@@ -47,7 +47,7 @@ public class Main extends JavaPlugin implements Listener {
   public static Main plugin;
   private CustomYmlManger customyml;
   ArrayList<String> Afk = afk.Afk;
-  ArrayList<String> Fly = fly.Fly; //TEST
+  ArrayList<String> Fly = fly.Fly;
   // MySQL mysql = new MySQL(Main.plugin.getConfig().getString("MysqlHOST"),
   // Main.plugin.getConfig().getString("MysqlDATABASE"),
   // Main.plugin.getConfig().getString("MysqlUSER"),
