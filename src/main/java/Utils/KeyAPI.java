@@ -17,119 +17,119 @@ import java.util.Arrays;
 public class KeyAPI {
 
 
-  private static Main plugin = Main.plugin;
+    private static Main plugin = Main.plugin;
 
-  // START
-  public void giveKey(Player p, MySQL mysql) { //GIVES DEFAULT ID 1 KEY
-    new BukkitRunnable() {
+    // START
+    public void giveKey(Player p, MySQL mysql) { //GIVES DEFAULT ID 1 KEY
+        new BukkitRunnable() {
 
-      @Override
-      public void run() {
-        Material material = Material.TRIPWIRE_HOOK;
-        int ammount = 1;
-        String name = "Key";
+            @Override
+            public void run() {
+                Material material = Material.TRIPWIRE_HOOK;
+                int ammount = 1;
+                String name = "Key";
 
-        ItemStack item = new ItemStack(material, ammount);
-        ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.setDisplayName(name);
+                ItemStack item = new ItemStack(material, ammount);
+                ItemMeta itemMeta = item.getItemMeta();
+                itemMeta.setDisplayName(name);
 
-        // SELECT * FROM KeyData WHERE Player='Mexico';
-        ResultSet rs =
-                mysql.GetResult("SELECT * FROM KeyData WHERE Player='" + p.getDisplayName() + "';");
-        try {
-          if (rs.next()) {
-            String PlayerData = rs.getString("Player");
-            String LoreData = rs.getString("Lore");
-            Player pDone = Bukkit.getPlayer(PlayerData);
-            if (pDone != null) {
-              itemMeta.setLore(Arrays.asList(LoreData));
-              item.setItemMeta(itemMeta);
-              p.getInventory().addItem(new ItemStack(item));
-              p.sendMessage(Translate.chat("&aThere You Go."));
-            } else {
-              p.sendMessage(Translate.chat("&4Error With Checking if the Player is you are not."));
+                // SELECT * FROM KeyData WHERE Player='Mexico';
+                ResultSet rs =
+                        mysql.GetResult("SELECT * FROM KeyData WHERE Player='" + p.getDisplayName() + "';");
+                try {
+                    if (rs.next()) {
+                        String PlayerData = rs.getString("Player");
+                        String LoreData = rs.getString("Lore");
+                        Player pDone = Bukkit.getPlayer(PlayerData);
+                        if (pDone != null) {
+                            itemMeta.setLore(Arrays.asList(LoreData));
+                            item.setItemMeta(itemMeta);
+                            p.getInventory().addItem(new ItemStack(item));
+                            p.sendMessage(Translate.chat("&aThere You Go."));
+                        } else {
+                            p.sendMessage(Translate.chat("&4Error With Checking if the Player is you are not."));
+                        }
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-          }
-        } catch (SQLException e) {
-          e.printStackTrace();
-        }
-      }
-    }.runTask(plugin);
-  }
+        }.runTask(plugin);
+    }
 
-  public void mkey(MySQL mysql, Player p, String KeyDataID) {
-    new BukkitRunnable() {
+    public void mkey(MySQL mysql, Player p, String KeyDataID) {
+        new BukkitRunnable() {
 
-      @Override
-      public void run() {
-        Material material = Material.TRIPWIRE_HOOK;
-        int ammount = 1;
-        String name = "Key";
+            @Override
+            public void run() {
+                Material material = Material.TRIPWIRE_HOOK;
+                int ammount = 1;
+                String name = "Key";
 
-        ItemStack item = new ItemStack(material, ammount);
-        ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.setDisplayName(name);
+                ItemStack item = new ItemStack(material, ammount);
+                ItemMeta itemMeta = item.getItemMeta();
+                itemMeta.setDisplayName(name);
 
-        // SELECT * FROM KeyData WHERE Player='Mexico';
-        ResultSet rs = mysql.GetResult("SELECT * FROM KeyData WHERE Player='" + p.getDisplayName()
-            + "' AND KeyDataID=" + KeyDataID + ";");
-        try {
-          if (rs.next()) {
-            String KeyDataID = rs.getString("KeyDataID");
-            String PlayerData = rs.getString("Player");
-            String LoreData = rs.getString("Lore");
-            Player pDone = Bukkit.getPlayer(PlayerData);
-            if (pDone != null) {
-              itemMeta.setLore(Arrays.asList(LoreData));
-              item.setItemMeta(itemMeta);
-              p.getInventory().addItem(new ItemStack(item));
-              p.sendMessage(Translate.chat("&aThere You Go."));
-            } else {
-              p.sendMessage(Translate.chat("&4Error With Checking if the Player is you are not."));
+                // SELECT * FROM KeyData WHERE Player='Mexico';
+                ResultSet rs = mysql.GetResult("SELECT * FROM KeyData WHERE Player='" + p.getDisplayName()
+                        + "' AND KeyDataID=" + KeyDataID + ";");
+                try {
+                    if (rs.next()) {
+                        String KeyDataID = rs.getString("KeyDataID");
+                        String PlayerData = rs.getString("Player");
+                        String LoreData = rs.getString("Lore");
+                        Player pDone = Bukkit.getPlayer(PlayerData);
+                        if (pDone != null) {
+                            itemMeta.setLore(Arrays.asList(LoreData));
+                            item.setItemMeta(itemMeta);
+                            p.getInventory().addItem(new ItemStack(item));
+                            p.sendMessage(Translate.chat("&aThere You Go."));
+                        } else {
+                            p.sendMessage(Translate.chat("&4Error With Checking if the Player is you are not."));
+                        }
+                    }
+                } catch (IllegalArgumentException | SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
-          }
-        } catch (IllegalArgumentException | SQLException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
-      }
-    }.runTask(plugin);
-  }
+        }.runTask(plugin);
+    }
 
-  public void mkeygetanotherplayerkey(MySQL mysql, Player p, String KeyDataDone,
-      String PlayerNameDataDone) {
-    new BukkitRunnable() {
+    public void mkeygetanotherplayerkey(MySQL mysql, Player p, String KeyDataDone,
+                                        String PlayerNameDataDone) {
+        new BukkitRunnable() {
 
-      @Override
-      public void run() {
-        Material material = Material.TRIPWIRE_HOOK;
-        int ammount = 1;
-        String name = "Key";
+            @Override
+            public void run() {
+                Material material = Material.TRIPWIRE_HOOK;
+                int ammount = 1;
+                String name = "Key";
 
-        ItemStack item = new ItemStack(material, ammount);
-        ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.setDisplayName(name);
+                ItemStack item = new ItemStack(material, ammount);
+                ItemMeta itemMeta = item.getItemMeta();
+                itemMeta.setDisplayName(name);
 
-        // SELECT * FROM KeyData WHERE Player='Mexico';
-        ResultSet rs = mysql.GetResult("SELECT * FROM KeyData WHERE (KeyDataID='" + KeyDataDone
-            + "' AND Player='" + PlayerNameDataDone + "')");
-        try {
-          if (rs.next()) {
-            String KeyDataID = rs.getString("KeyDataID");
-            String PlayerData = rs.getString("Player");
-            String LoreData = rs.getString("Lore");
-            // Player pDone = Bukkit.getPlayer(PlayerData);
-            // if (pDone != null) {
-            itemMeta.setLore(Arrays.asList(LoreData));
-            item.setItemMeta(itemMeta);
-            p.getInventory().addItem(new ItemStack(item));
-            p.sendMessage(Translate.chat("&aThere You Go."));
-          }
-        } catch (IllegalArgumentException | SQLException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
-      }
-    }.runTaskAsynchronously(plugin);
-  }
+                // SELECT * FROM KeyData WHERE Player='Mexico';
+                ResultSet rs = mysql.GetResult("SELECT * FROM KeyData WHERE (KeyDataID='" + KeyDataDone
+                        + "' AND Player='" + PlayerNameDataDone + "')");
+                try {
+                    if (rs.next()) {
+                        String KeyDataID = rs.getString("KeyDataID");
+                        String PlayerData = rs.getString("Player");
+                        String LoreData = rs.getString("Lore");
+                        // Player pDone = Bukkit.getPlayer(PlayerData);
+                        // if (pDone != null) {
+                        itemMeta.setLore(Arrays.asList(LoreData));
+                        item.setItemMeta(itemMeta);
+                        p.getInventory().addItem(new ItemStack(item));
+                        p.sendMessage(Translate.chat("&aThere You Go."));
+                    }
+                } catch (IllegalArgumentException | SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }.runTaskAsynchronously(plugin);
+    }
 }

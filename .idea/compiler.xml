@@ -9,8 +9,5 @@
         <module name="World1-6Essentials" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="World1-6Essentials" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

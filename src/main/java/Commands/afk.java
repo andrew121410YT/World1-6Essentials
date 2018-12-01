@@ -14,40 +14,40 @@ import java.util.ArrayList;
 
 public class afk implements Listener, CommandExecutor {
 
-  public static ArrayList<String> Afk = new ArrayList<>();
+    public static ArrayList<String> Afk = new ArrayList<>();
 
-  public Main plugin;
-  API api = new API();
+    public Main plugin;
+    API api = new API();
 
-  public afk(World16.World16.World16.Main getPlugin) {
-    this.plugin = getPlugin;
-    this.plugin.getCommand("afk").setExecutor(this);
-  }
-
-  @Override
-  public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-    if (!(sender instanceof Player)) {
-      sender.sendMessage("Only Players Can Use This Command.");
-      return true;
+    public afk(World16.World16.World16.Main getPlugin) {
+        this.plugin = getPlugin;
+        this.plugin.getCommand("afk").setExecutor(this);
     }
 
-    Player p = (Player) sender;
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Only Players Can Use This Command.");
+            return true;
+        }
 
-    if (!p.hasPermission("command.afk.permission")) {
-      api.PermissionErrorMessage(p);
-      return true;
+        Player p = (Player) sender;
+
+        if (!p.hasPermission("command.afk.permission")) {
+            api.PermissionErrorMessage(p);
+            return true;
+        }
+        if (args.length == 0) {
+            if (!Afk.contains(p.getDisplayName())) {
+                Bukkit.broadcastMessage(
+                        Translate.chat("&8<&4&lAFK&r&8>&r " + p.getDisplayName() + " &chas GONE afk."));
+                Afk.add(p.getDisplayName());
+            } else if (Afk.contains(p.getDisplayName())) {
+                Bukkit.broadcastMessage(
+                        Translate.chat("&8<&4&lAFK&r&8>&r " + p.getDisplayName() + " &2is now back from afk."));
+                Afk.remove(p.getDisplayName());
+            }
+        }
+        return true;
     }
-    if (args.length == 0) {
-      if (!Afk.contains(p.getDisplayName())) {
-        Bukkit.broadcastMessage(
-                Translate.chat("&8<&4&lAFK&r&8>&r " + p.getDisplayName() + " &chas GONE afk."));
-        Afk.add(p.getDisplayName());
-      } else if (Afk.contains(p.getDisplayName())) {
-        Bukkit.broadcastMessage(
-                Translate.chat("&8<&4&lAFK&r&8>&r " + p.getDisplayName() + " &2is now back from afk."));
-        Afk.remove(p.getDisplayName());
-      }
-    }
-    return true;
-  }
 }
