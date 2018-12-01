@@ -19,10 +19,10 @@ public class OnJoin implements Listener {
     MySQL mysql = new MySQL();
     KeyAPI keyapi = new KeyAPI();
 
-    public OnJoin(Main plugin) {
-        this.plugin = plugin;
+    public OnJoin(World16.World16.World16.Main getPlugin) {
+        this.plugin = getPlugin;
 
-        Bukkit.getPluginManager().registerEvents(this, plugin);
+        Bukkit.getPluginManager().registerEvents(this, this.plugin);
     }
 
     @EventHandler
@@ -43,6 +43,6 @@ public class OnJoin implements Listener {
     }
 
     public void version(Player p) {
-        p.sendMessage(Translate.chat("&4World1-6Ess Last Time Updated Was 11/24/2018"));
+        p.sendMessage(Translate.chat("&4World1-6Ess Last Time Updated Was 12/1/2018"));
     }
 }
