@@ -12,15 +12,15 @@ import World16.World16.World16.Main;
 
 public class setjail implements CommandExecutor {
 
-  private static Plugin plugin = Main.plugin;
+  private Main plugin;
   API api = new API();
 
   private CustomYmlManger configinstance = null;
 
-  public setjail(CustomYmlManger getConfigInstance, World16.World16.World16.Main plugin) {
-    this.configinstance = getConfigInstance;
-    this.plugin = plugin;
-    plugin.getCommand("setjail").setExecutor(this);
+  public setjail(CustomYmlManger getCustomYml, World16.World16.World16.Main getPlugin) {
+    this.configinstance = getCustomYml;
+    this.plugin = getPlugin;
+    this.plugin.getCommand("setjail").setExecutor(this);
   }
 
   @Override

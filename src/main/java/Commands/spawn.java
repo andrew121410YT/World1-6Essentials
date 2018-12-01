@@ -1,5 +1,9 @@
 package Commands;
 
+import Translate.Translate;
+import Utils.API;
+import Utils.CustomYmlManger;
+import World16.World16.World16.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -7,10 +11,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import Translate.Translate;
-import Utils.API;
-import Utils.CustomYmlManger;
-import World16.World16.World16.Main;
 
 public class spawn implements CommandExecutor {
 
@@ -19,10 +19,10 @@ public class spawn implements CommandExecutor {
 
   private CustomYmlManger configinstance = null;
 
-  public spawn(CustomYmlManger getConfigInstance, World16.World16.World16.Main plugin) {
-    this.configinstance = getConfigInstance;
-    this.plugin = plugin;
-    plugin.getCommand("spawn").setExecutor(this);
+  public spawn(CustomYmlManger getCustomYml, World16.World16.World16.Main getPlugin) {
+    this.configinstance = getCustomYml;
+    this.plugin = getPlugin;
+    this.plugin.getCommand("spawn").setExecutor(this);
   }
 
   @Override

@@ -15,15 +15,15 @@ import World16.World16.World16.Main;
 
 public class jail implements CommandExecutor {
 
-  private static Plugin plugin = Main.plugin;
+  private Main plugin;
   API api = new API();
 
   private CustomYmlManger configinstance = null;
 
-  public jail(CustomYmlManger getConfigInstance, World16.World16.World16.Main plugin) {
-    this.configinstance = getConfigInstance;
-    this.plugin = plugin;
-    plugin.getCommand("jail").setExecutor(this);
+  public jail(CustomYmlManger getCustomYml, World16.World16.World16.Main getPlugin) {
+    this.configinstance = getCustomYml;
+    this.plugin = getPlugin;
+    this.plugin.getCommand("jail").setExecutor(this);
   }
 
   @Override

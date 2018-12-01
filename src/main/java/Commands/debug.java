@@ -1,22 +1,25 @@
 package Commands;
 
+import MysqlAPI.MySQL;
+import Translate.Translate;
+import Utils.API;
+import World16.World16.World16.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import MysqlAPI.MySQL;
-import Translate.Translate;
-import Utils.API;
-import World16.World16.World16.Main;
 
 public class debug implements CommandExecutor {
 
-  private static Plugin plugin = Main.plugin;
+  private Main plugin;
   API api = new API();
   MySQL mysql = new MySQL();
+
+  public debug(World16.World16.World16.Main getPlugin){
+    this.plugin = getPlugin;
+  }
 
   @Override
   public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

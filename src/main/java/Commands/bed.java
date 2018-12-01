@@ -1,5 +1,7 @@
 package Commands;
 
+import Utils.API;
+import World16.World16.World16.Main;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -7,17 +9,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import Utils.API;
-import World16.World16.World16.Main;
 
 public class bed implements CommandExecutor {
 
   private Main plugin;
   API api = new API();
 
-  public bed(World16.World16.World16.Main plugin) {
-    this.plugin = plugin;
-    plugin.getCommand("bed").setExecutor(this);
+  public bed(World16.World16.World16.Main getPlugin) {
+    this.plugin = getPlugin;
+    this.plugin.getCommand("bed").setExecutor(this);
   }
 
   @Override
