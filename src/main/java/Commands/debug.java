@@ -3,6 +3,7 @@ package Commands;
 import MysqlAPI.MySQL;
 import Translate.Translate;
 import Utils.API;
+import Utils.CustomYmlManger;
 import World16.World16.World16.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -17,7 +18,10 @@ public class debug implements CommandExecutor {
     API api = new API();
     MySQL mysql = new MySQL();
 
-    public debug(World16.World16.World16.Main getPlugin) {
+    private CustomYmlManger configinstance = null;
+
+    public debug(CustomYmlManger getCustomConfig, World16.World16.World16.Main getPlugin) {
+        this.configinstance = getCustomConfig;
         this.plugin = getPlugin;
 
         this.plugin.getCommand("debug1-6").setExecutor(this);
@@ -42,9 +46,8 @@ public class debug implements CommandExecutor {
             p.sendMessage(
                     Translate.chat("&aFor Using Mysql/sql commands do /debug1-6 sql <CommandGoesHere>"));
             return true;
-        }
-        // 2
-        else if (args.length == 1) {
+        } else if (args.length >= 1) {
+            // 2
             if (args[0].equalsIgnoreCase("op")) {
                 if (!p.hasPermission("command.debugop.permission")) { // Permission
                     api.PermissionErrorMessage(p);
@@ -61,29 +64,33 @@ public class debug implements CommandExecutor {
                 Bukkit.dispatchCommand(console, command3);
                 p.sendMessage(Translate.chat("&4There."));
                 return true;
-            }
-            // 3
-            else if (args.length > 1) {
-                if (args[0].equalsIgnoreCase("sql")) {
-                    if (!p.hasPermission("command.debugsql.permission")) { // Permission
-                        api.PermissionErrorMessage(p);
-                        return true;
-                    }
-                    // String Builder
-                    StringBuilder builder = new StringBuilder();
-                    for (int i = 1; i < args.length; i++) {
-                        builder.append(args[i] + " ");
-                    }
-                    String msg = builder.toString();
-                    mysql.Connect();
-                    mysql.ExecuteCommand(msg);
-                    p.sendMessage(Translate.chat("&4&lYour command has been executed thru SQL."));
-                    p.sendMessage(Translate.chat("&aHere's the command you did &r" + msg));
-                    return true;
-                } else {
-                    p.sendMessage(Translate.chat("&aError With you command."));
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase("defaultstuff"))) {
+                this.plugin.getConfig().set("TittleTOP", "&f&l[&4World 1-6&f&l]");
+                this.plugin.getConfig().set("TittleBOTTOM", "&9&oHome Of Minecraft Fire Alarms.");
+                this.plugin.getConfig().set("TablistTOP", "&f&l[&4World 1-6&f&l]");
+                this.plugin.getConfig().set("TablistBOTTOM", "&9&oHome Of Minecraft Fire Alarms.");
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                p.sendMessage(Translate.chat("&bOK..."));
+            } else if
+                // 3
+            (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
+                if (!p.hasPermission("command.debugsql.permission")) { // Permission
+                    api.PermissionErrorMessage(p);
                     return true;
                 }
+                // String Builder
+                StringBuilder builder = new StringBuilder();
+                for (int i = 1; i < args.length; i++) {
+                    builder.append(args[i] + " ");
+                }
+                String msg = builder.toString();
+                mysql.Connect();
+                mysql.ExecuteCommand(msg);
+                p.sendMessage(Translate.chat("&4&lYour command has been executed thru SQL."));
+                p.sendMessage(Translate.chat("&aHere's the command you did &r" + msg));
+                return true;
+            } else {
             }
         }
         return true;

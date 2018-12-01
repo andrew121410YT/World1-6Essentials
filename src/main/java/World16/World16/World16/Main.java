@@ -58,7 +58,7 @@ public class Main extends JavaPlugin {//implements Listener {
         new feed(this);
         new heal(this);
         new fly(this);
-        new debug(this);
+        new debug(customyml, this);
         new commandblock(this);
         new bed(this);
         new ram(this);
