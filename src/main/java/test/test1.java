@@ -1,16 +1,30 @@
 package test;
 
+import MysqlAPI.MySQL;
+import Utils.API;
+import Utils.CustomYmlManger;
+import World16.World16.World16.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import MysqlAPI.MySQL;
-import Utils.API;
+import Translate.Translate;
 
 public class test1 implements CommandExecutor {
 
+  private Main plugin;
+
   MySQL mysql = new MySQL();
   API api = new API();
+
+  private CustomYmlManger configinstance = null;
+
+  public test1(CustomYmlManger getCustomYml, World16.World16.World16.Main getPlugin){
+    this.configinstance = getCustomYml;
+      this.plugin = getPlugin;
+
+    this.plugin.getCommand("testee1").setExecutor(this);
+  }
 
   @Override
   public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -19,27 +33,19 @@ public class test1 implements CommandExecutor {
       return true;
     }
     Player p = (Player) sender;
-    // START
-    if (args.length == 0) {
-      // DO SOMETHING HERE.
+    if (!p.hasPermission("command.testee1.permission")){
+      api.PermissionErrorMessage(p);
       return true;
-    } else if (args[0].equalsIgnoreCase("test2")) { // FIRST ARG
-      if (!p.hasPermission("command.test2.command")) {
-        api.PermissionErrorMessage(p);
-        return true;
-      }
-      if (args.length == 1) {
-        // STUFF HERE
-      }
-    } else if (args[0].equalsIgnoreCase("test3")) {
-      if (!p.hasPermission("command.test3.command")) {
-        api.PermissionErrorMessage(p);
-        return true;
-      }
-      if (args.length == 1) {
-        // STUFF HERE
-      }
+    }
+    if (args.length == 0) {
+      //SOMETHING HERE
+    }else if (args.length >= 1) {
+      //SOMETHING HERE
+      return true;
+    }else{
+      p.sendMessage("Something messed up!");
+      return true;
     }
     return true;
   }
-}
+  }

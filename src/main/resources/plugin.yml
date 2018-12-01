@@ -26,7 +26,8 @@ commands:
     fs:
     isafk:
     testee:
-    test1:
+    testee1:
+    food:
     
     gmc:
         aliases:

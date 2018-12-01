@@ -23,12 +23,6 @@ public class flyspeed implements CommandExecutor {
     this.configinstance = getConfigInstance;
     this.plugin = plugin;
     plugin.getCommand("fs").setExecutor(this);
-
-    // OLD ONE
-
-    // public bed(World16.World16.World16.Main plugin){
-    // this.plugin = plugin;
-    // plugin.getCommand("bed").setExecutor(this);
   }
 
   @Override
@@ -40,33 +34,31 @@ public class flyspeed implements CommandExecutor {
 
     Player player = (Player) sender;
     // STUFF GOES HERE
-    {
-      if (args.length == 1) {
-        if (!player.hasPermission("command.fs.permission")) {
-          api.PermissionErrorMessage(player);
-          return true;
-        }
-        String oldnum = args[0];
-        double num = Double.parseDouble(oldnum);
-        int num1 = (int) num;
-        if ((num1 > -1) && (num1 < 11)) {
-          double num2 = num1;
-          float flyspeed = (float) (num2 / 10.0D);
-
-          player.setFlySpeed(flyspeed);
-          player.sendMessage(
-              ChatColor.GOLD + "[FlySpeed]  " + ChatColor.YELLOW + "Your flyspeed now equals: "
-                  + ChatColor.RED + "[" + flyspeed * 10.0F + "]" + ChatColor.YELLOW + "!");
-          configinstance.getshit().set(player.getName().toString() + ".flyspeed",
-              Float.valueOf(flyspeed));
-          configinstance.saveshit();
-          return true;
-        }
-        player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.RED
-            + "Your input is not valid! must be between 0 and 10.");
+    if (args.length == 1) {
+      if (!player.hasPermission("command.fs.permission")) {
+        api.PermissionErrorMessage(player);
         return true;
       }
-    else if (!player.hasPermission("command.fs.other.permission")) {
+      String oldnum = args[0];
+      double num = Double.parseDouble(oldnum);
+      int num1 = (int) num;
+      if ((num1 > -1) && (num1 < 11)) {
+        double num2 = num1;
+        float flyspeed = (float) (num2 / 10.0D);
+
+        player.setFlySpeed(flyspeed);
+        player.sendMessage(
+                ChatColor.GOLD + "[FlySpeed]  " + ChatColor.YELLOW + "Your flyspeed now equals: "
+                        + ChatColor.RED + "[" + flyspeed * 10.0F + "]" + ChatColor.YELLOW + "!");
+        configinstance.getshit().set(player.getName().toString() + ".flyspeed",
+                Float.valueOf(flyspeed));
+        configinstance.saveshit();
+        return true;
+      }
+      player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.RED
+              + "Your input is not valid! must be between 0 and 10.");
+      return true;
+    } else if (!player.hasPermission("command.fs.other.permission")) {
       api.PermissionErrorMessage(player);
       return true;
     }
@@ -82,28 +74,27 @@ public class flyspeed implements CommandExecutor {
         if (player2.getName().equalsIgnoreCase(args[0])) {
           player2.setFlySpeed(flyspeed);
           player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.YELLOW
-              + player.getName().toString() + " set your flyspeed to: " + ChatColor.RED + "["
-              + flyspeed * 10.0F + "]" + ChatColor.YELLOW + "!");
+                  + player.getName().toString() + " set your flyspeed to: " + ChatColor.RED + "["
+                  + flyspeed * 10.0F + "]" + ChatColor.YELLOW + "!");
           player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.YELLOW
-              + "You succesfully set " + player.getName().toString() + "'s flyspeed to: "
-              + ChatColor.RED + "[" + flyspeed * 10.0F + "]" + ChatColor.YELLOW + "!");
+                  + "You succesfully set " + player.getName().toString() + "'s flyspeed to: "
+                  + ChatColor.RED + "[" + flyspeed * 10.0F + "]" + ChatColor.YELLOW + "!");
           playerfound = true;
           configinstance.getshit().set(player2.getName().toString() + ".flyspeed",
-              Float.valueOf(flyspeed));
+                  Float.valueOf(flyspeed));
           configinstance.saveshit();
           return true;
         }
         if (!playerfound) {
           player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.RED + "we could not find "
-              + args[0] + "!");
+                  + args[0] + "!");
           return true;
         }
       }
     } else {
       player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.RED
-          + "Your input is not valid! must be between 0 and 10.");
+              + "Your input is not valid! must be between 0 and 10.");
       return true;
-    }
     }
     return true;
   }

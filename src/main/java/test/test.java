@@ -1,32 +1,25 @@
 package test;
 
+import Utils.API;
+import Utils.CustomYmlManger;
+import World16.World16.World16.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import Utils.API;
-import Utils.CustomYmlManger;
-import World16.World16.World16.Main;
 
 public class test implements CommandExecutor {
 
   private Main plugin;
   API api = new API();
-  // ArrayList<String> Afk1 = afk.Afk;
-  // NEW ONE ..
 
   private CustomYmlManger configinstance = null;
 
-  public test(CustomYmlManger getConfigInstance, World16.World16.World16.Main plugin) {
-    this.configinstance = getConfigInstance;
-    this.plugin = plugin;
-    plugin.getCommand("testee").setExecutor(this);
+  public test(CustomYmlManger getCustomYml, World16.World16.World16.Main getPlugin) {
+    this.configinstance = getCustomYml;
+    this.plugin = getPlugin;
 
-    // OLD ONE
-
-    // public bed(World16.World16.World16.Main plugin){
-    // this.plugin = plugin;
-    // plugin.getCommand("bed").setExecutor(this);
+    this.plugin.getCommand("testee").setExecutor(this);
   }
 
   @Override
@@ -38,12 +31,11 @@ public class test implements CommandExecutor {
 
     Player p = (Player) sender;
 
-    if (p.hasPermission("command.test.permission")) {
-      // STUFF GOES HERE'
-      return true;
-    } else {
+    if (!p.hasPermission("command.test.permission")) {
       api.PermissionErrorMessage(p);
+      return true;
     }
+    //STUFF HERE
     return true;
   }
 }

@@ -76,19 +76,18 @@ public class API {
   public boolean isAfk(Player playerDONE) {
     if (Afk1.contains(playerDONE)) {
       return true;
+    } else {
+      // if (Afk1.contains(p.getDisplayName())) { return true; }
+      return false;
     }
-    // if (Afk1.contains(p.getDisplayName())) { return true; }
-    return false;
   }
-
   public boolean isFlying(Player p) {
     if (Fly1.contains(p.getDisplayName()) || p.isFlying()) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   }
-
-
 
   public void PermissionErrorMessage(Player p) {
     p.sendMessage(
