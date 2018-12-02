@@ -1,5 +1,6 @@
 package Utils;
 
+import Events.OnJoin;
 import MysqlAPI.MySQL;
 import Translate.Translate;
 import World16.World16.World16.Main;
@@ -8,16 +9,18 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class KeyAPI {
 
-
-    private static Main plugin = Main.plugin;
+    private static Plugin plugin = Main.plugin;
+    public static HashMap<String, String> keyDatam = OnJoin.keyDatam;
 
     // START
     public void giveKey(Player p, MySQL mysql) { //GIVES DEFAULT ID 1 KEY
@@ -56,6 +59,44 @@ public class KeyAPI {
             }
         }.runTask(plugin);
     }
+
+    public String giveKeyReturn(Player p, MySQL mysql) { //RETURNS KEY
+        mysql.Connect();
+        ResultSet rs =
+                mysql.GetResult("SELECT * FROM KeyData WHERE Player='" + p.getPlayer().getDisplayName() + "';");
+        try {
+            if (rs.next()) {
+                String PlayerData = rs.getString("Player");
+                String LoreData = rs.getString("Lore");
+                Player pDone = Bukkit.getPlayer(PlayerData);
+                mysql.Disconnect();
+                if (pDone != null) {
+                    mysql.Disconnect();
+                    return LoreData.toString();
+                } else {
+                    p.sendMessage(Translate.chat("&4Error With Checking if the Player is you are not."));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void giveKeyFromTheRam(Player p) { //GETS THE 1 KEY FROM THE MEMORY.
+        Material material = Material.TRIPWIRE_HOOK;
+        int ammount = 1;
+        String name = "Key";
+
+        ItemStack item = new ItemStack(material, ammount);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setDisplayName(name);
+        itemMeta.setLore(Arrays.asList(keyDatam.get(p.getDisplayName())));
+        item.setItemMeta(itemMeta);
+        p.getInventory().addItem(new ItemStack(item));
+        p.sendMessage(Translate.chat("&aThere You Go."));
+    }
+
 
     public void mkey(MySQL mysql, Player p, String KeyDataID) {
         new BukkitRunnable() {

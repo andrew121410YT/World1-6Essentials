@@ -71,8 +71,12 @@ public class Key implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                mysql.Connect();
-                keyapi.giveKey(p, mysql);
+                //OLD WAY
+                //mysql.Connect();
+                //keyapi.giveKey(p, mysql);
+
+                //NEW WAY
+                keyapi.giveKeyFromTheRam(p);
                 return true;
             }
             if (args[0].equalsIgnoreCase("reset")) {

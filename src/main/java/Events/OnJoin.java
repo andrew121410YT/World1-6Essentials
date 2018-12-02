@@ -11,11 +11,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import java.util.HashMap;
+
 public class OnJoin implements Listener {
 
     private Main plugin;
 
-    //public static HashMap<String, String> keydatam = new HashMap<String, String>();
+    public static HashMap<String, String> keyDatam = new HashMap<String, String>();
     MySQL mysql = new MySQL();
     KeyAPI keyapi = new KeyAPI();
 
@@ -40,6 +42,9 @@ public class OnJoin implements Listener {
         Bukkit.broadcastMessage(Translate.chat("[&9World1-6&r] &6Welcome Back! " + p.getDisplayName()));
         p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10.0f, 1.0f);
         version(p);
+
+        //GETS THE 1 KEY FROM THE PLAYER AND THEN IT STORES IT IN RAM FOR EASY ACCESS
+        keyDatam.put(p.getDisplayName(), keyapi.giveKeyReturn(p, mysql));
     }
 
     public void version(Player p) {
