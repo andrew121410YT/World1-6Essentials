@@ -4,6 +4,7 @@ import Commands.*;
 import Events.OnBedEnter;
 import Events.OnJoin;
 import Events.OnJoinTitle;
+import Events.OnLeave;
 import KeyCommands.Key;
 import KeyCommands.MutiKeys;
 import Translate.Translate;
@@ -19,6 +20,7 @@ import test.test;
 import test.test1;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main extends JavaPlugin {//implements Listener {
 
@@ -26,6 +28,7 @@ public class Main extends JavaPlugin {//implements Listener {
     private CustomYmlManger customyml;
     ArrayList<String> Afk = afk.Afk;
     ArrayList<String> Fly = fly.Fly;
+    HashMap<String, String> keyDataM = OnJoin.keyDatam;
     // GOT THE MYSQL API AT https://www.spigotmc.org/resources/simple-easy-mysql-api.36447/
     // GOT THE TITLE API AT https://www.spigotmc.org/resources/titleapi-1-8-1-13.1325/
     PluginManager pm = Bukkit.getPluginManager();
@@ -46,6 +49,7 @@ public class Main extends JavaPlugin {//implements Listener {
     public void onDisable() {
         Afk.clear();
         Fly.clear();
+        keyDataM.clear();
         getLogger().info("[World1-6Essentials] is now disabled.");
     }
 
@@ -82,6 +86,8 @@ public class Main extends JavaPlugin {//implements Listener {
     public void regEvents() {
         //Bukkit.getServer().getPluginManager().registerEvents(this, this);
         new OnJoin(this);
+        new OnLeave(this);
+        //...
         new OnBedEnter(this);
         new OnJoinTitle(this);
     }

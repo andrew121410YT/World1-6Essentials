@@ -1,5 +1,6 @@
 package Commands;
 
+import Events.OnJoin;
 import MysqlAPI.MySQL;
 import Translate.Translate;
 import Utils.API;
@@ -12,8 +13,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+
 public class debug implements CommandExecutor {
 
+    HashMap<String, String> keyDataM = OnJoin.keyDatam;
     private Main plugin;
     API api = new API();
     MySQL mysql = new MySQL();
@@ -43,6 +47,8 @@ public class debug implements CommandExecutor {
             }
             p.sendMessage(Translate.chat("&aHow to use /debug1-6"));
             p.sendMessage(Translate.chat("&aFor Oping Staff Use /debug1-6 op"));
+            p.sendMessage(Translate.chat("&aFor The Default Tab And Title Use /debug1-6 defaultstuff"));
+            p.sendMessage(Translate.chat("&aToo see what's stored in the hashmaps of you do /debug1-6 checkhashmaps"));
             p.sendMessage(
                     Translate.chat("&aFor Using Mysql/sql commands do /debug1-6 sql <CommandGoesHere>"));
             return true;
@@ -72,6 +78,8 @@ public class debug implements CommandExecutor {
                 this.plugin.saveConfig();
                 this.plugin.reloadConfig();
                 p.sendMessage(Translate.chat("&bOK..."));
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase("checkhashmaps"))) {
+                p.sendMessage(Translate.chat("Here's the HashMap for OnJoin.keyDatam: " + keyDataM.get(p.getDisplayName())));
             } else if
                 // 3
             (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
