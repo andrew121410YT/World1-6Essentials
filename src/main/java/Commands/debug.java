@@ -13,11 +13,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class debug implements CommandExecutor {
 
     HashMap<String, String> keyDataM = OnJoin.keyDatam;
+    ArrayList<String> Afk1 = afk.Afk;
+    ArrayList<String> Fly1 = fly.Fly;
+
     private Main plugin;
     API api = new API();
     MySQL mysql = new MySQL();
@@ -71,6 +75,10 @@ public class debug implements CommandExecutor {
                 p.sendMessage(Translate.chat("&4There."));
                 return true;
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("defaultstuff"))) {
+                if (!p.hasPermission("command.debugdefaultstuff.permission")) { // Permission
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
                 this.plugin.getConfig().set("TittleTOP", "&f&l[&4World 1-6&f&l]");
                 this.plugin.getConfig().set("TittleBOTTOM", "&9&oHome Of Minecraft Fire Alarms.");
                 this.plugin.getConfig().set("TablistTOP", "&f&l[&4World 1-6&f&l]");
@@ -80,6 +88,12 @@ public class debug implements CommandExecutor {
                 p.sendMessage(Translate.chat("&bOK..."));
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("checkhashmaps"))) {
                 p.sendMessage(Translate.chat("Here's the HashMap for OnJoin.keyDatam: " + keyDataM.get(p.getDisplayName())));
+            }else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallarraylists"))) {
+                api.clearAllArrayLists(p);
+            }else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmaps"))){
+                api.clearAllHashMaps(p);
+            }else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmapswithname"))){
+                api.clearAllHahsMapsWithName(p);
             } else if
                 // 3
             (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {

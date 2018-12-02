@@ -73,13 +73,40 @@ public class API {
             return false;
         }
     }
-    public void clearArrayListandHashMaps(Player p){
+
+    public void clearArrayListandHashMapsWithName(Player p) {
         keyDataM.remove(p.getDisplayName());
         this.plugin.getLogger().info("Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For Player: " + p.getDisplayName());
         Afk1.remove(p.getDisplayName());
         this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.afk.Afk For Player: " + p.getDisplayName());
         Fly1.remove(p.getDisplayName());
         this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.fly.Fly For Player: " + p.getDisplayName());
+    }
+
+    public void clearArrayListandHashMaps(Player p) {
+        keyDataM.clear();
+        this.plugin.getLogger().info("Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For EVERY PLAYER");
+        Afk1.clear();
+        this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.afk.Afk For EVERY PLAYER");
+        Fly1.clear();
+        this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.fly.Fly For EVERY PLAYER");
+    }
+
+    public void clearAllHahsMapsWithName(Player p) {
+        keyDataM.remove(p.getDisplayName());
+        this.plugin.getLogger().info("Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For Player: " + p.getDisplayName());
+    }
+
+    public void clearAllArrayLists(Player p) {
+        Afk1.clear();
+        this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.afk.Afk For EVERY PLAYER");
+        Fly1.clear();
+        this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.fly.Fly For EVERY PLAYER");
+    }
+
+    public void clearAllHashMaps(Player p) {
+        keyDataM.clear();
+        this.plugin.getLogger().info("Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For EVERY PLAYER");
     }
 
     public void PermissionErrorMessage(Player p) {
