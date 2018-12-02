@@ -2,15 +2,18 @@ package Utils;
 
 import Commands.afk;
 import Commands.fly;
+import Events.OnJoin;
 import Translate.Translate;
 import World16.World16.World16.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class API {
 
+    HashMap<String, String> keyDataM = OnJoin.keyDatam;
     ArrayList<String> Afk1 = afk.Afk;
     ArrayList<String> Fly1 = fly.Fly;
 
@@ -69,6 +72,14 @@ public class API {
         } else {
             return false;
         }
+    }
+    public void clearArrayListandHashMaps(Player p){
+        keyDataM.remove(p.getDisplayName());
+        this.plugin.getLogger().info("Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For Player: " + p.getDisplayName());
+        Afk1.remove(p.getDisplayName());
+        this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.afk.Afk For Player: " + p.getDisplayName());
+        Fly1.remove(p.getDisplayName());
+        this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.fly.Fly For Player: " + p.getDisplayName());
     }
 
     public void PermissionErrorMessage(Player p) {

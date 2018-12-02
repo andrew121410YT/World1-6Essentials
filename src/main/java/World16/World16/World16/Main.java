@@ -47,10 +47,13 @@ public class Main extends JavaPlugin {//implements Listener {
     }
 
     public void onDisable() {
+        this.clear();
+        getLogger().info("[World1-6Essentials] is now disabled.");
+    }
+    public void clear(){
         Afk.clear();
         Fly.clear();
         keyDataM.clear();
-        getLogger().info("[World1-6Essentials] is now disabled.");
     }
 
     public void regCommands() {
