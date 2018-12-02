@@ -1,5 +1,6 @@
 package KeyCommands;
 
+import Events.OnJoin;
 import MysqlAPI.MySQL;
 import Translate.Translate;
 import Utils.API;
@@ -10,7 +11,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+
 public class Key implements CommandExecutor {
+
+    HashMap<String, String> keyDataM = OnJoin.keyDatam;
 
     private Main plugin;
     API api = new API();
@@ -62,6 +67,9 @@ public class Key implements CommandExecutor {
                 mysql.Connect();
                 mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('1', '"
                         + p.getDisplayName() + "', '" + setDataDone + "')");
+                //NEW
+                keyDataM.put(p.getDisplayName(), setDataDone);
+
                 p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
                 return true;
             }
@@ -86,6 +94,10 @@ public class Key implements CommandExecutor {
                 }
                 mysql.Connect();
                 mysql.ExecuteCommand("DELETE FROM KeyData WHERE Player='" + p.getDisplayName() + "'");
+
+                //NEW
+                keyDataM.remove(p.getDisplayName());
+
                 p.sendMessage(
                         Translate.chat("&cAll of you data from the mysql data base has been cleared."));
                 return true;

@@ -87,12 +87,24 @@ public class debug implements CommandExecutor {
                 this.plugin.reloadConfig();
                 p.sendMessage(Translate.chat("&bOK..."));
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("checkhashmaps"))) {
-                p.sendMessage(Translate.chat("Here's the HashMap for OnJoin.keyDatam: " + keyDataM.get(p.getDisplayName())));
+                p.sendMessage(Translate.chat("Here's the HashMap for Events.OnJoin.keyDatam: " + keyDataM.get(p.getDisplayName())));
             }else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallarraylists"))) {
+                if (!p.hasPermission("command.debugcheckhashmaps.permission")) { // Permission
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
                 api.clearAllArrayLists(p);
             }else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmaps"))){
+                if (!p.hasPermission("command.debugclearallhashmaps.permission")) { // Permission
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
                 api.clearAllHashMaps(p);
             }else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmapswithname"))){
+                if (!p.hasPermission("command.debugclearallhashmapswithname.permission")) { // Permission
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
                 api.clearAllHahsMapsWithName(p);
             } else if
                 // 3
