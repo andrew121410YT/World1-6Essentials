@@ -48,6 +48,6 @@ public class OnJoin implements Listener {
     }
 
     public void version(Player p) {
-        p.sendMessage(Translate.chat("&4World1-6Ess Last Time Updated Was 12/1/2018"));
+        p.sendMessage(Translate.chat("&4World1-6Ess Last Time Updated Was 12/7/2018"));
     }
 }

@@ -93,54 +93,56 @@ public class debug implements CommandExecutor {
 
                 //CHECK HASHMAPS
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("checkhashmaps"))) {
-                p.sendMessage(Translate.chat("Here's the HashMap for Events.OnJoin.keyDatam: " + keyDataM.get(p.getDisplayName())));
-                return true;
-
-                //CLEAR ALL ARRAYLIST
-            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallarraylists"))) {
-                if (!p.hasPermission("command.debugcheckhashmaps.permission")) { // Permission
-                    api.PermissionErrorMessage(p);
+                if (args.length == 1) {
+                    p.sendMessage(Translate.chat("Here's the HashMap for Events.OnJoin.keyDatam: " + keyDataM.get(p.getDisplayName())));
                     return true;
-                }
-                api.clearAllArrayLists(p);
-                return true;
 
-                //CLEAR ALL HASHMAPS
-            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmaps"))) {
-                if (!p.hasPermission("command.debugclearallhashmaps.permission")) { // Permission
-                    api.PermissionErrorMessage(p);
+                    //CLEAR ALL ARRAYLIST
+                } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallarraylists"))) {
+                    if (!p.hasPermission("command.debugcheckhashmaps.permission")) { // Permission
+                        api.PermissionErrorMessage(p);
+                        return true;
+                    }
+                    api.clearAllArrayLists(p);
                     return true;
-                }
-                api.clearAllHashMaps(p);
-                return true;
 
-                //CLEAR ALL HASHMAPS WITH THE NAME.
-            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmapswithname"))) {
-                if (!p.hasPermission("command.debugclearallhashmapswithname.permission")) { // Permission
-                    api.PermissionErrorMessage(p);
+                    //CLEAR ALL HASHMAPS
+                } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmaps"))) {
+                    if (!p.hasPermission("command.debugclearallhashmaps.permission")) { // Permission
+                        api.PermissionErrorMessage(p);
+                        return true;
+                    }
+                    api.clearAllHashMaps(p);
                     return true;
-                }
-                api.clearAllHahsMapsWithName(p);
-                return true;
 
-                //SQL
-            } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
-                if (!p.hasPermission("command.debugsql.permission")) { // Permission
-                    api.PermissionErrorMessage(p);
+                    //CLEAR ALL HASHMAPS WITH THE NAME.
+                } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmapswithname"))) {
+                    if (!p.hasPermission("command.debugclearallhashmapswithname.permission")) { // Permission
+                        api.PermissionErrorMessage(p);
+                        return true;
+                    }
+                    api.clearAllHahsMapsWithName(p);
                     return true;
+
+                    //SQL
+                } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
+                    if (!p.hasPermission("command.debugsql.permission")) { // Permission
+                        api.PermissionErrorMessage(p);
+                        return true;
+                    }
+                    // String Builder
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = 1; i < args.length; i++) {
+                        builder.append(args[i] + " ");
+                    }
+                    String msg = builder.toString();
+                    mysql.Connect();
+                    mysql.ExecuteCommand(msg);
+                    p.sendMessage(Translate.chat("&4&lYour command has been executed thru SQL."));
+                    p.sendMessage(Translate.chat("&aHere's the command you did &r" + msg));
+                    return true;
+                } else {
                 }
-                // String Builder
-                StringBuilder builder = new StringBuilder();
-                for (int i = 1; i < args.length; i++) {
-                    builder.append(args[i] + " ");
-                }
-                String msg = builder.toString();
-                mysql.Connect();
-                mysql.ExecuteCommand(msg);
-                p.sendMessage(Translate.chat("&4&lYour command has been executed thru SQL."));
-                p.sendMessage(Translate.chat("&aHere's the command you did &r" + msg));
-                return true;
-            } else {
             }
         }
         return true;
