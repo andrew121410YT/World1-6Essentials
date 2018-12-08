@@ -50,7 +50,8 @@ public class Main extends JavaPlugin {//implements Listener {
         this.clear();
         getLogger().info("[World1-6Essentials] is now disabled.");
     }
-    public void clear(){
+
+    public void clear() {
         Afk.clear();
         Fly.clear();
         keyDataM.clear();

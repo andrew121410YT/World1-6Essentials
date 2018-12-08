@@ -115,7 +115,7 @@ public class debug implements CommandExecutor {
                             api.PermissionErrorMessage(p);
                             return true;
                         }
-                        api.clearAllArrayLists(p);
+                        api.clearAllArrayLists();
                         return true;
 
                         //CLEAR ALL HASHMAPS
@@ -124,7 +124,7 @@ public class debug implements CommandExecutor {
                             api.PermissionErrorMessage(p);
                             return true;
                         }
-                        api.clearAllHashMaps(p);
+                        api.clearAllHashMaps();
                         return true;
 
                         //CLEAR ALL HASHMAPS WITH THE NAME.

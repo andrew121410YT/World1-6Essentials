@@ -83,7 +83,7 @@ public class API {
         this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.fly.Fly For Player: " + p.getDisplayName());
     }
 
-    public void clearArrayListandHashMaps(Player p) {
+    public void clearArrayListandHashMaps() {
         keyDataM.clear();
         this.plugin.getLogger().info("Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For EVERY PLAYER");
         Afk1.clear();
@@ -97,14 +97,14 @@ public class API {
         this.plugin.getLogger().info("Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For Player: " + p.getDisplayName());
     }
 
-    public void clearAllArrayLists(Player p) {
+    public void clearAllArrayLists() {
         Afk1.clear();
         this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.afk.Afk For EVERY PLAYER");
         Fly1.clear();
         this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.fly.Fly For EVERY PLAYER");
     }
 
-    public void clearAllHashMaps(Player p) {
+    public void clearAllHashMaps() {
         keyDataM.clear();
         this.plugin.getLogger().info("Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For EVERY PLAYER");
     }
