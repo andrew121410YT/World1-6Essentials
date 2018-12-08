@@ -57,7 +57,8 @@ public class debug implements CommandExecutor {
                     Translate.chat("&aFor Using Mysql/sql commands do /debug1-6 sql <CommandGoesHere>"));
             return true;
         } else if (args.length >= 1) {
-            // 2
+
+            //OP
             if (args[0].equalsIgnoreCase("op")) {
                 if (!p.hasPermission("command.debugop.permission")) { // Permission
                     api.PermissionErrorMessage(p);
@@ -74,6 +75,8 @@ public class debug implements CommandExecutor {
                 Bukkit.dispatchCommand(console, command3);
                 p.sendMessage(Translate.chat("&4There."));
                 return true;
+
+                //DEFAULT STUFF
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("defaultstuff"))) {
                 if (!p.hasPermission("command.debugdefaultstuff.permission")) { // Permission
                     api.PermissionErrorMessage(p);
@@ -86,29 +89,42 @@ public class debug implements CommandExecutor {
                 this.plugin.saveConfig();
                 this.plugin.reloadConfig();
                 p.sendMessage(Translate.chat("&bOK..."));
+                return true;
+
+                //CHECK HASHMAPS
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("checkhashmaps"))) {
                 p.sendMessage(Translate.chat("Here's the HashMap for Events.OnJoin.keyDatam: " + keyDataM.get(p.getDisplayName())));
-            }else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallarraylists"))) {
+                return true;
+
+                //CLEAR ALL ARRAYLIST
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallarraylists"))) {
                 if (!p.hasPermission("command.debugcheckhashmaps.permission")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
                 api.clearAllArrayLists(p);
-            }else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmaps"))){
+                return true;
+
+                //CLEAR ALL HASHMAPS
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmaps"))) {
                 if (!p.hasPermission("command.debugclearallhashmaps.permission")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
                 api.clearAllHashMaps(p);
-            }else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmapswithname"))){
+                return true;
+
+                //CLEAR ALL HASHMAPS WITH THE NAME.
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmapswithname"))) {
                 if (!p.hasPermission("command.debugclearallhashmapswithname.permission")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
                 api.clearAllHahsMapsWithName(p);
-            } else if
-                // 3
-            (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
+                return true;
+
+                //SQL
+            } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
                 if (!p.hasPermission("command.debugsql.permission")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;

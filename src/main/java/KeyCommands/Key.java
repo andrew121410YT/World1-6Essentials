@@ -51,7 +51,9 @@ public class Key implements CommandExecutor {
             p.sendMessage(Translate.chat("---------------"));
             return true;
         }
-        if (args.length > 1) {
+        else if (args.length >= 1) {
+
+            //SET
             if (args[0].equalsIgnoreCase("set")) {
                 if (!p.hasPermission("command.keyset.permission")) { // Permission
                     api.PermissionErrorMessage(p);
@@ -72,9 +74,9 @@ public class Key implements CommandExecutor {
 
                 p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
                 return true;
-            }
-        } else if (args.length == 1) {
-            if (args[0].equalsIgnoreCase("give")) {
+
+                //GIVE
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase("give"))) {
                 if (!p.hasPermission("command.keygive.permission")) {
                     api.PermissionErrorMessage(p);
                     return true;
@@ -86,8 +88,9 @@ public class Key implements CommandExecutor {
                 //NEW WAY
                 keyapi.giveKeyFromTheRam(p);
                 return true;
-            }
-            if (args[0].equalsIgnoreCase("reset")) {
+
+                //RESET
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase("reset"))) {
                 if (!p.hasPermission("command.keyreset.permission")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
