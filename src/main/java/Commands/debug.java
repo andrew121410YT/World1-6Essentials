@@ -92,56 +92,69 @@ public class debug implements CommandExecutor {
                 return true;
 
                 //CHECK HASHMAPS
-            } else if (args.length == 1 && (args[0].equalsIgnoreCase("checkhashmaps"))) {
+            } else if (args.length >= 1 && (args[0].equalsIgnoreCase("checkhashmaps"))) {
                 if (args.length == 1) {
-                    p.sendMessage(Translate.chat("Here's the HashMap for Events.OnJoin.keyDatam: " + keyDataM.get(p.getDisplayName())));
-                    return true;
-
-                    //CLEAR ALL ARRAYLIST
-                } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallarraylists"))) {
-                    if (!p.hasPermission("command.debugcheckhashmaps.permission")) { // Permission
-                        api.PermissionErrorMessage(p);
-                        return true;
-                    }
-                    api.clearAllArrayLists(p);
-                    return true;
-
-                    //CLEAR ALL HASHMAPS
-                } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmaps"))) {
-                    if (!p.hasPermission("command.debugclearallhashmaps.permission")) { // Permission
-                        api.PermissionErrorMessage(p);
-                        return true;
-                    }
-                    api.clearAllHashMaps(p);
-                    return true;
-
-                    //CLEAR ALL HASHMAPS WITH THE NAME.
-                } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmapswithname"))) {
-                    if (!p.hasPermission("command.debugclearallhashmapswithname.permission")) { // Permission
-                        api.PermissionErrorMessage(p);
-                        return true;
-                    }
-                    api.clearAllHahsMapsWithName(p);
-                    return true;
-
-                    //SQL
-                } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
-                    if (!p.hasPermission("command.debugsql.permission")) { // Permission
-                        api.PermissionErrorMessage(p);
-                        return true;
-                    }
-                    // String Builder
-                    StringBuilder builder = new StringBuilder();
-                    for (int i = 1; i < args.length; i++) {
-                        builder.append(args[i] + " ");
-                    }
-                    String msg = builder.toString();
-                    mysql.Connect();
-                    mysql.ExecuteCommand(msg);
-                    p.sendMessage(Translate.chat("&4&lYour command has been executed thru SQL."));
-                    p.sendMessage(Translate.chat("&aHere's the command you did &r" + msg));
+                    p.sendMessage(Translate.chat("[&3/debug1-6 checkhashmaps &5checkmine&r] &9<-- show's what is stored in the HashMap of you."));
+                    p.sendMessage(Translate.chat("[&3/debug1-6 checkhashmaps &c@all&r] &9<-- Show's everything in the HashMap"));
                     return true;
                 } else {
+                    if (args.length >= 1) {
+                        if (args[1].equalsIgnoreCase("@all")) {
+                            for (String t2 : keyDataM.keySet()) {
+                                p.sendMessage(Translate.chat("Key: " + t2 + " Values: " + keyDataM.get(t2)));
+                                return true;
+                            }
+                        } else if (args[1].equalsIgnoreCase("checkmine")) {
+                            p.sendMessage(Translate.chat("Here's the HashMap for Events.OnJoin.keyDatam: " + keyDataM.get(p.getDisplayName())));
+
+                        }
+
+                        //CLEAR ALL ARRAYLIST
+                    } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallarraylists"))) {
+                        if (!p.hasPermission("command.debugcheckhashmaps.permission")) { // Permission
+                            api.PermissionErrorMessage(p);
+                            return true;
+                        }
+                        api.clearAllArrayLists(p);
+                        return true;
+
+                        //CLEAR ALL HASHMAPS
+                    } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmaps"))) {
+                        if (!p.hasPermission("command.debugclearallhashmaps.permission")) { // Permission
+                            api.PermissionErrorMessage(p);
+                            return true;
+                        }
+                        api.clearAllHashMaps(p);
+                        return true;
+
+                        //CLEAR ALL HASHMAPS WITH THE NAME.
+                    } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmapswithname"))) {
+                        if (!p.hasPermission("command.debugclearallhashmapswithname.permission")) { // Permission
+                            api.PermissionErrorMessage(p);
+                            return true;
+                        }
+                        api.clearAllHahsMapsWithName(p);
+                        return true;
+
+                        //SQL
+                    } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
+                        if (!p.hasPermission("command.debugsql.permission")) { // Permission
+                            api.PermissionErrorMessage(p);
+                            return true;
+                        }
+                        // String Builder
+                        StringBuilder builder = new StringBuilder();
+                        for (int i = 1; i < args.length; i++) {
+                            builder.append(args[i] + " ");
+                        }
+                        String msg = builder.toString();
+                        mysql.Connect();
+                        mysql.ExecuteCommand(msg);
+                        p.sendMessage(Translate.chat("&4&lYour command has been executed thru SQL."));
+                        p.sendMessage(Translate.chat("&aHere's the command you did &r" + msg));
+                        return true;
+                    } else {
+                    }
                 }
             }
         }
