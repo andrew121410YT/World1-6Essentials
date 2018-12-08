@@ -98,7 +98,7 @@ public class KeyAPI {
     }
 
 
-    public void mkey(MySQL mysql, Player p, String KeyDataID) {
+    public void MkeyGive(MySQL mysql, Player p, String KeyDataID) {
         new BukkitRunnable() {
 
             @Override
@@ -112,6 +112,7 @@ public class KeyAPI {
                 itemMeta.setDisplayName(name);
 
                 // SELECT * FROM KeyData WHERE Player='Mexico';
+                mysql.Connect();
                 ResultSet rs = mysql.GetResult("SELECT * FROM KeyData WHERE Player='" + p.getDisplayName()
                         + "' AND KeyDataID=" + KeyDataID + ";");
                 try {
@@ -120,7 +121,9 @@ public class KeyAPI {
                         String PlayerData = rs.getString("Player");
                         String LoreData = rs.getString("Lore");
                         Player pDone = Bukkit.getPlayer(PlayerData);
+                        mysql.Disconnect();
                         if (pDone != null) {
+                            mysql.Disconnect();
                             itemMeta.setLore(Arrays.asList(LoreData));
                             item.setItemMeta(itemMeta);
                             p.getInventory().addItem(new ItemStack(item));
@@ -137,7 +140,7 @@ public class KeyAPI {
         }.runTask(plugin);
     }
 
-    public void mkeygetanotherplayerkey(MySQL mysql, Player p, String KeyDataDone,
+    public void MkeyGetAnotherPlayerKey(MySQL mysql, Player p, String KeyDataDone,
                                         String PlayerNameDataDone) {
         new BukkitRunnable() {
 
@@ -152,6 +155,7 @@ public class KeyAPI {
                 itemMeta.setDisplayName(name);
 
                 // SELECT * FROM KeyData WHERE Player='Mexico';
+                mysql.Connect();
                 ResultSet rs = mysql.GetResult("SELECT * FROM KeyData WHERE (KeyDataID='" + KeyDataDone
                         + "' AND Player='" + PlayerNameDataDone + "')");
                 try {
@@ -165,6 +169,7 @@ public class KeyAPI {
                         item.setItemMeta(itemMeta);
                         p.getInventory().addItem(new ItemStack(item));
                         p.sendMessage(Translate.chat("&aThere You Go."));
+                        mysql.Disconnect();
                     }
                 } catch (IllegalArgumentException | SQLException e) {
                     // TODO Auto-generated catch block
@@ -172,5 +177,13 @@ public class KeyAPI {
                 }
             }
         }.runTaskAsynchronously(plugin);
+    }
+//
+//
+//
+public void ClearKeyDataIDFrom(int INT, MySQL mysql, Player p){
+    mysql.Connect();
+    mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + INT + "' AND Player='" + p.getDisplayName() + "'");
+    mysql.Disconnect();
     }
 }

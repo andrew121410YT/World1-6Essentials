@@ -46,53 +46,61 @@ public class MutiKeys implements CommandExecutor {
             p.sendMessage(Translate.chat("&3/mkey set <KeyID> <PlayerName> <Lore>"));
             p.sendMessage(Translate.chat("&b---------------"));
             return true;
-        } else if (args[0].equalsIgnoreCase("give")) {
-            if (args.length >= 2) {
-                if (!p.hasPermission("command.mkeygetanotherplayer.permission")) {
-                    api.PermissionErrorMessage(p);
-                    return true;
-                }
-                String KeyDataDone = args[1];
-                String PlayerNameDataDone = args[2];
+        } else {
 
-                mysql.Connect();
-                keyapi.mkeygetanotherplayerkey(mysql, p, KeyDataDone, PlayerNameDataDone);
-                return true;
-            }
-            if (!p.hasPermission("command.mkeygive.permission")) {
-                api.PermissionErrorMessage(p);
-                return true;
-            }
-            String KeyDataID = args[1];
-            mysql.Connect();
-            keyapi.mkey(mysql, p, KeyDataID);
-            return true;
-        } else if (args[0].equalsIgnoreCase("set")) {
-            if (!p.hasPermission("command.mkeyset.permission")) {
-                api.PermissionErrorMessage(p);
-                return true;
-            }
-            if (args.length == 1) {
-                String KeyDataid = args[1];
-                String Lore = args[2];
-                mysql.Connect();
-                mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataid
-                        + "', '" + p.getDisplayName() + "', '" + Lore + "')");
-                p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
-                return true;
-            } else if (args.length != 3) {
-                if (!p.hasPermission("command.mkeysetother.permission")) {
+            if (args[0].equalsIgnoreCase("give")) {
+                if (args.length == 3) {
+                    if (!p.hasPermission("command.mkeygetanotherplayer.permission")) {
+                        api.PermissionErrorMessage(p);
+                        return true;
+                    }
+                    String KeyDataDone = args[1];
+                    String PlayerNameDataDone = args[2];
+
+                    keyapi.MkeyGetAnotherPlayerKey(mysql, p, KeyDataDone, PlayerNameDataDone);
+                    return true;
+                }else if (args.length == 2) {
+                    if (!p.hasPermission("command.mkeygive.permission")) {
+                        api.PermissionErrorMessage(p);
+                        return true;
+                    }
+                    String KeyDataID = args[1];
+
+                    keyapi.MkeyGive(mysql, p, KeyDataID);
+                    return true;
+                }
+
+                //SET
+            } else if (args[0].equalsIgnoreCase("set")) {
+                if (!p.hasPermission("command.mkeyset.permission")) {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                String KeyDataID = args[1];
-                String PlayerNameTarget = args[2];
-                String Lore = args[3];
-                mysql.Connect();
-                mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID
-                        + "', '" + PlayerNameTarget + "', '" + Lore + "')");
-                p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
-                return true;
+                if (args.length >= 3) {
+                    String KeyDataid = args[1];
+                    String Lore = args[2];
+                    mysql.Connect();
+                    mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataid
+                            + "', '" + p.getDisplayName() + "', '" + Lore + "')");
+                    p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
+                    mysql.Disconnect();
+                    return true;
+                } else if (args.length != 3) {
+                    if (!p.hasPermission("command.mkeysetother.permission")) {
+                        api.PermissionErrorMessage(p);
+                        return true;
+                    }
+                    String KeyDataID = args[1];
+                    String PlayerNameTarget = args[2];
+                    String Lore = args[3];
+                    mysql.Connect();
+                    mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID
+                            + "', '" + PlayerNameTarget + "', '" + Lore + "')");
+                    p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
+                    mysql.Disconnect();
+                    return true;
+                }else{
+                }
             }
         }
         return true;

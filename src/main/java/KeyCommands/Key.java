@@ -95,8 +95,8 @@ public class Key implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                mysql.Connect();
-                mysql.ExecuteCommand("DELETE FROM KeyData WHERE Player='" + p.getDisplayName() + "'");
+                //NEW
+                keyapi.ClearKeyDataIDFrom(1, mysql, p);
 
                 //NEW
                 keyDataM.remove(p.getDisplayName());
