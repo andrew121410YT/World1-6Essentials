@@ -43,8 +43,13 @@ public class OnJoin implements Listener {
         p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10.0f, 1.0f);
         version(p);
 
-        //GETS THE 1 KEY FROM THE PLAYER AND THEN IT STORES IT IN RAM FOR EASY ACCESS
-        keyDatam.put(p.getDisplayName(), keyapi.giveKeyReturn(p, mysql));
+        if (keyapi.giveKeyReturn(p, mysql) == null) {
+            keyapi.SetKey(mysql, 1, p, "null");
+        } else {
+
+            //GETS THE 1 KEY FROM THE PLAYER AND THEN IT STORES IT IN RAM FOR EASY ACCESS
+            keyDatam.put(p.getDisplayName(), keyapi.giveKeyReturn(p, mysql));
+        }
     }
 
     public void version(Player p) {

@@ -50,8 +50,7 @@ public class Key implements CommandExecutor {
             p.sendMessage(Translate.chat("&6/key reset < Resets/Clears all data from DATABASE."));
             p.sendMessage(Translate.chat("---------------"));
             return true;
-        }
-        else if (args.length >= 1) {
+        } else if (args.length >= 1) {
 
             //SET
             if (args[0].equalsIgnoreCase("set")) {
@@ -66,9 +65,9 @@ public class Key implements CommandExecutor {
                     // END OF STRING BUILDER
                 }
                 String setDataDone = setData.toString(); // OUT PUT OF STRING BUILDER
-                mysql.Connect();
-                mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('1', '"
-                        + p.getDisplayName() + "', '" + setDataDone + "')");
+
+                keyapi.SetKey(mysql, 1, p, setDataDone);
+
                 //NEW
                 keyDataM.put(p.getDisplayName(), setDataDone);
 
@@ -96,7 +95,7 @@ public class Key implements CommandExecutor {
                     return true;
                 }
                 //NEW
-                keyapi.ClearKeyDataIDFrom(1, mysql, p);
+                keyapi.ClearKeyDataID(mysql, p, 1);
 
                 //NEW
                 keyDataM.remove(p.getDisplayName());

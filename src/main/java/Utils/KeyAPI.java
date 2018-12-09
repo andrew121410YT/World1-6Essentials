@@ -178,12 +178,20 @@ public class KeyAPI {
             }
         }.runTaskAsynchronously(plugin);
     }
+
+    //
 //
 //
-//
-public void ClearKeyDataIDFrom(int INT, MySQL mysql, Player p){
-    mysql.Connect();
-    mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + INT + "' AND Player='" + p.getDisplayName() + "'");
-    mysql.Disconnect();
+    public void ClearKeyDataID(MySQL mysql, Player p, int INT) {
+        mysql.Connect();
+        mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + INT + "' AND Player='" + p.getDisplayName() + "'");
+        mysql.Disconnect();
+    }
+
+    public void SetKey(MySQL mysql, int KeyDataID, Player p, String Lore) {
+        mysql.Connect();
+        mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
+                + p.getDisplayName() + "', '" + Lore + "')");
+        mysql.Disconnect();
     }
 }
