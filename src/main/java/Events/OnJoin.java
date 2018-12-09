@@ -44,9 +44,9 @@ public class OnJoin implements Listener {
         version(p);
 
         if (keyapi.giveKeyReturn(p, mysql) == null) {
+            this.plugin.getLogger().info("The Player: " + p.getDisplayName() + " is not in the Database Adding...");
             keyapi.SetKey(mysql, 1, p, "null");
         } else {
-
             //GETS THE 1 KEY FROM THE PLAYER AND THEN IT STORES IT IN RAM FOR EASY ACCESS
             keyDatam.put(p.getDisplayName(), keyapi.giveKeyReturn(p, mysql));
         }
