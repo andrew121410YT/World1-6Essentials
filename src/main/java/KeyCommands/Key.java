@@ -66,14 +66,7 @@ public class Key implements CommandExecutor {
                 }
                 String setDataDone = setData.toString(); // OUT PUT OF STRING BUILDER
 
-//                OLD WAY
-//                keyapi.ClearKeyDataID(mysql, p, 1);
-//                keyapi.SetKey(mysql, 1, p, setDataDone);
-
-                //NEW
                 keyapi.ReplaceKey(mysql, 1, p, setDataDone);
-
-                //NEW
                 keyDataM.put(p.getDisplayName(), setDataDone);
 
                 p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
@@ -85,11 +78,6 @@ public class Key implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                //OLD WAY
-                //mysql.Connect();
-                //keyapi.giveKey(p, mysql);
-
-                //NEW WAY
                 keyapi.giveKeyFromTheRam(p);
                 return true;
 
@@ -99,10 +87,8 @@ public class Key implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                //NEW
-                keyapi.ClearKeyDataID(mysql, p, 1);
 
-                //NEW
+                keyapi.ClearKeyDataID(mysql, p, 1);
                 keyDataM.remove(p.getDisplayName());
 
                 p.sendMessage(
