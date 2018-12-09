@@ -54,7 +54,7 @@ public class Key implements CommandExecutor {
 
             //SET
             if (args[0].equalsIgnoreCase("set")) {
-                if (!p.hasPermission("command.keyset.permission")) { // Permission
+                if (!p.hasPermission("command.key.set.permission")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -74,7 +74,7 @@ public class Key implements CommandExecutor {
 
                 //GIVE
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("give"))) {
-                if (!p.hasPermission("command.keygive.permission")) {
+                if (!p.hasPermission("command.key.give.permission")) {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -83,16 +83,17 @@ public class Key implements CommandExecutor {
 
                 //RESET
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("reset"))) {
-                if (!p.hasPermission("command.keyreset.permission")) { // Permission
+                if (!p.hasPermission("command.key.reset.permission")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
 
-                keyapi.ClearKeyDataID(mysql, p, 1);
+//                keyapi.ClearKeyDataID(mysql, p, 1);
+                keyapi.ReplaceKey(mysql, 1, p, "null");
                 keyDataM.remove(p.getDisplayName());
 
                 p.sendMessage(
-                        Translate.chat("&cAll of you data from the mysql data base has been cleared."));
+                        Translate.chat("&The lore has been reseted."));
                 return true;
             }
         }

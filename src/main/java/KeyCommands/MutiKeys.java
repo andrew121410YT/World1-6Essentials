@@ -51,7 +51,7 @@ public class MutiKeys implements CommandExecutor {
 
             if (args[0].equalsIgnoreCase("give")) {
                 if (args.length == 3) {
-                    if (!p.hasPermission("command.mkeygetanotherplayer.permission")) {
+                    if (!p.hasPermission("command.give.other.permission")) {
                         api.PermissionErrorMessage(p);
                         return true;
                     }
@@ -61,7 +61,7 @@ public class MutiKeys implements CommandExecutor {
                     keyapi.MkeyGetAnotherPlayerKey(mysql, p, KeyDataDone, PlayerNameDataDone);
                     return true;
                 } else if (args.length == 2) {
-                    if (!p.hasPermission("command.mkeygive.permission")) {
+                    if (!p.hasPermission("command.mkey.give.permission")) {
                         api.PermissionErrorMessage(p);
                         return true;
                     }
@@ -71,21 +71,42 @@ public class MutiKeys implements CommandExecutor {
                     return true;
                 }
             } else if (args[0].equalsIgnoreCase("reset")) {
+                if (!p.hasPermission("command.mkey.reset.permission")) {
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
                 if (args.length == 1) {
-                    p.sendMessage(Translate.chat("/mkey reset KeyDataID Player"));
+                    p.sendMessage(Translate.chat("/mkey reset <KeyDataID> <Player>"));
                 } else {
                     if (args.length == 3) {
                         String keydataid = args[1];
                         String playertarget = args[2];
                         Integer keydataidDONE = Integer.valueOf(keydataid);
-
+                        if (args[1].equals("1")) {
+                            p.sendMessage(Translate.chat("&cFor reseting KeyID 1 please use /key reset"));
+                            return true;
+                        }
                         keyapi.ClearKeyDataID(mysql, playertarget, keydataidDONE);
                         p.sendMessage(Translate.chat("&bOK..."));
+                        return true;
+                    } else {
+                        if (args.length >= 4) {
+                            String keydataid = args[1];
+                            String playertarget = args[2];
+                            Integer keydataidDONE = Integer.valueOf(keydataid);
+                            if (args[3].equalsIgnoreCase("@bypass")) {
+                                keyapi.ClearKeyDataID(mysql, playertarget, keydataidDONE);
+                                p.sendMessage(Translate.chat("&bOK..."));
+                                p.sendMessage(Translate.chat("YOU Bypassed!!!"));
+                            } else {
+                                p.sendMessage(Translate.chat("&6Hmm?"));
+                            }
+                        }
                     }
                 }
                 //SET
             } else if (args[0].equalsIgnoreCase("set")) {
-                if (!p.hasPermission("command.mkeyset.permission")) {
+                if (!p.hasPermission("command.mkey.set.permission")) {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -99,7 +120,7 @@ public class MutiKeys implements CommandExecutor {
                     mysql.Disconnect();
                     return true;
                 } else if (args.length >= 4) {
-                    if (!p.hasPermission("command.mkeysetother.permission")) {
+                    if (!p.hasPermission("command.mkey.set.other.permission")) {
                         api.PermissionErrorMessage(p);
                         return true;
                     }
