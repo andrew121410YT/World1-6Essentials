@@ -2,6 +2,7 @@ package Events;
 
 import MysqlAPI.MySQL;
 import Translate.Translate;
+import Utils.API;
 import Utils.KeyAPI;
 import World16.World16.World16.Main;
 import org.bukkit.Bukkit;
@@ -19,6 +20,7 @@ public class OnJoin implements Listener {
 
     public static HashMap<String, String> keyDataM = new HashMap<String, String>();
     MySQL mysql = new MySQL();
+    API api = new API();
     KeyAPI keyapi = new KeyAPI();
 
     public OnJoin(World16.World16.World16.Main getPlugin) {
@@ -46,7 +48,7 @@ public class OnJoin implements Listener {
         String giveKeyReturnTEMP = keyapi.giveKeyReturn(p, mysql);
 
         if (giveKeyReturnTEMP == null) {
-            this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat("[&9World1-6Ess&r]->[&bUSELESS&r] &9The Player: " + p.getDisplayName() + " is not in the Database so gonna add them..."));
+            this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(api.USELESS+" &9The Player: " + p.getDisplayName() + " is not in the Database so gonna add them..."));
             keyapi.SetKey(mysql, 1, p, "null");
         } else {
             //GETS THE 1 KEY FROM THE PLAYER AND THEN IT STORES IT IN RAM FOR EASY ACCESS

@@ -119,11 +119,9 @@ public class Main extends JavaPlugin {//implements Listener {
             Player p = (Player) sender;
 
             if (cmd.getName().equalsIgnoreCase("World1-6Essentials")) {
-                if (args.length == 0) {
+                if (args.length >= 0) {
                     p.sendMessage(Translate.chat("&6Made By Andrew121410 My -> Discord: Andrew121410#2035"));
                     return true;
-                } else {
-                    this.getLogger().info("[ERROR]");
                 }
             }
         }
