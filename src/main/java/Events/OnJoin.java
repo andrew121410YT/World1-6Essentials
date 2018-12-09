@@ -17,7 +17,7 @@ public class OnJoin implements Listener {
 
     private Main plugin;
 
-    public static HashMap<String, String> keyDatam = new HashMap<String, String>();
+    public static HashMap<String, String> keyDataM = new HashMap<String, String>();
     MySQL mysql = new MySQL();
     KeyAPI keyapi = new KeyAPI();
 
@@ -48,7 +48,7 @@ public class OnJoin implements Listener {
             keyapi.SetKey(mysql, 1, p, "null");
         } else {
             //GETS THE 1 KEY FROM THE PLAYER AND THEN IT STORES IT IN RAM FOR EASY ACCESS
-            keyDatam.put(p.getDisplayName(), keyapi.giveKeyReturn(p, mysql));
+            keyDataM.put(p.getDisplayName(), keyapi.giveKeyReturn(p, mysql));
         }
     }
 

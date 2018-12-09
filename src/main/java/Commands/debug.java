@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 public class debug implements CommandExecutor {
 
-    HashMap<String, String> keyDataM = OnJoin.keyDatam;
+    HashMap<String, String> keyDataM = OnJoin.keyDataM;
     ArrayList<String> Afk1 = afk.Afk;
     ArrayList<String> Fly1 = fly.Fly;
 

@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class API {
 
-    HashMap<String, String> keyDataM = OnJoin.keyDatam;
+    HashMap<String, String> keyDataM = OnJoin.keyDataM;
     ArrayList<String> Afk1 = afk.Afk;
     ArrayList<String> Fly1 = fly.Fly;
 
@@ -76,41 +76,43 @@ public class API {
 
     public void clearArrayListandHashMapsWithName(Player p) {
         keyDataM.remove(p.getDisplayName());
-        this.plugin.getLogger().info("Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For Player: " + p.getDisplayName());
+        this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS+" Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For Player: " + p.getDisplayName()));
         Afk1.remove(p.getDisplayName());
-        this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.afk.Afk For Player: " + p.getDisplayName());
+        this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS+" Class: Utils.API has cleared the ArrayList of Commands.afk.Afk For Player: " + p.getDisplayName()));
         Fly1.remove(p.getDisplayName());
-        this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.fly.Fly For Player: " + p.getDisplayName());
+        this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS+" Class: Utils.API has cleared the ArrayList of Commands.fly.Fly For Player: " + p.getDisplayName()));
     }
 
     public void clearArrayListandHashMaps() {
         keyDataM.clear();
-        this.plugin.getLogger().info("Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For EVERY PLAYER");
+        this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS+" Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For EVERY PLAYER"));
         Afk1.clear();
-        this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.afk.Afk For EVERY PLAYER");
+        this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS+" Class: Utils.API has cleared the ArrayList of Commands.afk.Afk For EVERY PLAYER"));
         Fly1.clear();
-        this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.fly.Fly For EVERY PLAYER");
+        this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS+" Class: Utils.API has cleared the ArrayList of Commands.fly.Fly For EVERY PLAYER"));
     }
 
     public void clearAllHahsMapsWithName(Player p) {
         keyDataM.remove(p.getDisplayName());
-        this.plugin.getLogger().info("Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For Player: " + p.getDisplayName());
+        this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS+" Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For Player: " + p.getDisplayName()));
     }
 
     public void clearAllArrayLists() {
         Afk1.clear();
-        this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.afk.Afk For EVERY PLAYER");
+        this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS+" Class: Utils.API has cleared the ArrayList of Commands.afk.Afk For EVERY PLAYER"));
         Fly1.clear();
-        this.plugin.getLogger().info("Class: Utils.API has cleared the ArrayList of Commands.fly.Fly For EVERY PLAYER");
+        this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS+" Class: Utils.API has cleared the ArrayList of Commands.fly.Fly For EVERY PLAYER"));
     }
 
     public void clearAllHashMaps() {
         keyDataM.clear();
-        this.plugin.getLogger().info("Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For EVERY PLAYER");
+        this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS+" Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDatam For EVERY PLAYER"));
     }
 
     public void PermissionErrorMessage(Player p) {
         p.sendMessage(
                 Translate.chat("[&9World1-6&r] &cYou Do Not Have Permission To Use This Command."));
     }
+    public static final String PREFIX = "[&9World1-6Ess&r]";
+    public static final String USELESS = ""+PREFIX+"->[&bUSELESS&r]";
 }

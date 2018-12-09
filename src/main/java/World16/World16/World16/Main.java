@@ -28,7 +28,7 @@ public class Main extends JavaPlugin {//implements Listener {
     private CustomYmlManger customyml;
     ArrayList<String> Afk = afk.Afk;
     ArrayList<String> Fly = fly.Fly;
-    HashMap<String, String> keyDataM = OnJoin.keyDatam;
+    HashMap<String, String> keyDataM = OnJoin.keyDataM;
     // GOT THE MYSQL API AT https://www.spigotmc.org/resources/simple-easy-mysql-api.36447/
     // GOT THE TITLE API AT https://www.spigotmc.org/resources/titleapi-1-8-1-13.1325/
     PluginManager pm = Bukkit.getPluginManager();

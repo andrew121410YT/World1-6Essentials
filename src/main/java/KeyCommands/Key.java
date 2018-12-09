@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 public class Key implements CommandExecutor {
 
-    HashMap<String, String> keyDataM = OnJoin.keyDatam;
+    HashMap<String, String> keyDataM = OnJoin.keyDataM;
 
     private Main plugin;
     API api = new API();
