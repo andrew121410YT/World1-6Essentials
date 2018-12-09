@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class KeyAPI {
 
     private static Plugin plugin = Main.plugin;
-    public static HashMap<String, String> keyDatam = OnJoin.keyDatam;
+    private static HashMap<String, String> keyDatam = OnJoin.keyDatam;
 
     // START
     public void giveKey(Player p, MySQL mysql) { //GIVES DEFAULT ID 1 KEY

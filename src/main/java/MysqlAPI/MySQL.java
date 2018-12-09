@@ -98,6 +98,25 @@ public class MySQL {
         return null;
     }
 
+    public ResultSet GetResultPreparedStatement(String command) {
+        try {
+            if (this.connection.isClosed()) {
+                this.Connect();
+            }
+            PreparedStatement pst = this.connection.prepareStatement(command);
+            pst.executeQuery();
+            ResultSet rs = pst.getResultSet();
+            return rs;
+
+        } catch (SQLException e4) {
+            System.out.println(Translate.chat("&c[MySQLAPI] Error 04"));
+            System.out
+                    .println(Translate.chat("[MySQLAPI] An error occurred while executing the command!"));
+            e4.printStackTrace();
+        }
+        return null;
+    }
+
     public void ExecuteCommand(String command) {
         try {
             if (this.connection.isClosed()) {
