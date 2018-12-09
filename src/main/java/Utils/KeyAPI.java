@@ -194,4 +194,10 @@ public class KeyAPI {
                 + p.getDisplayName() + "', '" + Lore + "')");
         mysql.Disconnect();
     }
+
+    public void ReplaceKey(MySQL mysql, int KeyDataID, Player p, String Lore) {
+        mysql.Connect();
+        mysql.ExecuteCommand("UPDATE KeyData SET KeyDataID = '" + KeyDataID + "', Lore = '" + Lore + "' WHERE Player = '" + p.getDisplayName() + "'");
+        mysql.Disconnect();
+    }
 }
