@@ -66,8 +66,12 @@ public class Key implements CommandExecutor {
                 }
                 String setDataDone = setData.toString(); // OUT PUT OF STRING BUILDER
 
-                keyapi.ClearKeyDataID(mysql, p, 1);
-                keyapi.SetKey(mysql, 1, p, setDataDone);
+//                OLD WAY
+//                keyapi.ClearKeyDataID(mysql, p, 1);
+//                keyapi.SetKey(mysql, 1, p, setDataDone);
+
+                //NEW
+                keyapi.ReplaceKey(mysql, 1, p, setDataDone);
 
                 //NEW
                 keyDataM.put(p.getDisplayName(), setDataDone);
