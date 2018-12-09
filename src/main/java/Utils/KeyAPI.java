@@ -80,6 +80,7 @@ public class KeyAPI {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        mysql.Disconnect();
         return null;
     }
 
