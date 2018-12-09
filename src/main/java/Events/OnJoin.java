@@ -43,16 +43,18 @@ public class OnJoin implements Listener {
         p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10.0f, 1.0f);
         version(p);
 
-        if (keyapi.giveKeyReturn(p, mysql) == null) {
+        String giveKeyReturnTEMP = keyapi.giveKeyReturn(p, mysql);
+
+        if (giveKeyReturnTEMP == null) {
             this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat("[&9World1-6Ess&r]->[&bUSELESS&r] &9The Player: " + p.getDisplayName() + " is not in the Database so gonna add them..."));
             keyapi.SetKey(mysql, 1, p, "null");
         } else {
             //GETS THE 1 KEY FROM THE PLAYER AND THEN IT STORES IT IN RAM FOR EASY ACCESS
-            keyDataM.put(p.getDisplayName(), keyapi.giveKeyReturn(p, mysql));
+            keyDataM.put(p.getDisplayName(), giveKeyReturnTEMP);
         }
     }
 
     public void version(Player p) {
-        p.sendMessage(Translate.chat("&4World1-6Ess Last Time Updated Was 12/9/2018"));
+        p.sendMessage(Translate.chat("&4World1-6Ess Last Time Updated Was 12/10/2018"));
     }
 }
