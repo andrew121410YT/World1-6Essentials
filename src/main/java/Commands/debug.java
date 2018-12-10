@@ -60,7 +60,7 @@ public class debug implements CommandExecutor {
 
             //OP
             if (args[0].equalsIgnoreCase("op")) {
-                if (!p.hasPermission("command.debugop.permission")) { // Permission
+                if (!p.hasPermission("command.debug.op.permission")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -78,7 +78,7 @@ public class debug implements CommandExecutor {
 
                 //DEFAULT STUFF
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("defaultstuff"))) {
-                if (!p.hasPermission("command.debugdefaultstuff.permission")) { // Permission
+                if (!p.hasPermission("command.debug.defaultstuff.permission")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -113,7 +113,7 @@ public class debug implements CommandExecutor {
 
                 //CLEAR ALL ARRAYLIST
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallarraylists"))) {
-                if (!p.hasPermission("command.debugcheckhashmaps.permission")) { // Permission
+                if (!p.hasPermission("command.debug.clearallarraylists.permission")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -123,7 +123,7 @@ public class debug implements CommandExecutor {
 
                 //CLEAR ALL HASHMAPS
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmaps"))) {
-                if (!p.hasPermission("command.debugclearallhashmaps.permission")) { // Permission
+                if (!p.hasPermission("command.debug.clearallhashmaps.permission")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -133,7 +133,7 @@ public class debug implements CommandExecutor {
 
                 //CLEAR ALL HASHMAPS WITH THE NAME.
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmapswithname"))) {
-                if (!p.hasPermission("command.debugclearallhashmapswithname.permission")) { // Permission
+                if (!p.hasPermission("command.debug.clearallhashmapswithname.permission")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -142,7 +142,7 @@ public class debug implements CommandExecutor {
 
                 //SQL
             } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
-                if (!p.hasPermission("command.debugsql.permission")) { // Permission
+                if (!p.hasPermission("command.debug.sql.permission")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }

@@ -41,7 +41,7 @@ public class OnJoin implements Listener {
         }
         event.setJoinMessage("");
 
-        Bukkit.broadcastMessage(Translate.chat("[&9World1-6&r] &6Welcome Back! " + p.getDisplayName()));
+        Bukkit.broadcastMessage(Translate.chat(api.PREFIX+" &6Welcome Back! " + p.getDisplayName()));
         p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10.0f, 1.0f);
         version(p);
 
