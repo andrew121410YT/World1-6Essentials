@@ -48,7 +48,7 @@ public class OnJoin implements Listener {
         String giveKeyReturnTEMP = keyapi.giveKeyReturn(p, mysql);
 
         if (giveKeyReturnTEMP == null) {
-            this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(api.USELESS+" &9The Player: " + p.getDisplayName() + " is not in the Database so gonna add them..."));
+            this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(api.USELESS + " &9The Player: " + p.getDisplayName() + " is not in the Database so gonna add them..."));
             keyapi.SetKey(mysql, 1, p, "null");
         } else {
             //GETS THE 1 KEY FROM THE PLAYER AND THEN IT STORES IT IN RAM FOR EASY ACCESS
