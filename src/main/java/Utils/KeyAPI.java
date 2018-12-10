@@ -185,45 +185,75 @@ public class KeyAPI {
 //
     //1
     public void ClearKeyDataID(MySQL mysql, Player p, int INT) {
-        mysql.Connect();
-        mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + INT + "' AND Player='" + p.getDisplayName() + "'");
-        mysql.Disconnect();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                mysql.Connect();
+                mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + INT + "' AND Player='" + p.getDisplayName() + "'");
+                mysql.Disconnect();
+            }
+        }.runTaskAsynchronously(plugin);
     }
 
     //2
     public void ClearKeyDataID(MySQL mysql, String p, int INT) {
-        mysql.Connect();
-        mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + INT + "' AND Player='" + p + "'");
-        mysql.Disconnect();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                mysql.Connect();
+                mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + INT + "' AND Player='" + p + "'");
+                mysql.Disconnect();
+            }
+        }.runTaskAsynchronously(plugin);
     }
 
     //1
     public void SetKey(MySQL mysql, int KeyDataID, Player p, String Lore) {
-        mysql.Connect();
-        mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
-                + p.getDisplayName() + "', '" + Lore + "')");
-        mysql.Disconnect();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                mysql.Connect();
+                mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
+                        + p.getDisplayName() + "', '" + Lore + "')");
+                mysql.Disconnect();
+            }
+        }.runTaskAsynchronously(plugin);
     }
 
     //2
     public void SetKey(MySQL mysql, int KeyDataID, String p, String Lore) {
-        mysql.Connect();
-        mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
-                + p + "', '" + Lore + "')");
-        mysql.Disconnect();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                mysql.Connect();
+                mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
+                        + p + "', '" + Lore + "')");
+                mysql.Disconnect();
+            }
+        }.runTaskAsynchronously(plugin);
     }
 
     //1
     public void ReplaceKey(MySQL mysql, int KeyDataID, Player p, String Lore) {
-        mysql.Connect();
-        mysql.ExecuteCommand("UPDATE KeyData SET Lore = '" + Lore + "' WHERE KeyDataID = " + KeyDataID + " AND Player = '" + p.getDisplayName() + "'");
-        mysql.Disconnect();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                mysql.Connect();
+                mysql.ExecuteCommand("UPDATE KeyData SET Lore = '" + Lore + "' WHERE KeyDataID = " + KeyDataID + " AND Player = '" + p.getDisplayName() + "'");
+                mysql.Disconnect();
+            }
+        }.runTaskAsynchronously(plugin);
     }
 
     //2
     public void ReplaceKey(MySQL mysql, int KeyDataID, String p, String Lore) {
-        mysql.Connect();
-        mysql.ExecuteCommand("UPDATE KeyData SET Lore = '" + Lore + "' WHERE KeyDataID = " + KeyDataID + " AND Player = '" + p + "'");
-        mysql.Disconnect();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                mysql.Connect();
+                mysql.ExecuteCommand("UPDATE KeyData SET Lore = '" + Lore + "' WHERE KeyDataID = " + KeyDataID + " AND Player = '" + p + "'");
+                mysql.Disconnect();
+            }
+        }.runTaskAsynchronously(plugin);
     }
 }
