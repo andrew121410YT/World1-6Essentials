@@ -111,23 +111,27 @@ public class MutiKeys implements CommandExecutor {
                     return true;
                 }
                 if (args.length == 3) {
-                    String KeyDataid = args[1];
-                    String Lore = args[2];
-                    mysql.Connect();
-                    mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataid
-                            + "', '" + p.getDisplayName() + "', '" + Lore + "')");
+                    String KeyDataID = args[1]; //TAKES THE KEYDATAID.
+                    String Lore = args[2]; //TAKES THE LORE.
+                    Integer KeyDataIDDONE = Integer.valueOf(KeyDataID); //Makes KeyDataID Turn into an INT.
+                    keyapi.SetKey(mysql, KeyDataIDDONE, p, Lore);
+
+//                    mysql.Connect();
+//                    mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataid
+//                            + "', '" + p.getDisplayName() + "', '" + Lore + "')");
+
                     p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
-                    mysql.Disconnect();
+//                    mysql.Disconnect();
                     return true;
                 } else if (args.length >= 4) {
                     if (!p.hasPermission("command.mkey.set.other.permission")) {
                         api.PermissionErrorMessage(p);
                         return true;
                     }
-                    String KeyDataID = args[1];
-                    Player PlayerNmaeTarget = this.plugin.getServer().getPlayerExact(args[2]);
-                    String Lore = args[3];
-                    Integer KeyDataIDDONE = Integer.valueOf(KeyDataID);
+                    String KeyDataID = args[1]; //TAKES THE KEYDATAID
+                    String PlayerNmaeTarget = args[2]; //TAKES THE PLAYER
+                    String Lore = args[3]; //TAKES THE LORE
+                    Integer KeyDataIDDONE = Integer.valueOf(KeyDataID); //CHANGES STRING TO INT
 
                     try {
                         keyapi.SetKey(mysql, KeyDataIDDONE, PlayerNmaeTarget, Lore);
