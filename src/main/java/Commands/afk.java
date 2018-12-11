@@ -1,5 +1,6 @@
 package Commands;
 
+import CustomEvents.handlers.AfkEventHandler;
 import Translate.Translate;
 import Utils.API;
 import World16.World16.World16.Main;
@@ -42,10 +43,13 @@ public class afk implements Listener, CommandExecutor {
                 Bukkit.broadcastMessage(
                         Translate.chat("&8<&4&lAFK&r&8>&r " + p.getDisplayName() + " &chas GONE afk."));
                 Afk.add(p.getDisplayName());
+                AfkEventHandler event = new AfkEventHandler(p);
+                return true;
             } else if (Afk.contains(p.getDisplayName())) {
                 Bukkit.broadcastMessage(
                         Translate.chat("&8<&4&lAFK&r&8>&r " + p.getDisplayName() + " &2is now back from afk."));
                 Afk.remove(p.getDisplayName());
+                return true;
             }
         }
         return true;

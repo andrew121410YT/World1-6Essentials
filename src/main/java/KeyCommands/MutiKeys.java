@@ -114,6 +114,7 @@ public class MutiKeys implements CommandExecutor {
                     String KeyDataID = args[1]; //TAKES THE KEYDATAID.
                     String Lore = args[2]; //TAKES THE LORE.
                     Integer KeyDataIDDONE = Integer.valueOf(KeyDataID); //Makes KeyDataID Turn into an INT.
+
                     keyapi.SetKey(mysql, KeyDataIDDONE, p, Lore);
 
 //                    mysql.Connect();

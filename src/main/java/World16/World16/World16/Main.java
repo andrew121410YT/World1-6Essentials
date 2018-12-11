@@ -1,10 +1,7 @@
 package World16.World16.World16;
 
 import Commands.*;
-import Events.OnBedEnter;
-import Events.OnJoin;
-import Events.OnJoinTitle;
-import Events.OnLeave;
+import Events.*;
 import KeyCommands.Key;
 import KeyCommands.MutiKeys;
 import Translate.Translate;
