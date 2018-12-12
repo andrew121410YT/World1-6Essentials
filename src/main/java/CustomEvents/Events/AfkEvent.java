@@ -1,13 +1,16 @@
 package CustomEvents.Events;
 
+import World16.World16.World16.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public class AfkEvent extends Event {
-    private static final HandlerList handlers = new HandlerList();
 
-    Player p;
+    private static final HandlerList handlers = new HandlerList();
+    private static Main plugin = Main.plugin;
+
+    String p;
 
     @Override
     public HandlerList getHandlers() {
@@ -20,11 +23,19 @@ public class AfkEvent extends Event {
 
     //CODE STARTS HERE
 
-    public AfkEvent(Player p) {
+    public AfkEvent(String p) {
         this.p = p;
     }
 
-    public Player getPlayer() {
+    public String getPlayerName() {
         return this.p;
+    }
+
+    public Player getPlayer() {
+        return this.plugin.getServer().getPlayerExact(p);
+    }
+
+    public Main getPlugin() {
+        return this.plugin;
     }
 }

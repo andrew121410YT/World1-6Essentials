@@ -43,7 +43,7 @@ public class afk implements Listener, CommandExecutor {
                 Bukkit.broadcastMessage(
                         Translate.chat("&8<&4&lAFK&r&8>&r " + p.getDisplayName() + " &chas GONE afk."));
                 Afk.add(p.getDisplayName());
-                AfkEventHandler event = new AfkEventHandler(p);
+                new AfkEventHandler(p.getDisplayName()); //CALLS THE EVENT.
                 return true;
             } else if (Afk.contains(p.getDisplayName())) {
                 Bukkit.broadcastMessage(
