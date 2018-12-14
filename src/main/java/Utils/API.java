@@ -8,6 +8,8 @@ import World16.World16.World16.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -107,6 +109,21 @@ public class API {
     public void clearAllHashMaps() {
         keyDataM.clear();
         this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS + " Class: Utils.API has cleared the HashMap of Events.OnJoin.keyDataM For EVERY PLAYER"));
+    }
+
+    public String FormatTime(LocalDateTime time) {
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = time.format(myFormatObj);
+
+        return formattedDate;
+    }
+
+    public String Time() {
+        LocalDateTime time = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = time.format(myFormatObj);
+
+        return formattedDate;
     }
 
     public void PermissionErrorMessage(Player p) {

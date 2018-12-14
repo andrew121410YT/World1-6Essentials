@@ -140,6 +140,16 @@ public class debug implements CommandExecutor {
                 api.clearAllHahsMapsWithName(p);
                 return true;
 
+                //DATE
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase("date"))) {
+                if (!p.hasPermission("command.debug.date.permission")) { // Permission
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
+                String date = api.Time();
+                p.sendMessage(Translate.chat("Time/Data:-> " + date));
+                return true;
+
                 //SQL
             } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
                 if (!p.hasPermission("command.debug.sql.permission")) { // Permission
