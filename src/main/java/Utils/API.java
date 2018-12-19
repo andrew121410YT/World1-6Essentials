@@ -24,11 +24,11 @@ public class API {
     CustomYmlManger yml = new CustomYmlManger();
 
     // FOR MYSQL
-    public String HOST = plugin.getConfig().getString("MysqlHOST");
-    public String DATABASE = plugin.getConfig().getString("MysqlDATABASE");
-    public String USER = plugin.getConfig().getString("MysqlUSER");
-    public String PASSWORD = plugin.getConfig().getString("MysqlPASSWORD");
-    public String PORT = plugin.getConfig().getString("MysqlPORT");
+    private String HOST = plugin.getConfig().getString("MysqlHOST");
+    private String DATABASE = plugin.getConfig().getString("MysqlDATABASE");
+    private String USER = plugin.getConfig().getString("MysqlUSER");
+    private String PASSWORD = plugin.getConfig().getString("MysqlPASSWORD");
+    private String PORT = plugin.getConfig().getString("MysqlPORT");
     // END MYSQL
 
     // MAIN
@@ -40,23 +40,23 @@ public class API {
     // START OF MYSQL
 
     public String getHOST() {
-        return HOST;
+        return this.HOST;
     }
 
     public String getDATABASE() {
-        return DATABASE;
+        return this.DATABASE;
     }
 
     public String getUSER() {
-        return USER;
+        return this.USER;
     }
 
     public String getPASSWORD() {
-        return PASSWORD;
+        return this.PASSWORD;
     }
 
     public String getPORT() {
-        return PORT;
+        return this.PORT;
     }
     // END OF MYSQL
 
@@ -112,7 +112,7 @@ public class API {
     }
 
     public String FormatTime(LocalDateTime time) {
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
         String formattedDate = time.format(myFormatObj);
 
         return formattedDate;
@@ -120,7 +120,7 @@ public class API {
 
     public String Time() {
         LocalDateTime time = LocalDateTime.now();
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
         String formattedDate = time.format(myFormatObj);
 
         return formattedDate;
