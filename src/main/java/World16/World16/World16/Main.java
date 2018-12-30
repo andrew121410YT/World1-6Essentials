@@ -1,12 +1,38 @@
 package World16.World16.World16;
 
-import Commands.*;
-import Events.*;
+import Commands.afk;
+import Commands.bed;
+import Commands.colors;
+import Commands.commandblock;
+import Commands.day;
+import Commands.debug;
+import Commands.echest;
+import Commands.feed;
+import Commands.fly;
+import Commands.flyspeed;
+import Commands.gmc;
+import Commands.gms;
+import Commands.gmsp;
+import Commands.heal;
+import Commands.isafk;
+import Commands.jail;
+import Commands.night;
+import Commands.ram;
+import Commands.setjail;
+import Commands.setspawn;
+import Commands.sign;
+import Commands.spawn;
+import Events.OnBedEnter;
+import Events.OnJoin;
+import Events.OnJoinTitle;
+import Events.OnLeave;
 import KeyCommands.Key;
 import KeyCommands.MutiKeys;
 import Translate.Translate;
 import Utils.CustomYmlManger;
 import Utils.Metrics;
+import java.util.ArrayList;
+import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -15,9 +41,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import test.test;
 import test.test1;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Main extends JavaPlugin {//implements Listener {
 
@@ -32,7 +55,7 @@ public class Main extends JavaPlugin {//implements Listener {
 
     public void onEnable() {
         plugin = this;
-        YmlConfigGen();
+        CustomYmlConfigGEN();
         FileConfigGen();
         regEvents();
         regCommands();
@@ -98,7 +121,7 @@ public class Main extends JavaPlugin {//implements Listener {
         saveConfig();
     }
 
-    public void YmlConfigGen() {
+    public void CustomYmlConfigGEN() {
         customyml = new CustomYmlManger();
         // Shit.yml
         customyml.setupshit();

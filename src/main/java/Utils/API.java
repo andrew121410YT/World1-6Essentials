@@ -22,6 +22,12 @@ public class API {
 
   CustomYmlManger yml = new CustomYmlManger();
 
+  //finals
+  public static final Integer VERSION = 1;
+  public static final String DATE_OF_VERSION = "12/29/2018";
+  public static final String PREFIX = "[&9World1-6Ess&r]";
+  public static final String USELESS = "" + PREFIX + "->[&bUSELESS&r]";
+
   // FOR MYSQL
   private String HOST = plugin.getConfig().getString("MysqlHOST");
   private String DATABASE = plugin.getConfig().getString("MysqlDATABASE");
@@ -147,7 +153,4 @@ public class API {
     p.sendMessage(
         Translate.chat(this.PREFIX + " &cYou Do Not Have Permission To Use This Command."));
   }
-
-  public static final String PREFIX = "[&9World1-6Ess&r]";
-  public static final String USELESS = "" + PREFIX + "->[&bUSELESS&r]";
 }
