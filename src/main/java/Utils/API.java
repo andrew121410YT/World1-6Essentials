@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
 public class API {
 
@@ -18,7 +17,7 @@ public class API {
   ArrayList<String> Afk1 = afk.Afk;
   ArrayList<String> Fly1 = fly.Fly;
 
-  private static Plugin plugin = Main.plugin;
+  private static Main plugin = Main.plugin;
 
   CustomYmlManger yml = new CustomYmlManger();
 
@@ -27,6 +26,7 @@ public class API {
   public static final String DATE_OF_VERSION = "12/29/2018";
   public static final String PREFIX = "[&9World1-6Ess&r]";
   public static final String USELESS = "" + PREFIX + "->[&bUSELESS&r]";
+  public static final String TOO_DAMN_OLD = "Your mc version is too damn old 1.11 up too 1.13.2 please.";
 
   // FOR MYSQL
   private String HOST = plugin.getConfig().getString("MysqlHOST");
@@ -147,6 +147,20 @@ public class API {
     String formattedDate = time.format(myFormatObj);
 
     return formattedDate;
+  }
+
+  public String getServerVersion() {
+    String version = this.plugin.getServer().getVersion();
+    if (version.contains("1.13") || version.contains("1.13.1") || version.contains("1.13.2")) {
+      return "1.13";
+    }
+    if (version.contains("1.12") || version.contains("1.12.1") || version.contains("1.12.2")) {
+      return "1.12";
+    }
+    if (version.contains("1.11") || version.contains("1.11.1") || version.contains("1.11.2")) {
+      return "1.11";
+    }
+    return this.TOO_DAMN_OLD;
   }
 
   public void PermissionErrorMessage(Player p) {
