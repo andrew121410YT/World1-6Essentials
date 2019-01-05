@@ -8,10 +8,17 @@
     <name>World1-6Essentials</name>
 
     <repositories>
+
         <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+
+        <repository>
+            <id>viaversion-repo</id>
+            <url>https://repo.viaversion.com</url>
+        </repository>
+
     </repositories>
 
     <dependencies>
@@ -28,6 +35,12 @@
             <artifactId>bukkit</artifactId>
             <version>1.12-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <!-- ViaVersion API -->
+        <dependency>
+            <groupId>us.myles</groupId>
+            <artifactId>viaversion</artifactId>
+            <version>1.6.0</version>
         </dependency>
 
     </dependencies>

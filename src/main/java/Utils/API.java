@@ -10,6 +10,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.bukkit.entity.Player;
+import us.myles.ViaVersion.api.Via;
+import us.myles.ViaVersion.api.ViaAPI;
 
 public class API {
 
@@ -20,6 +22,7 @@ public class API {
   private static Main plugin = Main.plugin;
 
   CustomYmlManger yml = new CustomYmlManger();
+  ViaAPI viaapi = Via.getAPI(); // https://docs.viaversion.com/display/VIAVERSION/Basic+API+usage
 
   //finals
   public static final Integer VERSION = 1;
@@ -27,6 +30,7 @@ public class API {
   public static final String PREFIX = "[&9World1-6Ess&r]";
   public static final String USELESS = "" + PREFIX + "->[&bUSELESS&r]";
   public static final String TOO_DAMN_OLD = "Your mc version is too damn old 1.11 up too 1.13.2 please.";
+  public static final String SOMETHING_WENT_WRONG = "Something went wrong.";
 
   // FOR MYSQL
   private String HOST = plugin.getConfig().getString("MysqlHOST");
@@ -161,6 +165,56 @@ public class API {
       return "1.11";
     }
     return this.TOO_DAMN_OLD;
+  }
+
+  public String getTheSumPlayerVersion(Player p) {
+    if (viaapi == null) {
+      return SOMETHING_WENT_WRONG;
+    }
+    switch (viaapi.getPlayerVersion(p)) {
+      case 404:
+      case 401:
+      case 393:
+        return "1.13";
+      case 340:
+      case 338:
+      case 335:
+        return "1.12";
+      case 316:
+      case 315:
+        return "1.11";
+      default:
+        return TOO_DAMN_OLD;
+    }
+  }
+
+  public String getPlayerVersion(Player p) {
+    switch (viaapi.getPlayerVersion(p)) {
+      case 404:
+        return "1.13.2";
+      case 401:
+        return "1.13.1";
+      case 393:
+        return "1.13";
+      case 340:
+        return "1.12.2";
+      case 338:
+        return "1.12.1";
+      case 335:
+        return "1.12";
+      case 316:
+        return "1.11.1 & 1.11.2";
+      case 315:
+        return "1.11";
+      case 270:
+        return "1.10 & 1.10.1 1.10.2";
+      default:
+        return TOO_DAMN_OLD;
+    }
+  }
+
+  public int getPlayerProtocolVersion(Player p) {
+    return viaapi.getPlayerVersion(p);
   }
 
   public void PermissionErrorMessage(Player p) {
