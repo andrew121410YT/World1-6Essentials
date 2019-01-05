@@ -26,7 +26,7 @@ public class API {
 
   //finals
   public static final Integer VERSION = 1;
-  public static final String DATE_OF_VERSION = "12/29/2018";
+  public static final String DATE_OF_VERSION = "1/5/2019";
   public static final String PREFIX = "[&9World1-6Ess&r]";
   public static final String USELESS = "" + PREFIX + "->[&bUSELESS&r]";
   public static final String TOO_DAMN_OLD = "Your mc version is too damn old 1.11 up too 1.13.2 please.";

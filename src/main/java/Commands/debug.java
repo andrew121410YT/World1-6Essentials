@@ -6,15 +6,14 @@ import Translate.Translate;
 import Utils.API;
 import Utils.CustomYmlManger;
 import World16.World16.World16.Main;
+import java.util.ArrayList;
+import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class debug implements CommandExecutor {
 
@@ -94,18 +93,23 @@ public class debug implements CommandExecutor {
                 //CHECK HASHMAPS
             } else if (args.length >= 1 && (args[0].equalsIgnoreCase("checkhashmaps"))) {
                 if (args.length == 1) {
-                    p.sendMessage(Translate.chat("[&3/debug1-6 checkhashmaps &5checkmine&r] &9<-- show's what is stored in the HashMap of you."));
-                    p.sendMessage(Translate.chat("[&3/debug1-6 checkhashmaps &c@all&r] &9<-- Show's everything in the HashMap"));
+                    p.sendMessage(Translate.chat(
+                        "[&3/debug1-6 checkhashmaps &5checkmine&r] &9<-- show's what is stored in the HashMap of you."));
+                    p.sendMessage(Translate.chat(
+                        "[&3/debug1-6 checkhashmaps &c@all&r] &9<-- Show's everything in the HashMap"));
                     return true;
                 } else {
                     if (args.length >= 1) {
                         if (args[1].equalsIgnoreCase("@all")) {
                             for (String t2 : keyDataM.keySet()) {
-                                p.sendMessage(Translate.chat("Key: " + t2 + " Values: " + keyDataM.get(t2)));
+                                p.sendMessage(
+                                    Translate.chat("Key: " + t2 + " Values: " + keyDataM.get(t2)));
                                 return true;
                             }
                         } else if (args[1].equalsIgnoreCase("checkmine")) {
-                            p.sendMessage(Translate.chat("Here's the HashMap for Events.OnJoin.keyDatam: " + keyDataM.get(p.getDisplayName())));
+                            p.sendMessage(Translate.chat(
+                                "Here's the HashMap for Events.OnJoin.keyDatam: " + keyDataM
+                                    .get(p.getDisplayName())));
 
                         }
                     }
@@ -133,7 +137,8 @@ public class debug implements CommandExecutor {
 
                 //CLEAR ALL HASHMAPS WITH THE NAME.
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmapswithname"))) {
-                if (!p.hasPermission("command.debug.clearallhashmapswithname.permission")) { // Permission
+                if (!p.hasPermission(
+                    "command.debug.clearallhashmapswithname.permission")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -149,6 +154,13 @@ public class debug implements CommandExecutor {
                 String date = api.Time();
                 p.sendMessage(Translate.chat("Time/Data:-> " + date));
                 return true;
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase("playerversion"))) {
+                if (!p.hasPermission("command.debug.playerversion.permission")) {
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
+                p.sendMessage(api.getPlayerVersion(p));
+            //}
 
                 //SQL
             } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
