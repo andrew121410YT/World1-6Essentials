@@ -12,7 +12,7 @@ public class CustomYmlManger {
 
     private Main plugin = Main.getPlugin(Main.class);
 
-    private API api = new API();
+    API api = new API();
     // Files & File Configs Here.
     public FileConfiguration shitcfg;
     public File shitfile;
