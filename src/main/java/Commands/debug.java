@@ -48,12 +48,16 @@ public class debug implements CommandExecutor {
                 api.PermissionErrorMessage(p);
                 return true;
             }
-            p.sendMessage(Translate.chat("&aHow to use /debug1-6"));
-            p.sendMessage(Translate.chat("&aFor Oping Staff Use /debug1-6 op"));
-            p.sendMessage(Translate.chat("&aFor The Default Tab And Title Use /debug1-6 defaultstuff"));
-            p.sendMessage(Translate.chat("&aToo see what's stored in the hashmaps of you do /debug1-6 checkhashmaps"));
-            p.sendMessage(
-                    Translate.chat("&aFor Using Mysql/sql commands do /debug1-6 sql <CommandGoesHere>"));
+            p.sendMessage(Translate.chat("/debug1-6 op"));
+            p.sendMessage(Translate.chat("/debug1-6 defaultstuff"));
+            p.sendMessage(Translate.chat("/debug1-6 checkhashmaps"));
+            p.sendMessage(Translate.chat("/debug1-6 clearallarraylists"));
+            p.sendMessage(Translate.chat("/debug1-6 clearallhashmaps"));
+            p.sendMessage(Translate.chat("/debug1-6 clearallhashmapswithname"));
+            p.sendMessage(Translate.chat("/debug1-6 date"));
+            p.sendMessage(Translate.chat("/debug1-6 playerversion"));
+            p.sendMessage(Translate.chat("/debug1-6 sql"));
+            //p.sendMessage(Translate.chat("/debug1-6 "));
             return true;
         } else if (args.length >= 1) {
 
