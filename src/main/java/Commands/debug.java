@@ -154,6 +154,8 @@ public class debug implements CommandExecutor {
                 String date = api.Time();
                 p.sendMessage(Translate.chat("Time/Data:-> " + date));
                 return true;
+
+                //PLAYER VERSION
             } else if (args.length >= 1 && (args[0].equalsIgnoreCase("playerversion"))) {
                 if (!p.hasPermission("command.debug.playerversion.permission")) {
                     api.PermissionErrorMessage(p);
@@ -162,7 +164,7 @@ public class debug implements CommandExecutor {
                 if (args.length == 1) {
                     p.sendMessage(api.getPlayerVersion(p));
                 } else {
-                    Player target = plugin.getServer().getPlayerExact(args[0]);
+                    Player target = plugin.getServer().getPlayerExact(args[1]);
                     if (args.length >= 1 && target != null && target.isOnline()) {
                         if (!p.hasPermission("command.debug.playerversion.other.permission")) {
                             api.PermissionErrorMessage(p);
