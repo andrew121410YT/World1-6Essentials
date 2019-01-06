@@ -10,7 +10,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class CustomYmlManger {
 
-    private Main plugin = Main.getPlugin(Main.class);
+    private Main plugin = Main.plugin;
 
     API api = new API();
     // Files & File Configs Here.

@@ -117,8 +117,9 @@ public class Main extends JavaPlugin {//implements Listener {
     }
 
     public void FileConfigGen() {
-        getConfig().options().copyDefaults(true);
-        saveConfig();
+        this.getConfig().options().copyDefaults(true);
+        this.saveConfig();
+        this.reloadConfig();
     }
 
     public void CustomYmlConfigGEN() {

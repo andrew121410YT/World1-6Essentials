@@ -5,14 +5,13 @@ import Translate.Translate;
 import Utils.API;
 import Utils.KeyAPI;
 import World16.World16.World16.Main;
+import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-
-import java.util.HashMap;
 
 public class OnJoin implements Listener {
 
@@ -45,14 +44,18 @@ public class OnJoin implements Listener {
         p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10.0f, 1.0f);
         version(p);
 
-        String giveKeyReturnTEMP = keyapi.giveKeyReturn(p, mysql);
+        if (!api.getHOST().equals("null")) {
+            String giveKeyReturnTEMP = keyapi.giveKeyReturn(p, mysql);
 
-        if (giveKeyReturnTEMP == null) {
-            this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(api.USELESS + " &9The Player: " + p.getDisplayName() + " is not in the Database so gonna add them..."));
-            keyapi.SetKey(mysql, 1, p, "null");
-        } else {
-            //GETS THE 1 KEY FROM THE PLAYER AND THEN IT STORES IT IN RAM FOR EASY ACCESS
-            keyDataM.put(p.getDisplayName(), giveKeyReturnTEMP);
+            if (giveKeyReturnTEMP == null) {
+                this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(
+                    api.USELESS + " &9The Player: " + p.getDisplayName()
+                        + " is not in the Database so gonna add them..."));
+                keyapi.SetKey(mysql, 1, p, "null");
+            } else {
+                //GETS THE 1 KEY FROM THE PLAYER AND THEN IT STORES IT IN RAM FOR EASY ACCESS
+                keyDataM.put(p.getDisplayName(), giveKeyReturnTEMP);
+            }
         }
     }
 

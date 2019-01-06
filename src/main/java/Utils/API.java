@@ -21,7 +21,6 @@ public class API {
 
   private static Main plugin = Main.plugin;
 
-  CustomYmlManger yml = new CustomYmlManger();
   ViaAPI viaapi = Via.getAPI(); // https://docs.viaversion.com/display/VIAVERSION/Basic+API+usage
 
   //finals
@@ -49,23 +48,43 @@ public class API {
   // START OF MYSQL
 
   public String getHOST() {
-    return this.HOST;
+    if (this.HOST != null) {
+      return this.HOST;
+    } else {
+      return null;
+    }
   }
 
   public String getDATABASE() {
-    return this.DATABASE;
+    if (this.DATABASE != null) {
+      return this.DATABASE;
+    } else {
+      return null;
+    }
   }
 
   public String getUSER() {
-    return this.USER;
+    if (this.USER != null) {
+      return this.USER;
+    } else {
+      return null;
+    }
   }
 
   public String getPASSWORD() {
-    return this.PASSWORD;
+    if (this.PASSWORD != null) {
+      return this.PASSWORD;
+    } else {
+      return null;
+    }
   }
 
   public String getPORT() {
-    return this.PORT;
+    if (this.PORT != null) {
+      return this.PORT;
+    } else {
+      return null;
+    }
   }
   // END OF MYSQL
 
