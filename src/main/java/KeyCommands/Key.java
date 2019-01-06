@@ -67,6 +67,7 @@ public class Key implements CommandExecutor {
                 String setDataDone = setData.toString(); // OUT PUT OF STRING BUILDER
 
                 keyapi.ReplaceKey(mysql, 1, p, setDataDone);
+                keyDataM.remove(p.getDisplayName());
                 keyDataM.put(p.getDisplayName(), setDataDone);
 
                 p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
