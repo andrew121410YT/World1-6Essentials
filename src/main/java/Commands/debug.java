@@ -193,8 +193,7 @@ public class debug implements CommandExecutor {
                     p.sendMessage(Translate.chat(p.getUniqueId().toString()));
                 } else {
                     Player target = plugin.getServer().getPlayerExact(args[1]);
-                    if (args.length == 2 && target != null && target.isOnline() && !args[2]
-                        .equalsIgnoreCase("@offline")) {
+                    if (args.length == 2 && target != null && target.isOnline()) {
                         if (!p.hasPermission("command.debug.checkuuid.other.permission")) {
                             api.PermissionErrorMessage(p);
                             return true;
