@@ -34,16 +34,7 @@ public class spawn implements CommandExecutor {
 
         Player p = (Player) sender;
 
-        double x = configinstance.getshit().getInt("Spawn.Data.X");
-        double y = configinstance.getshit().getInt("Spawn.Data.Y");
-        double z = configinstance.getshit().getInt("Spawn.Data.Z");
-        float yaw = (float) configinstance.getshit().getInt("Spawn.Data.Yaw");
-        float pitch = (float) configinstance.getshit().getInt("Spawn.Data.Pitch");
-        World world = Bukkit.getWorld(configinstance.getshit().getString("Spawn.Data.World"));
-
-        Location spawn = new Location(world, x, y, z, yaw, pitch);
-        // World world = Bukkit.getServer().getWorld("world");
-        // FileConfiguration file = Main.plugin.getConfig();
+        Location spawn = this.configinstance.apiGetSpawn("default");
 
         if (!p.hasPermission("command.spawn.permission")) {
             api.PermissionErrorMessage(p);

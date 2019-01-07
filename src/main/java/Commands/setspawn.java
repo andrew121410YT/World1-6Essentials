@@ -36,22 +36,12 @@ public class setspawn implements CommandExecutor {
         float yaw = p.getLocation().getYaw();
         float pitch = p.getLocation().getPitch();
         String worldName = p.getWorld().getName();
-        // FileConfiguration file = plugin.getConfig();
 
         if (!p.hasPermission("command.setspawn.permission")) {
             api.PermissionErrorMessage(p);
             return true;
         }
-        configinstance.getshit().set("Spawn.Data.X", Double.valueOf(x));
-        configinstance.getshit().set("Spawn.Data.Y", Double.valueOf(y));
-        configinstance.getshit().set("Spawn.Data.Z", Double.valueOf(z));
-        configinstance.getshit().set("Spawn.Data.Yaw", Float.valueOf(yaw));
-        configinstance.getshit().set("Spawn.Data.Pitch", Float.valueOf(pitch));
-        configinstance.getshit().set("Spawn.Data.World", worldName);
-        configinstance.getshit().set("Spawn.Player.Data.NAME", p.getDisplayName());
-        configinstance.getshit().set("Spawn.Player.Data.UUID", p.getUniqueId().toString());
-        configinstance.saveshit();
-        // plugin.saveConfig();
+        this.configinstance.apiSetSpawn(p, x, y, z, yaw, pitch, worldName, "default");
         p.sendMessage(Translate.chat("&6Spawn location set for group default."));
         return true;
     }
