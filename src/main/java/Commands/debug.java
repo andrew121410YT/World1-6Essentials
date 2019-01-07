@@ -5,8 +5,8 @@ import MysqlAPI.MySQL;
 import Translate.Translate;
 import Utils.API;
 import Utils.CustomYmlManger;
-import Utils.UpdaterAPI;
 import World16.World16.World16.Main;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.bukkit.Bukkit;
@@ -15,6 +15,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.json.simple.parser.ParseException;
 
 public class debug implements CommandExecutor {
 
@@ -57,6 +58,7 @@ public class debug implements CommandExecutor {
             p.sendMessage(Translate.chat("/debug1-6 clearallhashmapswithname"));
             p.sendMessage(Translate.chat("/debug1-6 date"));
             p.sendMessage(Translate.chat("/debug1-6 playerversion"));
+            p.sendMessage(Translate.chat("/debug1-6 checkuuid"));
             p.sendMessage(Translate.chat("/debug1-6 sql"));
             //p.sendMessage(Translate.chat("/debug1-6 "));
             return true;
@@ -182,17 +184,45 @@ public class debug implements CommandExecutor {
                         return true;
                     }
                 }
-            } else if (args.length == 1 && (args[0].equalsIgnoreCase("update"))) {
-                if (!p.hasPermission("command.debug.update.permission")) {
+            } else if (args.length >= 1 && (args[0].equalsIgnoreCase("checkuuid"))) {
+                if (!p.hasPermission("command.debug.checkuuid.permission")) {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                UpdaterAPI updater = new UpdaterAPI(this.plugin,
-                    "http://server2.andrewsdatacenter.com/world16/index.html");
-                updater.externalUpdate();
-                return true;
-                //}
+                if (args.length == 1) {
+                    p.sendMessage(Translate.chat(p.getUniqueId().toString()));
+                } else {
+                    Player target = plugin.getServer().getPlayerExact(args[1]);
+                    if (args.length == 2 && target != null && target.isOnline() && !args[2]
+                        .equalsIgnoreCase("@offline")) {
+                        if (!p.hasPermission("command.debug.checkuuid.other.permission")) {
+                            api.PermissionErrorMessage(p);
+                            return true;
+                        }
+                        try {
+                            String uuidtarget = api.getUUIDFromMojangAPI(target.getDisplayName());
+                            p.sendMessage(Translate
+                                .chat("UUID: " + uuidtarget + " FOR " + target.getDisplayName()));
 
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (args.length >= 3 && args[1] != null && args[2] != null && args[2]
+                        .equalsIgnoreCase("@offline")) {
+                        try {
+                            String uuidtarget2 = api.getUUIDFromMojangAPI(args[1].toString());
+                            p.sendMessage(
+                                Translate.chat("UUID: " + uuidtarget2 + " FOR " + args[1]));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                //}
                 //SQL
             } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
                 if (!p.hasPermission("command.debug.sql.permission")) { // Permission
