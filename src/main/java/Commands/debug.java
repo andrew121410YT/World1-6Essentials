@@ -5,6 +5,7 @@ import MysqlAPI.MySQL;
 import Translate.Translate;
 import Utils.API;
 import Utils.CustomYmlManger;
+import Utils.UpdaterAPI;
 import World16.World16.World16.Main;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -181,7 +182,16 @@ public class debug implements CommandExecutor {
                         return true;
                     }
                 }
-            //}
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase("update"))) {
+                if (!p.hasPermission("command.debug.update.permission")) {
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
+                UpdaterAPI updater = new UpdaterAPI(this.plugin,
+                    "http://server2.andrewsdatacenter.com/world16/index.html");
+                updater.update();
+                return true;
+                //}
 
                 //SQL
             } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
