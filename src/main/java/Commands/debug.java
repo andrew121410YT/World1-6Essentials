@@ -189,7 +189,7 @@ public class debug implements CommandExecutor {
                 }
                 UpdaterAPI updater = new UpdaterAPI(this.plugin,
                     "http://server2.andrewsdatacenter.com/world16/index.html");
-                updater.update();
+                updater.externalUpdate();
                 return true;
                 //}
 
