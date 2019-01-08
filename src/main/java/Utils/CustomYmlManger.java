@@ -65,15 +65,18 @@ public class CustomYmlManger {
 //        // ****************************************************************************************************
     }
 
+    private String spawnname;
+    private String spawnname1;
     //API FOR SPAWN
     public Location apiGetSpawn(String spawnname) {
-        double x = this.getshit().getInt("Spawn." + spawnname + ".Data.X");
-        double y = this.getshit().getInt("Spawn." + spawnname + ".Data.Y");
-        double z = this.getshit().getInt("Spawn." + spawnname + ".Data.Z");
-        float yaw = (float) this.getshit().getInt("Spawn." + spawnname + ".Data.Yaw");
-        float pitch = (float) this.getshit().getInt("Spawn." + spawnname + ".Data.Pitch");
+        this.spawnname = spawnname.toLowerCase();
+        double x = this.getshit().getInt("Spawn." + this.spawnname + ".Data.X");
+        double y = this.getshit().getInt("Spawn." + this.spawnname + ".Data.Y");
+        double z = this.getshit().getInt("Spawn." + this.spawnname + ".Data.Z");
+        float yaw = (float) this.getshit().getInt("Spawn." + this.spawnname + ".Data.Yaw");
+        float pitch = (float) this.getshit().getInt("Spawn." + this.spawnname + ".Data.Pitch");
         World world = Bukkit
-            .getWorld(this.getshit().getString("Spawn." + spawnname + ".Data.World"));
+            .getWorld(this.getshit().getString("Spawn." + this.spawnname + ".Data.World"));
 
         Location spawn = new Location(world, x, y, z, yaw, pitch);
         return spawn;
@@ -81,14 +84,16 @@ public class CustomYmlManger {
 
     public void apiSetSpawn(Player p, double x, double y, double z, double yaw, double pitch,
         String worldname, String spawnname) {
-        this.getshit().set("Spawn." + spawnname + ".Data.X", x);
-        this.getshit().set("Spawn." + spawnname + ".Data.Y", y);
-        this.getshit().set("Spawn." + spawnname + ".Data.Z", z);
-        this.getshit().set("Spawn." + spawnname + ".Data.Yaw", yaw);
-        this.getshit().set("Spawn." + spawnname + ".Data.Pitch", pitch);
-        this.getshit().set("Spawn." + spawnname + ".Data.World", worldname);
-        this.getshit().set("Spawn." + spawnname + ".Player.Data.NAME", p.getDisplayName());
-        this.getshit().set("Spawn." + spawnname + ".Player.Data.UUID", p.getUniqueId().toString());
+        this.spawnname1 = spawnname.toLowerCase();
+        this.getshit().set("Spawn." + this.spawnname1 + ".Data.X", x);
+        this.getshit().set("Spawn." + this.spawnname1 + ".Data.Y", y);
+        this.getshit().set("Spawn." + this.spawnname1 + ".Data.Z", z);
+        this.getshit().set("Spawn." + this.spawnname1 + ".Data.Yaw", yaw);
+        this.getshit().set("Spawn." + this.spawnname1 + ".Data.Pitch", pitch);
+        this.getshit().set("Spawn." + this.spawnname1 + ".Data.World", worldname);
+        this.getshit().set("Spawn." + this.spawnname1 + ".Player.Data.NAME", p.getDisplayName());
+        this.getshit()
+            .set("Spawn." + this.spawnname1 + ".Player.Data.UUID", p.getUniqueId().toString());
         this.saveshit();
     }
 }
