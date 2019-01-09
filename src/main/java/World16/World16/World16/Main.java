@@ -29,6 +29,7 @@ import Events.OnLeave;
 import KeyCommands.Key;
 import KeyCommands.MutiKeys;
 import Translate.Translate;
+import Utils.API;
 import Utils.CustomYmlManger;
 import Utils.Metrics;
 import java.util.ArrayList;
@@ -46,24 +47,27 @@ public class Main extends JavaPlugin {//implements Listener {
 
     public static Main plugin;
     private CustomYmlManger customyml;
+    private API api;
+
+    //ARRAY LIST AND HASH MAPS
     ArrayList<String> Afk = afk.Afk;
     ArrayList<String> Fly = fly.Fly;
     HashMap<String, String> keyDataM = OnJoin.keyDataM;
+    //END
     // GOT THE MYSQL API AT https://www.spigotmc.org/resources/simple-easy-mysql-api.36447/
     // GOT THE TITLE API AT https://www.spigotmc.org/resources/titleapi-1-8-1-13.1325/
+    // FROM https://www.spigotmc.org/resources/api-pluginupdater-with-website.5578/
     PluginManager pm = Bukkit.getPluginManager();
 
     public void onEnable() {
         plugin = this;
-        CustomYmlConfigGEN();
-        FileConfigGen();
+        regCustomYmlConfigGEN();
+        regFileConfigGEN();
+        regAPIS();
         regEvents();
         regCommands();
-        bstats();
+        regbstats();
         getLogger().info("[World1-6Essentials] is now loaded!");
-        // START OF UPDATER
-        // FROM https://www.spigotmc.org/resources/api-pluginupdater-with-website.5578/
-        // FINISH OF UPDATER
     }
 
     public void onDisable() {
@@ -116,13 +120,13 @@ public class Main extends JavaPlugin {//implements Listener {
         new OnJoinTitle(this);
     }
 
-    public void FileConfigGen() {
+    public void regFileConfigGEN() {
         this.getConfig().options().copyDefaults(true);
         this.saveConfig();
         this.reloadConfig();
     }
 
-    public void CustomYmlConfigGEN() {
+    public void regCustomYmlConfigGEN() {
         customyml = new CustomYmlManger();
         // Shit.yml
         customyml.setupshit();
@@ -131,7 +135,11 @@ public class Main extends JavaPlugin {//implements Listener {
         // END OF Shit.yml
     }
 
-    public void bstats() {
+    public void regAPIS() {
+        api = new API();
+    }
+
+    public void regbstats() {
         Metrics metrics = new Metrics(this);
     }
 
