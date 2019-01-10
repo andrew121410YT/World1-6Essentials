@@ -160,4 +160,8 @@ public class Main extends JavaPlugin {//implements Listener {
     public static Main getPlugin() {
         return plugin;
     }
+
+    public API getApi() {
+        return api;
+    }
 }

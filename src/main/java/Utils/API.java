@@ -26,6 +26,7 @@ public class API {
   ArrayList<String> Fly1 = fly.Fly;
 
   private static Main plugin = Main.getPlugin();
+  private CustomYmlManger configinstance = null;
 
   ViaAPI viaapi = Via.getAPI(); // https://docs.viaversion.com/display/VIAVERSION/Basic+API+usage
 
@@ -47,7 +48,10 @@ public class API {
 
   // MAIN
   public API() {
+  }
 
+  public API(CustomYmlManger configinstance) {
+    this.configinstance = configinstance;
   }
 
   // END MAIN
