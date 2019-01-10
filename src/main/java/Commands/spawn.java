@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 public class spawn implements CommandExecutor {
 
     private Main plugin;
-    API api;
+    private API api;
 
     private CustomYmlManger configinstance = null;
 
