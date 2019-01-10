@@ -19,7 +19,7 @@ public class OnJoinTitle implements Listener {
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
-    FileConfiguration file = Main.plugin.getConfig();
+    FileConfiguration file = Main.getPlugin().getConfig();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {

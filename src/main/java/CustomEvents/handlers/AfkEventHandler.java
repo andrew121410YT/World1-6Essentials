@@ -5,7 +5,7 @@ import World16.World16.World16.Main;
 
 public class AfkEventHandler {
 
-    private static Main plugin = Main.plugin;
+    private static Main plugin = Main.getPlugin();
 
     public AfkEventHandler(String p) {
         AfkEvent event = new AfkEvent(p);

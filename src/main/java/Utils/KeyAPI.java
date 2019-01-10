@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 public class KeyAPI {
 
-    private static Plugin plugin = Main.plugin;
+    private static Plugin plugin = Main.getPlugin();
     HashMap<String, String> keyDatam = OnJoin.keyDataM;
 
     // START

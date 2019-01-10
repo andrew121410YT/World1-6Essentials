@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 
 public class CustomYmlManger {
 
-    private Main plugin = Main.plugin;
+    private Main plugin = Main.getPlugin();
 
     API api = new API();
     // Files & File Configs Here.

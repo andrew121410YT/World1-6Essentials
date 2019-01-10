@@ -8,7 +8,7 @@ import org.bukkit.event.HandlerList;
 public class AfkEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
-    private static Main plugin = Main.plugin;
+    private static Main plugin = Main.getPlugin();
 
     String p;
 

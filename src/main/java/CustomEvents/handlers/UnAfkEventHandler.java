@@ -5,7 +5,7 @@ import World16.World16.World16.Main;
 
 public class UnAfkEventHandler {
 
-    private static Main plugin = Main.plugin;
+    private static Main plugin = Main.getPlugin();
 
     public UnAfkEventHandler(String p) {
         UnAfkEvent event = new UnAfkEvent(p);

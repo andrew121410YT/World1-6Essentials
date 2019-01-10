@@ -45,7 +45,7 @@ import test.test1;
 
 public class Main extends JavaPlugin {//implements Listener {
 
-    public static Main plugin;
+    private static Main plugin;
     private CustomYmlManger customyml;
     private API api;
 
@@ -155,5 +155,9 @@ public class Main extends JavaPlugin {//implements Listener {
             }
         }
         return true;
+    }
+
+    public static Main getPlugin() {
+        return plugin;
     }
 }
