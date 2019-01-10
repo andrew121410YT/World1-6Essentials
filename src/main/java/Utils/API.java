@@ -12,6 +12,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -275,6 +278,44 @@ public class API {
         uuid.substring(0, 8) + "-" + uuid.substring(8, 12) + "-" + uuid.substring(12, 16) + "-"
             + uuid.substring(16, 20) + "-" + uuid.substring(20, 32);
     return realUUID.toString();
+  }
+
+
+  private String spawnname;
+  private String spawnname1;
+
+  //API FOR SPAWN
+  public Location GetSpawn(String spawnname) {
+    this.spawnname = spawnname.toLowerCase();
+    double x = this.configinstance.getshit().getInt("Spawn." + this.spawnname + ".Data.X");
+    double y = this.configinstance.getshit().getInt("Spawn." + this.spawnname + ".Data.Y");
+    double z = this.configinstance.getshit().getInt("Spawn." + this.spawnname + ".Data.Z");
+    float yaw = (float) this.configinstance.getshit()
+        .getInt("Spawn." + this.spawnname + ".Data.Yaw");
+    float pitch = (float) this.configinstance.getshit()
+        .getInt("Spawn." + this.spawnname + ".Data.Pitch");
+    World world = Bukkit
+        .getWorld(
+            this.configinstance.getshit().getString("Spawn." + this.spawnname + ".Data.World"));
+
+    Location spawn = new Location(world, x, y, z, yaw, pitch);
+    return spawn;
+  }
+
+  public void SetSpawn(Player p, double x, double y, double z, double yaw, double pitch,
+      String worldname, String spawnname) {
+    this.spawnname1 = spawnname.toLowerCase();
+    this.configinstance.getshit().set("Spawn." + this.spawnname1 + ".Data.X", x);
+    this.configinstance.getshit().set("Spawn." + this.spawnname1 + ".Data.Y", y);
+    this.configinstance.getshit().set("Spawn." + this.spawnname1 + ".Data.Z", z);
+    this.configinstance.getshit().set("Spawn." + this.spawnname1 + ".Data.Yaw", yaw);
+    this.configinstance.getshit().set("Spawn." + this.spawnname1 + ".Data.Pitch", pitch);
+    this.configinstance.getshit().set("Spawn." + this.spawnname1 + ".Data.World", worldname);
+    this.configinstance.getshit()
+        .set("Spawn." + this.spawnname1 + ".Player.Data.NAME", p.getDisplayName());
+    this.configinstance.getshit()
+        .set("Spawn." + this.spawnname1 + ".Player.Data.UUID", p.getUniqueId().toString());
+    this.configinstance.saveshit();
   }
 
   public void PermissionErrorMessage(Player p) {

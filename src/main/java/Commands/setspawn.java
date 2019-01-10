@@ -12,13 +12,14 @@ import org.bukkit.entity.Player;
 public class setspawn implements CommandExecutor {
 
     private Main plugin;
-    API api = new API();
+    API api;
 
     private CustomYmlManger configinstance = null;
 
     public setspawn(CustomYmlManger getCustomYml, World16.World16.World16.Main getPlugin) {
         this.configinstance = getCustomYml;
         this.plugin = getPlugin;
+        api = new API(this.configinstance);
         this.plugin.getCommand("setspawn").setExecutor(this);
     }
 
@@ -41,7 +42,7 @@ public class setspawn implements CommandExecutor {
             api.PermissionErrorMessage(p);
             return true;
         }
-        this.configinstance.apiSetSpawn(p, x, y, z, yaw, pitch, worldName, "default");
+        this.api.SetSpawn(p, x, y, z, yaw, pitch, worldName, "default");
         p.sendMessage(Translate.chat("&6Spawn location set for group default."));
         return true;
     }
