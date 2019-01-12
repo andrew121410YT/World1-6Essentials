@@ -1,6 +1,6 @@
 package World16.KeyCommands;
 
-import World16.Events.OnJoin;
+import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Translate.Translate;
@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 
 public class Key implements CommandExecutor {
 
-    HashMap<String, String> keyDataM = OnJoin.keyDataM;
+    HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
 
     private Main plugin;
     API api = new API();

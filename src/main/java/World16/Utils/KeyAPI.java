@@ -1,6 +1,6 @@
 package World16.Utils;
 
-import World16.Events.OnJoin;
+import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Translate.Translate;
@@ -19,7 +19,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class KeyAPI {
 
     private static Plugin plugin = Main.getPlugin();
-    HashMap<String, String> keyDatam = OnJoin.keyDataM;
+    HashMap<String, String> keyDatam = OnJoinEvent.keyDataM;
 
     // START
     public void giveKey(Player p, MySQL mysql) { //GIVES DEFAULT ID 1 KEY

@@ -13,7 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-public class OnJoin implements Listener {
+public class OnJoinEvent implements Listener {
 
     private Main plugin;
 
@@ -22,7 +22,7 @@ public class OnJoin implements Listener {
     API api = new API();
     KeyAPI keyapi = new KeyAPI();
 
-    public OnJoin(Main getPlugin) {
+    public OnJoinEvent(Main getPlugin) {
         this.plugin = getPlugin;
 
         Bukkit.getPluginManager().registerEvents(this, this.plugin);

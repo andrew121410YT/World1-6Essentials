@@ -2,7 +2,7 @@ package World16.Utils;
 
 import World16.Commands.afk;
 import World16.Commands.fly;
-import World16.Events.OnJoin;
+import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Translate.Translate;
 import java.io.IOException;
@@ -24,7 +24,7 @@ import us.myles.ViaVersion.api.ViaAPI;
 
 public class API {
 
-  HashMap<String, String> keyDataM = OnJoin.keyDataM;
+  HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
   ArrayList<String> Afk1 = afk.Afk;
   ArrayList<String> Fly1 = fly.Fly;
 
@@ -34,8 +34,8 @@ public class API {
   ViaAPI viaapi = Via.getAPI(); // https://docs.viaversion.com/display/VIAVERSION/Basic+API+usage
 
   //finals
-  public static final Integer VERSION = 2;
-  public static final String DATE_OF_VERSION = "1/10/2019";
+  public static final Integer VERSION = 4;
+  public static final String DATE_OF_VERSION = "1/12/2019";
   public static final String PREFIX = "[&9World1-6Ess&r]";
   public static final String USELESS = "" + PREFIX + "->[&bUSELESS&r]";
   public static final String TOO_DAMN_OLD = "Your mc version is too damn old 1.11 up too 1.13.2 please.";
@@ -124,7 +124,7 @@ public class API {
   public void clearArrayListAndHashMaps(Player p) {
     keyDataM.remove(p.getDisplayName());
     this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the HashMap of World16.Events.OnJoin.keyDataM For Player: " + p
+        + " Class: World16.Utils.API has cleared the HashMap of World16.Events.OnJoinEvent.keyDataM For Player: " + p
         .getDisplayName()));
     Afk1.remove(p.getDisplayName());
     this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
@@ -139,7 +139,7 @@ public class API {
   public void clearArrayListAndHashMaps() {
     keyDataM.clear();
     this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the HashMap of World16.Events.OnJoin.keyDataM For EVERY PLAYER"));
+        + " Class: World16.Utils.API has cleared the HashMap of World16.Events.OnJoinEvent.keyDataM For EVERY PLAYER"));
     Afk1.clear();
     this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
         + " Class: World16.Utils.API has cleared the ArrayList of World16.Commands.afk.Afk For EVERY PLAYER"));
@@ -151,14 +151,14 @@ public class API {
   public void clearAllHashMaps(Player p) {
     keyDataM.remove(p.getDisplayName());
     this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the HashMap of World16.Events.OnJoin.keyDataM For Player: " + p
+        + " Class: World16.Utils.API has cleared the HashMap of World16.Events.OnJoinEvent.keyDataM For Player: " + p
         .getDisplayName()));
   }
 
   public void clearAllHashMaps() {
     keyDataM.clear();
     this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the HashMap of World16.Events.OnJoin.keyDataM For EVERY PLAYER"));
+        + " Class: World16.Utils.API has cleared the HashMap of World16.Events.OnJoinEvent.keyDataM For EVERY PLAYER"));
   }
 
   public void clearAllArrayList(Player p) {

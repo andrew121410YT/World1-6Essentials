@@ -9,11 +9,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-public class OnJoinTitle implements Listener {
+public class OnJoinTitleEvent implements Listener {
 
     private Main plugin;
 
-    public OnJoinTitle(Main plugin) {
+    public OnJoinTitleEvent(Main plugin) {
         this.plugin = plugin;
 
         Bukkit.getPluginManager().registerEvents(this, plugin);

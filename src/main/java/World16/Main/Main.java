@@ -22,10 +22,10 @@ import World16.Commands.setjail;
 import World16.Commands.setspawn;
 import World16.Commands.sign;
 import World16.Commands.spawn;
-import World16.Events.OnBedEnter;
-import World16.Events.OnJoin;
-import World16.Events.OnJoinTitle;
-import World16.Events.OnLeave;
+import World16.Events.OnBedEnterEvent;
+import World16.Events.OnJoinEvent;
+import World16.Events.OnJoinTitleEvent;
+import World16.Events.OnLeaveEvent;
 import World16.KeyCommands.Key;
 import World16.KeyCommands.MutiKeys;
 import World16.Translate.Translate;
@@ -52,7 +52,7 @@ public class Main extends JavaPlugin {//implements Listener {
     //ARRAY LIST AND HASH MAPS
     ArrayList<String> Afk = afk.Afk;
     ArrayList<String> Fly = fly.Fly;
-    HashMap<String, String> keyDataM = OnJoin.keyDataM;
+    HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
     //END
     // GOT THE MYSQL API AT https://www.spigotmc.org/resources/simple-easy-mysql-api.36447/
     // GOT THE TITLE API AT https://www.spigotmc.org/resources/titleapi-1-8-1-13.1325/
@@ -113,11 +113,11 @@ public class Main extends JavaPlugin {//implements Listener {
 
     public void regEvents() {
         //Bukkit.getServer().getPluginManager().registerEvents(this, this);
-        new OnJoin(this);
-        new OnLeave(this);
+        new OnJoinEvent(this);
+        new OnLeaveEvent(this);
         //...
-        new OnBedEnter(this);
-        new OnJoinTitle(this);
+        new OnBedEnterEvent(this);
+        new OnJoinTitleEvent(this);
     }
 
     public void regFileConfigGEN() {
