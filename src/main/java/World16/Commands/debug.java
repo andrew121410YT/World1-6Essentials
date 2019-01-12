@@ -1,5 +1,6 @@
 package World16.Commands;
 
+import World16.Events.OnDeathEvent;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
@@ -9,7 +10,9 @@ import World16.Utils.CustomYmlManger;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,6 +23,7 @@ import org.json.simple.parser.ParseException;
 public class debug implements CommandExecutor {
 
   HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
+  LinkedHashMap<String, Location> backmap = OnDeathEvent.backmap;
   ArrayList<String> Afk1 = afk.Afk;
   ArrayList<String> Fly1 = fly.Fly;
   API api = new API();
@@ -99,21 +103,33 @@ public class debug implements CommandExecutor {
       } else if (args.length >= 1 && (args[0].equalsIgnoreCase("checkhashmaps"))) {
         if (args.length == 1) {
           p.sendMessage(Translate.chat(
-              "[&3/debug1-6 checkhashmaps &5checkmine&r] &9<-- show's what is stored in the HashMap of you."));
+              "[&3/debug1-6 checkhashmaps &5@checkmine&r] &9<-- show's what is stored in the HashMap of you."));
           p.sendMessage(Translate.chat(
               "[&3/debug1-6 checkhashmaps &c@all&r] &9<-- Show's everything in the HashMap"));
           return true;
         } else {
           if (args.length >= 1) {
             if (args[1].equalsIgnoreCase("@all")) {
+
               for (String t2 : keyDataM.keySet()) {
                 p.sendMessage(
-                    Translate.chat("Key: " + t2 + " Values: " + keyDataM.get(t2)));
+                    Translate.chat("Key For KeyData: " + t2 + " Values: " + keyDataM.get(t2)));
                 return true;
               }
-            } else if (args[1].equalsIgnoreCase("checkmine")) {
+
+              for (String t2 : backmap.keySet()) {
+                p.sendMessage(
+                    Translate.chat("Key For BackData: " + t2 + " Values: " + backmap.get(t2)));
+                return true;
+              }
+
+            } else if (args[1].equalsIgnoreCase("@checkmine")) {
               p.sendMessage(Translate.chat(
                   "Here's the HashMap for World16.Events.OnJoinEvent.keyDatam: " + keyDataM
+                      .get(p.getDisplayName())));
+
+              p.sendMessage(Translate.chat(
+                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap: " + backmap
                       .get(p.getDisplayName())));
 
             }
