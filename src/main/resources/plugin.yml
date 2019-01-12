@@ -1,7 +1,7 @@
 name: World1-6Essentials
 version: 0.1
 author: Andrew121410
-main: World16.Main.World16.Main
+main: Main.Main
 commands:
     World1-6Essentials:
     bed:
