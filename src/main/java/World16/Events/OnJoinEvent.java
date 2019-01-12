@@ -25,7 +25,7 @@ public class OnJoinEvent implements Listener {
     public OnJoinEvent(Main getPlugin) {
         this.plugin = getPlugin;
 
-        Bukkit.getPluginManager().registerEvents(this, this.plugin);
+        this.plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler

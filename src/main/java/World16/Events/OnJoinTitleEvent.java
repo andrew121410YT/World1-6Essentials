@@ -3,7 +3,6 @@ package World16.Events;
 import World16.Main.Main;
 import World16.Translate.Translate;
 import World16.titleapi.TitleAPI;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,7 +15,7 @@ public class OnJoinTitleEvent implements Listener {
     public OnJoinTitleEvent(Main plugin) {
         this.plugin = plugin;
 
-        Bukkit.getPluginManager().registerEvents(this, plugin);
+        this.plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     FileConfiguration file = Main.getPlugin().getConfig();

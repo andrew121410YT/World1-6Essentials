@@ -15,7 +15,8 @@ public class OnLeaveEvent implements Listener {
 
     public OnLeaveEvent(Main getPlugin) {
         this.plugin = getPlugin;
-        Bukkit.getPluginManager().registerEvents(this, this.plugin);
+
+        this.plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
