@@ -1,7 +1,7 @@
 package Events;
 
+import Main.Main;
 import Translate.Translate;
-import World16.World16.World16.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

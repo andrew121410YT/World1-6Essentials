@@ -1,9 +1,9 @@
 package Commands;
 
+import Main.Main;
 import Translate.Translate;
 import Utils.API;
 import Utils.CustomYmlManger;
-import World16.World16.World16.Main;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,7 +17,7 @@ public class spawn implements CommandExecutor {
 
     private CustomYmlManger configinstance = null;
 
-    public spawn(CustomYmlManger getCustomYml, World16.World16.World16.Main getPlugin) {
+    public spawn(CustomYmlManger getCustomYml, Main getPlugin) {
         this.configinstance = getCustomYml;
         this.plugin = getPlugin;
         this.api = new API(this.configinstance);

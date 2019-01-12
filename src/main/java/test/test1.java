@@ -1,9 +1,9 @@
 package test;
 
+import Main.Main;
 import MysqlAPI.MySQL;
 import Utils.API;
 import Utils.CustomYmlManger;
-import World16.World16.World16.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,7 +18,7 @@ public class test1 implements CommandExecutor {
 
   private CustomYmlManger configinstance = null;
 
-  public test1(CustomYmlManger getCustomYml, World16.World16.World16.Main getPlugin){
+  public test1(CustomYmlManger getCustomYml, Main getPlugin){
     this.configinstance = getCustomYml;
       this.plugin = getPlugin;
 

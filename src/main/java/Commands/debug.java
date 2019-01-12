@@ -1,11 +1,11 @@
 package Commands;
 
 import Events.OnJoin;
+import Main.Main;
 import MysqlAPI.MySQL;
 import Translate.Translate;
 import Utils.API;
 import Utils.CustomYmlManger;
-import World16.World16.World16.Main;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +29,7 @@ public class debug implements CommandExecutor {
 
     private CustomYmlManger configinstance = null;
 
-    public debug(CustomYmlManger getCustomConfig, World16.World16.World16.Main getPlugin) {
+    public debug(CustomYmlManger getCustomConfig, Main getPlugin) {
         this.configinstance = getCustomConfig;
         this.plugin = getPlugin;
 

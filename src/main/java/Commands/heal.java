@@ -1,8 +1,8 @@
 package Commands;
 
+import Main.Main;
 import Translate.Translate;
 import Utils.API;
-import World16.World16.World16.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,7 +14,7 @@ public class heal implements CommandExecutor {
     private Main plugin;
     API api = new API();
 
-    public heal(World16.World16.World16.Main plugin) {
+    public heal(Main plugin) {
         this.plugin = plugin;
         plugin.getCommand("heal").setExecutor(this);
     }

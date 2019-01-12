@@ -1,8 +1,8 @@
 package Commands;
 
+import Main.Main;
 import Translate.Translate;
 import Utils.API;
-import World16.World16.World16.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,7 +13,7 @@ public class night implements CommandExecutor {
     private Main plugin;
     API api = new API();
 
-    public night(World16.World16.World16.Main plugin) {
+    public night(Main plugin) {
         this.plugin = plugin;
         plugin.getCommand("night").setExecutor(this);
     }

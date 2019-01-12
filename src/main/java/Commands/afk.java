@@ -2,17 +2,16 @@ package Commands;
 
 import CustomEvents.handlers.AfkEventHandler;
 import CustomEvents.handlers.UnAfkEventHandler;
+import Main.Main;
 import Translate.Translate;
 import Utils.API;
-import World16.World16.World16.Main;
+import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-
-import java.util.ArrayList;
 
 public class afk implements Listener, CommandExecutor {
 
@@ -21,7 +20,7 @@ public class afk implements Listener, CommandExecutor {
     public Main plugin;
     API api = new API();
 
-    public afk(World16.World16.World16.Main getPlugin) {
+    public afk(Main getPlugin) {
         this.plugin = getPlugin;
         this.plugin.getCommand("afk").setExecutor(this);
     }

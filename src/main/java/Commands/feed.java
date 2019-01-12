@@ -1,8 +1,8 @@
 package Commands;
 
+import Main.Main;
 import Translate.Translate;
 import Utils.API;
-import World16.World16.World16.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,7 +13,7 @@ public class feed implements CommandExecutor {
     private Main plugin;
     API api = new API();
 
-    public feed(World16.World16.World16.Main plugin) {
+    public feed(Main plugin) {
         this.plugin = plugin;
         plugin.getCommand("feed").setExecutor(this);
     }

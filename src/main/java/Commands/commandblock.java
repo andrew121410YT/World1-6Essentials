@@ -1,7 +1,7 @@
 package Commands;
 
+import Main.Main;
 import Utils.API;
-import World16.World16.World16.Main;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,7 +15,7 @@ public class commandblock implements CommandExecutor {
     private Main plugin;
     API api = new API();
 
-    public commandblock(World16.World16.World16.Main getPlugin) {
+    public commandblock(Main getPlugin) {
         this.plugin = getPlugin;
         this.plugin.getCommand("commandblock").setExecutor(this);
     }

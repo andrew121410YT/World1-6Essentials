@@ -1,10 +1,10 @@
 package Events;
 
+import Main.Main;
 import MysqlAPI.MySQL;
 import Translate.Translate;
 import Utils.API;
 import Utils.KeyAPI;
-import World16.World16.World16.Main;
 import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -22,7 +22,7 @@ public class OnJoin implements Listener {
     API api = new API();
     KeyAPI keyapi = new KeyAPI();
 
-    public OnJoin(World16.World16.World16.Main getPlugin) {
+    public OnJoin(Main getPlugin) {
         this.plugin = getPlugin;
 
         Bukkit.getPluginManager().registerEvents(this, this.plugin);

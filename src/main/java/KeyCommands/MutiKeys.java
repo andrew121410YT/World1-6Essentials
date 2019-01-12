@@ -1,10 +1,10 @@
 package KeyCommands;
 
+import Main.Main;
 import MysqlAPI.MySQL;
 import Translate.Translate;
 import Utils.API;
 import Utils.KeyAPI;
-import World16.World16.World16.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,7 +17,7 @@ public class MutiKeys implements CommandExecutor {
     MySQL mysql = new MySQL();
     KeyAPI keyapi = new KeyAPI();
 
-    public MutiKeys(World16.World16.World16.Main getPlugin) {
+    public MutiKeys(Main getPlugin) {
         this.plugin = getPlugin;
 
         this.plugin.getCommand("mkey").setExecutor(this);

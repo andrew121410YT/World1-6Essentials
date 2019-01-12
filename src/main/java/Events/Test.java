@@ -4,7 +4,7 @@ import org.bukkit.event.Listener;
 
 public class Test implements Listener {
 
-//    private static Main plugin = Main.plugin;
+//    private static Main.Main plugin = Main.Main.plugin;
 //
 //    public Test() {
 //        this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);

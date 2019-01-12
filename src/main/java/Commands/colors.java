@@ -1,8 +1,8 @@
 package Commands;
 
+import Main.Main;
 import Translate.Translate;
 import Utils.API;
-import World16.World16.World16.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,7 +13,7 @@ public class colors implements CommandExecutor {
     private Main plugin;
     API api = new API();
 
-    public colors(World16.World16.World16.Main getPlugin) {
+    public colors(Main getPlugin) {
         this.plugin = getPlugin;
         this.plugin.getCommand("colors").setExecutor(this);
     }

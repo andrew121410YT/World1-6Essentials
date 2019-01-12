@@ -1,7 +1,7 @@
 package Commands;
 
+import Main.Main;
 import Utils.API;
-import World16.World16.World16.Main;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,7 +15,7 @@ public class bed implements CommandExecutor {
     private Main plugin;
     API api = new API();
 
-    public bed(World16.World16.World16.Main getPlugin) {
+    public bed(Main getPlugin) {
         this.plugin = getPlugin;
         this.plugin.getCommand("bed").setExecutor(this);
     }

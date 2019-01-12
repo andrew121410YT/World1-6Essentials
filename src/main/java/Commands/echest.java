@@ -1,7 +1,7 @@
 package Commands;
 
+import Main.Main;
 import Utils.API;
-import World16.World16.World16.Main;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,7 +13,7 @@ public class echest implements CommandExecutor {
     private Main plugin;
     API api = new API();
 
-    public echest(World16.World16.World16.Main plugin) {
+    public echest(Main plugin) {
         this.plugin = plugin;
         plugin.getCommand("echest").setExecutor(this);
     }

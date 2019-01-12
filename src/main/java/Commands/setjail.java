@@ -1,9 +1,9 @@
 package Commands;
 
+import Main.Main;
 import Translate.Translate;
 import Utils.API;
 import Utils.CustomYmlManger;
-import World16.World16.World16.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,7 +16,7 @@ public class setjail implements CommandExecutor {
 
     private CustomYmlManger configinstance = null;
 
-    public setjail(CustomYmlManger getCustomYml, World16.World16.World16.Main getPlugin) {
+    public setjail(CustomYmlManger getCustomYml, Main getPlugin) {
         this.configinstance = getCustomYml;
         this.plugin = getPlugin;
         this.plugin.getCommand("setjail").setExecutor(this);

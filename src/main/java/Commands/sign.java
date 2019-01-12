@@ -1,7 +1,7 @@
 package Commands;
 
+import Main.Main;
 import Utils.API;
-import World16.World16.World16.Main;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,7 +15,7 @@ public class sign implements CommandExecutor {
     private Main plugin;
     API api = new API();
 
-    public sign(World16.World16.World16.Main plugin) {
+    public sign(Main plugin) {
         this.plugin = plugin;
         plugin.getCommand("sign").setExecutor(this);
     }

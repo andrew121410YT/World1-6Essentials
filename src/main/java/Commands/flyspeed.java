@@ -1,8 +1,8 @@
 package Commands;
 
+import Main.Main;
 import Utils.API;
 import Utils.CustomYmlManger;
-import World16.World16.World16.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -19,7 +19,7 @@ public class flyspeed implements CommandExecutor {
 
     private CustomYmlManger configinstance = null;
 
-    public flyspeed(CustomYmlManger getConfigInstance, World16.World16.World16.Main plugin) {
+    public flyspeed(CustomYmlManger getConfigInstance, Main plugin) {
         this.configinstance = getConfigInstance;
         this.plugin = plugin;
         plugin.getCommand("fs").setExecutor(this);

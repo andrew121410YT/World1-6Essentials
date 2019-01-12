@@ -1,4 +1,4 @@
-package World16.World16.World16;
+package Main;
 
 import Commands.afk;
 import Commands.bed;

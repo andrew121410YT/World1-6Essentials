@@ -1,8 +1,8 @@
 package test;
 
+import Main.Main;
 import Utils.API;
 import Utils.CustomYmlManger;
-import World16.World16.World16.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,7 +15,7 @@ public class test implements CommandExecutor {
 
   private CustomYmlManger configinstance = null;
 
-  public test(CustomYmlManger getCustomYml, World16.World16.World16.Main getPlugin) {
+  public test(CustomYmlManger getCustomYml, Main getPlugin) {
     this.configinstance = getCustomYml;
     this.plugin = getPlugin;
 

@@ -1,16 +1,14 @@
 package Commands;
 
+import Main.Main;
 import Translate.Translate;
 import Utils.API;
 import Utils.CustomYmlManger;
-import World16.World16.World16.Main;
+import java.util.ArrayList;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class isafk implements CommandExecutor {
 
@@ -20,7 +18,7 @@ public class isafk implements CommandExecutor {
 
     private CustomYmlManger configinstance = null;
 
-    public isafk(CustomYmlManger getCustomYml, World16.World16.World16.Main getPlugin) {
+    public isafk(CustomYmlManger getCustomYml, Main getPlugin) {
         this.configinstance = getCustomYml;
         this.plugin = getPlugin;
         this.plugin.getCommand("isafk").setExecutor(this);

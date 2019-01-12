@@ -1,6 +1,6 @@
 package CustomEvents.Events;
 
-import World16.World16.World16.Main;
+import Main.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;

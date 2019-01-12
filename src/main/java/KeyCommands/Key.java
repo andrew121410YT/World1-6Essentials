@@ -1,17 +1,16 @@
 package KeyCommands;
 
 import Events.OnJoin;
+import Main.Main;
 import MysqlAPI.MySQL;
 import Translate.Translate;
 import Utils.API;
 import Utils.KeyAPI;
-import World16.World16.World16.Main;
+import java.util.HashMap;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.HashMap;
 
 public class Key implements CommandExecutor {
 
@@ -22,7 +21,7 @@ public class Key implements CommandExecutor {
     KeyAPI keyapi = new KeyAPI();
     MySQL mysql = new MySQL();
 
-    public Key(World16.World16.World16.Main getPlugin) {
+    public Key(Main getPlugin) {
         this.plugin = getPlugin;
 
         this.plugin.getCommand("key").setExecutor(this);

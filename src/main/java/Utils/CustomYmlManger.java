@@ -1,7 +1,7 @@
 package Utils;
 
+import Main.Main;
 import Translate.Translate;
-import World16.World16.World16.Main;
 import java.io.File;
 import java.io.IOException;
 import org.bukkit.Bukkit;

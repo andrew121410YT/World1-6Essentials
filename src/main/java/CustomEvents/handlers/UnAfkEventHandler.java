@@ -1,7 +1,7 @@
 package CustomEvents.handlers;
 
 import CustomEvents.Events.UnAfkEvent;
-import World16.World16.World16.Main;
+import Main.Main;
 
 public class UnAfkEventHandler {
 

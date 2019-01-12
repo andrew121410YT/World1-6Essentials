@@ -1,9 +1,9 @@
 package Commands;
 
+import Main.Main;
 import Translate.Translate;
 import Utils.API;
 import Utils.CustomYmlManger;
-import World16.World16.World16.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -19,7 +19,7 @@ public class jail implements CommandExecutor {
 
     private CustomYmlManger configinstance = null;
 
-    public jail(CustomYmlManger getCustomYml, World16.World16.World16.Main getPlugin) {
+    public jail(CustomYmlManger getCustomYml, Main getPlugin) {
         this.configinstance = getCustomYml;
         this.plugin = getPlugin;
         this.plugin.getCommand("jail").setExecutor(this);
