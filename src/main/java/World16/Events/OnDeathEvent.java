@@ -15,7 +15,7 @@ public class OnDeathEvent implements Listener {
   public static LinkedHashMap<String, Location> backmap = new LinkedHashMap<>();
 
   public OnDeathEvent(Main getPlugin) {
-    this.plugin = plugin;
+    this.plugin = getPlugin;
 
     this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
   }

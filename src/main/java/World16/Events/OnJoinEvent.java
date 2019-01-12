@@ -15,7 +15,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class OnJoinEvent implements Listener {
 
-    private Main plugin;
+    private static Main plugin;
 
     public static HashMap<String, String> keyDataM = new HashMap<String, String>();
     MySQL mysql = new MySQL();

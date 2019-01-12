@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class OnLeaveEvent implements Listener {
-    private Main plugin;
+    private static Main plugin;
     API api = new API();
 
     public OnLeaveEvent(Main getPlugin) {

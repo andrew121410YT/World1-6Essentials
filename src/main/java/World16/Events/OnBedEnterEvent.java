@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerBedEnterEvent;
 
 public class OnBedEnterEvent implements Listener {
 
-    private Main plugin;
+    private static Main plugin;
 
     public OnBedEnterEvent(Main plugin) {
         this.plugin = plugin;
