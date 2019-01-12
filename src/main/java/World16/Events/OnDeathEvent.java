@@ -17,7 +17,7 @@ public class OnDeathEvent implements Listener {
   public OnDeathEvent(Main getPlugin) {
     this.plugin = plugin;
 
-    this.plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
   }
 
   @EventHandler

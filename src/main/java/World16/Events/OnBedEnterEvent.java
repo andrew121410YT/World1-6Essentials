@@ -16,7 +16,7 @@ public class OnBedEnterEvent implements Listener {
     public OnBedEnterEvent(Main plugin) {
         this.plugin = plugin;
 
-        this.plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
