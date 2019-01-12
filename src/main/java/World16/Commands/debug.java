@@ -126,7 +126,7 @@ public class debug implements CommandExecutor {
           api.PermissionErrorMessage(p);
           return true;
         }
-        api.clearAllArrayLists();
+        api.clearAllArrayList();
         p.sendMessage(Translate.chat("&bOK..."));
         return true;
 
@@ -147,7 +147,7 @@ public class debug implements CommandExecutor {
           api.PermissionErrorMessage(p);
           return true;
         }
-        api.clearAllHahsMapsWithName(p);
+        api.clearAllHashMaps(p);
         return true;
 
         //DATE

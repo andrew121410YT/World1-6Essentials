@@ -23,7 +23,7 @@ public class OnLeave implements Listener {
         Player p = event.getPlayer();
 
         //CLEAR ARRAYLIST AND HASHMAPS ETC
-        api.clearArrayListandHashMapsWithName(p);
+        api.clearArrayListAndHashMaps(p);
 
         event.setQuitMessage("");
         Bukkit.broadcastMessage(Translate.chat(api.PREFIX+" &5Bye Bye, " + p.getDisplayName()));
