@@ -1,6 +1,7 @@
 package World16.Main;
 
 import World16.Commands.afk;
+import World16.Commands.back;
 import World16.Commands.bed;
 import World16.Commands.colors;
 import World16.Commands.commandblock;
@@ -23,6 +24,7 @@ import World16.Commands.setspawn;
 import World16.Commands.sign;
 import World16.Commands.spawn;
 import World16.Events.OnBedEnterEvent;
+import World16.Events.OnDeathEvent;
 import World16.Events.OnJoinEvent;
 import World16.Events.OnJoinTitleEvent;
 import World16.Events.OnLeaveEvent;
@@ -32,6 +34,8 @@ import World16.Translate.Translate;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManger;
 import World16.Utils.Metrics;
+import World16.test.test;
+import World16.test.test1;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.bukkit.Bukkit;
@@ -40,8 +44,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import World16.test.test;
-import World16.test.test1;
 
 public class Main extends JavaPlugin {//implements Listener {
 
@@ -106,6 +108,7 @@ public class Main extends JavaPlugin {//implements Listener {
         new afk(this);
         new flyspeed(customyml, this);
         new isafk(customyml, this);
+        new back(this);
 
         new test(customyml, this);
         new test1(customyml, this);
@@ -115,6 +118,7 @@ public class Main extends JavaPlugin {//implements Listener {
         //Bukkit.getServer().getPluginManager().registerEvents(this, this);
         new OnJoinEvent(this);
         new OnLeaveEvent(this);
+        new OnDeathEvent(this);
         //...
         new OnBedEnterEvent(this);
         new OnJoinTitleEvent(this);

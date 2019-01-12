@@ -2,6 +2,7 @@ package World16.Utils;
 
 import World16.Commands.afk;
 import World16.Commands.fly;
+import World16.Events.OnDeathEvent;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Translate.Translate;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -25,6 +27,7 @@ import us.myles.ViaVersion.api.ViaAPI;
 public class API {
 
   HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
+  LinkedHashMap<String, Location> backmap = OnDeathEvent.backmap;
   ArrayList<String> Afk1 = afk.Afk;
   ArrayList<String> Fly1 = fly.Fly;
 
@@ -123,62 +126,52 @@ public class API {
 
   public void clearArrayListAndHashMaps(Player p) {
     keyDataM.remove(p.getDisplayName());
-    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the HashMap of World16.Events.OnJoinEvent.keyDataM For Player: " + p
-        .getDisplayName()));
+    ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM", p);
+    backmap.remove(p.getDisplayName());
+    ClearHashMapMessage("World16.Events.OnDeathEvent.backmap", p);
     Afk1.remove(p.getDisplayName());
-    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the ArrayList of World16.Commands.afk.Afk For Player: " + p
-        .getDisplayName()));
+    ClearArrayListMessage("World16.Commands.afk.Afk", p);
     Fly1.remove(p.getDisplayName());
-    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the ArrayList of World16.Commands.fly.Fly For Player: " + p
-        .getDisplayName()));
+    ClearArrayListMessage("World16.Commands.fly.Fly", p);
   }
 
   public void clearArrayListAndHashMaps() {
     keyDataM.clear();
-    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the HashMap of World16.Events.OnJoinEvent.keyDataM For EVERY PLAYER"));
+    ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM");
+    backmap.clear();
+    ClearHashMapMessage("World16.Events.OnDeathEvent.backmap");
     Afk1.clear();
-    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the ArrayList of World16.Commands.afk.Afk For EVERY PLAYER"));
+    ClearArrayListMessage("World16.Commands.afk.Afk");
     Fly1.clear();
-    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the ArrayList of World16.Commands.fly.Fly For EVERY PLAYER"));
+    ClearArrayListMessage("World16.Commands.fly.Fly");
   }
 
   public void clearAllHashMaps(Player p) {
     keyDataM.remove(p.getDisplayName());
-    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the HashMap of World16.Events.OnJoinEvent.keyDataM For Player: " + p
-        .getDisplayName()));
+    ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM", p);
+    backmap.clear();
+    ClearHashMapMessage("World16.Events.OnDeathEvent.backmap", p);
   }
 
   public void clearAllHashMaps() {
     keyDataM.clear();
-    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the HashMap of World16.Events.OnJoinEvent.keyDataM For EVERY PLAYER"));
+    ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM");
+    backmap.clear();
+    ClearHashMapMessage("World16.Events.OnDeathEvent.backmap");
   }
 
   public void clearAllArrayList(Player p) {
     Afk1.remove(p.getDisplayName());
-    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the ArrayList of World16.Commands.afk.Afk For Player: "
-        + p.getDisplayName()));
+    ClearArrayListMessage("World16.Commands.afk.Afk", p);
     Fly1.remove(p.getDisplayName());
-    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the ArrayList of World16.Commands.fly.Fly For Player: "
-        + p.getDisplayName()));
+    ClearArrayListMessage("World16.Commands.fly.Fly", p);
   }
 
   public void clearAllArrayList() {
     Afk1.clear();
-    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the ArrayList of World16.Commands.afk.Afk For EVERY PLAYER"));
+    ClearArrayListMessage("World16.Commands.afk.Afk");
     Fly1.clear();
-    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
-        + " Class: World16.Utils.API has cleared the ArrayList of World16.Commands.fly.Fly For EVERY PLAYER"));
+    ClearArrayListMessage("World16.Commands.fly.Fly");
   }
 
   public String FormatTime(LocalDateTime time) {
@@ -332,5 +325,27 @@ public class API {
   public void PermissionErrorMessage(Player p) {
     p.sendMessage(
         Translate.chat(this.PREFIX + " &cYou Do Not Have Permission To Use This Command."));
+  }
+
+  public void ClearHashMapMessage(String place) {
+    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
+        + " Class: World16.Utils.API has cleared the HashMap of " + place + " For EVERY PLAYER"));
+  }
+
+  public void ClearHashMapMessage(String place, Player p) {
+    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
+        + " Class: World16.Utils.API has cleared the HashMap of " + place + " For Player: " + p
+        .getDisplayName()));
+  }
+
+  public void ClearArrayListMessage(String place) {
+    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
+        + " Class: World16.Utils.API has cleared the ArrayList of " + place + " For EVERY PLAYER"));
+  }
+
+  public void ClearArrayListMessage(String place, Player p) {
+    this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
+        + " Class: World16.Utils.API has cleared the ArrayList of " + place + " For Player: " + p
+        .getDisplayName()));
   }
 }
