@@ -1,6 +1,7 @@
 package World16.Commands;
 
 import World16.Main.Main;
+import World16.Translate.Translate;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManger;
 import org.bukkit.Bukkit;
@@ -33,67 +34,78 @@ public class flyspeed implements CommandExecutor {
 
     Player player = (Player) sender;
     // STUFF GOES HERE
-    if (args.length == 1) {
-      if (!player.hasPermission("command.fs.permission")) {
+    if (args.length == 0) {
+      if (args.length == 1) {
+        if (!player.hasPermission("command.fs.permission")) {
+          api.PermissionErrorMessage(player);
+          return true;
+        }
+        player.sendMessage(Translate.chat("&4Usage: /fs <Number>"));
+        player.sendMessage(Translate.chat("&6Remember the default flight speed is &a1"));
+      }
+      if (args.length == 1) {
+        if (!player.hasPermission("command.fs.permission")) {
+          api.PermissionErrorMessage(player);
+          return true;
+        }
+        String oldnum = args[0];
+        double num = Double.parseDouble(oldnum);
+        int num1 = (int) num;
+        if ((num1 > -1) && (num1 < 11)) {
+          double num2 = num1;
+          float flyspeed = (float) (num2 / 10.0D);
+
+          player.setFlySpeed(flyspeed);
+          player.sendMessage(
+              ChatColor.GOLD + "[FlySpeed]  " + ChatColor.YELLOW + "Your flyspeed now equals: "
+                  + ChatColor.RED + "[" + flyspeed * 10.0F + "]" + ChatColor.YELLOW + "!");
+          configinstance.getshit().set(player.getName().toString() + ".flyspeed",
+              Float.valueOf(flyspeed));
+          configinstance.saveshit();
+          return true;
+        }
+        player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.RED
+            + "Your input is not valid! must be between 0 and 10.");
+        return true;
+      } else if (!player.hasPermission("command.fs.other.permission")) {
         api.PermissionErrorMessage(player);
         return true;
       }
-      String oldnum = args[0];
+      String oldnum = args[1];
       double num = Double.parseDouble(oldnum);
       int num1 = (int) num;
       if ((num1 > -1) && (num1 < 11)) {
         double num2 = num1;
         float flyspeed = (float) (num2 / 10.0D);
 
-        player.setFlySpeed(flyspeed);
-        player.sendMessage(
-            ChatColor.GOLD + "[FlySpeed]  " + ChatColor.YELLOW + "Your flyspeed now equals: "
+        boolean playerfound = false;
+        for (Player player2 : Bukkit.getServer().getOnlinePlayers()) {
+          if (player2.getName().equalsIgnoreCase(args[0])) {
+            player2.setFlySpeed(flyspeed);
+            player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.YELLOW
+                + player.getName().toString() + " set your flyspeed to: " + ChatColor.RED + "["
+                + flyspeed * 10.0F + "]" + ChatColor.YELLOW + "!");
+            player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.YELLOW
+                + "You succesfully set " + player.getName().toString() + "'s flyspeed to: "
                 + ChatColor.RED + "[" + flyspeed * 10.0F + "]" + ChatColor.YELLOW + "!");
-        configinstance.getshit().set(player.getName().toString() + ".flyspeed",
-            Float.valueOf(flyspeed));
-        configinstance.saveshit();
+            playerfound = true;
+            configinstance.getshit().set(player2.getName().toString() + ".flyspeed",
+                Float.valueOf(flyspeed));
+            configinstance.saveshit();
+            return true;
+          }
+          if (!playerfound) {
+            player
+                .sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.RED + "we could not find "
+                    + args[0] + "!");
+            return true;
+          }
+        }
+      } else {
+        player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.RED
+            + "Your input is not valid! must be between 0 and 10.");
         return true;
       }
-      player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.RED
-          + "Your input is not valid! must be between 0 and 10.");
-      return true;
-    } else if (!player.hasPermission("command.fs.other.permission")) {
-      api.PermissionErrorMessage(player);
-      return true;
-    }
-    String oldnum = args[1];
-    double num = Double.parseDouble(oldnum);
-    int num1 = (int) num;
-    if ((num1 > -1) && (num1 < 11)) {
-      double num2 = num1;
-      float flyspeed = (float) (num2 / 10.0D);
-
-      boolean playerfound = false;
-      for (Player player2 : Bukkit.getServer().getOnlinePlayers()) {
-        if (player2.getName().equalsIgnoreCase(args[0])) {
-          player2.setFlySpeed(flyspeed);
-          player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.YELLOW
-              + player.getName().toString() + " set your flyspeed to: " + ChatColor.RED + "["
-              + flyspeed * 10.0F + "]" + ChatColor.YELLOW + "!");
-          player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.YELLOW
-              + "You succesfully set " + player.getName().toString() + "'s flyspeed to: "
-              + ChatColor.RED + "[" + flyspeed * 10.0F + "]" + ChatColor.YELLOW + "!");
-          playerfound = true;
-          configinstance.getshit().set(player2.getName().toString() + ".flyspeed",
-              Float.valueOf(flyspeed));
-          configinstance.saveshit();
-          return true;
-        }
-        if (!playerfound) {
-          player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.RED + "we could not find "
-              + args[0] + "!");
-          return true;
-        }
-      }
-    } else {
-      player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.RED
-          + "Your input is not valid! must be between 0 and 10.");
-      return true;
     }
     return true;
   }
