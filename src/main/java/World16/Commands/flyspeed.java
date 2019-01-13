@@ -1,7 +1,6 @@
 package World16.Commands;
 
 import World16.Main.Main;
-import World16.Translate.Translate;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManger;
 import org.bukkit.Bukkit;
@@ -31,17 +30,8 @@ public class flyspeed implements CommandExecutor {
       sender.sendMessage("Only Players Can Use This Command.");
       return true;
     }
-
     Player player = (Player) sender;
     // STUFF GOES HERE
-    if (args.length == 0) {
-      if (!player.hasPermission("command.fs.permission")) {
-        api.PermissionErrorMessage(player);
-        return true;
-      }
-      player.sendMessage(Translate.chat("&4Usage: /fs <Number>"));
-      player.sendMessage(Translate.chat("&6Remember the default flight speed is &a1"));
-    }
     if (args.length == 1) {
       if (!player.hasPermission("command.fs.permission")) {
         api.PermissionErrorMessage(player);
@@ -94,9 +84,8 @@ public class flyspeed implements CommandExecutor {
           return true;
         }
         if (!playerfound) {
-          player
-              .sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.RED + "we could not find "
-                  + args[0] + "!");
+          player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.RED + "we could not find "
+              + args[0] + "!");
           return true;
         }
       }
