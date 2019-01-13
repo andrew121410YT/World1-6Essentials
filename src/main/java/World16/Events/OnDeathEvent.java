@@ -24,7 +24,7 @@ public class OnDeathEvent implements Listener {
   public void OnDeath(PlayerDeathEvent event) {
     Player p = event.getEntity();
 
-    backmap.remove(p.getDisplayName());
+    backmap.remove(p.getDisplayName() + "death");
 
     double x = event.getEntity().getLocation().getX();
     double y = event.getEntity().getLocation().getY();
@@ -35,6 +35,6 @@ public class OnDeathEvent implements Listener {
 
     Location location = new Location(world, x, y, z, yaw, pitch);
 
-    backmap.put(p.getDisplayName(), location);
+    backmap.put(p.getDisplayName() + "death", location);
   }
 }

@@ -30,11 +30,27 @@ public class back implements CommandExecutor {
     }
     Player p = (Player) sender;
 
-    if (args.length >= 0) {
-      if (backmap.get(p.getDisplayName()) != null) {
-        p.teleport(backmap.get(p.getDisplayName()));
-      } else {
-        p.sendMessage(Translate.chat("&4Looks like you didn't die yet."));
+    if (args.length == 0) {
+      p.sendMessage(Translate.chat("Usage: /back death OR /back tp"));
+    }
+    if (args.length >= 1) {
+
+      if (args[0].equalsIgnoreCase("death")) {
+        if (backmap.get(p.getDisplayName() + "death") != null) {
+          p.teleport(backmap.get(p.getDisplayName() + "death"));
+        } else {
+          p.sendMessage(Translate.chat("&4Look's like you didn't die yet."));
+        }
+
+        if (args[0].equalsIgnoreCase("tp")) {
+          if (backmap.get(p.getDisplayName() + "tp") != null) {
+            p.teleport(backmap.get(p.getDisplayName() + "tp"));
+          } else {
+            p.sendMessage(Translate.chat("&4Something went wrong."));
+          }
+          return true;
+        }
+        return true;
       }
       return true;
     }
