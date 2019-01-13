@@ -128,6 +128,8 @@ public class API {
     keyDataM.remove(p.getDisplayName());
     ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM", p);
     backmap.remove(p.getDisplayName());
+    backmap.remove(p.getDisplayName() + "death");
+    backmap.remove(p.getDisplayName() + "tp");
     ClearHashMapMessage("World16.Events.OnDeathEvent.backmap", p);
     Afk1.remove(p.getDisplayName());
     ClearArrayListMessage("World16.Commands.afk.Afk", p);
@@ -149,7 +151,9 @@ public class API {
   public void clearAllHashMaps(Player p) {
     keyDataM.remove(p.getDisplayName());
     ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM", p);
-    backmap.clear();
+    backmap.remove(p.getDisplayName());
+    backmap.remove(p.getDisplayName() + "death");
+    backmap.remove(p.getDisplayName() + "tp");
     ClearHashMapMessage("World16.Events.OnDeathEvent.backmap", p);
   }
 
