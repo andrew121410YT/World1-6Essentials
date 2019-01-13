@@ -56,9 +56,9 @@ public class flyspeed implements CommandExecutor {
         player.sendMessage(
             ChatColor.GOLD + "[FlySpeed]  " + ChatColor.YELLOW + "Your flyspeed now equals: "
                 + ChatColor.RED + "[" + flyspeed * 10.0F + "]" + ChatColor.YELLOW + "!");
-        configinstance.getshit().set(player.getDisplayName() + ".flyspeed",
-            Float.valueOf(flyspeed));
-        configinstance.saveshitsilent();
+//        configinstance.getshit().set(player.getDisplayName() + ".flyspeed",
+//            Float.valueOf(flyspeed));
+//        configinstance.saveshitsilent();
         return true;
       }
       player.sendMessage(ChatColor.GOLD + "[FlySpeed]  " + ChatColor.RED
