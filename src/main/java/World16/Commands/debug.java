@@ -9,6 +9,7 @@ import World16.Utils.API;
 import World16.Utils.CustomYmlManger;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import org.bukkit.Bukkit;
@@ -110,27 +111,24 @@ public class debug implements CommandExecutor {
         } else {
           if (args.length >= 1) {
             if (args[1].equalsIgnoreCase("@all")) {
-
-              for (String t2 : keyDataM.keySet()) {
-                p.sendMessage(
-                    Translate.chat("Key For KeyData: " + t2 + " Values: " + keyDataM.get(t2)));
-                return true;
-              }
-
-              for (String t2 : backmap.keySet()) {
-                p.sendMessage(
-                    Translate.chat("Key For BackData: " + t2 + " Values: " + backmap.get(t2)));
-                return true;
-              }
-
+              p.sendMessage(String.valueOf(Arrays.asList(keyDataM)));
+              p.sendMessage(String.valueOf(Arrays.asList(backmap)));
             } else if (args[1].equalsIgnoreCase("@checkmine")) {
               p.sendMessage(Translate.chat(
                   "Here's the HashMap for World16.Events.OnJoinEvent.keyDatam: " + keyDataM
                       .get(p.getDisplayName())));
-
               p.sendMessage(Translate.chat(
-                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap: " + backmap
+                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backmap
                       .get(p.getDisplayName())));
+              p.sendMessage(Translate.chat(
+                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backmap
+                      .get(p.getDisplayName() + "death")));
+              p.sendMessage(Translate.chat(
+                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backmap
+                      .get(p.getDisplayName() + "tp")));
+              p.sendMessage(Translate.chat(
+                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backmap
+                      .get(p.getDisplayName() + "set")));
 
             }
           }

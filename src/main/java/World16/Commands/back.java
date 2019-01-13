@@ -42,6 +42,10 @@ public class back implements CommandExecutor {
     if (args.length >= 1) {
 
       if (args[0].equalsIgnoreCase("death")) {
+        if (!p.hasPermission("command.back.death.permission")) {
+          api.PermissionErrorMessage(p);
+          return true;
+        }
         if (backmap.get(p.getDisplayName() + "death") != null) {
           p.teleport(backmap.get(p.getDisplayName() + "death"));
           return true;
@@ -50,6 +54,10 @@ public class back implements CommandExecutor {
           return true;
         }
       } else if (args[0].equalsIgnoreCase("tp")) {
+        if (!p.hasPermission("command.back.tp.permission")) {
+          api.PermissionErrorMessage(p);
+          return true;
+        }
         if (backmap.get(p.getDisplayName() + "tp") != null) {
           p.teleport(backmap.get(p.getDisplayName() + "tp"));
         } else {
@@ -57,6 +65,10 @@ public class back implements CommandExecutor {
           return true;
         }
       } else if (args[0].equalsIgnoreCase("set")) {
+        if (!p.hasPermission("command.back.set.permission")) {
+          api.PermissionErrorMessage(p);
+          return true;
+        }
         backmap.remove(p.getDisplayName());
         double x = p.getLocation().getX();
         double y = p.getLocation().getY();
@@ -67,7 +79,12 @@ public class back implements CommandExecutor {
         Location location = new Location(world, x, y, z, yaw, pitch);
         backmap.put(p.getDisplayName() + "set", location);
         return true;
+
       } else if (args[0].equalsIgnoreCase("goto")) {
+        if (!p.hasPermission("command.back.goto.permission")) {
+          api.PermissionErrorMessage(p);
+          return true;
+        }
         if (backmap.get(p.getDisplayName() + "set") != null) {
           p.teleport(backmap.get(p.getDisplayName() + "set"));
           return true;
