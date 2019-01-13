@@ -54,6 +54,15 @@ public class CustomYmlManger {
         }
     }
 
+    public void saveshitsilent() {
+        try {
+            shitcfg.save(shitfile);
+        } catch (IOException e) {
+            Bukkit.getServer().getConsoleSender()
+                .sendMessage(Translate.chat(api.USELESS + " &cThe shit.yml has been NOT SAVED.."));
+        }
+    }
+
     public void reloadshit() {
         shitcfg = YamlConfiguration.loadConfiguration(shitfile);
         Bukkit.getServer().getConsoleSender()
