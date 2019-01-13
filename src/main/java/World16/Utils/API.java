@@ -226,7 +226,7 @@ public class API {
       case 315:
         return "1.11";
       case 210:
-        return "1.10 & 1.10.1 & 1.10.2";
+        return "1.10";
       case 110:
       case 109:
       case 108:
@@ -235,9 +235,9 @@ public class API {
       case 105:
       case 104:
       case 103:
-        return "1.9 & 1.9.1 & 1.9.2 & 1.9.3 & 1.9.4";
+        return "1.9";
       case 47:
-        return "1.8.9 1.8.8 1.8.7 1.8.6 1.8.5 1.8.4 1.8.3 1.8.2 1.8";
+        return "1.8";
       default:
         return TOO_DAMN_OLD;
     }
