@@ -130,6 +130,7 @@ public class API {
     backmap.remove(p.getDisplayName());
     backmap.remove(p.getDisplayName() + "death");
     backmap.remove(p.getDisplayName() + "tp");
+    backmap.remove(p.getDisplayName() + "set");
     ClearHashMapMessage("World16.Events.OnDeathEvent.backmap", p);
     Afk1.remove(p.getDisplayName());
     ClearArrayListMessage("World16.Commands.afk.Afk", p);
@@ -154,6 +155,7 @@ public class API {
     backmap.remove(p.getDisplayName());
     backmap.remove(p.getDisplayName() + "death");
     backmap.remove(p.getDisplayName() + "tp");
+    backmap.remove(p.getDisplayName() + "set");
     ClearHashMapMessage("World16.Events.OnDeathEvent.backmap", p);
   }
 
