@@ -41,18 +41,15 @@ public class back implements CommandExecutor {
         } else {
           p.sendMessage(Translate.chat("&4Look's like you didn't die yet."));
         }
-
-        if (args[0].equalsIgnoreCase("tp")) {
-          if (backmap.get(p.getDisplayName() + "tp") != null) {
-            p.teleport(backmap.get(p.getDisplayName() + "tp"));
-          } else {
-            p.sendMessage(Translate.chat("&4Something went wrong."));
-          }
-          return true;
-        }
-        return true;
       }
-      return true;
+
+      if (args[0].equalsIgnoreCase("tp")) {
+        if (backmap.get(p.getDisplayName() + "tp") != null) {
+          p.teleport(backmap.get(p.getDisplayName() + "tp"));
+        } else {
+          p.sendMessage(Translate.chat("&4Something went wrong."));
+        }
+      }
     }
     return true;
   }
