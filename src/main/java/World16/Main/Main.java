@@ -39,7 +39,9 @@ import World16.test.test;
 import World16.test.test1;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -56,6 +58,7 @@ public class Main extends JavaPlugin {//implements Listener {
     ArrayList<String> Afk = afk.Afk;
     ArrayList<String> Fly = fly.Fly;
     HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
+    LinkedHashMap<String, Location> backmap = OnDeathEvent.backmap;
     //END
     // GOT THE MYSQL API AT https://www.spigotmc.org/resources/simple-easy-mysql-api.36447/
     // GOT THE TITLE API AT https://www.spigotmc.org/resources/titleapi-1-8-1-13.1325/
@@ -82,6 +85,7 @@ public class Main extends JavaPlugin {//implements Listener {
         Afk.clear();
         Fly.clear();
         keyDataM.clear();
+        backmap.clear();
     }
 
     public void regCommands() {
