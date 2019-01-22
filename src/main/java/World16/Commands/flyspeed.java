@@ -33,7 +33,7 @@ public class flyspeed implements CommandExecutor {
     Player player = (Player) sender;
 
     if (args.length == 0) {
-      if (!player.hasPermission("command.fs.permission")) {
+      if (!player.hasPermission("world16.fs")) {
         api.PermissionErrorMessage(player);
         return true;
       }
@@ -42,7 +42,7 @@ public class flyspeed implements CommandExecutor {
       player.sendMessage(Translate.chat("&6Remember that the default flight speed is &a1"));
     }
     if (args.length == 1) {
-      if (!player.hasPermission("command.fs.permission")) {
+      if (!player.hasPermission("world16.fs")) {
         api.PermissionErrorMessage(player);
         return true;
       }
@@ -70,7 +70,7 @@ public class flyspeed implements CommandExecutor {
     if (args.length >= 2) {
       Player target = plugin.getServer().getPlayerExact(args[0]);
       if (args.length >= 1 && target != null && target.isOnline()) {
-        if (!player.hasPermission("command.fs.other.permission")) {
+        if (!player.hasPermission("world16.fs.other")) {
           api.PermissionErrorMessage(player);
           return true;
         }

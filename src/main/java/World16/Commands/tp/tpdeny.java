@@ -37,7 +37,7 @@ public class tpdeny implements CommandExecutor {
       return true;
     }
     Player p = (Player) sender;
-    if (!p.hasPermission("command.tpdeny.permission")) {
+    if (!p.hasPermission("world16.tpdeny")) {
       api.PermissionErrorMessage(p);
       return true;
     }

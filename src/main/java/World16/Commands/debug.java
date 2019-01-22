@@ -49,7 +49,7 @@ public class debug implements CommandExecutor {
       return true;
     }
     if (args.length == 0) {
-      if (!p.hasPermission("command.debug.permission")) { // Permission
+      if (!p.hasPermission("world16.debug")) { // Permission
         api.PermissionErrorMessage(p);
         return true;
       }
@@ -69,7 +69,7 @@ public class debug implements CommandExecutor {
 
       //OP
       if (args[0].equalsIgnoreCase("op")) {
-        if (!p.hasPermission("command.debug.op.permission")) { // Permission
+        if (!p.hasPermission("world16.debug.op")) { // Permission
           api.PermissionErrorMessage(p);
           return true;
         }
@@ -87,7 +87,7 @@ public class debug implements CommandExecutor {
 
         //DEFAULT STUFF
       } else if (args.length == 1 && (args[0].equalsIgnoreCase("defaultstuff"))) {
-        if (!p.hasPermission("command.debug.defaultstuff.permission")) { // Permission
+        if (!p.hasPermission("world16.debug.defaultstuff")) { // Permission
           api.PermissionErrorMessage(p);
           return true;
         }
@@ -136,7 +136,7 @@ public class debug implements CommandExecutor {
 
         //CLEAR ALL ARRAYLIST
       } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallarraylists"))) {
-        if (!p.hasPermission("command.debug.clearallarraylists.permission")) { // Permission
+        if (!p.hasPermission("world16.debug.clearallarraylists")) { // Permission
           api.PermissionErrorMessage(p);
           return true;
         }
@@ -146,7 +146,7 @@ public class debug implements CommandExecutor {
 
         //CLEAR ALL HASHMAPS
       } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmaps"))) {
-        if (!p.hasPermission("command.debug.clearallhashmaps.permission")) { // Permission
+        if (!p.hasPermission("world16.debug.clearallhashmaps")) { // Permission
           api.PermissionErrorMessage(p);
           return true;
         }
@@ -157,7 +157,7 @@ public class debug implements CommandExecutor {
         //CLEAR ALL HASHMAPS WITH THE NAME.
       } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmapswithname"))) {
         if (!p.hasPermission(
-            "command.debug.clearallhashmapswithname.permission")) { // Permission
+            "world16.debug.clearallhashmapswithname")) { // Permission
           api.PermissionErrorMessage(p);
           return true;
         }
@@ -166,7 +166,7 @@ public class debug implements CommandExecutor {
 
         //DATE
       } else if (args.length == 1 && (args[0].equalsIgnoreCase("date"))) {
-        if (!p.hasPermission("command.debug.date.permission")) { // Permission
+        if (!p.hasPermission("world16.debug.date")) { // Permission
           api.PermissionErrorMessage(p);
           return true;
         }
@@ -176,7 +176,7 @@ public class debug implements CommandExecutor {
 
         //PLAYER VERSION
       } else if (args.length >= 1 && (args[0].equalsIgnoreCase("playerversion"))) {
-        if (!p.hasPermission("command.debug.playerversion.permission")) {
+        if (!p.hasPermission("world16.debug.playerversion")) {
           api.PermissionErrorMessage(p);
           return true;
         }
@@ -185,7 +185,7 @@ public class debug implements CommandExecutor {
         } else {
           Player target = plugin.getServer().getPlayerExact(args[1]);
           if (args.length >= 1 && target != null && target.isOnline()) {
-            if (!p.hasPermission("command.debug.playerversion.other.permission")) {
+            if (!p.hasPermission("world16.debug.playerversion.other")) {
               api.PermissionErrorMessage(p);
               return true;
             }
@@ -197,7 +197,7 @@ public class debug implements CommandExecutor {
           }
         }
       } else if (args.length >= 1 && (args[0].equalsIgnoreCase("checkuuid"))) {
-        if (!p.hasPermission("command.debug.checkuuid.permission")) {
+        if (!p.hasPermission("world16.debug.checkuuid")) {
           api.PermissionErrorMessage(p);
           return true;
         }
@@ -206,7 +206,7 @@ public class debug implements CommandExecutor {
         } else {
           Player target = plugin.getServer().getPlayerExact(args[1]);
           if (args.length == 2 && target != null && target.isOnline()) {
-            if (!p.hasPermission("command.debug.checkuuid.other.permission")) {
+            if (!p.hasPermission("world16.debug.checkuuid.other")) {
               api.PermissionErrorMessage(p);
               return true;
             }
@@ -236,7 +236,7 @@ public class debug implements CommandExecutor {
         //}
         //SQL
       } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
-        if (!p.hasPermission("command.debug.sql.permission")) { // Permission
+        if (!p.hasPermission("world16.debug.sql")) { // Permission
           api.PermissionErrorMessage(p);
           return true;
         }

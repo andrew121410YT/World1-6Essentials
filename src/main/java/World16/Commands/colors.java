@@ -27,7 +27,7 @@ public class colors implements CommandExecutor {
 
     Player p = (Player) sender;
 
-    if (!p.hasPermission("command.colors.permission")) {
+    if (!p.hasPermission("world16.colors")) {
       api.PermissionErrorMessage(p);
       return true;
     }

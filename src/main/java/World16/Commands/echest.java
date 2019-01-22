@@ -27,7 +27,7 @@ public class echest implements CommandExecutor {
 
     Player p = (Player) sender;
 
-    if (!p.hasPermission("command.echest.permission")) {
+    if (!p.hasPermission("world16.echest")) {
       api.PermissionErrorMessage(p);
       return true;
     }

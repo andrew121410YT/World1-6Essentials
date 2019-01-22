@@ -28,7 +28,7 @@ public class heal implements CommandExecutor {
 
     Player p = (Player) sender;
 
-    if (!p.hasPermission("command.heal.permission")) {
+    if (!p.hasPermission("world16.heal")) {
       api.PermissionErrorMessage(p);
       return true;
     }
@@ -44,7 +44,7 @@ public class heal implements CommandExecutor {
     } else {
       Player target = plugin.getServer().getPlayerExact(args[0]);
       if (args.length >= 1 && target != null && target.isOnline()) {
-        if (!p.hasPermission("command.heal.other.permission")) {
+        if (!p.hasPermission("world16.heal.other")) {
           api.PermissionErrorMessage(p);
           return true;
         }

@@ -29,7 +29,7 @@ public class sign implements CommandExecutor {
 
     Player p = (Player) sender;
 
-    if (!p.hasPermission("command.sign.permission")) {
+    if (!p.hasPermission("world16.sign")) {
       api.PermissionErrorMessage(p);
       return true;
     }

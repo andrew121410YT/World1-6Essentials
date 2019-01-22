@@ -42,7 +42,7 @@ public class back implements CommandExecutor {
     if (args.length >= 1) {
 
       if (args[0].equalsIgnoreCase("death")) {
-        if (!p.hasPermission("command.back.death.permission")) {
+        if (!p.hasPermission("world16.back.death")) {
           api.PermissionErrorMessage(p);
           return true;
         }
@@ -54,7 +54,7 @@ public class back implements CommandExecutor {
           return true;
         }
       } else if (args[0].equalsIgnoreCase("tp")) {
-        if (!p.hasPermission("command.back.tp.permission")) {
+        if (!p.hasPermission("world16.back.tp")) {
           api.PermissionErrorMessage(p);
           return true;
         }
@@ -65,7 +65,7 @@ public class back implements CommandExecutor {
           return true;
         }
       } else if (args[0].equalsIgnoreCase("set")) {
-        if (!p.hasPermission("command.back.set.permission")) {
+        if (!p.hasPermission("world16.back.set")) {
           api.PermissionErrorMessage(p);
           return true;
         }
@@ -81,7 +81,7 @@ public class back implements CommandExecutor {
         return true;
 
       } else if (args[0].equalsIgnoreCase("goto")) {
-        if (!p.hasPermission("command.back.goto.permission")) {
+        if (!p.hasPermission("world16.back.goto")) {
           api.PermissionErrorMessage(p);
           return true;
         }

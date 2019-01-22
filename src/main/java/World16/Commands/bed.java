@@ -29,7 +29,7 @@ public class bed implements CommandExecutor {
 
     Player p = (Player) sender;
 
-    if (!p.hasPermission("command.bed.permission")) {
+    if (!p.hasPermission("world16.bed")) {
       api.PermissionErrorMessage(p);
       return true;
     }

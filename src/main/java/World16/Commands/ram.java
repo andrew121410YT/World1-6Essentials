@@ -27,7 +27,7 @@ public class ram implements CommandExecutor {
 
     Player p = (Player) sender;
 
-    if (!p.hasPermission("command.ram.permission")) {
+    if (!p.hasPermission("world16.ram")) {
       api.PermissionErrorMessage(p);
       return true;
     }

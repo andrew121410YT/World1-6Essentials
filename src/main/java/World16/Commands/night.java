@@ -27,7 +27,7 @@ public class night implements CommandExecutor {
 
     Player p = (Player) sender;
 
-    if (!p.hasPermission("command.night.permission")) {
+    if (!p.hasPermission("world16.night")) {
       api.PermissionErrorMessage(p);
       return true;
     }

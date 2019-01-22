@@ -38,7 +38,7 @@ public class setjail implements CommandExecutor {
     // Location loc = p.getLocation();
     // FileConfiguration file = plugin.getConfig();
 
-    if (!p.hasPermission("command.setjail.permission")) {
+    if (!p.hasPermission("world16.setjail")) {
       api.PermissionErrorMessage(p);
       return true;
     }

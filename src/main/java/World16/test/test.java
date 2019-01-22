@@ -31,7 +31,7 @@ public class test implements CommandExecutor {
 
     Player p = (Player) sender;
 
-    if (!p.hasPermission("command.World16.test.permission")) {
+    if (!p.hasPermission("world16.testee")) {
       api.PermissionErrorMessage(p);
       return true;
     }

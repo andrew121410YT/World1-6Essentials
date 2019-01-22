@@ -34,7 +34,7 @@ public class afk implements Listener, CommandExecutor {
 
     Player p = (Player) sender;
 
-    if (!p.hasPermission("command.afk.permission")) {
+    if (!p.hasPermission("world16.afk")) {
       api.PermissionErrorMessage(p);
       return true;
     }

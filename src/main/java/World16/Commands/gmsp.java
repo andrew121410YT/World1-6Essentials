@@ -28,7 +28,7 @@ public class gmsp implements CommandExecutor {
 
     Player p = (Player) sender;
 
-    if (!p.hasPermission("command.gmsp.permission")) {
+    if (!p.hasPermission("world16.gmsp")) {
       api.PermissionErrorMessage(p);
       return true;
     }
@@ -40,7 +40,7 @@ public class gmsp implements CommandExecutor {
     } else {
       Player target = plugin.getServer().getPlayerExact(args[0]);
       if (args.length >= 1 && target != null && target.isOnline()) {
-        if (!p.hasPermission("command.gmsp.other.permission")) {
+        if (!p.hasPermission("world16.gmsp.other")) {
           api.PermissionErrorMessage(p);
           return true;
         }

@@ -31,7 +31,7 @@ public class isafk implements CommandExecutor {
 //        }
     Player p = (Player) sender;
 
-    if (!p.hasPermission("command.isafk.permission")) {
+    if (!p.hasPermission("world16.isafk")) {
       api.PermissionErrorMessage(p);
       return true;
     }

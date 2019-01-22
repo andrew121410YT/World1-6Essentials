@@ -35,7 +35,7 @@ public class spawn implements CommandExecutor {
 
     Location spawn = this.api.GetSpawn("default");
 
-    if (!p.hasPermission("command.spawn.permission")) {
+    if (!p.hasPermission("world16.spawn")) {
       api.PermissionErrorMessage(p);
       return true;
     }
@@ -46,7 +46,7 @@ public class spawn implements CommandExecutor {
     } else {
       Player target = plugin.getServer().getPlayerExact(args[0]);
       if (args.length >= 1 && target != null && target.isOnline()) {
-        if (!p.hasPermission("command.spawn.other.permission")) {
+        if (!p.hasPermission("world16.spawn.other")) {
           api.PermissionErrorMessage(p);
           return true;
         }

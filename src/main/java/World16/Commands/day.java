@@ -27,7 +27,7 @@ public class day implements CommandExecutor {
 
     Player p = (Player) sender;
 
-    if (!p.hasPermission("command.day.permission")) {
+    if (!p.hasPermission("world16.day")) {
       api.PermissionErrorMessage(p);
       return true;
     }

@@ -37,7 +37,7 @@ public class tpa implements CommandExecutor {
       return true;
     }
     Player p = (Player) sender;
-    if (!p.hasPermission("command.tpa.permission")) {
+    if (!p.hasPermission("world16.tpa")) {
       api.PermissionErrorMessage(p);
       return true;
     }

@@ -38,7 +38,7 @@ public class setspawn implements CommandExecutor {
     float pitch = p.getLocation().getPitch();
     String worldName = p.getWorld().getName();
 
-    if (!p.hasPermission("command.setspawn.permission")) {
+    if (!p.hasPermission("world16.setspawn")) {
       api.PermissionErrorMessage(p);
       return true;
     }

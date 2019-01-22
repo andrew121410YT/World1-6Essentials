@@ -37,7 +37,7 @@ public class tpaccept implements CommandExecutor {
       return true;
     }
     Player p = (Player) sender;
-    if (!p.hasPermission("command.tpaccept.permission")) {
+    if (!p.hasPermission("world16.tpaccept")) {
       api.PermissionErrorMessage(p);
       return true;
     }

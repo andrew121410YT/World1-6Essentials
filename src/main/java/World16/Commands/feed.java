@@ -27,7 +27,7 @@ public class feed implements CommandExecutor {
 
     Player p = (Player) sender;
 
-    if (!p.hasPermission("command.feed.permission")) {
+    if (!p.hasPermission("world16.feed")) {
       api.PermissionErrorMessage(p);
       return true;
     }
@@ -38,7 +38,7 @@ public class feed implements CommandExecutor {
     } else {
       Player target = plugin.getServer().getPlayerExact(args[0]);
       if (args.length >= 1 && target != null && target.isOnline()) {
-        if (!p.hasPermission("command.feed.other.permission")) {
+        if (!p.hasPermission("world16.feed.other")) {
           api.PermissionErrorMessage(p);
           return true;
         }

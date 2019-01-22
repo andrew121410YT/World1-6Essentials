@@ -42,7 +42,7 @@ public class jail implements CommandExecutor {
     Location jail = new Location(world, x, y, z, yaw, pitch);
     // FileConfiguration file = plugin.getConfig();
 
-    if (!p.hasPermission("command.jail.permission")) {
+    if (!p.hasPermission("world16.jail")) {
       api.PermissionErrorMessage(p);
       return true;
     }

@@ -29,7 +29,7 @@ public class commandblock implements CommandExecutor {
 
     Player p = (Player) sender;
 
-    if (!p.hasPermission("command.commandblock.permission")) {
+    if (!p.hasPermission("world16.commandblock")) {
       api.PermissionErrorMessage(p);
       return true;
     }

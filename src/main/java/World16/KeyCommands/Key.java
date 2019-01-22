@@ -38,7 +38,7 @@ public class Key implements CommandExecutor {
         Player p = (Player) sender;
         // 1
         if (args.length == 0) {
-            if (!p.hasPermission("command.key.permission")) { // Permission
+            if (!p.hasPermission("world16.key")) { // Permission
                 api.PermissionErrorMessage(p);
                 return true;
             }
@@ -53,7 +53,7 @@ public class Key implements CommandExecutor {
 
             //SET
             if (args[0].equalsIgnoreCase("set")) {
-                if (!p.hasPermission("command.key.set.permission")) { // Permission
+                if (!p.hasPermission("world16.key.set")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -74,7 +74,7 @@ public class Key implements CommandExecutor {
 
                 //GIVE
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("give"))) {
-                if (!p.hasPermission("command.key.give.permission")) {
+                if (!p.hasPermission("world16.key.give")) {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -83,7 +83,7 @@ public class Key implements CommandExecutor {
 
                 //RESET
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("reset"))) {
-                if (!p.hasPermission("command.key.reset.permission")) { // Permission
+                if (!p.hasPermission("world16.key.reset")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }

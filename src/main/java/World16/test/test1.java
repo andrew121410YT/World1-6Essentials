@@ -32,7 +32,7 @@ public class test1 implements CommandExecutor {
       return true;
     }
     Player p = (Player) sender;
-    if (!p.hasPermission("command.testee1.permission")){
+    if (!p.hasPermission("world16.testee1")) {
       api.PermissionErrorMessage(p);
       return true;
     }

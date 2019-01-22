@@ -33,7 +33,7 @@ public class MutiKeys implements CommandExecutor {
             return true;
         }
         if (args.length == 0) {
-            if (!p.hasPermission("command.mkey.permission")) {
+            if (!p.hasPermission("world16.mkey")) {
                 api.PermissionErrorMessage(p);
                 return true;
             }
@@ -51,7 +51,7 @@ public class MutiKeys implements CommandExecutor {
 
             if (args[0].equalsIgnoreCase("give")) {
                 if (args.length == 3) {
-                    if (!p.hasPermission("command.give.other.permission")) {
+                    if (!p.hasPermission("world16.mkey.give.other")) {
                         api.PermissionErrorMessage(p);
                         return true;
                     }
@@ -61,7 +61,7 @@ public class MutiKeys implements CommandExecutor {
                     keyapi.MkeyGetAnotherPlayerKey(mysql, p, KeyDataDone, PlayerNameDataDone);
                     return true;
                 } else if (args.length == 2) {
-                    if (!p.hasPermission("command.mkey.give.permission")) {
+                    if (!p.hasPermission("world16.mkey.give")) {
                         api.PermissionErrorMessage(p);
                         return true;
                     }
@@ -71,7 +71,7 @@ public class MutiKeys implements CommandExecutor {
                     return true;
                 }
             } else if (args[0].equalsIgnoreCase("reset")) {
-                if (!p.hasPermission("command.mkey.reset.permission")) {
+                if (!p.hasPermission("world16.mkey.reset")) {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -106,7 +106,7 @@ public class MutiKeys implements CommandExecutor {
                 }
                 //SET
             } else if (args[0].equalsIgnoreCase("set")) {
-                if (!p.hasPermission("command.mkey.set.permission")) {
+                if (!p.hasPermission("world16.mkey.set")) {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -125,7 +125,7 @@ public class MutiKeys implements CommandExecutor {
 //                    mysql.Disconnect();
                     return true;
                 } else if (args.length >= 4) {
-                    if (!p.hasPermission("command.mkey.set.other.permission")) {
+                    if (!p.hasPermission("world16.mkey.set.other")) {
                         api.PermissionErrorMessage(p);
                         return true;
                     }
