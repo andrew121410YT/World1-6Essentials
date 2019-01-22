@@ -29,6 +29,9 @@ commands:
     testee1:
     food:
     back:
+    tpa:
+    tpaccept:
+    tpdeny:
     
     gmc:
         aliases:

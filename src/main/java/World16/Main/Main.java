@@ -23,6 +23,9 @@ import World16.Commands.setjail;
 import World16.Commands.setspawn;
 import World16.Commands.sign;
 import World16.Commands.spawn;
+import World16.Commands.tp.tpa;
+import World16.Commands.tp.tpaccept;
+import World16.Commands.tp.tpdeny;
 import World16.Events.OnBedEnterEvent;
 import World16.Events.OnDeathEvent;
 import World16.Events.OnJoinEvent;
@@ -114,6 +117,10 @@ public class Main extends JavaPlugin {//implements Listener {
         new flyspeed(customyml, this);
         new isafk(customyml, this);
         new back(this);
+
+        new tpa(customyml, this);
+        new tpaccept(customyml, this);
+        new tpdeny(customyml, this);
 
         new test(customyml, this);
         new test1(customyml, this);
