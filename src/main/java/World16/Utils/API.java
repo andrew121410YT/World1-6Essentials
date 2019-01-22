@@ -2,6 +2,7 @@ package World16.Utils;
 
 import World16.Commands.afk;
 import World16.Commands.fly;
+import World16.Commands.tp.tpa;
 import World16.Events.OnDeathEvent;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
@@ -28,6 +29,8 @@ public class API {
 
   HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
   LinkedHashMap<String, Location> backmap = OnDeathEvent.backmap;
+  LinkedHashMap<Player, Player> tpam = tpa.tpam;
+
   ArrayList<String> Afk1 = afk.Afk;
   ArrayList<String> Fly1 = fly.Fly;
 
@@ -37,12 +40,13 @@ public class API {
   ViaAPI viaapi = Via.getAPI(); // https://docs.viaversion.com/display/VIAVERSION/Basic+API+usage
 
   //finals
-  public static final Integer VERSION = 4;
+  public static final Integer VERSION = 5;
   public static final String DATE_OF_VERSION = "1/22/2019";
   public static final String PREFIX = "[&9World1-6Ess&r]";
   public static final String USELESS = "" + PREFIX + "->[&bUSELESS&r]";
   public static final String TOO_DAMN_OLD = "Your mc version is too damn old 1.11 up too 1.13.2 please.";
   public static final String SOMETHING_WENT_WRONG = "Something went wrong.";
+  //END finals
 
   // FOR MYSQL
   private String HOST = plugin.getConfig().getString("MysqlHOST");
@@ -125,28 +129,13 @@ public class API {
   }
 
   public void clearArrayListAndHashMaps(Player p) {
-    keyDataM.remove(p.getDisplayName());
-    ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM", p);
-    backmap.remove(p.getDisplayName());
-    backmap.remove(p.getDisplayName() + "death");
-    backmap.remove(p.getDisplayName() + "tp");
-    backmap.remove(p.getDisplayName() + "set");
-    ClearHashMapMessage("World16.Events.OnDeathEvent.backmap", p);
-    Afk1.remove(p.getDisplayName());
-    ClearArrayListMessage("World16.Commands.afk.Afk", p);
-    Fly1.remove(p.getDisplayName());
-    ClearArrayListMessage("World16.Commands.fly.Fly", p);
+    clearAllHashMaps(p);
+    clearAllArrayList(p);
   }
 
   public void clearArrayListAndHashMaps() {
-    keyDataM.clear();
-    ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM");
-    backmap.clear();
-    ClearHashMapMessage("World16.Events.OnDeathEvent.backmap");
-    Afk1.clear();
-    ClearArrayListMessage("World16.Commands.afk.Afk");
-    Fly1.clear();
-    ClearArrayListMessage("World16.Commands.fly.Fly");
+    clearAllHashMaps();
+    clearAllArrayList();
   }
 
   public void clearAllHashMaps(Player p) {
@@ -157,6 +146,8 @@ public class API {
     backmap.remove(p.getDisplayName() + "tp");
     backmap.remove(p.getDisplayName() + "set");
     ClearHashMapMessage("World16.Events.OnDeathEvent.backmap", p);
+    tpam.remove(p);
+    ClearHashMapMessage("World16.Commands.tp.tpa.tpam", p);
   }
 
   public void clearAllHashMaps() {
@@ -164,6 +155,8 @@ public class API {
     ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM");
     backmap.clear();
     ClearHashMapMessage("World16.Events.OnDeathEvent.backmap");
+    tpam.clear();
+    ClearHashMapMessage("World16.Commands.tp.tpa.tpam");
   }
 
   public void clearAllArrayList(Player p) {
