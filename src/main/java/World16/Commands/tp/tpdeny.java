@@ -45,7 +45,8 @@ public class tpdeny implements CommandExecutor {
       if (tpam.get(p) != null) {
         p.sendMessage(Translate.chat("&9Ok you denied the tp request."));
         tpam.get(p).sendMessage(
-            Translate.chat("[&eTPA&r] &cYour tpa request got denied from " + p.getDisplayName()));
+            Translate.chat("[&eTPA&r] &cYour tpa request got denied by " + p.getDisplayName()));
+        tpam.remove(p);
       } else {
         p.sendMessage(Translate.chat("&4Something went wrong."));
       }
