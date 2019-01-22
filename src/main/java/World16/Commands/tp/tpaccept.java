@@ -44,9 +44,9 @@ public class tpaccept implements CommandExecutor {
     if (args.length == 0) {
       if (tpam.get(p) != null) {
         tpam.get(p).teleport(p);
-        tpam.remove(p);
         tpam.get(p).sendMessage(Translate
             .chat("[&eTPA&r] &a" + p.getDisplayName() + " has accepted your tpa request."));
+        tpam.remove(p);
       }
     }
     return true;
