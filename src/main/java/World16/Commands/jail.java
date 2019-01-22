@@ -1,5 +1,6 @@
 package World16.Commands;
 
+import World16.CustomEvents.handlers.TpEventHandler;
 import World16.Main.Main;
 import World16.Translate.Translate;
 import World16.Utils.API;
@@ -46,6 +47,7 @@ public class jail implements CommandExecutor {
       api.PermissionErrorMessage(p);
       return true;
     }
+    new TpEventHandler(p.getDisplayName()); //RUNS TP EVENT
     p.teleport(jail);
     p.sendMessage(Translate.chat("&6Teleporting..."));
     return true;

@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class UnAfkEvent extends Event {
+public class AfkCustomEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
     private static Main plugin = Main.getPlugin();
@@ -21,9 +21,9 @@ public class UnAfkEvent extends Event {
         return handlers;
     }
 
-//CODE STARTS HERE
+    //CODE STARTS HERE
 
-    public UnAfkEvent(String p) {
+    public AfkCustomEvent(String p) {
         this.p = p;
     }
 
