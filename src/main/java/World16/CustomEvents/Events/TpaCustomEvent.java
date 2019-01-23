@@ -46,6 +46,9 @@ public class TpaCustomEvent extends Event {
   }
 
   public Player getTargetPlayer() {
-    return this.plugin.getServer().getPlayerExact(target);
+    if (target != null) {
+      return this.plugin.getServer().getPlayerExact(target);
+    }
+    return null;
   }
 }
