@@ -1,6 +1,5 @@
 package World16.Commands;
 
-import World16.Events.OnDeathEvent;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
@@ -24,7 +23,7 @@ import org.json.simple.parser.ParseException;
 public class debug implements CommandExecutor {
 
   HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
-  LinkedHashMap<String, Location> backmap = OnDeathEvent.backmap;
+  LinkedHashMap<String, Location> backm = back.backm;
   ArrayList<String> Afk1 = afk.Afk;
   ArrayList<String> Fly1 = fly.Fly;
   API api = new API();
@@ -112,22 +111,22 @@ public class debug implements CommandExecutor {
           if (args.length >= 1) {
             if (args[1].equalsIgnoreCase("@all")) {
               p.sendMessage(String.valueOf(Arrays.asList(keyDataM)));
-              p.sendMessage(String.valueOf(Arrays.asList(backmap)));
+              p.sendMessage(String.valueOf(Arrays.asList(backm)));
             } else if (args[1].equalsIgnoreCase("@checkmine")) {
               p.sendMessage(Translate.chat(
                   "Here's the HashMap for World16.Events.OnJoinEvent.keyDatam: " + keyDataM
                       .get(p.getDisplayName())));
               p.sendMessage(Translate.chat(
-                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backmap
+                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backm
                       .get(p.getDisplayName())));
               p.sendMessage(Translate.chat(
-                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backmap
+                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backm
                       .get(p.getDisplayName() + "death")));
               p.sendMessage(Translate.chat(
-                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backmap
+                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backm
                       .get(p.getDisplayName() + "tp")));
               p.sendMessage(Translate.chat(
-                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backmap
+                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backm
                       .get(p.getDisplayName() + "set")));
 
             }
