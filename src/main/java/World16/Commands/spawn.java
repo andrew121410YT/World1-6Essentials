@@ -41,6 +41,7 @@ public class spawn implements CommandExecutor {
       return true;
     }
     if (args.length == 0) {
+      new TpEventHandler(p.getDisplayName()); //RUNS TP EVENT
       p.teleport(spawn);
       p.sendMessage(Translate.chat("&6Teleporting..."));
       return true;
@@ -51,7 +52,7 @@ public class spawn implements CommandExecutor {
           api.PermissionErrorMessage(p);
           return true;
         }
-        new TpEventHandler(p.getDisplayName()); //RUNS TP EVENT
+        new TpEventHandler(target.getDisplayName()); //RUNS TP EVENT
         target.teleport(spawn);
         target.sendMessage(Translate.chat("&6Teleporting..."));
       } else {
