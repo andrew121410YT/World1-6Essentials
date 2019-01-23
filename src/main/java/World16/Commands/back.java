@@ -5,7 +5,6 @@ import World16.Translate.Translate;
 import World16.Utils.API;
 import java.util.LinkedHashMap;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -40,6 +39,7 @@ public class back implements CommandExecutor {
     }
     if (args.length >= 1) {
 
+      //DEATH
       if (args[0].equalsIgnoreCase("death")) {
         if (!p.hasPermission("world16.back.death")) {
           api.PermissionErrorMessage(p);
@@ -52,6 +52,8 @@ public class back implements CommandExecutor {
           p.sendMessage(Translate.chat("&4Look's like you didn't die yet."));
           return true;
         }
+
+        //TP
       } else if (args[0].equalsIgnoreCase("tp")) {
         if (!p.hasPermission("world16.back.tp")) {
           api.PermissionErrorMessage(p);
@@ -63,34 +65,30 @@ public class back implements CommandExecutor {
           p.sendMessage(Translate.chat("&4Something went wrong."));
           return true;
         }
+
       } else if (args[0].equalsIgnoreCase("set")) {
         if (!p.hasPermission("world16.back.set")) {
           api.PermissionErrorMessage(p);
           return true;
         }
-        backm.remove(p.getDisplayName());
-        double x = p.getLocation().getX();
-        double y = p.getLocation().getY();
-        double z = p.getLocation().getZ();
-        float yaw = p.getLocation().getYaw();
-        float pitch = p.getLocation().getPitch();
-        World world = p.getWorld();
-        Location location = new Location(world, x, y, z, yaw, pitch);
-        backm.put(p.getDisplayName() + "set", location);
+        backm.remove(p.getDisplayName() + "set");
+        backm.put(p.getDisplayName() + "set", p.getLocation());
+        p.sendMessage(Translate.chat("[&9Back&r] &aYour back has been set."));
         return true;
+      }
 
-      } else if (args[0].equalsIgnoreCase("goto")) {
-        if (!p.hasPermission("world16.back.goto")) {
-          api.PermissionErrorMessage(p);
-          return true;
-        }
-        if (backm.get(p.getDisplayName() + "set") != null) {
-          p.teleport(backm.get(p.getDisplayName() + "set"));
-          return true;
-        } else {
-          p.sendMessage(Translate.chat("&4Something went wrong."));
-          return true;
-        }
+    } else if (args[0].equalsIgnoreCase("goto")) {
+      if (!p.hasPermission("world16.back.goto")) {
+        api.PermissionErrorMessage(p);
+        return true;
+      }
+      if (backm.get(p.getDisplayName() + "set") != null) {
+        p.teleport(backm.get(p.getDisplayName() + "set"));
+        p.sendMessage(Translate.chat("[&9Back&r] &aTheir you go."));
+        return true;
+      } else {
+        p.sendMessage(Translate.chat("&4Something went wrong."));
+        return true;
       }
     }
     return true;
