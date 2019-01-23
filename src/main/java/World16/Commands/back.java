@@ -1,6 +1,5 @@
 package World16.Commands;
 
-import World16.Events.OnDeathEvent;
 import World16.Main.Main;
 import World16.Translate.Translate;
 import World16.Utils.API;
@@ -16,7 +15,7 @@ public class back implements CommandExecutor {
 
   API api = new API();
   private Main plugin;
-  LinkedHashMap<String, Location> backmap = OnDeathEvent.backmap;
+  public static LinkedHashMap<String, Location> backm = new LinkedHashMap<>();
 
   public back(Main getPlugin) {
     this.plugin = getPlugin;
@@ -46,8 +45,8 @@ public class back implements CommandExecutor {
           api.PermissionErrorMessage(p);
           return true;
         }
-        if (backmap.get(p.getDisplayName() + "death") != null) {
-          p.teleport(backmap.get(p.getDisplayName() + "death"));
+        if (backm.get(p.getDisplayName() + "death") != null) {
+          p.teleport(backm.get(p.getDisplayName() + "death"));
           return true;
         } else {
           p.sendMessage(Translate.chat("&4Look's like you didn't die yet."));
@@ -58,8 +57,8 @@ public class back implements CommandExecutor {
           api.PermissionErrorMessage(p);
           return true;
         }
-        if (backmap.get(p.getDisplayName() + "tp") != null) {
-          p.teleport(backmap.get(p.getDisplayName() + "tp"));
+        if (backm.get(p.getDisplayName() + "tp") != null) {
+          p.teleport(backm.get(p.getDisplayName() + "tp"));
         } else {
           p.sendMessage(Translate.chat("&4Something went wrong."));
           return true;
@@ -69,7 +68,7 @@ public class back implements CommandExecutor {
           api.PermissionErrorMessage(p);
           return true;
         }
-        backmap.remove(p.getDisplayName());
+        backm.remove(p.getDisplayName());
         double x = p.getLocation().getX();
         double y = p.getLocation().getY();
         double z = p.getLocation().getZ();
@@ -77,7 +76,7 @@ public class back implements CommandExecutor {
         float pitch = p.getLocation().getPitch();
         World world = p.getWorld();
         Location location = new Location(world, x, y, z, yaw, pitch);
-        backmap.put(p.getDisplayName() + "set", location);
+        backm.put(p.getDisplayName() + "set", location);
         return true;
 
       } else if (args[0].equalsIgnoreCase("goto")) {
@@ -85,8 +84,8 @@ public class back implements CommandExecutor {
           api.PermissionErrorMessage(p);
           return true;
         }
-        if (backmap.get(p.getDisplayName() + "set") != null) {
-          p.teleport(backmap.get(p.getDisplayName() + "set"));
+        if (backm.get(p.getDisplayName() + "set") != null) {
+          p.teleport(backm.get(p.getDisplayName() + "set"));
           return true;
         } else {
           p.sendMessage(Translate.chat("&4Something went wrong."));

@@ -1,9 +1,9 @@
 package World16.Utils;
 
 import World16.Commands.afk;
+import World16.Commands.back;
 import World16.Commands.fly;
 import World16.Commands.tp.tpa;
-import World16.Events.OnDeathEvent;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Translate.Translate;
@@ -28,7 +28,7 @@ import us.myles.ViaVersion.api.ViaAPI;
 public class API {
 
   HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
-  LinkedHashMap<String, Location> backmap = OnDeathEvent.backmap;
+  LinkedHashMap<String, Location> backm = back.backm;
   LinkedHashMap<Player, Player> tpam = tpa.tpam;
 
   ArrayList<String> Afk1 = afk.Afk;
@@ -141,11 +141,11 @@ public class API {
   public void clearAllHashMaps(Player p) {
     keyDataM.remove(p.getDisplayName());
     ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM", p);
-    backmap.remove(p.getDisplayName());
-    backmap.remove(p.getDisplayName() + "death");
-    backmap.remove(p.getDisplayName() + "tp");
-    backmap.remove(p.getDisplayName() + "set");
-    ClearHashMapMessage("World16.Events.OnDeathEvent.backmap", p);
+    backm.remove(p.getDisplayName());
+    backm.remove(p.getDisplayName() + "death");
+    backm.remove(p.getDisplayName() + "tp");
+    backm.remove(p.getDisplayName() + "set");
+    ClearHashMapMessage("World16.Commands.back.backm", p);
     tpam.remove(p);
     ClearHashMapMessage("World16.Commands.tp.tpa.tpam", p);
   }
@@ -153,8 +153,8 @@ public class API {
   public void clearAllHashMaps() {
     keyDataM.clear();
     ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM");
-    backmap.clear();
-    ClearHashMapMessage("World16.Events.OnDeathEvent.backmap");
+    backm.clear();
+    ClearHashMapMessage("World16.Commands.back.backm");
     tpam.clear();
     ClearHashMapMessage("World16.Commands.tp.tpa.tpam");
   }

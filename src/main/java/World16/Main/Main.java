@@ -31,7 +31,6 @@ import World16.Events.OnDeathEvent;
 import World16.Events.OnJoinEvent;
 import World16.Events.OnJoinTitleEvent;
 import World16.Events.OnLeaveEvent;
-import World16.Events.OnTpEvent;
 import World16.KeyCommands.Key;
 import World16.KeyCommands.MutiKeys;
 import World16.Translate.Translate;
@@ -61,7 +60,8 @@ public class Main extends JavaPlugin {//implements Listener {
     ArrayList<String> Afk = afk.Afk;
     ArrayList<String> Fly = fly.Fly;
     HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
-    LinkedHashMap<String, Location> backmap = OnDeathEvent.backmap;
+    LinkedHashMap<String, Location> backm = back.backm;
+    LinkedHashMap<Player, Player> tpam = tpa.tpam;
     //END
     // GOT THE MYSQL API AT https://www.spigotmc.org/resources/simple-easy-mysql-api.36447/
     // GOT THE TITLE API AT https://www.spigotmc.org/resources/titleapi-1-8-1-13.1325/
@@ -88,7 +88,8 @@ public class Main extends JavaPlugin {//implements Listener {
         Afk.clear();
         Fly.clear();
         keyDataM.clear();
-        backmap.clear();
+        backm.clear();
+        tpam.clear();
     }
 
     public void regCommands() {
