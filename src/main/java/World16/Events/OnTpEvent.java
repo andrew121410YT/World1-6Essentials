@@ -8,6 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class OnTpEvent implements Listener {
 
@@ -21,7 +22,23 @@ public class OnTpEvent implements Listener {
   }
 
   @EventHandler
-  public void OnTp(TpCustomEvent event) {
+  public void OnTp(PlayerTeleportEvent event) {
+    Player p = event.getPlayer();
+
+    Location to = event.getTo();
+    Location from = event.getFrom();
+
+    // only save location if teleporting more than 5 blocks
+    if (!to.getWorld().equals(from.getWorld()) || to.distanceSquared(from) > 25) {
+
+      backm.remove(p.getDisplayName() + "tp");
+      backm.put(p.getDisplayName() + "tp", from);
+    }
+  }
+
+
+  @EventHandler
+  public void OnTpCustom(TpCustomEvent event) {
     Player p = event.getPlayer();
 
     backm.remove(p.getDisplayName() + "tp");
