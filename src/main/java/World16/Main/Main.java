@@ -32,7 +32,6 @@ import World16.Events.OnJoinEvent;
 import World16.Events.OnJoinTitleEvent;
 import World16.Events.OnLeaveEvent;
 import World16.Events.OnTpEvent;
-import World16.Events.OnTpaEvent;
 import World16.KeyCommands.Key;
 import World16.KeyCommands.MutiKeys;
 import World16.Translate.Translate;
@@ -136,7 +135,6 @@ public class Main extends JavaPlugin {//implements Listener {
         //...
         new OnDeathEvent(this);
         new OnTpEvent(this);
-        new OnTpaEvent(this);
         //...
         new OnBedEnterEvent(this);
         new OnJoinTitleEvent(this);
@@ -155,6 +153,10 @@ public class Main extends JavaPlugin {//implements Listener {
         customyml.saveshit();
         customyml.reloadshit();
         // END OF Shit.yml
+    }
+
+    public void checkForPlugins() {
+
     }
 
     public void regAPIS() {

@@ -47,7 +47,6 @@ public class jail implements CommandExecutor {
       api.PermissionErrorMessage(p);
       return true;
     }
-    new TpEventHandler(p.getDisplayName()); //RUNS TP EVENT
     p.teleport(jail);
     p.sendMessage(Translate.chat("&6Teleporting..."));
     return true;

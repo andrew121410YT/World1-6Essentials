@@ -1,7 +1,6 @@
 package World16.Events;
 
 import World16.Commands.back;
-import World16.CustomEvents.Events.TpCustomEvent;
 import World16.Main.Main;
 import java.util.LinkedHashMap;
 import org.bukkit.Location;
@@ -34,14 +33,5 @@ public class OnTpEvent implements Listener {
       backm.remove(p.getDisplayName() + "tp");
       backm.put(p.getDisplayName() + "tp", from);
     }
-  }
-
-
-  @EventHandler
-  public void OnTpCustom(TpCustomEvent event) {
-    Player p = event.getPlayer();
-
-    backm.remove(p.getDisplayName() + "tp");
-    backm.put(p.getDisplayName() + "tp", p.getLocation());
   }
 }
