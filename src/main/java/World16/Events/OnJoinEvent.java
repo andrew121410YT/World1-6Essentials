@@ -38,11 +38,13 @@ public class OnJoinEvent implements Listener {
         if (p.getDisplayName().equals("AlphaGibbon43")) {
             p.sendMessage(Translate.chat("&4Hello, Owner."));
         }
+        //JOIN MESSAGE STUFF
         event.setJoinMessage("");
 
         Bukkit.broadcastMessage(Translate.chat(api.PREFIX+" &6Welcome Back! " + p.getDisplayName()));
         p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10.0f, 1.0f);
         version(p);
+        //...
 
         if (!api.getHOST().equals("null")) {
             String giveKeyReturnTEMP = keyapi.giveKeyReturn(p, mysql);
@@ -56,6 +58,10 @@ public class OnJoinEvent implements Listener {
                 //GETS THE 1 KEY FROM THE PLAYER AND THEN IT STORES IT IN RAM FOR EASY ACCESS
                 keyDataM.put(p.getDisplayName(), giveKeyReturnTEMP);
             }
+        } else {
+            this.plugin.getServer().getConsoleSender()
+                .sendMessage(Translate.chat(api.USELESS
+                    + "Please make sure too put in the mysql details in the config.yml."));
         }
     }
 

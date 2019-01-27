@@ -112,23 +112,9 @@ public class debug implements CommandExecutor {
             if (args[1].equalsIgnoreCase("@all")) {
               p.sendMessage(String.valueOf(Arrays.asList(keyDataM)));
               p.sendMessage(String.valueOf(Arrays.asList(backm)));
-            } else if (args[1].equalsIgnoreCase("@checkmine")) {
-              p.sendMessage(Translate.chat(
-                  "Here's the HashMap for World16.Events.OnJoinEvent.keyDatam: " + keyDataM
-                      .get(p.getDisplayName())));
-              p.sendMessage(Translate.chat(
-                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backm
-                      .get(p.getDisplayName())));
-              p.sendMessage(Translate.chat(
-                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backm
-                      .get(p.getDisplayName() + "death")));
-              p.sendMessage(Translate.chat(
-                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backm
-                      .get(p.getDisplayName() + "tp")));
-              p.sendMessage(Translate.chat(
-                  "Here's the HashMap for World16.Events.OnDeathEvent.backmap*death" + backm
-                      .get(p.getDisplayName() + "set")));
-
+            }
+            if (args[1].equalsIgnoreCase("@checkmine")){
+              p.sendMessage(Translate.chat("&4This is no longer working."));
             }
           }
         }
