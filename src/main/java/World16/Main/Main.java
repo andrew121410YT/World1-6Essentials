@@ -1,37 +1,10 @@
 package World16.Main;
 
-import World16.Commands.afk;
-import World16.Commands.back;
-import World16.Commands.bed;
-import World16.Commands.colors;
-import World16.Commands.commandblock;
-import World16.Commands.day;
-import World16.Commands.debug;
-import World16.Commands.echest;
-import World16.Commands.feed;
-import World16.Commands.fly;
-import World16.Commands.flyspeed;
-import World16.Commands.gmc;
-import World16.Commands.gms;
-import World16.Commands.gmsp;
-import World16.Commands.heal;
-import World16.Commands.isafk;
-import World16.Commands.jail;
-import World16.Commands.night;
-import World16.Commands.ram;
-import World16.Commands.setjail;
-import World16.Commands.setspawn;
-import World16.Commands.sign;
-import World16.Commands.spawn;
+import World16.Commands.*;
 import World16.Commands.tp.tpa;
 import World16.Commands.tp.tpaccept;
 import World16.Commands.tp.tpdeny;
-import World16.Events.OnBedEnterEvent;
-import World16.Events.OnDeathEvent;
-import World16.Events.OnJoinEvent;
-import World16.Events.OnJoinTitleEvent;
-import World16.Events.OnLeaveEvent;
-import World16.Events.OnTpEvent;
+import World16.Events.*;
 import World16.KeyCommands.Key;
 import World16.KeyCommands.MutiKeys;
 import World16.Translate.Translate;
@@ -40,9 +13,6 @@ import World16.Utils.CustomYmlManger;
 import World16.Utils.Metrics;
 import World16.test.test;
 import World16.test.test1;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -50,6 +20,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Main extends JavaPlugin {//implements Listener {
 
@@ -119,6 +93,7 @@ public class Main extends JavaPlugin {//implements Listener {
         new flyspeed(customyml, this);
         new isafk(customyml, this);
         new back(this);
+        new broadcast(customyml, this);
 
         new tpa(customyml, this);
         new tpaccept(customyml, this);

@@ -32,6 +32,7 @@ commands:
     tpa:
     tpaccept:
     tpdeny:
+    broadcast:
     
     gmc:
         aliases:
