@@ -3,6 +3,7 @@ package World16.Utils;
 import World16.Commands.afk;
 import World16.Commands.back;
 import World16.Commands.fly;
+import World16.Commands.god;
 import World16.Commands.tp.tpa;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
@@ -34,6 +35,7 @@ public class API {
 
     ArrayList<String> Afk1 = afk.Afk;
     ArrayList<String> Fly1 = fly.Fly;
+    ArrayList<String> GodM = god.godm;
 
     private static Main plugin = Main.getPlugin();
     private CustomYmlManger configinstance = null;
@@ -42,7 +44,7 @@ public class API {
 
     //finals
     public static final Integer VERSION = 5;
-    public static final String DATE_OF_VERSION = "1/28/2019";
+    public static final String DATE_OF_VERSION = "1/29/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String TOO_DAMN_OLD = "Your mc version is too damn old 1.11 up too 1.13.2 please.";
@@ -175,9 +177,12 @@ public class API {
 
         Fly1.remove(p.getDisplayName());
 
+        GodM.remove(p.getDisplayName());
+
         if (this.isDebug()) {
             ClearArrayListMessage("World16.Commands.afk.Afk", p);
             ClearArrayListMessage("World16.Commands.fly.Fly", p);
+            ClearArrayListMessage("World16.Commands.god.godm", p);
         }
     }
 
@@ -186,9 +191,12 @@ public class API {
 
         Fly1.clear();
 
+        GodM.clear();
+
         if (this.isDebug()) {
             ClearArrayListMessage("World16.Commands.afk.Afk");
             ClearArrayListMessage("World16.Commands.fly.Fly");
+            ClearArrayListMessage("World16.Commands.god.godm");
         }
     }
 

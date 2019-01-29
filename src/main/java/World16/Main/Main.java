@@ -34,6 +34,7 @@ public class Main extends JavaPlugin {//implements Listener {
     //ARRAY LIST AND HASH MAPS
     ArrayList<String> Afk = afk.Afk;
     ArrayList<String> Fly = fly.Fly;
+    ArrayList<String> GodM = god.godm;
     HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
     LinkedHashMap<String, Location> backm = back.backm;
     LinkedHashMap<Player, Player> tpam = tpa.tpam;
@@ -62,6 +63,8 @@ public class Main extends JavaPlugin {//implements Listener {
     public void clear() {
         Afk.clear();
         Fly.clear();
+        GodM.clear();
+
         keyDataM.clear();
         backm.clear();
         tpam.clear();
