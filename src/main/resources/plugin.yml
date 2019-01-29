@@ -33,6 +33,7 @@ commands:
   tpaccept:
   tpdeny:
   broadcast:
+  god:
 
   gmc:
     aliases:

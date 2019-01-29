@@ -96,6 +96,7 @@ public class Main extends JavaPlugin {//implements Listener {
         new isafk(customyml, this);
         new back(this);
         new broadcast(customyml, this);
+        new god(this);
 
         new tpa(customyml, this);
         new tpaccept(customyml, this);
@@ -111,6 +112,7 @@ public class Main extends JavaPlugin {//implements Listener {
         new OnLeaveEvent(this);
         //...
         new OnDeathEvent(this);
+        new PlayerDamageEvent(this);
         new OnTpEvent(this);
         //...
         new OnBedEnterEvent(this);
