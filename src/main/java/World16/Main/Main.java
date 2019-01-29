@@ -71,6 +71,8 @@ public class Main extends JavaPlugin {//implements Listener {
         new gmc(this);
         new gms(this);
         new gmsp(this);
+        new gma(this);
+
         new day(this);
         new night(this);
         new feed(this);
@@ -163,4 +165,5 @@ public class Main extends JavaPlugin {//implements Listener {
     public API getApi() {
         return api;
     }
+
 }

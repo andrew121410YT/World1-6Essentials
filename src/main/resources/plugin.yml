@@ -3,43 +3,46 @@ version: 0.1
 author: Andrew121410
 main: World16.Main.Main
 commands:
-    World1-6Essentials:
-    bed:
-    commandblock:
-    day:
-    debug1-6:
-    feed:
-    fly:
-    heal:
-    night:
-    ram:
-    spawn:
-    echest:
-    setspawn:
-    sign:
-    key:
-    mkey:
-    colors:
-    setjail:
-    jail:
-    afk:
-    fs:
-    isafk:
-    testee:
-    testee1:
-    food:
-    back:
-    tpa:
-    tpaccept:
-    tpdeny:
-    broadcast:
-    
-    gmc:
-        aliases:
-        - gm1
-    gms:
-        aliases:
-        - gm0
-    gmsp:
-        aliases:
-        - gm3
+  World1-6Essentials:
+  bed:
+  commandblock:
+  day:
+  debug1-6:
+  feed:
+  fly:
+  heal:
+  night:
+  ram:
+  spawn:
+  echest:
+  setspawn:
+  sign:
+  key:
+  mkey:
+  colors:
+  setjail:
+  jail:
+  afk:
+  fs:
+  isafk:
+  testee:
+  testee1:
+  food:
+  back:
+  tpa:
+  tpaccept:
+  tpdeny:
+  broadcast:
+
+  gmc:
+    aliases:
+      - gm1
+  gms:
+    aliases:
+      - gm0
+  gmsp:
+    aliases:
+      - gm3
+  gma:
+    aliases:
+      - gm2
