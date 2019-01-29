@@ -42,8 +42,7 @@ public class god implements CommandExecutor {
             if (godm.contains(p.getDisplayName())) {
                 godm.remove(p.getDisplayName());
                 p.sendMessage(Translate.chat("&e{GOD MODE} &cHas been turned off."));
-            }
-            if (!godm.contains(p.getDisplayName())) {
+            } else if (!godm.contains(p.getDisplayName())) {
                 godm.add(p.getDisplayName());
                 p.sendMessage(Translate.chat("&e{GOD MODE} &aHas been turned on."));
             }
@@ -58,8 +57,7 @@ public class god implements CommandExecutor {
                 if (godm.contains(target.getDisplayName())) {
                     godm.remove(target.getDisplayName());
                     target.sendMessage(Translate.chat("&e{GOD MODE} &cHas been turned off by &a{player}.").replace("{player}", p.getDisplayName()));
-                }
-                if (!godm.contains(target.getDisplayName())) {
+                } else if (!godm.contains(target.getDisplayName())) {
                     godm.add(p.getDisplayName());
                     target.sendMessage(Translate.chat("&e{GOD MODE} &aHas been turned on by &c{player}.").replace("{player}", p.getDisplayName()));
                 }
