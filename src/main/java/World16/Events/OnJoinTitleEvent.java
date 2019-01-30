@@ -13,9 +13,9 @@ public class OnJoinTitleEvent implements Listener {
     private static Main plugin;
 
     public OnJoinTitleEvent(Main plugin) {
-        this.plugin = plugin;
+        OnJoinTitleEvent.plugin = plugin;
 
-        this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
+        OnJoinTitleEvent.plugin.getServer().getPluginManager().registerEvents(this, OnJoinTitleEvent.plugin);
     }
 
     FileConfiguration file = Main.getPlugin().getConfig();

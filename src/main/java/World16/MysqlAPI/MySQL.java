@@ -2,12 +2,8 @@ package World16.MysqlAPI;
 
 import World16.Translate.Translate;
 import World16.Utils.API;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 
 public class MySQL {
 
@@ -69,11 +65,7 @@ public class MySQL {
 
     public boolean isConnected() {
         try {
-            if (this.connection.isClosed()) {
-                return false;
-            } else {
-                return true;
-            }
+            return !this.connection.isClosed();
         } catch (SQLException e2) {
             System.out.println(Translate.chat("&c[MySQLAPI] Error 02"));
             System.out.println(Translate.chat("[MySQLAPI] An error occurred while connecting!"));

@@ -7,48 +7,48 @@ import org.bukkit.event.HandlerList;
 
 public class TpaCustomEvent extends Event {
 
-  private static final HandlerList handlers = new HandlerList();
-  private static Main plugin = Main.getPlugin();
+    private static final HandlerList handlers = new HandlerList();
+    private static Main plugin = Main.getPlugin();
 
-  String p;
-  String target;
+    String p;
+    String target;
 
-  @Override
-  public HandlerList getHandlers() {
-    return handlers;
-  }
-
-  public static HandlerList getHandlerList() {
-    return handlers;
-  }
-
-  //CODE STARTS HERE
-
-  public TpaCustomEvent(String p, String target) {
-    this.p = p;
-    this.target = target;
-  }
-
-  public String getPlayerName() {
-    return this.p;
-  }
-
-  public Player getPlayer() {
-    return this.plugin.getServer().getPlayerExact(p);
-  }
-
-  public Main getPlugin() {
-    return this.plugin;
-  }
-
-  public String getTargetName() {
-    return this.target;
-  }
-
-  public Player getTargetPlayer() {
-    if (target != null) {
-      return this.plugin.getServer().getPlayerExact(target);
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
     }
-    return null;
-  }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+    //CODE STARTS HERE
+
+    public TpaCustomEvent(String p, String target) {
+        this.p = p;
+        this.target = target;
+    }
+
+    public String getPlayerName() {
+        return this.p;
+    }
+
+    public Player getPlayer() {
+        return plugin.getServer().getPlayerExact(p);
+    }
+
+    public Main getPlugin() {
+        return plugin;
+    }
+
+    public String getTargetName() {
+        return this.target;
+    }
+
+    public Player getTargetPlayer() {
+        if (target != null) {
+            return plugin.getServer().getPlayerExact(target);
+        }
+        return null;
+    }
 }

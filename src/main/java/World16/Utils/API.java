@@ -115,19 +115,11 @@ public class API {
     // END OF MYSQL
 
     public boolean isAfk(Player p) {
-        if (Afk1.contains(p.getDisplayName())) {
-            return true;
-        } else {
-            return false;
-        }
+        return Afk1.contains(p.getDisplayName());
     }
 
     public boolean isFlying(Player p) {
-        if (Fly1.contains(p.getDisplayName()) || p.isFlying()) {
-            return true;
-        } else {
-            return false;
-        }
+        return Fly1.contains(p.getDisplayName()) || p.isFlying();
     }
 
     public ArrayList<String> getAfkArrayList() {
@@ -219,7 +211,7 @@ public class API {
     }
 
     public String getServerVersion() {
-        String version = this.plugin.getServer().getVersion();
+        String version = plugin.getServer().getVersion();
         if (version.contains("1.13") || version.contains("1.13.1") || version.contains("1.13.2")) {
             return "1.13";
         }
@@ -229,7 +221,7 @@ public class API {
         if (version.contains("1.11") || version.contains("1.11.1") || version.contains("1.11.2")) {
             return "1.11";
         }
-        return this.TOO_DAMN_OLD;
+        return TOO_DAMN_OLD;
     }
 
     public String getTheSumPlayerVersion(Player p) {
@@ -310,7 +302,7 @@ public class API {
         String realUUID =
                 uuid.substring(0, 8) + "-" + uuid.substring(8, 12) + "-" + uuid.substring(12, 16) + "-"
                         + uuid.substring(16, 20) + "-" + uuid.substring(20, 32);
-        return realUUID.toString();
+        return realUUID;
     }
 
 
@@ -352,32 +344,32 @@ public class API {
     }
 
     public boolean isDebug() {
-        return this.plugin.getConfig().getString("debug").equalsIgnoreCase("true") ? true : false;
+        return plugin.getConfig().getString("debug").equalsIgnoreCase("true");
     }
 
     public void PermissionErrorMessage(Player p) {
         p.sendMessage(
-                Translate.chat(this.PREFIX + " &cYou Do Not Have Permission To Use This Command."));
+                Translate.chat(PREFIX + " &cYou Do Not Have Permission To Use This Command."));
     }
 
     public void ClearHashMapMessage(String place) {
-        this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
+        plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS
                 + " Class: World16.Utils.API has cleared the HashMap of " + place + " For EVERY PLAYER"));
     }
 
     public void ClearHashMapMessage(String place, Player p) {
-        this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
+        plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS
                 + " Class: World16.Utils.API has cleared the HashMap of " + place + " For Player: " + p
                 .getDisplayName()));
     }
 
     public void ClearArrayListMessage(String place) {
-        this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
+        plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS
                 + " Class: World16.Utils.API has cleared the ArrayList of " + place + " For EVERY PLAYER"));
     }
 
     public void ClearArrayListMessage(String place, Player p) {
-        this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(this.USELESS
+        plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS
                 + " Class: World16.Utils.API has cleared the ArrayList of " + place + " For Player: " + p
                 .getDisplayName()));
     }

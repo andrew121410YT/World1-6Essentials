@@ -32,10 +32,10 @@ public class UnAfkCustomEvent extends Event {
     }
 
     public Player getPlayer() {
-        return this.plugin.getServer().getPlayerExact(p);
+        return plugin.getServer().getPlayerExact(p);
     }
 
     public Main getPlugin() {
-        return this.plugin;
+        return plugin;
     }
 }

@@ -10,33 +10,33 @@ import org.bukkit.entity.Player;
 
 public class ram implements CommandExecutor {
 
-  API api = new API();
-  private Main plugin;
+    API api = new API();
+    private Main plugin;
 
-  public ram(Main plugin) {
-    this.plugin = plugin;
-    plugin.getCommand("ram").setExecutor(this);
-  }
-
-  @Override
-  public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-    if (!(sender instanceof Player)) {
-      sender.sendMessage("Only Players Can Use This Command.");
-      return true;
+    public ram(Main plugin) {
+        this.plugin = plugin;
+        plugin.getCommand("ram").setExecutor(this);
     }
 
-    Player p = (Player) sender;
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Only Players Can Use This Command.");
+            return true;
+        }
 
-    if (!p.hasPermission("world16.ram")) {
-      api.PermissionErrorMessage(p);
-      return true;
+        Player p = (Player) sender;
+
+        if (!p.hasPermission("world16.ram")) {
+            api.PermissionErrorMessage(p);
+            return true;
+        }
+        // RAM START
+        Runtime runtime = Runtime.getRuntime();
+        sender.sendMessage(ChatColor.GREEN + "[Used / Total / Free]  " + ChatColor.BLUE
+                + (runtime.totalMemory() - runtime.freeMemory()) / 1048576L + " MB / "
+                + runtime.totalMemory() / 1048576L + " MB / " + runtime.freeMemory() / 1048576L + " MB");
+        // RAM FINISH
+        return true;
     }
-    // RAM START
-    Runtime runtime = Runtime.getRuntime();
-    sender.sendMessage(ChatColor.GREEN + "[Used / Total / Free]  " + ChatColor.BLUE
-        + (runtime.totalMemory() - runtime.freeMemory()) / 1048576L + " MB / "
-        + runtime.totalMemory() / 1048576L + " MB / " + runtime.freeMemory() / 1048576L + " MB");
-    // RAM FINISH
-    return true;
-  }
 }

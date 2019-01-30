@@ -24,9 +24,9 @@ public class OnJoinEvent implements Listener {
     KeyAPI keyapi = new KeyAPI();
 
     public OnJoinEvent(Main getPlugin) {
-        this.plugin = getPlugin;
+        plugin = getPlugin;
 
-        this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
@@ -42,7 +42,7 @@ public class OnJoinEvent implements Listener {
         //JOIN MESSAGE STUFF
         event.setJoinMessage("");
 
-        Bukkit.broadcastMessage(Translate.chat(api.PREFIX+" &6Welcome Back! " + p.getDisplayName()));
+        Bukkit.broadcastMessage(Translate.chat(API.PREFIX + " &6Welcome Back! " + p.getDisplayName()));
         p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10.0f, 1.0f);
         version(p);
         //...
@@ -51,22 +51,22 @@ public class OnJoinEvent implements Listener {
             String giveKeyReturnTEMP = keyapi.giveKeyReturn(p, mysql);
 
             if (giveKeyReturnTEMP == null) {
-                this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(
-                    api.USELESS + " &9The Player: " + p.getDisplayName()
-                        + " is not in the Database so gonna add them..."));
+                plugin.getServer().getConsoleSender().sendMessage(Translate.chat(
+                        API.USELESS + " &9The Player: " + p.getDisplayName()
+                                + " is not in the Database so gonna add them..."));
                 keyapi.SetKey(mysql, 1, p, "null");
             } else {
                 //GETS THE 1 KEY FROM THE PLAYER AND THEN IT STORES IT IN RAM FOR EASY ACCESS
                 keyDataM.put(p.getDisplayName(), giveKeyReturnTEMP);
             }
         } else {
-            this.plugin.getServer().getConsoleSender()
-                .sendMessage(Translate.chat(api.USELESS
-                    + " Please make sure too put in the mysql details in the config.yml."));
+            plugin.getServer().getConsoleSender()
+                    .sendMessage(Translate.chat(API.USELESS
+                            + " Please make sure too put in the mysql details in the config.yml."));
         }
     }
 
     public void version(Player p) {
-        p.sendMessage(Translate.chat("&4World1-6Ess Last Time Updated Was " + api.DATE_OF_VERSION));
+        p.sendMessage(Translate.chat("&4World1-6Ess Last Time Updated Was " + API.DATE_OF_VERSION));
     }
 }

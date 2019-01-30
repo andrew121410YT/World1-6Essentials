@@ -11,48 +11,48 @@ import org.bukkit.entity.Player;
 
 public class gmc implements CommandExecutor {
 
-  API api = new API();
-  private Main plugin;
+    API api = new API();
+    private Main plugin;
 
-  public gmc(Main plugin) {
-    this.plugin = plugin;
-    plugin.getCommand("gmc").setExecutor(this);
-  }
-
-  @Override
-  public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-    if (!(sender instanceof Player)) {
-      sender.sendMessage("Only Players Can Use This Command.");
-      return true;
+    public gmc(Main plugin) {
+        this.plugin = plugin;
+        plugin.getCommand("gmc").setExecutor(this);
     }
 
-    Player p = (Player) sender;
-
-    if (!p.hasPermission("world16.gmc")) {
-      api.PermissionErrorMessage(p);
-      return true;
-    }
-    if (args.length == 0) {
-      p.setGameMode(GameMode.CREATIVE);
-      p.sendMessage(
-          Translate.chat("&6Set game mode &ccreative&6 for " + ((Player) sender).getDisplayName()));
-      return true;
-    } else {
-      Player target = plugin.getServer().getPlayerExact(args[0]);
-      if (args.length == 1 && target != null && target.isOnline()) {
-        if (!p.hasPermission("world16.gmc.other")) {
-          api.PermissionErrorMessage(p);
-          return true;
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Only Players Can Use This Command.");
+            return true;
         }
-        target.setGameMode(GameMode.CREATIVE);
-        p.sendMessage(
-            Translate.chat("&6Set game mode &ccreative&6 for " + target.getDisplayName()));
-      } else {
-        p.sendMessage(Translate.chat("&aAliases: gmc && gm1"));
-        p.sendMessage(Translate
-            .chat("&cUsage: for yourself do /gmc OR /gm1 OR /gmc <Player> OR /gm1 <Player>"));
-      }
+
+        Player p = (Player) sender;
+
+        if (!p.hasPermission("world16.gmc")) {
+            api.PermissionErrorMessage(p);
+            return true;
+        }
+        if (args.length == 0) {
+            p.setGameMode(GameMode.CREATIVE);
+            p.sendMessage(
+                    Translate.chat("&6Set game mode &ccreative&6 for " + ((Player) sender).getDisplayName()));
+            return true;
+        } else {
+            Player target = plugin.getServer().getPlayerExact(args[0]);
+            if (args.length == 1 && target != null && target.isOnline()) {
+                if (!p.hasPermission("world16.gmc.other")) {
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
+                target.setGameMode(GameMode.CREATIVE);
+                p.sendMessage(
+                        Translate.chat("&6Set game mode &ccreative&6 for " + target.getDisplayName()));
+            } else {
+                p.sendMessage(Translate.chat("&aAliases: gmc && gm1"));
+                p.sendMessage(Translate
+                        .chat("&cUsage: for yourself do /gmc OR /gm1 OR /gmc <Player> OR /gm1 <Player>"));
+            }
+        }
+        return true;
     }
-    return true;
-  }
 }

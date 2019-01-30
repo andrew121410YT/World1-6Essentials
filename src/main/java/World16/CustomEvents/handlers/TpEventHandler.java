@@ -5,11 +5,11 @@ import World16.Main.Main;
 
 public class TpEventHandler {
 
-  private static Main plugin = Main.getPlugin();
+    private static Main plugin = Main.getPlugin();
 
-  public TpEventHandler(String p) {
-    TpCustomEvent event = new TpCustomEvent(p);
+    public TpEventHandler(String p) {
+        TpCustomEvent event = new TpCustomEvent(p);
 
-    plugin.getServer().getPluginManager().callEvent(event);
-  }
+        plugin.getServer().getPluginManager().callEvent(event);
+    }
 }

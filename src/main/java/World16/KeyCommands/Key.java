@@ -6,11 +6,12 @@ import World16.MysqlAPI.MySQL;
 import World16.Translate.Translate;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
-import java.util.HashMap;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.HashMap;
 
 public class Key implements CommandExecutor {
 
@@ -60,7 +61,7 @@ public class Key implements CommandExecutor {
                 // STRING BUILDER
                 StringBuilder setData = new StringBuilder();
                 for (int i = 1; i < args.length; i++) {
-                    setData.append(args[i]).append("");
+                    setData.append(args[i]);
                     // END OF STRING BUILDER
                 }
                 String setDataDone = setData.toString(); // OUT PUT OF STRING BUILDER

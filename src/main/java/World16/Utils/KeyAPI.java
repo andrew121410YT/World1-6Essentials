@@ -4,10 +4,6 @@ import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Translate.Translate;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,6 +11,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class KeyAPI {
 
@@ -71,7 +72,7 @@ public class KeyAPI {
                 mysql.Disconnect();
                 if (pDone != null) {
                     mysql.Disconnect();
-                    return LoreData.toString();
+                    return LoreData;
                 } else {
                     p.sendMessage(Translate.chat("&4Error With Checking if the Player is you are not."));
                 }

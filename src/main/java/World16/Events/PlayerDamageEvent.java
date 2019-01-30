@@ -17,9 +17,9 @@ public class PlayerDamageEvent implements Listener {
     ArrayList<String> godm = god.godm;
 
     public PlayerDamageEvent(Main getPlugin) {
-        this.plugin = getPlugin;
+        plugin = getPlugin;
 
-        this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler

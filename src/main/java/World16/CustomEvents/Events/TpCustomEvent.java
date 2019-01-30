@@ -7,35 +7,35 @@ import org.bukkit.event.HandlerList;
 
 public class TpCustomEvent extends Event {
 
-  private static final HandlerList handlers = new HandlerList();
-  private static Main plugin = Main.getPlugin();
+    private static final HandlerList handlers = new HandlerList();
+    private static Main plugin = Main.getPlugin();
 
-  String p;
+    String p;
 
-  @Override
-  public HandlerList getHandlers() {
-    return handlers;
-  }
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
+    }
 
-  public static HandlerList getHandlerList() {
-    return handlers;
-  }
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
 
-  //CODE STARTS HERE
+    //CODE STARTS HERE
 
-  public TpCustomEvent(String p) {
-    this.p = p;
-  }
+    public TpCustomEvent(String p) {
+        this.p = p;
+    }
 
-  public String getPlayerName() {
-    return this.p;
-  }
+    public String getPlayerName() {
+        return this.p;
+    }
 
-  public Player getPlayer() {
-    return this.plugin.getServer().getPlayerExact(p);
-  }
+    public Player getPlayer() {
+        return plugin.getServer().getPlayerExact(p);
+    }
 
-  public Main getPlugin() {
-    return this.plugin;
-  }
+    public Main getPlugin() {
+        return plugin;
+    }
 }
