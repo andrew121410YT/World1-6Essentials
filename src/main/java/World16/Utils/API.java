@@ -29,13 +29,16 @@ import java.util.LinkedHashMap;
 
 public class API {
 
+    //Maps
     HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
     LinkedHashMap<String, Location> backm = back.backm;
     LinkedHashMap<Player, Player> tpam = tpa.tpam;
-
+    //...
+    // Lists
     ArrayList<String> Afk1 = afk.Afk;
     ArrayList<String> Fly1 = fly.Fly;
     ArrayList<String> GodM = god.godm;
+    //...
 
     private static Main plugin = Main.getPlugin();
     private CustomYmlManger configinstance = null;

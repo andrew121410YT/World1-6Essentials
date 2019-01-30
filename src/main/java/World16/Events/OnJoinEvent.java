@@ -5,13 +5,14 @@ import World16.MysqlAPI.MySQL;
 import World16.Translate.Translate;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
-import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+
+import java.util.HashMap;
 
 public class OnJoinEvent implements Listener {
 
@@ -61,7 +62,7 @@ public class OnJoinEvent implements Listener {
         } else {
             this.plugin.getServer().getConsoleSender()
                 .sendMessage(Translate.chat(api.USELESS
-                    + "Please make sure too put in the mysql details in the config.yml."));
+                    + " Please make sure too put in the mysql details in the config.yml."));
         }
     }
 
