@@ -122,6 +122,10 @@ public class API {
         return Fly1.contains(p.getDisplayName()) || p.isFlying();
     }
 
+    public boolean isGod(Player p) {
+        return GodM.contains(p.getDisplayName());
+    }
+
     public ArrayList<String> getAfkArrayList() {
         return Afk1;
     }

@@ -15,7 +15,10 @@ public class back implements CommandExecutor {
 
     API api = new API();
     private Main plugin;
+
+    //Maps
     public static LinkedHashMap<String, Location> backm = new LinkedHashMap<>();
+    //...
 
     public back(Main getPlugin) {
         this.plugin = getPlugin;
