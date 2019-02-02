@@ -43,7 +43,7 @@ public class setspawn implements CommandExecutor {
             api.PermissionErrorMessage(p);
             return true;
         }
-        this.api.SetSpawn(p, x, y, z, yaw, pitch, worldName, "default");
+        this.api.setLocationToFile(null, "Spawn", "default", p, x, y, z, yaw, pitch, worldName);
         p.sendMessage(Translate.chat("&6Spawn location set for group default."));
         return true;
     }

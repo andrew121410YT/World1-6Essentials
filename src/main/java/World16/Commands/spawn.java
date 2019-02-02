@@ -34,7 +34,7 @@ public class spawn implements CommandExecutor {
 
         Player p = (Player) sender;
 
-        Location spawn = this.api.GetSpawn("default");
+        Location spawn = this.api.getLocationFromFile(null, "Spawn", "default");
 
         if (!p.hasPermission("world16.spawn")) {
             api.PermissionErrorMessage(p);

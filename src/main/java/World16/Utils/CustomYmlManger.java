@@ -12,7 +12,7 @@ import java.io.IOException;
 public class CustomYmlManger {
 
     private Main plugin = Main.getPlugin();
-    
+
     // Files & File Configs Here.
     private FileConfiguration configcfg;
     private File configfile;

@@ -28,7 +28,6 @@ public class setjail implements CommandExecutor {
             sender.sendMessage("Only Players Can Use This Command.");
             return true;
         }
-
         Player p = (Player) sender;
         double x = p.getLocation().getX();
         double y = p.getLocation().getY();
@@ -36,23 +35,12 @@ public class setjail implements CommandExecutor {
         float yaw = p.getLocation().getYaw();
         float pitch = p.getLocation().getPitch();
         String worldName = p.getWorld().getName();
-        // Location loc = p.getLocation();
-        // FileConfiguration file = plugin.getConfig();
 
         if (!p.hasPermission("world16.setjail")) {
             api.PermissionErrorMessage(p);
             return true;
         }
-        configinstance.getConfig().set("Jail.Data.X", Double.valueOf(x));
-        configinstance.getConfig().set("Jail.Data.Y", Double.valueOf(y));
-        configinstance.getConfig().set("Jail.Data.Z", Double.valueOf(z));
-        configinstance.getConfig().set("Jail.Data.Yaw", Float.valueOf(yaw));
-        configinstance.getConfig().set("Jail.Data.Pitch", Float.valueOf(pitch));
-        configinstance.getConfig().set("Jail.Data.World", worldName);
-        configinstance.getConfig().set("Jail.Player.Data.NAME", p.getDisplayName());
-        configinstance.getConfig().set("Jail.Player.Data.UUID", p.getUniqueId().toString());
-        configinstance.getConfig();
-        // plugin.saveConfig();
+        this.api.setLocationToFile(null, "Jail", "default", p, x, y, z, yaw, pitch, worldName);
         p.sendMessage(Translate.chat("&6The jail has been set."));
         return true;
     }

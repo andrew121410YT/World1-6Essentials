@@ -29,7 +29,7 @@ import java.util.LinkedHashMap;
 
 public class API {
 
-    //Maps
+    // Maps
     HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
     LinkedHashMap<String, Location> backm = back.backm;
     LinkedHashMap<Player, Player> tpam = tpa.tpam;
@@ -46,14 +46,14 @@ public class API {
 
     ViaAPI viaapi = Via.getAPI(); // https://docs.viaversion.com/display/VIAVERSION/Basic+API+usage
 
-    //finals
-    public static final Integer VERSION = 5;
+    //Finals
+    public static final Integer VERSION = 6;
     public static final String DATE_OF_VERSION = "2/2/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String TOO_DAMN_OLD = "Your mc version is too damn old 1.11 up too 1.13.2 please.";
     public static final String SOMETHING_WENT_WRONG = "Something went wrong.";
-    //END finals
+    //...
 
     // FOR MYSQL
     private String HOST = plugin.getConfig().getString("MysqlHOST");
@@ -128,7 +128,7 @@ public class API {
     }
 
     public boolean isDebug() {
-        return this.plugin.getConfig().getString("debug").equalsIgnoreCase("true");
+        return plugin.getConfig().getString("debug").equalsIgnoreCase("true");
     }
 
     public ArrayList<String> getAfkArrayList() {
@@ -322,42 +322,59 @@ public class API {
         return realUUID;
     }
 
+    private String locationname;
+    private String Path;
+    private CustomYmlManger configinstance2;
 
-    private String spawnname;
-    private String spawnname1;
+    private String locationname2;
+    private String Path2;
+    private CustomYmlManger configinstance3;
 
     //API FOR SPAWN
-    public Location GetSpawn(String spawnname) {
-        this.spawnname = spawnname.toLowerCase();
-        double x = this.configinstance.getConfig().getInt("Spawn." + this.spawnname + ".Data.X");
-        double y = this.configinstance.getConfig().getInt("Spawn." + this.spawnname + ".Data.Y");
-        double z = this.configinstance.getConfig().getInt("Spawn." + this.spawnname + ".Data.Z");
-        float yaw = (float) this.configinstance.getConfig()
-                .getInt("Spawn." + this.spawnname + ".Data.Yaw");
-        float pitch = (float) this.configinstance.getConfig()
-                .getInt("Spawn." + this.spawnname + ".Data.Pitch");
+    public Location getLocationFromFile(CustomYmlManger configinstance, String Path, String nameoflocation) {
+        this.configinstance2 = configinstance;
+        this.Path = Path;
+        this.locationname = nameoflocation.toLowerCase();
+
+        if (configinstance == null) {
+            this.configinstance2 = this.configinstance;
+        }
+
+        double x = this.configinstance2.getConfig().getInt(this.Path + "." + this.locationname + ".Data.X");
+        double y = this.configinstance2.getConfig().getInt(this.Path + "." + this.locationname + ".Data.Y");
+        double z = this.configinstance2.getConfig().getInt(this.Path + "." + this.locationname + ".Data.Z");
+        float yaw = Float.parseFloat(this.configinstance2.getConfig().getString(this.Path + "." + this.locationname + ".Data.Yaw"));
+        float pitch = Float.parseFloat(this.configinstance2.getConfig()
+                .getString(this.Path + "." + this.locationname + ".Data.Pitch"));
         World world = Bukkit
                 .getWorld(
-                        this.configinstance.getConfig().getString("Spawn." + this.spawnname + ".Data.World"));
+                        this.configinstance2.getConfig().getString(this.Path + "." + this.locationname + ".Data.World"));
 
-        Location spawn = new Location(world, x, y, z, yaw, pitch);
-        return spawn;
+        Location location = new Location(world, x, y, z, yaw, pitch);
+        return location;
     }
 
-    public void SetSpawn(Player p, double x, double y, double z, double yaw, double pitch,
-                         String worldname, String spawnname) {
-        this.spawnname1 = spawnname.toLowerCase();
-        this.configinstance.getConfig().set("Spawn." + this.spawnname1 + ".Data.X", x);
-        this.configinstance.getConfig().set("Spawn." + this.spawnname1 + ".Data.Y", y);
-        this.configinstance.getConfig().set("Spawn." + this.spawnname1 + ".Data.Z", z);
-        this.configinstance.getConfig().set("Spawn." + this.spawnname1 + ".Data.Yaw", yaw);
-        this.configinstance.getConfig().set("Spawn." + this.spawnname1 + ".Data.Pitch", pitch);
-        this.configinstance.getConfig().set("Spawn." + this.spawnname1 + ".Data.World", worldname);
-        this.configinstance.getConfig()
-                .set("Spawn." + this.spawnname1 + ".Player.Data.NAME", p.getDisplayName());
-        this.configinstance.getConfig()
-                .set("Spawn." + this.spawnname1 + ".Player.Data.UUID", p.getUniqueId().toString());
-        this.configinstance.saveConfig();
+    public void setLocationToFile(CustomYmlManger configinstance, String path, String nameoflocation, Player p, double x, double y, double z, double yaw, double pitch,
+                                  String worldname) {
+        this.locationname2 = nameoflocation.toLowerCase();
+        this.Path2 = path;
+        this.configinstance3 = configinstance;
+
+        if (configinstance == null) {
+            this.configinstance3 = this.configinstance;
+        }
+
+        this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.X", x);
+        this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Y", y);
+        this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Z", z);
+        this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Yaw", yaw);
+        this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Pitch", pitch);
+        this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.World", worldname);
+        this.configinstance3.getConfig()
+                .set(this.Path2 + "." + this.locationname2 + ".Player.Data.NAME", p.getDisplayName());
+        this.configinstance3.getConfig()
+                .set(this.Path2 + "." + this.locationname2 + ".Player.Data.UUID", p.getUniqueId().toString());
+        this.configinstance3.saveConfig();
     }
 
     public void PermissionErrorMessage(Player p) {

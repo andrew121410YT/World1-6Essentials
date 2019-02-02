@@ -31,16 +31,9 @@ public class jail implements CommandExecutor {
             sender.sendMessage("Only Players Can Use This Command.");
             return true;
         }
-
         Player p = (Player) sender;
-        double x = configinstance.getConfig().getInt("Jail.Data.X");
-        double y = configinstance.getConfig().getInt("Jail.Data.Y");
-        double z = configinstance.getConfig().getInt("Jail.Data.Z");
-        float yaw = (float) configinstance.getConfig().getInt("Jail.Data.Yaw");
-        float pitch = (float) configinstance.getConfig().getInt("Jail.Data.Pitch");
-        World world = Bukkit.getWorld(configinstance.getConfig().getString("Jail.Data.World"));
 
-        Location jail = new Location(world, x, y, z, yaw, pitch);
+        Location jail = api.getLocationFromFile(null,"Jail","default");
         // FileConfiguration file = plugin.getConfig();
 
         if (!p.hasPermission("world16.jail")) {
