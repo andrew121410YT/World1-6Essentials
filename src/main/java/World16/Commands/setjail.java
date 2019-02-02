@@ -1,5 +1,6 @@
 package World16.Commands;
 
+import World16.CustomConfigs.ShitConfig;
 import World16.Main.Main;
 import World16.Translate.Translate;
 import World16.Utils.API;
@@ -15,8 +16,8 @@ public class setjail implements CommandExecutor {
     private Main plugin;
     private CustomYmlManger configinstance = null;
 
-    public setjail(CustomYmlManger getCustomYml, Main getPlugin) {
-        this.configinstance = getCustomYml;
+    public setjail(ShitConfig getCustomYml, Main getPlugin) {
+        this.configinstance = getCustomYml.getInstance();
         this.plugin = getPlugin;
         this.plugin.getCommand("setjail").setExecutor(this);
     }
@@ -42,15 +43,15 @@ public class setjail implements CommandExecutor {
             api.PermissionErrorMessage(p);
             return true;
         }
-        configinstance.getshit().set("Jail.Data.X", Double.valueOf(x));
-        configinstance.getshit().set("Jail.Data.Y", Double.valueOf(y));
-        configinstance.getshit().set("Jail.Data.Z", Double.valueOf(z));
-        configinstance.getshit().set("Jail.Data.Yaw", Float.valueOf(yaw));
-        configinstance.getshit().set("Jail.Data.Pitch", Float.valueOf(pitch));
-        configinstance.getshit().set("Jail.Data.World", worldName);
-        configinstance.getshit().set("Jail.Player.Data.NAME", p.getDisplayName());
-        configinstance.getshit().set("Jail.Player.Data.UUID", p.getUniqueId().toString());
-        configinstance.saveshit();
+        configinstance.getConfig().set("Jail.Data.X", Double.valueOf(x));
+        configinstance.getConfig().set("Jail.Data.Y", Double.valueOf(y));
+        configinstance.getConfig().set("Jail.Data.Z", Double.valueOf(z));
+        configinstance.getConfig().set("Jail.Data.Yaw", Float.valueOf(yaw));
+        configinstance.getConfig().set("Jail.Data.Pitch", Float.valueOf(pitch));
+        configinstance.getConfig().set("Jail.Data.World", worldName);
+        configinstance.getConfig().set("Jail.Player.Data.NAME", p.getDisplayName());
+        configinstance.getConfig().set("Jail.Player.Data.UUID", p.getUniqueId().toString());
+        configinstance.getConfig();
         // plugin.saveConfig();
         p.sendMessage(Translate.chat("&6The jail has been set."));
         return true;

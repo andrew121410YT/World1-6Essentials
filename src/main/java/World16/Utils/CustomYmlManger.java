@@ -15,59 +15,66 @@ public class CustomYmlManger {
 
     API api = new API();
     // Files & File Configs Here.
-    public FileConfiguration shitcfg;
-    public File shitfile;
+    private FileConfiguration configcfg;
+    private File configfile;
+
+    //Strings
+    private String nameoffile;
+    //...
 
     // --------------------------------------------------------------------------------------------------------
-    public void setupshit() {
+    public void setup(String nameoffile) {
+        this.nameoffile = nameoffile;
+
         if (!plugin.getDataFolder().exists()) {
             plugin.getDataFolder().mkdir();
         }
-        shitfile = new File(plugin.getDataFolder(), "shit.yml");
 
-        if (!shitfile.exists()) {
+        configfile = new File(plugin.getDataFolder(), this.nameoffile);
+
+        if (!configfile.exists()) {
             try {
-                shitfile.createNewFile();
+                configfile.createNewFile();
                 Bukkit.getServer().getConsoleSender()
-                        .sendMessage(Translate.chat(API.USELESS + " The shit.yml has been created."));
+                        .sendMessage(Translate.chat(API.USELESS + " The {nameoffile} has been created.").replace("{nameoffile}", this.nameoffile));
             } catch (IOException e) {
                 Bukkit.getServer().getConsoleSender()
                         .sendMessage(Translate
-                                .chat(API.USELESS + " The shit.yml could not make for some reason."));
+                                .chat(API.USELESS + " The {nameoffile} could not make for some reason.").replace("{nameoffile}", this.nameoffile));
             }
         }
 
-        shitcfg = YamlConfiguration.loadConfiguration(shitfile);
+        configcfg = YamlConfiguration.loadConfiguration(configfile);
     }
 
-    public FileConfiguration getshit() {
-        return shitcfg;
+    public FileConfiguration getConfig() {
+        return configcfg;
     }
 
-    public void saveshit() {
+    public void saveConfig() {
         try {
-            shitcfg.save(shitfile);
+            configcfg.save(configfile);
             Bukkit.getServer().getConsoleSender()
-                    .sendMessage(Translate.chat(API.USELESS + " &aThe shit.yml has been saved."));
+                    .sendMessage(Translate.chat(API.USELESS + " &aThe {nameoffile} has been saved.").replace("{nameoffile}", this.nameoffile));
         } catch (IOException e) {
             Bukkit.getServer().getConsoleSender()
-                    .sendMessage(Translate.chat(API.USELESS + " &cThe shit.yml has been NOT SAVED.."));
+                    .sendMessage(Translate.chat(API.USELESS + " &cThe {nameoffile} has been NOT SAVED..").replace("{nameoffile}", this.nameoffile));
         }
     }
 
-    public void saveshitsilent() {
+    public void saveConfigSilent() {
         try {
-            shitcfg.save(shitfile);
+            configcfg.save(configfile);
         } catch (IOException e) {
             Bukkit.getServer().getConsoleSender()
-                    .sendMessage(Translate.chat(API.USELESS + " &cThe shit.yml has been NOT SAVED.."));
+                    .sendMessage(Translate.chat(API.USELESS + " &cThe {nameoffile} has been NOT SAVED..").replace("{nameoffile}", this.nameoffile));
         }
     }
 
-    public void reloadshit() {
-        shitcfg = YamlConfiguration.loadConfiguration(shitfile);
+    public void reloadConfig() {
+        configcfg = YamlConfiguration.loadConfiguration(configfile);
         Bukkit.getServer().getConsoleSender()
-                .sendMessage(Translate.chat(API.USELESS + " &6The shit.yml has been reloaded."));
+                .sendMessage(Translate.chat(API.USELESS + " &6The {nameoffile} has been reloaded.").replace("{nameoffile}", this.nameoffile));
 //        // END OF SHIT YML
 //        // ****************************************************************************************************
     }

@@ -1,5 +1,6 @@
 package World16.Commands.tp;
 
+import World16.CustomConfigs.ShitConfig;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Translate.Translate;
@@ -24,8 +25,8 @@ public class tpaccept implements CommandExecutor {
 
     private CustomYmlManger configinstance = null;
 
-    public tpaccept(CustomYmlManger getCustomYml, Main getPlugin) {
-        this.configinstance = getCustomYml;
+    public tpaccept(ShitConfig getCustomYml, Main getPlugin) {
+        this.configinstance = getCustomYml.getInstance();
         this.plugin = getPlugin;
 
         this.plugin.getCommand("tpaccept").setExecutor(this);
