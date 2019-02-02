@@ -29,21 +29,24 @@ import java.util.LinkedHashMap;
 public class Main extends JavaPlugin {//implements Listener {
 
     private static Main plugin;
+
+    //Configs
     private CustomYmlManger customyml;
     private ShitConfig shityml;
+
     private API api;
 
-    //ARRAY LIST AND HASH MAPS
+    //Lists
     ArrayList<String> Afk = afk.Afk;
     ArrayList<String> Fly = fly.Fly;
     ArrayList<String> GodM = god.godm;
+    //...
+
+    //Maps
     HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
     LinkedHashMap<String, Location> backm = back.backm;
     LinkedHashMap<Player, Player> tpam = tpa.tpam;
-    //END
-    // GOT THE MYSQL API AT https://www.spigotmc.org/resources/simple-easy-mysql-api.36447/
-    // GOT THE TITLE API AT https://www.spigotmc.org/resources/titleapi-1-8-1-13.1325/
-    // FROM https://www.spigotmc.org/resources/api-pluginupdater-with-website.5578/
+    //...
     PluginManager pm = Bukkit.getPluginManager();
 
     public void onEnable() {
@@ -165,7 +168,7 @@ public class Main extends JavaPlugin {//implements Listener {
     }
 
     public API getApi() {
-        return api;
+        return this.api;
     }
 
 }

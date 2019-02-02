@@ -12,8 +12,7 @@ import java.io.IOException;
 public class CustomYmlManger {
 
     private Main plugin = Main.getPlugin();
-
-    API api = new API();
+    
     // Files & File Configs Here.
     private FileConfiguration configcfg;
     private File configfile;
@@ -75,7 +74,5 @@ public class CustomYmlManger {
         configcfg = YamlConfiguration.loadConfiguration(configfile);
         Bukkit.getServer().getConsoleSender()
                 .sendMessage(Translate.chat(API.USELESS + " &6The {nameoffile} has been reloaded.").replace("{nameoffile}", this.nameoffile));
-//        // END OF SHIT YML
-//        // ****************************************************************************************************
     }
 }
