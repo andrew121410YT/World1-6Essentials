@@ -14,40 +14,40 @@ import org.bukkit.entity.Player;
 
 public class jail implements CommandExecutor {
 
-  API api = new API();
-  private Main plugin;
-  private CustomYmlManger configinstance = null;
+    API api = new API();
+    private Main plugin;
+    private CustomYmlManger configinstance = null;
 
-  public jail(CustomYmlManger getCustomYml, Main getPlugin) {
-    this.configinstance = getCustomYml;
-    this.plugin = getPlugin;
-    this.plugin.getCommand("jail").setExecutor(this);
-  }
-
-  @Override
-  public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-    if (!(sender instanceof Player)) {
-      sender.sendMessage("Only Players Can Use This Command.");
-      return true;
+    public jail(CustomYmlManger getCustomYml, Main getPlugin) {
+        this.configinstance = getCustomYml;
+        this.plugin = getPlugin;
+        this.plugin.getCommand("jail").setExecutor(this);
     }
 
-    Player p = (Player) sender;
-    double x = configinstance.getshit().getInt("Jail.Data.X");
-    double y = configinstance.getshit().getInt("Jail.Data.Y");
-    double z = configinstance.getshit().getInt("Jail.Data.Z");
-    float yaw = (float) configinstance.getshit().getInt("Jail.Data.Yaw");
-    float pitch = (float) configinstance.getshit().getInt("Jail.Data.Pitch");
-    World world = Bukkit.getWorld(configinstance.getshit().getString("Jail.Data.World"));
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Only Players Can Use This Command.");
+            return true;
+        }
 
-    Location jail = new Location(world, x, y, z, yaw, pitch);
-    // FileConfiguration file = plugin.getConfig();
+        Player p = (Player) sender;
+        double x = configinstance.getshit().getInt("Jail.Data.X");
+        double y = configinstance.getshit().getInt("Jail.Data.Y");
+        double z = configinstance.getshit().getInt("Jail.Data.Z");
+        float yaw = (float) configinstance.getshit().getInt("Jail.Data.Yaw");
+        float pitch = (float) configinstance.getshit().getInt("Jail.Data.Pitch");
+        World world = Bukkit.getWorld(configinstance.getshit().getString("Jail.Data.World"));
 
-    if (!p.hasPermission("command.jail.permission")) {
-      api.PermissionErrorMessage(p);
-      return true;
+        Location jail = new Location(world, x, y, z, yaw, pitch);
+        // FileConfiguration file = plugin.getConfig();
+
+        if (!p.hasPermission("world16.jail")) {
+            api.PermissionErrorMessage(p);
+            return true;
+        }
+        p.teleport(jail);
+        p.sendMessage(Translate.chat("&6Teleporting..."));
+        return true;
     }
-    p.teleport(jail);
-    p.sendMessage(Translate.chat("&6Teleporting..."));
-    return true;
-  }
 }

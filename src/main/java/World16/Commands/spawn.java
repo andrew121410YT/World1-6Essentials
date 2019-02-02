@@ -12,50 +12,50 @@ import org.bukkit.entity.Player;
 
 public class spawn implements CommandExecutor {
 
-  private Main plugin;
-  private API api;
+    private Main plugin;
+    private API api;
 
-  private CustomYmlManger configinstance = null;
+    private CustomYmlManger configinstance = null;
 
-  public spawn(CustomYmlManger getCustomYml, Main getPlugin) {
-    this.configinstance = getCustomYml;
-    this.plugin = getPlugin;
-    this.api = new API(this.configinstance);
-    this.plugin.getCommand("spawn").setExecutor(this);
-  }
-
-  @Override
-  public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-    if (!(sender instanceof Player)) {
-      sender.sendMessage("Only Players Can Use This Command.");
-      return true;
+    public spawn(CustomYmlManger getCustomYml, Main getPlugin) {
+        this.configinstance = getCustomYml;
+        this.plugin = getPlugin;
+        this.api = new API(this.configinstance);
+        this.plugin.getCommand("spawn").setExecutor(this);
     }
 
-    Player p = (Player) sender;
-
-    Location spawn = this.api.GetSpawn("default");
-
-    if (!p.hasPermission("command.spawn.permission")) {
-      api.PermissionErrorMessage(p);
-      return true;
-    }
-    if (args.length == 0) {
-      p.teleport(spawn);
-      p.sendMessage(Translate.chat("&6Teleporting..."));
-      return true;
-    } else {
-      Player target = plugin.getServer().getPlayerExact(args[0]);
-      if (args.length >= 1 && target != null && target.isOnline()) {
-        if (!p.hasPermission("command.spawn.other.permission")) {
-          api.PermissionErrorMessage(p);
-          return true;
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Only Players Can Use This Command.");
+            return true;
         }
-        target.teleport(spawn);
-        target.sendMessage(Translate.chat("&6Teleporting..."));
-      } else {
-        p.sendMessage(Translate.chat("&cUsage: for yourself do /spawn OR /spawn <Player>"));
-      }
+
+        Player p = (Player) sender;
+
+        Location spawn = this.api.GetSpawn("default");
+
+        if (!p.hasPermission("world16.spawn")) {
+            api.PermissionErrorMessage(p);
+            return true;
+        }
+        if (args.length == 0) {
+            p.teleport(spawn);
+            p.sendMessage(Translate.chat("&6Teleporting..."));
+            return true;
+        } else {
+            Player target = plugin.getServer().getPlayerExact(args[0]);
+            if (args.length >= 1 && target != null && target.isOnline()) {
+                if (!p.hasPermission("world16.spawn.other")) {
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
+                target.teleport(spawn);
+                target.sendMessage(Translate.chat("&6Teleporting..."));
+            } else {
+                p.sendMessage(Translate.chat("&cUsage: for yourself do /spawn OR /spawn <Player>"));
+            }
+        }
+        return true;
     }
-    return true;
-  }
 }

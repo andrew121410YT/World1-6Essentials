@@ -1,40 +1,34 @@
 package World16.Events;
 
+import World16.Commands.back;
 import World16.Main.Main;
-import java.util.LinkedHashMap;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+import java.util.LinkedHashMap;
+
 public class OnDeathEvent implements Listener {
 
-  private static Main plugin;
-  public static LinkedHashMap<String, Location> backmap = new LinkedHashMap<>();
+    private static Main plugin;
 
-  public OnDeathEvent(Main getPlugin) {
-    this.plugin = getPlugin;
+    //HASHMAPS
+    LinkedHashMap<String, Location> backm = back.backm;
 
-    this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
-  }
+    public OnDeathEvent(Main getPlugin) {
+        plugin = getPlugin;
 
-  @EventHandler
-  public void OnDeath(PlayerDeathEvent event) {
-    Player p = event.getEntity();
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    }
 
-    backmap.remove(p.getDisplayName() + "death");
+    @EventHandler
+    public void OnDeath(PlayerDeathEvent event) {
+        Player p = event.getEntity();
 
-    double x = event.getEntity().getLocation().getX();
-    double y = event.getEntity().getLocation().getY();
-    double z = event.getEntity().getLocation().getZ();
-    float yaw = event.getEntity().getLocation().getYaw();
-    float pitch = event.getEntity().getLocation().getPitch();
-    World world = event.getEntity().getWorld();
+        backm.remove(p.getDisplayName() + "death");
 
-    Location location = new Location(world, x, y, z, yaw, pitch);
-
-    backmap.put(p.getDisplayName() + "death", location);
-  }
+        backm.put(p.getDisplayName() + "death", p.getLocation());
+    }
 }

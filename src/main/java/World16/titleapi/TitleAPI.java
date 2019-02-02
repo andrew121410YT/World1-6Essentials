@@ -1,31 +1,32 @@
 package World16.titleapi;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+
 
 public class TitleAPI extends JavaPlugin implements Listener {
 
     @Deprecated
     public static void sendTitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut,
-        String message) {
+                                 String message) {
         sendTitle(player, fadeIn, stay, fadeOut, message, null);
     }
 
     @Deprecated
     public static void sendSubtitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut,
-        String message) {
+                                    String message) {
         sendTitle(player, fadeIn, stay, fadeOut, null, message);
     }
 
     @Deprecated
     public static void sendFullTitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut,
-        String title, String subtitle) {
+                                     String title, String subtitle) {
         sendTitle(player, fadeIn, stay, fadeOut, title, subtitle);
     }
 
@@ -34,7 +35,7 @@ public class TitleAPI extends JavaPlugin implements Listener {
             Object handle = player.getClass().getMethod("getHandle").invoke(player);
             Object playerConnection = handle.getClass().getField("playerConnection").get(handle);
             playerConnection.getClass().getMethod("sendPacket", getNMSClass("Packet"))
-                .invoke(playerConnection, packet);
+                    .invoke(playerConnection, packet);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -51,7 +52,7 @@ public class TitleAPI extends JavaPlugin implements Listener {
     }
 
     public static void sendTitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut,
-        String title, String subtitle) {
+                                 String title, String subtitle) {
         TitleSendEvent titleSendEvent = new TitleSendEvent(player, title, subtitle);
         Bukkit.getPluginManager().callEvent(titleSendEvent);
         if (titleSendEvent.isCancelled())
@@ -70,27 +71,27 @@ public class TitleAPI extends JavaPlugin implements Listener {
                 title = title.replaceAll("%player%", player.getDisplayName());
                 // Times packets
                 e = getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("TIMES")
-                    .get((Object) null);
+                        .get(null);
                 chatTitle = getNMSClass("IChatBaseComponent").getDeclaredClasses()[0]
-                    .getMethod("a", new Class[]{String.class})
-                    .invoke((Object) null, new Object[]{"{\"text\":\"" + title + "\"}"});
+                        .getMethod("a", String.class)
+                        .invoke(null, "{\"text\":\"" + title + "\"}");
                 subtitleConstructor = getNMSClass("PacketPlayOutTitle").getConstructor(
-                    new Class[]{getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0],
+                        getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0],
                         getNMSClass("IChatBaseComponent"), Integer.TYPE, Integer.TYPE,
-                        Integer.TYPE});
+                        Integer.TYPE);
                 titlePacket = subtitleConstructor
-                    .newInstance(new Object[]{e, chatTitle, fadeIn, stay, fadeOut});
+                        .newInstance(e, chatTitle, fadeIn, stay, fadeOut);
                 sendPacket(player, titlePacket);
 
                 e = getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("TITLE")
-                    .get((Object) null);
+                        .get(null);
                 chatTitle = getNMSClass("IChatBaseComponent").getDeclaredClasses()[0]
-                    .getMethod("a", new Class[]{String.class})
-                    .invoke((Object) null, new Object[]{"{\"text\":\"" + title + "\"}"});
+                        .getMethod("a", String.class)
+                        .invoke(null, "{\"text\":\"" + title + "\"}");
                 subtitleConstructor = getNMSClass("PacketPlayOutTitle").getConstructor(
-                    new Class[]{getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0],
-                        getNMSClass("IChatBaseComponent")});
-                titlePacket = subtitleConstructor.newInstance(new Object[]{e, chatTitle});
+                        getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0],
+                        getNMSClass("IChatBaseComponent"));
+                titlePacket = subtitleConstructor.newInstance(e, chatTitle);
                 sendPacket(player, titlePacket);
             }
 
@@ -99,29 +100,29 @@ public class TitleAPI extends JavaPlugin implements Listener {
                 subtitle = subtitle.replaceAll("%player%", player.getDisplayName());
                 // Times packets
                 e = getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("TIMES")
-                    .get((Object) null);
+                        .get(null);
                 chatSubtitle = getNMSClass("IChatBaseComponent").getDeclaredClasses()[0]
-                    .getMethod("a", new Class[]{String.class})
-                    .invoke((Object) null, new Object[]{"{\"text\":\"" + title + "\"}"});
+                        .getMethod("a", String.class)
+                        .invoke(null, "{\"text\":\"" + title + "\"}");
                 subtitleConstructor = getNMSClass("PacketPlayOutTitle").getConstructor(
-                    new Class[]{getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0],
+                        getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0],
                         getNMSClass("IChatBaseComponent"), Integer.TYPE, Integer.TYPE,
-                        Integer.TYPE});
+                        Integer.TYPE);
                 subtitlePacket = subtitleConstructor
-                    .newInstance(new Object[]{e, chatSubtitle, fadeIn, stay, fadeOut});
+                        .newInstance(e, chatSubtitle, fadeIn, stay, fadeOut);
                 sendPacket(player, subtitlePacket);
 
                 e = getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("SUBTITLE")
-                    .get((Object) null);
+                        .get(null);
                 chatSubtitle = getNMSClass("IChatBaseComponent").getDeclaredClasses()[0]
-                    .getMethod("a", new Class[]{String.class})
-                    .invoke((Object) null, new Object[]{"{\"text\":\"" + subtitle + "\"}"});
+                        .getMethod("a", String.class)
+                        .invoke(null, "{\"text\":\"" + subtitle + "\"}");
                 subtitleConstructor = getNMSClass("PacketPlayOutTitle").getConstructor(
-                    new Class[]{getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0],
+                        getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0],
                         getNMSClass("IChatBaseComponent"), Integer.TYPE, Integer.TYPE,
-                        Integer.TYPE});
+                        Integer.TYPE);
                 subtitlePacket = subtitleConstructor
-                    .newInstance(new Object[]{e, chatSubtitle, fadeIn, stay, fadeOut});
+                        .newInstance(e, chatSubtitle, fadeIn, stay, fadeOut);
                 sendPacket(player, subtitlePacket);
             }
         } catch (Exception var11) {
@@ -154,11 +155,11 @@ public class TitleAPI extends JavaPlugin implements Listener {
 
         try {
             Object tabHeader = getNMSClass("IChatBaseComponent").getDeclaredClasses()[0]
-                .getMethod("a", String.class).invoke(null, "{\"text\":\"" + header + "\"}");
+                    .getMethod("a", String.class).invoke(null, "{\"text\":\"" + header + "\"}");
             Object tabFooter = getNMSClass("IChatBaseComponent").getDeclaredClasses()[0]
-                .getMethod("a", String.class).invoke(null, "{\"text\":\"" + footer + "\"}");
+                    .getMethod("a", String.class).invoke(null, "{\"text\":\"" + footer + "\"}");
             Constructor<?> titleConstructor = getNMSClass("PacketPlayOutPlayerListHeaderFooter")
-                .getConstructor();
+                    .getConstructor();
             Object packet = titleConstructor.newInstance();
             try {
                 Field aField = packet.getClass().getDeclaredField("a");

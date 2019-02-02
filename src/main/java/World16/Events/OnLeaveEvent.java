@@ -14,9 +14,9 @@ public class OnLeaveEvent implements Listener {
     API api = new API();
 
     public OnLeaveEvent(Main getPlugin) {
-        this.plugin = getPlugin;
+        plugin = getPlugin;
 
-        this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
@@ -27,7 +27,7 @@ public class OnLeaveEvent implements Listener {
         api.clearArrayListAndHashMaps(p);
 
         event.setQuitMessage("");
-        Bukkit.broadcastMessage(Translate.chat(api.PREFIX+" &5Bye Bye, " + p.getDisplayName()));
+        Bukkit.broadcastMessage(Translate.chat(API.PREFIX + " &5Bye Bye, " + p.getDisplayName()));
 
     }
 }

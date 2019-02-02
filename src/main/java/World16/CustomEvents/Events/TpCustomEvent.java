@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class AfkEvent extends Event {
+public class TpCustomEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
     private static Main plugin = Main.getPlugin();
@@ -23,7 +23,7 @@ public class AfkEvent extends Event {
 
     //CODE STARTS HERE
 
-    public AfkEvent(String p) {
+    public TpCustomEvent(String p) {
         this.p = p;
     }
 
@@ -32,10 +32,10 @@ public class AfkEvent extends Event {
     }
 
     public Player getPlayer() {
-        return this.plugin.getServer().getPlayerExact(p);
+        return plugin.getServer().getPlayerExact(p);
     }
 
     public Main getPlugin() {
-        return this.plugin;
+        return plugin;
     }
 }

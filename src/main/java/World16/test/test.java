@@ -10,32 +10,32 @@ import org.bukkit.entity.Player;
 
 public class test implements CommandExecutor {
 
-  private Main plugin;
-  API api = new API();
+    private Main plugin;
+    API api = new API();
 
-  private CustomYmlManger configinstance = null;
+    private CustomYmlManger configinstance = null;
 
-  public test(CustomYmlManger getCustomYml, Main getPlugin) {
-    this.configinstance = getCustomYml;
-    this.plugin = getPlugin;
+    public test(CustomYmlManger getCustomYml, Main getPlugin) {
+        this.configinstance = getCustomYml;
+        this.plugin = getPlugin;
 
-    this.plugin.getCommand("testee").setExecutor(this);
-  }
-
-  @Override
-  public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-    if (!(sender instanceof Player)) {
-      sender.sendMessage("Only Players Can Use This Command.");
-      return true;
+        this.plugin.getCommand("testee").setExecutor(this);
     }
 
-    Player p = (Player) sender;
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Only Players Can Use This Command.");
+            return true;
+        }
 
-    if (!p.hasPermission("command.World16.test.permission")) {
-      api.PermissionErrorMessage(p);
-      return true;
+        Player p = (Player) sender;
+
+        if (!p.hasPermission("world16.testee")) {
+            api.PermissionErrorMessage(p);
+            return true;
+        }
+        //STUFF HERE
+        return true;
     }
-    //STUFF HERE
-    return true;
-  }
 }

@@ -1,34 +1,10 @@
 package World16.Main;
 
-import World16.Commands.afk;
-import World16.Commands.back;
-import World16.Commands.bed;
-import World16.Commands.colors;
-import World16.Commands.commandblock;
-import World16.Commands.day;
-import World16.Commands.debug;
-import World16.Commands.echest;
-import World16.Commands.feed;
-import World16.Commands.fly;
-import World16.Commands.flyspeed;
-import World16.Commands.gmc;
-import World16.Commands.gms;
-import World16.Commands.gmsp;
-import World16.Commands.heal;
-import World16.Commands.isafk;
-import World16.Commands.jail;
-import World16.Commands.night;
-import World16.Commands.ram;
-import World16.Commands.setjail;
-import World16.Commands.setspawn;
-import World16.Commands.sign;
-import World16.Commands.spawn;
-import World16.Events.OnBedEnterEvent;
-import World16.Events.OnDeathEvent;
-import World16.Events.OnJoinEvent;
-import World16.Events.OnJoinTitleEvent;
-import World16.Events.OnLeaveEvent;
-import World16.Events.OnTpEvent;
+import World16.Commands.*;
+import World16.Commands.tp.tpa;
+import World16.Commands.tp.tpaccept;
+import World16.Commands.tp.tpdeny;
+import World16.Events.*;
 import World16.KeyCommands.Key;
 import World16.KeyCommands.MutiKeys;
 import World16.Translate.Translate;
@@ -37,9 +13,6 @@ import World16.Utils.CustomYmlManger;
 import World16.Utils.Metrics;
 import World16.test.test;
 import World16.test.test1;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -47,6 +20,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Main extends JavaPlugin {//implements Listener {
 
@@ -57,8 +34,10 @@ public class Main extends JavaPlugin {//implements Listener {
     //ARRAY LIST AND HASH MAPS
     ArrayList<String> Afk = afk.Afk;
     ArrayList<String> Fly = fly.Fly;
+    ArrayList<String> GodM = god.godm;
     HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
-    LinkedHashMap<String, Location> backmap = OnDeathEvent.backmap;
+    LinkedHashMap<String, Location> backm = back.backm;
+    LinkedHashMap<Player, Player> tpam = tpa.tpam;
     //END
     // GOT THE MYSQL API AT https://www.spigotmc.org/resources/simple-easy-mysql-api.36447/
     // GOT THE TITLE API AT https://www.spigotmc.org/resources/titleapi-1-8-1-13.1325/
@@ -84,14 +63,19 @@ public class Main extends JavaPlugin {//implements Listener {
     public void clear() {
         Afk.clear();
         Fly.clear();
+        GodM.clear();
+
         keyDataM.clear();
-        backmap.clear();
+        backm.clear();
+        tpam.clear();
     }
 
     public void regCommands() {
         new gmc(this);
         new gms(this);
         new gmsp(this);
+        new gma(this);
+
         new day(this);
         new night(this);
         new feed(this);
@@ -114,6 +98,12 @@ public class Main extends JavaPlugin {//implements Listener {
         new flyspeed(customyml, this);
         new isafk(customyml, this);
         new back(this);
+        new broadcast(customyml, this);
+        new god(this);
+
+        new tpa(customyml, this);
+        new tpaccept(customyml, this);
+        new tpdeny(customyml, this);
 
         new test(customyml, this);
         new test1(customyml, this);
@@ -123,7 +113,9 @@ public class Main extends JavaPlugin {//implements Listener {
         //Bukkit.getServer().getPluginManager().registerEvents(this, this);
         new OnJoinEvent(this);
         new OnLeaveEvent(this);
+        //...
         new OnDeathEvent(this);
+        new PlayerDamageEvent(this);
         new OnTpEvent(this);
         //...
         new OnBedEnterEvent(this);
@@ -143,6 +135,10 @@ public class Main extends JavaPlugin {//implements Listener {
         customyml.saveshit();
         customyml.reloadshit();
         // END OF Shit.yml
+    }
+
+    public void checkForPlugins() {
+
     }
 
     public void regAPIS() {
@@ -174,4 +170,5 @@ public class Main extends JavaPlugin {//implements Listener {
     public API getApi() {
         return api;
     }
+
 }

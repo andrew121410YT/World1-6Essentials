@@ -6,11 +6,12 @@ import World16.MysqlAPI.MySQL;
 import World16.Translate.Translate;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
-import java.util.HashMap;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.HashMap;
 
 public class Key implements CommandExecutor {
 
@@ -38,7 +39,7 @@ public class Key implements CommandExecutor {
         Player p = (Player) sender;
         // 1
         if (args.length == 0) {
-            if (!p.hasPermission("command.key.permission")) { // Permission
+            if (!p.hasPermission("world16.key")) { // Permission
                 api.PermissionErrorMessage(p);
                 return true;
             }
@@ -53,14 +54,14 @@ public class Key implements CommandExecutor {
 
             //SET
             if (args[0].equalsIgnoreCase("set")) {
-                if (!p.hasPermission("command.key.set.permission")) { // Permission
+                if (!p.hasPermission("world16.key.set")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
                 // STRING BUILDER
                 StringBuilder setData = new StringBuilder();
                 for (int i = 1; i < args.length; i++) {
-                    setData.append(args[i]).append("");
+                    setData.append(args[i]);
                     // END OF STRING BUILDER
                 }
                 String setDataDone = setData.toString(); // OUT PUT OF STRING BUILDER
@@ -74,7 +75,7 @@ public class Key implements CommandExecutor {
 
                 //GIVE
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("give"))) {
-                if (!p.hasPermission("command.key.give.permission")) {
+                if (!p.hasPermission("world16.key.give")) {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -83,7 +84,7 @@ public class Key implements CommandExecutor {
 
                 //RESET
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("reset"))) {
-                if (!p.hasPermission("command.key.reset.permission")) { // Permission
+                if (!p.hasPermission("world16.key.reset")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }

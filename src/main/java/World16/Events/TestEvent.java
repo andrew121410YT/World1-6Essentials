@@ -11,7 +11,7 @@ public class TestEvent implements Listener {
 //    }
 //
 //    @EventHandler
-//    public void Lol(AfkEvent e) {
+//    public void Lol(AfkCustomEvent e) {
 //        Player p = e.getPlayer();
 //
 //        p.sendMessage(World16.Translate.chat("OMG IT WORKED."));
