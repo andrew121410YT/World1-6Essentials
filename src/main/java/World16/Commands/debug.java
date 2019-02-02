@@ -1,5 +1,6 @@
 package World16.Commands;
 
+import World16.Commands.tp.tpa;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
@@ -25,6 +26,7 @@ public class debug implements CommandExecutor {
     //Maps
     HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
     LinkedHashMap<String, Location> backm = back.backm;
+    LinkedHashMap<Player, Player> tpam = tpa.tpam;
     //...
 
     //Lists
@@ -66,6 +68,7 @@ public class debug implements CommandExecutor {
             p.sendMessage(Translate.chat("/debug1-6 date"));
             p.sendMessage(Translate.chat("/debug1-6 playerversion"));
             p.sendMessage(Translate.chat("/debug1-6 checkuuid"));
+            p.sendMessage(Translate.chat("/debug1-6 debugmessages"));
             p.sendMessage(Translate.chat("/debug1-6 sql"));
             //p.sendMessage(World16.Translate.chat("/debug1-6 "));
             return true;
@@ -116,6 +119,7 @@ public class debug implements CommandExecutor {
                     if (args[1].equalsIgnoreCase("@all")) {
                         p.sendMessage(String.valueOf(Arrays.asList(keyDataM)));
                         p.sendMessage(String.valueOf(Arrays.asList(backm)));
+                        p.sendMessage(String.valueOf(Arrays.asList(tpam)));
                         return true;
                     } else if (args[1].equalsIgnoreCase("@checkmine")) {
                         p.sendMessage(Translate.chat("&4This is no longer working."));
@@ -222,26 +226,41 @@ public class debug implements CommandExecutor {
                         }
                     }
                 }
-                //}
-                //SQL
-            } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
-                if (!p.hasPermission("world16.debug.sql")) { // Permission
-                    api.PermissionErrorMessage(p);
-                    return true;
+                //DEBUG MESSAGES
+            } else if (args.length >= 1 && args[0].equalsIgnoreCase("debugmessages")) {
+                if (args.length == 1) {
+                    p.sendMessage(Translate.chat("&4Usage: /debug1-6 debugmessages on OR off"));
                 }
-                // String Builder
-                StringBuilder builder = new StringBuilder();
-                for (int i = 1; i < args.length; i++) {
-                    builder.append(args[i] + " ");
+                if (args.length == 2 && args[1].equalsIgnoreCase("on")) {
+                    this.plugin.getConfig().set("debug", "true");
+                    this.plugin.saveConfig();
+                    this.plugin.reloadConfig();
+                    p.sendMessage(Translate.chat("&bOK..."));
+                } else if (args.length == 2 && args[1].equalsIgnoreCase("off")) {
+                    this.plugin.getConfig().set("debug", "false");
+                    this.plugin.saveConfig();
+                    this.plugin.reloadConfig();
+                    p.sendMessage(Translate.chat("&bOK..."));
                 }
-                String msg = builder.toString();
-                mysql.Connect();
-                mysql.ExecuteCommand(msg);
-                p.sendMessage(Translate.chat("&4&lYour command has been executed thru SQL."));
-                p.sendMessage(Translate.chat("&aHere's the command you did &r" + msg));
-                return true;
-            } else {
             }
+            //SQL
+        } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
+            if (!p.hasPermission("world16.debug.sql")) { // Permission
+                api.PermissionErrorMessage(p);
+                return true;
+            }
+            // String Builder
+            StringBuilder builder = new StringBuilder();
+            for (int i = 1; i < args.length; i++) {
+                builder.append(args[i] + " ");
+            }
+            String msg = builder.toString();
+            mysql.Connect();
+            mysql.ExecuteCommand(msg);
+            p.sendMessage(Translate.chat("&4&lYour command has been executed thru SQL."));
+            p.sendMessage(Translate.chat("&aHere's the command you did &r" + msg));
+            return true;
+        } else {
             return true;
         }
         return true;
