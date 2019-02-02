@@ -1,5 +1,6 @@
 package World16.Commands.tp;
 
+import World16.CustomConfigs.ShitConfig;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Translate.Translate;
@@ -24,8 +25,8 @@ public class tpdeny implements CommandExecutor {
 
     private CustomYmlManger configinstance = null;
 
-    public tpdeny(CustomYmlManger getCustomYml, Main getPlugin) {
-        this.configinstance = getCustomYml;
+    public tpdeny(ShitConfig getCustomYml, Main getPlugin) {
+        this.configinstance = getCustomYml.getInstance();
         this.plugin = getPlugin;
 
         this.plugin.getCommand("tpdeny").setExecutor(this);

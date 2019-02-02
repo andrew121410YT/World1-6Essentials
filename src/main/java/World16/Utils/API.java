@@ -34,6 +34,7 @@ public class API {
     LinkedHashMap<String, Location> backm = back.backm;
     LinkedHashMap<Player, Player> tpam = tpa.tpam;
     //...
+
     // Lists
     ArrayList<String> Afk1 = afk.Afk;
     ArrayList<String> Fly1 = fly.Fly;
@@ -134,7 +135,7 @@ public class API {
         return afk.Afk;
     }
 
-    public ArrayList<String> getFlyArrayList(){
+    public ArrayList<String> getFlyArrayList() {
         return fly.Fly;
     }
 
@@ -328,16 +329,16 @@ public class API {
     //API FOR SPAWN
     public Location GetSpawn(String spawnname) {
         this.spawnname = spawnname.toLowerCase();
-        double x = this.configinstance.getshit().getInt("Spawn." + this.spawnname + ".Data.X");
-        double y = this.configinstance.getshit().getInt("Spawn." + this.spawnname + ".Data.Y");
-        double z = this.configinstance.getshit().getInt("Spawn." + this.spawnname + ".Data.Z");
-        float yaw = (float) this.configinstance.getshit()
+        double x = this.configinstance.getConfig().getInt("Spawn." + this.spawnname + ".Data.X");
+        double y = this.configinstance.getConfig().getInt("Spawn." + this.spawnname + ".Data.Y");
+        double z = this.configinstance.getConfig().getInt("Spawn." + this.spawnname + ".Data.Z");
+        float yaw = (float) this.configinstance.getConfig()
                 .getInt("Spawn." + this.spawnname + ".Data.Yaw");
-        float pitch = (float) this.configinstance.getshit()
+        float pitch = (float) this.configinstance.getConfig()
                 .getInt("Spawn." + this.spawnname + ".Data.Pitch");
         World world = Bukkit
                 .getWorld(
-                        this.configinstance.getshit().getString("Spawn." + this.spawnname + ".Data.World"));
+                        this.configinstance.getConfig().getString("Spawn." + this.spawnname + ".Data.World"));
 
         Location spawn = new Location(world, x, y, z, yaw, pitch);
         return spawn;
@@ -346,17 +347,17 @@ public class API {
     public void SetSpawn(Player p, double x, double y, double z, double yaw, double pitch,
                          String worldname, String spawnname) {
         this.spawnname1 = spawnname.toLowerCase();
-        this.configinstance.getshit().set("Spawn." + this.spawnname1 + ".Data.X", x);
-        this.configinstance.getshit().set("Spawn." + this.spawnname1 + ".Data.Y", y);
-        this.configinstance.getshit().set("Spawn." + this.spawnname1 + ".Data.Z", z);
-        this.configinstance.getshit().set("Spawn." + this.spawnname1 + ".Data.Yaw", yaw);
-        this.configinstance.getshit().set("Spawn." + this.spawnname1 + ".Data.Pitch", pitch);
-        this.configinstance.getshit().set("Spawn." + this.spawnname1 + ".Data.World", worldname);
-        this.configinstance.getshit()
+        this.configinstance.getConfig().set("Spawn." + this.spawnname1 + ".Data.X", x);
+        this.configinstance.getConfig().set("Spawn." + this.spawnname1 + ".Data.Y", y);
+        this.configinstance.getConfig().set("Spawn." + this.spawnname1 + ".Data.Z", z);
+        this.configinstance.getConfig().set("Spawn." + this.spawnname1 + ".Data.Yaw", yaw);
+        this.configinstance.getConfig().set("Spawn." + this.spawnname1 + ".Data.Pitch", pitch);
+        this.configinstance.getConfig().set("Spawn." + this.spawnname1 + ".Data.World", worldname);
+        this.configinstance.getConfig()
                 .set("Spawn." + this.spawnname1 + ".Player.Data.NAME", p.getDisplayName());
-        this.configinstance.getshit()
+        this.configinstance.getConfig()
                 .set("Spawn." + this.spawnname1 + ".Player.Data.UUID", p.getUniqueId().toString());
-        this.configinstance.saveshit();
+        this.configinstance.saveConfig();
     }
 
     public void PermissionErrorMessage(Player p) {

@@ -4,6 +4,7 @@ import World16.Commands.*;
 import World16.Commands.tp.tpa;
 import World16.Commands.tp.tpaccept;
 import World16.Commands.tp.tpdeny;
+import World16.CustomConfigs.ShitConfig;
 import World16.Events.*;
 import World16.KeyCommands.Key;
 import World16.KeyCommands.MutiKeys;
@@ -29,6 +30,7 @@ public class Main extends JavaPlugin {//implements Listener {
 
     private static Main plugin;
     private CustomYmlManger customyml;
+    private ShitConfig shityml;
     private API api;
 
     //ARRAY LIST AND HASH MAPS
@@ -46,7 +48,7 @@ public class Main extends JavaPlugin {//implements Listener {
 
     public void onEnable() {
         plugin = this;
-        regCustomYmlConfigGEN();
+        regCustomConfigs();
         regFileConfigGEN();
         regAPIS();
         regEvents();
@@ -81,29 +83,29 @@ public class Main extends JavaPlugin {//implements Listener {
         new feed(this);
         new heal(this);
         new fly(this);
-        new debug(customyml, this);
+        new debug(this);
         new commandblock(this);
         new bed(this);
         new ram(this);
-        new spawn(customyml, this);
+        new spawn(this.shityml, this);
         new echest(this);
         new sign(this);
         new Key(this); //KEY COMMAND
         new MutiKeys(this); //MKEY COMMAND
         new colors(this);
-        new setjail(customyml, this);
-        new setspawn(customyml, this);
-        new jail(customyml, this);
+        new setjail(this.shityml, this);
+        new setspawn(this.shityml, this);
+        new jail(this.shityml, this);
         new afk(this);
-        new flyspeed(customyml, this);
-        new isafk(customyml, this);
+        new flyspeed(this.shityml, this);
+        new isafk(this.shityml, this);
         new back(this);
-        new broadcast(customyml, this);
+        new broadcast(this.shityml, this);
         new god(this);
 
-        new tpa(customyml, this);
-        new tpaccept(customyml, this);
-        new tpdeny(customyml, this);
+        new tpa(this.shityml, this);
+        new tpaccept(this.shityml, this);
+        new tpdeny(this.shityml, this);
 
         new test(customyml, this);
         new test1(customyml, this);
@@ -128,13 +130,8 @@ public class Main extends JavaPlugin {//implements Listener {
         this.reloadConfig();
     }
 
-    public void regCustomYmlConfigGEN() {
-        customyml = new CustomYmlManger();
-        // Shit.yml
-        customyml.setupshit();
-        customyml.saveshit();
-        customyml.reloadshit();
-        // END OF Shit.yml
+    public void regCustomConfigs() {
+        this.shityml = new ShitConfig();
     }
 
     public void checkForPlugins() {

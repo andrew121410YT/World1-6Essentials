@@ -1,5 +1,6 @@
 package World16.Commands.tp;
 
+import World16.CustomConfigs.ShitConfig;
 import World16.CustomEvents.handlers.TpaEventHandler;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
@@ -25,8 +26,8 @@ public class tpa implements CommandExecutor {
 
     private CustomYmlManger configinstance = null;
 
-    public tpa(CustomYmlManger getCustomYml, Main getPlugin) {
-        this.configinstance = getCustomYml;
+    public tpa(ShitConfig getCustomYml, Main getPlugin) {
+        this.configinstance = getCustomYml.getInstance();
         this.plugin = getPlugin;
 
         this.plugin.getCommand("tpa").setExecutor(this);

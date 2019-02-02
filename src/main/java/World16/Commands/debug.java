@@ -5,7 +5,6 @@ import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Translate.Translate;
 import World16.Utils.API;
-import World16.Utils.CustomYmlManger;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -23,17 +22,22 @@ import java.util.LinkedHashMap;
 
 public class debug implements CommandExecutor {
 
+    //Maps
     HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
     LinkedHashMap<String, Location> backm = back.backm;
+    //...
+
+    //Lists
     ArrayList<String> Afk1 = afk.Afk;
     ArrayList<String> Fly1 = fly.Fly;
+    //...
+
     API api = new API();
     MySQL mysql = new MySQL();
-    private Main plugin;
-    private CustomYmlManger configinstance = null;
 
-    public debug(CustomYmlManger getCustomConfig, Main getPlugin) {
-        this.configinstance = getCustomConfig;
+    private Main plugin;
+
+    public debug(Main getPlugin) {
         this.plugin = getPlugin;
 
         this.plugin.getCommand("debug1-6").setExecutor(this);

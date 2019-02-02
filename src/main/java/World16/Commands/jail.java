@@ -1,5 +1,6 @@
 package World16.Commands;
 
+import World16.CustomConfigs.ShitConfig;
 import World16.Main.Main;
 import World16.Translate.Translate;
 import World16.Utils.API;
@@ -18,8 +19,8 @@ public class jail implements CommandExecutor {
     private Main plugin;
     private CustomYmlManger configinstance = null;
 
-    public jail(CustomYmlManger getCustomYml, Main getPlugin) {
-        this.configinstance = getCustomYml;
+    public jail(ShitConfig getCustomYml, Main getPlugin) {
+        this.configinstance = getCustomYml.getInstance();
         this.plugin = getPlugin;
         this.plugin.getCommand("jail").setExecutor(this);
     }
@@ -32,12 +33,12 @@ public class jail implements CommandExecutor {
         }
 
         Player p = (Player) sender;
-        double x = configinstance.getshit().getInt("Jail.Data.X");
-        double y = configinstance.getshit().getInt("Jail.Data.Y");
-        double z = configinstance.getshit().getInt("Jail.Data.Z");
-        float yaw = (float) configinstance.getshit().getInt("Jail.Data.Yaw");
-        float pitch = (float) configinstance.getshit().getInt("Jail.Data.Pitch");
-        World world = Bukkit.getWorld(configinstance.getshit().getString("Jail.Data.World"));
+        double x = configinstance.getConfig().getInt("Jail.Data.X");
+        double y = configinstance.getConfig().getInt("Jail.Data.Y");
+        double z = configinstance.getConfig().getInt("Jail.Data.Z");
+        float yaw = (float) configinstance.getConfig().getInt("Jail.Data.Yaw");
+        float pitch = (float) configinstance.getConfig().getInt("Jail.Data.Pitch");
+        World world = Bukkit.getWorld(configinstance.getConfig().getString("Jail.Data.World"));
 
         Location jail = new Location(world, x, y, z, yaw, pitch);
         // FileConfiguration file = plugin.getConfig();
