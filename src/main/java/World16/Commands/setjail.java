@@ -12,12 +12,14 @@ import org.bukkit.entity.Player;
 
 public class setjail implements CommandExecutor {
 
-    API api = new API();
+    API api;
     private Main plugin;
     private CustomYmlManger configinstance = null;
 
     public setjail(ShitConfig getCustomYml, Main getPlugin) {
         this.configinstance = getCustomYml.getInstance();
+        this.api = new API(this.configinstance);
+
         this.plugin = getPlugin;
         this.plugin.getCommand("setjail").setExecutor(this);
     }

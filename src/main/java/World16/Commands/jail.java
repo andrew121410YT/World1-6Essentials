@@ -15,12 +15,14 @@ import org.bukkit.entity.Player;
 
 public class jail implements CommandExecutor {
 
-    API api = new API();
+    API api;
     private Main plugin;
     private CustomYmlManger configinstance = null;
 
     public jail(ShitConfig getCustomYml, Main getPlugin) {
         this.configinstance = getCustomYml.getInstance();
+        this.api = new API(this.configinstance);
+
         this.plugin = getPlugin;
         this.plugin.getCommand("jail").setExecutor(this);
     }
@@ -34,7 +36,6 @@ public class jail implements CommandExecutor {
         Player p = (Player) sender;
 
         Location jail = api.getLocationFromFile(null,"Jail","default");
-        // FileConfiguration file = plugin.getConfig();
 
         if (!p.hasPermission("world16.jail")) {
             api.PermissionErrorMessage(p);
