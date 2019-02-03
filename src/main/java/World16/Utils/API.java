@@ -5,6 +5,7 @@ import World16.Commands.back;
 import World16.Commands.fly;
 import World16.Commands.god;
 import World16.Commands.tp.tpa;
+import World16.CustomExceptions.CustomYmlManagerInstanceException;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Translate.Translate;
@@ -330,28 +331,35 @@ public class API {
     private String Path2;
     private CustomYmlManger configinstance3;
 
-    //API FOR SPAWN
     public Location getLocationFromFile(CustomYmlManger configinstance, String Path, String nameoflocation) {
         this.configinstance2 = configinstance;
         this.Path = Path;
         this.locationname = nameoflocation.toLowerCase();
 
-        if (configinstance == null) {
+        if (configinstance == null && this.configinstance != null) {
             this.configinstance2 = this.configinstance;
         }
+        if (this.configinstance2 != null) {
+            double x = this.configinstance2.getConfig().getInt(this.Path + "." + this.locationname + ".Data.X");
+            double y = this.configinstance2.getConfig().getInt(this.Path + "." + this.locationname + ".Data.Y");
+            double z = this.configinstance2.getConfig().getInt(this.Path + "." + this.locationname + ".Data.Z");
+            float yaw = Float.parseFloat(this.configinstance2.getConfig().getString(this.Path + "." + this.locationname + ".Data.Yaw"));
+            float pitch = Float.parseFloat(this.configinstance2.getConfig()
+                    .getString(this.Path + "." + this.locationname + ".Data.Pitch"));
+            World world = Bukkit
+                    .getWorld(
+                            this.configinstance2.getConfig().getString(this.Path + "." + this.locationname + ".Data.World"));
 
-        double x = this.configinstance2.getConfig().getInt(this.Path + "." + this.locationname + ".Data.X");
-        double y = this.configinstance2.getConfig().getInt(this.Path + "." + this.locationname + ".Data.Y");
-        double z = this.configinstance2.getConfig().getInt(this.Path + "." + this.locationname + ".Data.Z");
-        float yaw = Float.parseFloat(this.configinstance2.getConfig().getString(this.Path + "." + this.locationname + ".Data.Yaw"));
-        float pitch = Float.parseFloat(this.configinstance2.getConfig()
-                .getString(this.Path + "." + this.locationname + ".Data.Pitch"));
-        World world = Bukkit
-                .getWorld(
-                        this.configinstance2.getConfig().getString(this.Path + "." + this.locationname + ".Data.World"));
-
-        Location location = new Location(world, x, y, z, yaw, pitch);
-        return location;
+            Location location = new Location(world, x, y, z, yaw, pitch);
+            return location;
+        } else {
+            try {
+                throw new CustomYmlManagerInstanceException("In World16.Utils.API this.configinstance2 == null");
+            } catch (CustomYmlManagerInstanceException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     public void setLocationToFile(CustomYmlManger configinstance, String path, String nameoflocation, Player p, double x, double y, double z, double yaw, double pitch,
@@ -360,21 +368,29 @@ public class API {
         this.Path2 = path;
         this.configinstance3 = configinstance;
 
-        if (configinstance == null) {
+        if (configinstance == null && this.configinstance != null) {
             this.configinstance3 = this.configinstance;
         }
 
-        this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.X", x);
-        this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Y", y);
-        this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Z", z);
-        this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Yaw", yaw);
-        this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Pitch", pitch);
-        this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.World", worldname);
-        this.configinstance3.getConfig()
-                .set(this.Path2 + "." + this.locationname2 + ".Player.Data.NAME", p.getDisplayName());
-        this.configinstance3.getConfig()
-                .set(this.Path2 + "." + this.locationname2 + ".Player.Data.UUID", p.getUniqueId().toString());
-        this.configinstance3.saveConfig();
+        if (this.configinstance3 != null) {
+            this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.X", x);
+            this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Y", y);
+            this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Z", z);
+            this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Yaw", yaw);
+            this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Pitch", pitch);
+            this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.World", worldname);
+            this.configinstance3.getConfig()
+                    .set(this.Path2 + "." + this.locationname2 + ".Player.Data.NAME", p.getDisplayName());
+            this.configinstance3.getConfig()
+                    .set(this.Path2 + "." + this.locationname2 + ".Player.Data.UUID", p.getUniqueId().toString());
+            this.configinstance3.saveConfig();
+        } else {
+            try {
+                throw new CustomYmlManagerInstanceException("In World16.Utils.API this.configinstance3 == null");
+            } catch (CustomYmlManagerInstanceException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void PermissionErrorMessage(Player p) {
