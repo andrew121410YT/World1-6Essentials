@@ -4,6 +4,8 @@ import World16.Main.Main;
 import World16.Translate.Translate;
 import World16.Utils.API;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -50,7 +52,17 @@ public class back implements CommandExecutor {
                     return true;
                 }
                 if (backm.get(p.getDisplayName() + "death") != null) {
-                    p.teleport(backm.get(p.getDisplayName() + "death"));
+                    Location deathlocation = backm.get(p.getDisplayName() + "death");
+
+                    if (deathlocation.getBlock().isLiquid() || deathlocation.getBlock().getRelative(BlockFace.DOWN).isLiquid()) {
+                        deathlocation.getBlock().getRelative(BlockFace.DOWN).setType(Material.LOG);
+                        deathlocation.getBlock().getRelative(BlockFace.EAST).setType(Material.LOG);
+                        deathlocation.getBlock().getRelative(BlockFace.NORTH).setType(Material.LOG);
+                        deathlocation.getBlock().getRelative(BlockFace.WEST).setType(Material.LOG);
+                        deathlocation.getBlock().getRelative(BlockFace.SOUTH).setType(Material.LOG);
+                        deathlocation.getBlock().setType(Material.AIR);
+                    }
+                    p.teleport(deathlocation);
                     return true;
                 } else {
                     p.sendMessage(Translate.chat("&4Look's like you didn't die yet."));
