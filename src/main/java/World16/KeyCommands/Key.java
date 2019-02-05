@@ -69,7 +69,7 @@ public class Key implements CommandExecutor {
 
                 keyapi.ReplaceKey(mysql, 1, p, setDataDone);
                 keyDataM.remove(p.getDisplayName());
-                keyDataM.put(p.getDisplayName(), new KeyObject(p.getDisplayName(), "default", setDataDone));
+                keyDataM.put(p.getDisplayName(), new KeyObject(p.getDisplayName(), setDataDone));
 
                 p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
                 return true;

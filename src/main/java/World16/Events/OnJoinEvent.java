@@ -61,7 +61,7 @@ public class OnJoinEvent implements Listener {
                 keyapi.SetKey(mysql, 1, p, "null");
             } else {
                 //GETS THE 1 KEY FROM THE PLAYER AND THEN IT STORES IT IN RAM FOR EASY ACCESS
-                keyDataM.put(p.getDisplayName(), new KeyObject(p.getDisplayName(), "default", giveKeyReturnTEMP));
+                keyDataM.put(p.getDisplayName(), new KeyObject(p.getDisplayName(), giveKeyReturnTEMP));
             }
         } else {
             plugin.getServer().getConsoleSender()
