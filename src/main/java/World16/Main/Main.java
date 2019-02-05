@@ -8,10 +8,10 @@ import World16.CustomConfigs.ShitConfig;
 import World16.Events.*;
 import World16.KeyCommands.Key;
 import World16.KeyCommands.MutiKeys;
-import World16.Translate.Translate;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManger;
 import World16.Utils.Metrics;
+import World16.Utils.Translate;
 import World16.test.test;
 import World16.test.test1;
 import org.bukkit.Bukkit;
@@ -122,7 +122,7 @@ public class Main extends JavaPlugin {//implements Listener {
         new OnDeathEvent(this);
         new PlayerDamageEvent(this);
         new OnTpEvent(this);
-//        new PistonEvent(this);
+        new PistonEvent(this);
         //...
         new OnBedEnterEvent(this);
         new OnJoinTitleEvent(this);

@@ -2,12 +2,10 @@ package World16.Commands;
 
 import World16.CustomConfigs.ShitConfig;
 import World16.Main.Main;
-import World16.Translate.Translate;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManger;
-import org.bukkit.Bukkit;
+import World16.Utils.Translate;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -35,7 +33,7 @@ public class jail implements CommandExecutor {
         }
         Player p = (Player) sender;
 
-        Location jail = api.getLocationFromFile(null,"Jail","default");
+        Location jail = api.getLocationFromFile(null, "Jail", "default");
 
         if (!p.hasPermission("world16.jail")) {
             api.PermissionErrorMessage(p);

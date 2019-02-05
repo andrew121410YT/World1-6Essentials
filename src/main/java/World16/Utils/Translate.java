@@ -1,4 +1,4 @@
-package World16.Translate;
+package World16.Utils;
 
 import org.bukkit.ChatColor;
 

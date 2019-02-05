@@ -1,7 +1,7 @@
 package World16.MysqlAPI;
 
-import World16.Translate.Translate;
 import World16.Utils.API;
+import World16.Utils.Translate;
 
 import java.sql.*;
 

@@ -2,9 +2,9 @@ package World16.Commands;
 
 import World16.CustomConfigs.ShitConfig;
 import World16.Main.Main;
-import World16.Translate.Translate;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManger;
+import World16.Utils.Translate;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

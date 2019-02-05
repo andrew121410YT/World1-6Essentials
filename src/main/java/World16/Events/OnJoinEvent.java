@@ -2,9 +2,9 @@ package World16.Events;
 
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
-import World16.Translate.Translate;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
+import World16.Utils.Translate;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

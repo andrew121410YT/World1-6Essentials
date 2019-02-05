@@ -1,7 +1,6 @@
 package World16.Utils;
 
 import World16.Main.Main;
-import World16.Translate.Translate;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

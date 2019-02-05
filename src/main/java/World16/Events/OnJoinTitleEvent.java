@@ -1,7 +1,7 @@
 package World16.Events;
 
 import World16.Main.Main;
-import World16.Translate.Translate;
+import World16.Utils.Translate;
 import World16.titleapi.TitleAPI;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
