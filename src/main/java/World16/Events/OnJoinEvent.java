@@ -2,6 +2,7 @@ package World16.Events;
 
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
+import World16.Objects.KeyObject;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
 import World16.Utils.Translate;
@@ -18,7 +19,10 @@ public class OnJoinEvent implements Listener {
 
     private static Main plugin;
 
-    public static HashMap<String, String> keyDataM = new HashMap<String, String>();
+    //Maps
+    public static HashMap<String, KeyObject> keyDataM = new HashMap<>();
+    //...
+
     MySQL mysql = new MySQL();
     API api = new API();
     KeyAPI keyapi = new KeyAPI();
@@ -57,7 +61,7 @@ public class OnJoinEvent implements Listener {
                 keyapi.SetKey(mysql, 1, p, "null");
             } else {
                 //GETS THE 1 KEY FROM THE PLAYER AND THEN IT STORES IT IN RAM FOR EASY ACCESS
-                keyDataM.put(p.getDisplayName(), giveKeyReturnTEMP);
+                keyDataM.put(p.getDisplayName(), new KeyObject(p.getDisplayName(), "default", giveKeyReturnTEMP));
             }
         } else {
             plugin.getServer().getConsoleSender()

@@ -8,6 +8,7 @@ import World16.CustomConfigs.ShitConfig;
 import World16.Events.*;
 import World16.KeyCommands.Key;
 import World16.KeyCommands.MutiKeys;
+import World16.Objects.KeyObject;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManger;
 import World16.Utils.Metrics;
@@ -43,7 +44,7 @@ public class Main extends JavaPlugin {//implements Listener {
     //...
 
     //Maps
-    HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
+    HashMap<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
     LinkedHashMap<String, Location> backm = back.backm;
     LinkedHashMap<Player, Player> tpam = tpa.tpam;
     //...

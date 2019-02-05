@@ -3,6 +3,7 @@ package World16.KeyCommands;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
+import World16.Objects.KeyObject;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
 import World16.Utils.Translate;
@@ -15,7 +16,7 @@ import java.util.HashMap;
 
 public class Key implements CommandExecutor {
 
-    HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
+    HashMap<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
 
     private Main plugin;
     API api = new API();
@@ -68,7 +69,7 @@ public class Key implements CommandExecutor {
 
                 keyapi.ReplaceKey(mysql, 1, p, setDataDone);
                 keyDataM.remove(p.getDisplayName());
-                keyDataM.put(p.getDisplayName(), setDataDone);
+                keyDataM.put(p.getDisplayName(), new KeyObject(p.getDisplayName(), "default", setDataDone));
 
                 p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
                 return true;

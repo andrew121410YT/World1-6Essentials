@@ -3,6 +3,7 @@ package World16.Utils;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
+import World16.Objects.KeyObject;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -19,7 +20,7 @@ import java.util.HashMap;
 public class KeyAPI {
 
     private static Plugin plugin = Main.getPlugin();
-    HashMap<String, String> keyDatam = OnJoinEvent.keyDataM;
+    HashMap<String, KeyObject> keyDatam = OnJoinEvent.keyDataM;
 
     // START
     public void giveKey(Player p, MySQL mysql) { //GIVES DEFAULT ID 1 KEY
@@ -91,7 +92,7 @@ public class KeyAPI {
         ItemStack item = new ItemStack(material, ammount);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setDisplayName(name);
-        itemMeta.setLore(Arrays.asList(keyDatam.get(p.getDisplayName())));
+        itemMeta.setLore(Arrays.asList(keyDatam.get(p.getDisplayName()).getKey1()));
         item.setItemMeta(itemMeta);
         p.getInventory().addItem(new ItemStack(item));
         p.sendMessage(Translate.chat("&aThere You Go."));

@@ -8,6 +8,7 @@ import World16.Commands.tp.tpa;
 import World16.CustomExceptions.CustomYmlManagerInstanceException;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
+import World16.Objects.KeyObject;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -30,7 +31,7 @@ import java.util.LinkedHashMap;
 public class API {
 
     // Maps
-    HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
+    HashMap<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
     LinkedHashMap<String, Location> backm = back.backm;
     LinkedHashMap<Player, Player> tpam = tpa.tpam;
     //...
