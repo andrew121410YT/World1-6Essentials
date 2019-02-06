@@ -68,8 +68,11 @@ public class Key implements CommandExecutor {
                 String setDataDone = setData.toString(); // OUT PUT OF STRING BUILDER
 
                 keyapi.ReplaceKey(mysql, 1, p, setDataDone);
-                keyDataM.remove(p.getDisplayName());
-                keyDataM.put(p.getDisplayName(), new KeyObject(p.getDisplayName(), setDataDone));
+                if (keyDataM.get(p.getDisplayName()) != null) {
+                    keyDataM.get(p.getDisplayName()).setKey1(setDataDone);
+                } else {
+                    p.kickPlayer("Please rejoin the server something went wrong.");
+                }
 
                 p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
                 return true;
@@ -80,7 +83,7 @@ public class Key implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                keyapi.giveKeyToPlayerFromRam(p,1);
+                keyapi.giveKeyToPlayerFromRam(p, 1);
                 return true;
 
                 //RESET

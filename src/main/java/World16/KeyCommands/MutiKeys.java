@@ -1,7 +1,9 @@
 package World16.KeyCommands;
 
+import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
+import World16.Objects.KeyObject;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
 import World16.Utils.Translate;
@@ -10,9 +12,15 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+
 public class MutiKeys implements CommandExecutor {
 
     private Main plugin;
+
+    //Maps
+    HashMap<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
+    //...
 
     API api = new API();
     MySQL mysql = new MySQL();
@@ -47,6 +55,7 @@ public class MutiKeys implements CommandExecutor {
             p.sendMessage(Translate.chat("&c/mkey set <KeyID> <Lore>"));
             p.sendMessage(Translate.chat("&3/mkey set <KeyID> <PlayerName> <Lore>"));
             p.sendMessage(Translate.chat("&c/mkey reset <KeyID> <PlayerName>"));
+            p.sendMessage(Translate.chat("&c/mkey fetch"));
             p.sendMessage(Translate.chat("&b---------------"));
             return true;
         } else {
@@ -60,7 +69,7 @@ public class MutiKeys implements CommandExecutor {
                     String KeyDataDone = args[1];
                     String PlayerNameDataDone = args[2];
 
-                    keyapi.giveKeyFromMysql(p,mysql,Integer.valueOf(KeyDataDone), PlayerNameDataDone);
+                    keyapi.giveKeyFromMysql(p, mysql, Integer.valueOf(KeyDataDone), PlayerNameDataDone);
                     return true;
                 } else if (args.length == 2) {
                     if (!p.hasPermission("world16.mkey.give")) {
@@ -69,7 +78,7 @@ public class MutiKeys implements CommandExecutor {
                     }
                     String KeyDataID = args[1];
 
-                    keyapi.giveKeyFromMysql(p,mysql,Integer.valueOf(KeyDataID), p.getDisplayName());
+                    keyapi.giveKeyFromMysql(p, mysql, Integer.valueOf(KeyDataID), p.getDisplayName());
                     return true;
                 }
             } else if (args[0].equalsIgnoreCase("reset")) {
@@ -119,33 +128,35 @@ public class MutiKeys implements CommandExecutor {
 
                     keyapi.SetKey(mysql, KeyDataIDDONE, p, Lore);
 
-//                    mysql.Connect();
-//                    mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataid
-//                            + "', '" + p.getDisplayName() + "', '" + Lore + "')");
-
                     p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
-//                    mysql.Disconnect();
                     return true;
                 } else if (args.length >= 4) {
                     if (!p.hasPermission("world16.mkey.set.other")) {
                         api.PermissionErrorMessage(p);
                         return true;
                     }
+
                     String KeyDataID = args[1]; //TAKES THE KEYDATAID
                     String PlayerNmaeTarget = args[2]; //TAKES THE PLAYER
                     String Lore = args[3]; //TAKES THE LORE
                     Integer KeyDataIDDONE = Integer.valueOf(KeyDataID); //CHANGES STRING TO INT
 
-                    try {
-                        keyapi.SetKey(mysql, KeyDataIDDONE, PlayerNmaeTarget, Lore);
-                        p.sendMessage(Translate.chat("&6This key has been set and stored in the mysql database."));
-                    } catch (NullPointerException e) {
-                        p.sendMessage(Translate.chat("&cThat Player Does Not Exist"));
-                    } finally {
-                        mysql.Disconnect();
-                    }
+                    keyapi.SetKey(mysql, KeyDataIDDONE, PlayerNmaeTarget, Lore);
+                    p.sendMessage(Translate.chat("&6This key has been set and stored in the mysql database."));
+                }
+            } else if (args[0].equalsIgnoreCase("fetch")) {
+                if (!p.hasPermission("world16.mkey.fetch")) {
+                    api.PermissionErrorMessage(p);
                     return true;
-                } else {
+                }
+                keyapi.giveAllKeysToRam(p.getDisplayName(), mysql);
+                return true;
+            } else if (args[0].equalsIgnoreCase("list")) {
+                if (args.length == 1) {
+                    p.sendMessage(Translate.chat("/mkey list @ram"));
+                } else if (args.length == 2) {
+                    KeyObject keyo = keyDataM.get(p.getDisplayName());
+                    p.sendMessage(Translate.chat("Keys: " + keyo.getKey1() + " " + keyo.getKey2() + " " + keyo.getKey3() + " " + keyo.getKey4() + " " + keyo.getKey5()));
                 }
             }
         }

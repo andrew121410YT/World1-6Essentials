@@ -51,7 +51,6 @@ public class KeyObject {
     }
     //---------------------------------------------------------------------------
 
-
     public String getPlayerName() {
         return playerName;
     }
