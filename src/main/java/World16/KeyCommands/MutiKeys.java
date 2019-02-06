@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 public class MutiKeys implements CommandExecutor {
 
     private Main plugin;
+
     API api = new API();
     MySQL mysql = new MySQL();
     KeyAPI keyapi = new KeyAPI();
@@ -32,6 +33,7 @@ public class MutiKeys implements CommandExecutor {
             sender.sendMessage("Only Players Can Use This Command.");
             return true;
         }
+
         if (args.length == 0) {
             if (!p.hasPermission("world16.mkey")) {
                 api.PermissionErrorMessage(p);
@@ -58,7 +60,7 @@ public class MutiKeys implements CommandExecutor {
                     String KeyDataDone = args[1];
                     String PlayerNameDataDone = args[2];
 
-                    keyapi.MkeyGetAnotherPlayerKey(mysql, p, KeyDataDone, PlayerNameDataDone);
+                    keyapi.giveKeyFromMysql(p,mysql,Integer.valueOf(KeyDataDone), PlayerNameDataDone);
                     return true;
                 } else if (args.length == 2) {
                     if (!p.hasPermission("world16.mkey.give")) {
@@ -67,7 +69,7 @@ public class MutiKeys implements CommandExecutor {
                     }
                     String KeyDataID = args[1];
 
-                    keyapi.MkeyGive(mysql, p, KeyDataID);
+                    keyapi.giveKeyFromMysql(p,mysql,Integer.valueOf(KeyDataID), p.getDisplayName());
                     return true;
                 }
             } else if (args[0].equalsIgnoreCase("reset")) {

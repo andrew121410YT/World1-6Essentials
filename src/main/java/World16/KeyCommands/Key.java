@@ -80,7 +80,7 @@ public class Key implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                keyapi.giveKeyFromTheRam(p);
+                keyapi.giveKeyToPlayerFromRam(p,1);
                 return true;
 
                 //RESET

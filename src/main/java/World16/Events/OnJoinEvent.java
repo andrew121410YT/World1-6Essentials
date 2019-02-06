@@ -52,7 +52,7 @@ public class OnJoinEvent implements Listener {
         //...
 
         if (!api.getHOST().equals("null")) {
-            String giveKeyReturnTEMP = keyapi.giveKeyReturn(p, mysql);
+            String giveKeyReturnTEMP = keyapi.giveKeyReturn(p.getDisplayName(), mysql, 1);
 
             if (giveKeyReturnTEMP == null) {
                 plugin.getServer().getConsoleSender().sendMessage(Translate.chat(
