@@ -102,26 +102,7 @@ public class KeyAPI {
                         String PlayerData = rs.getString("Player");
                         String LoreData = rs.getString("Lore");
                         if (keyDatam.get(playerName) != null) {
-                            switch (Integer.valueOf(KeyID)) {
-                                case 1:
-                                    keyDatam.get(playerName).setKey1(LoreData);
-                                    break;
-                                case 2:
-                                    keyDatam.get(playerName).setKey2(LoreData);
-                                    break;
-                                case 3:
-                                    keyDatam.get(playerName).setKey3(LoreData);
-                                    break;
-                                case 4:
-                                    keyDatam.get(playerName).setKey4(LoreData);
-                                    break;
-                                case 5:
-                                    keyDatam.get(playerName).setKey5(LoreData);
-                                default:
-                                    keyDatam.get(playerName).setKey1(LoreData);
-                            }
-                        } else {
-                            plugin.getServer().getConsoleSender().sendMessage(Translate.chat("&4Something went wrong in KeyAPI giveKeyReturnToRam Method."));
+                            keyDatam.get(playerName).setKey(Integer.valueOf(KeyID), LoreData);
                         }
 
                     }
@@ -147,31 +128,12 @@ public class KeyAPI {
 //                mysql.GetResult("SELECT * FROM KeyData WHERE Player='" + p.getPlayer().getDisplayName() + "';");
                 ResultSet rs = mysql.GetResult("SELECT * FROM KeyData WHERE (Player='" + playerName + "')");
                 try {
-                    if (rs.next()) {
+                    while (rs.next()) {
                         String KeyID = rs.getString("KeyDataID");
                         String PlayerData = rs.getString("Player");
                         String LoreData = rs.getString("Lore");
                         if (keyDatam.get(playerName) != null) {
-                            switch (Integer.valueOf(KeyID)) {
-                                case 1:
-                                    keyDatam.get(playerName).setKey1(LoreData);
-                                    break;
-                                case 2:
-                                    keyDatam.get(playerName).setKey2(LoreData);
-                                    break;
-                                case 3:
-                                    keyDatam.get(playerName).setKey3(LoreData);
-                                    break;
-                                case 4:
-                                    keyDatam.get(playerName).setKey4(LoreData);
-                                    break;
-                                case 5:
-                                    keyDatam.get(playerName).setKey5(LoreData);
-                                default:
-                                    keyDatam.get(playerName).setKey1(LoreData);
-                            }
-                        } else {
-                            plugin.getServer().getConsoleSender().sendMessage(Translate.chat("&4Something went wrong in KeyAPI giveKeyReturnToRam Method."));
+                            keyDatam.get(playerName).setKey(Integer.valueOf(KeyID), LoreData);
                         }
 
                     }
@@ -181,7 +143,6 @@ public class KeyAPI {
                 } finally {
                     mysql.Disconnect();
                 }
-                mysql.Disconnect();
             }
         }.runTaskAsynchronously(this.plugin);
     }

@@ -154,7 +154,7 @@ public class MutiKeys implements CommandExecutor {
             } else if (args[0].equalsIgnoreCase("list")) {
                 if (args.length == 1) {
                     p.sendMessage(Translate.chat("/mkey list @ram"));
-                } else if (args.length == 2) {
+                } else if (args.length == 2 && args[1].equalsIgnoreCase("@ram")) {
                     KeyObject keyo = keyDataM.get(p.getDisplayName());
                     p.sendMessage(Translate.chat("Keys: " + keyo.getKey1() + " " + keyo.getKey2() + " " + keyo.getKey3() + " " + keyo.getKey4() + " " + keyo.getKey5()));
                 }

@@ -1,6 +1,12 @@
 package World16.Objects;
 
+import World16.Main.Main;
+import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitRunnable;
+
 public class KeyObject {
+
+    private Main plugin = Main.getPlugin();
 
     String playerName;
 
@@ -50,6 +56,35 @@ public class KeyObject {
         this.key1 = key1;
     }
     //---------------------------------------------------------------------------
+    //Start of functions
+    public void setKey(Integer keyID,String key){
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                switch (keyID) {
+                    case 0:
+                        break;
+                    case 1:
+                        setKey1(key);
+                        break;
+                    case 2:
+                        setKey2(key);
+                        break;
+                    case 3:
+                        setKey3(key);
+                        break;
+                    case 4:
+                        setKey4(key);
+                        break;
+                    case 5:
+                        setKey5(key);
+                        break;
+                    default:
+                }
+            }
+        }.runTaskAsynchronously(this.plugin);
+    }
+    //...
 
     public String getPlayerName() {
         return playerName;
