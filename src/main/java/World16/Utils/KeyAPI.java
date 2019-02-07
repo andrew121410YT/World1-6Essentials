@@ -259,6 +259,34 @@ public class KeyAPI {
     }
 
     //1
+    public void SetKeyAndDeleteOldKey(MySQL mysql, int KeyDataID, Player p, String Lore) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                mysql.Connect();
+                mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + KeyDataID + "' AND Player='" + p.getDisplayName() + "'");
+                mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
+                        + p.getDisplayName() + "', '" + Lore + "')");
+                mysql.Disconnect();
+            }
+        }.runTaskAsynchronously(plugin);
+    }
+
+    //2
+    public void SetKeyAndDeleteOldKey(MySQL mysql, int KeyDataID, String p, String Lore) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                mysql.Connect();
+                mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + KeyDataID + "' AND Player='" + p + "'");
+                mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
+                        + p + "', '" + Lore + "')");
+                mysql.Disconnect();
+            }
+        }.runTaskAsynchronously(plugin);
+    }
+
+    //1
     public void ReplaceKey(MySQL mysql, int KeyDataID, Player p, String Lore) {
         new BukkitRunnable() {
             @Override

@@ -1,34 +1,33 @@
 package World16.Objects;
 
 import World16.Main.Main;
-import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class KeyObject {
 
     private Main plugin = Main.getPlugin();
 
-    String playerName;
+    String playerName = "null";
 
-    String keyName1;
-    Integer keyID1;
-    String key1;
+    String keyName1 = "null";
+    Integer keyID1 = 0;
+    String key1 = "null";
 
-    String keyName2;
-    Integer keyID2;
-    String key2;
+    String keyName2 = "null";
+    Integer keyID2 = 0;
+    String key2 = "null";
 
-    String keyName3;
-    Integer keyID3;
-    String key3;
+    String keyName3 = "null";
+    Integer keyID3 = 0;
+    String key3 = "null";
 
-    String keyName4;
-    Integer keyID4;
-    String key4;
+    String keyName4 = "null";
+    Integer keyID4 = 0;
+    String key4 = "null";
 
-    String keyName5;
-    Integer keyID5;
-    String key5;
+    String keyName5 = "null";
+    Integer keyID5 = 0;
+    String key5 = "null";
 
     public KeyObject() {
     }
@@ -55,9 +54,10 @@ public class KeyObject {
         this.keyID1 = keyID1;
         this.key1 = key1;
     }
+
     //---------------------------------------------------------------------------
     //Start of functions
-    public void setKey(Integer keyID,String key){
+    public void setKey(Integer keyID, String key) {
         new BukkitRunnable() {
             @Override
             public void run() {

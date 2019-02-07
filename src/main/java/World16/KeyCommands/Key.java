@@ -79,13 +79,15 @@ public class Key implements CommandExecutor {
 
                     if (keyDataM.get(p.getDisplayName()) != null) {
                         keyDataM.get(p.getDisplayName()).setKey(keyID, setDataDone);
-                        keyapi.ClearKeyDataID(mysql,p,keyID);
-                        keyapi.SetKey(mysql, keyID,p,setDataDone);
+                        keyapi.SetKeyAndDeleteOldKey(mysql,keyID,p,setDataDone);
+                        p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
+                        return true;
                     } else {
                         p.kickPlayer("Please rejoin the server something went wrong.");
+                        return true;
                     }
-
-                    p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
+                }else{
+                    p.sendMessage(Translate.chat("&cUsage: /key set <KeyID> <Lore>"));
                     return true;
                 }
 
@@ -124,7 +126,7 @@ public class Key implements CommandExecutor {
                 } else if (args.length == 2 && args[1].equalsIgnoreCase("@everything")) {
                     keyapi.ResetEverythingFromPlayerMySQL(mysql, p);
                     keyDataM.remove(p.getDisplayName());
-                    p.sendMessage(Translate.chat("&cOK..."));
+                    p.sendMessage(Translate.chat("&bOK..."));
                     return true;
                 }
             }else if (args.length >= 1 && args[0].equalsIgnoreCase("list")){
