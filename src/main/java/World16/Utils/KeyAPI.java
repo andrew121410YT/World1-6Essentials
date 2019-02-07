@@ -183,6 +183,30 @@ public class KeyAPI {
 //
 //
     //1
+    public void ResetEverythingFromPlayerMySQL(MySQL mysql, Player p) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                mysql.Connect();
+                mysql.ExecuteCommand("DELETE FROM KeyData WHERE Player='" + p.getDisplayName() + "'");
+                mysql.Disconnect();
+            }
+        }.runTaskAsynchronously(plugin);
+    }
+
+    //2
+    public void ResetEverythingFromPlayerMySQL(MySQL mysql, String p) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                mysql.Connect();
+                mysql.ExecuteCommand("DELETE FROM KeyData WHERE Player='" + p + "'");
+                mysql.Disconnect();
+            }
+        }.runTaskAsynchronously(plugin);
+    }
+
+    //1
     public void ClearKeyDataID(MySQL mysql, Player p, int INT) {
         new BukkitRunnable() {
             @Override
@@ -212,6 +236,7 @@ public class KeyAPI {
             @Override
             public void run() {
                 mysql.Connect();
+//                mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + KeyDataID + "' AND Player='" + p.getDisplayName() + "'");
                 mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
                         + p.getDisplayName() + "', '" + Lore + "')");
                 mysql.Disconnect();
@@ -225,6 +250,7 @@ public class KeyAPI {
             @Override
             public void run() {
                 mysql.Connect();
+//                mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + KeyDataID + "' AND Player='" + p + "'");
                 mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
                         + p + "', '" + Lore + "')");
                 mysql.Disconnect();

@@ -52,17 +52,9 @@ public class OnJoinEvent implements Listener {
         //...
 
         if (!api.getHOST().equals("null")) {
-            String giveKeyReturnTEMP = keyapi.giveKeyReturn(p.getDisplayName(), mysql, 1);
-
-            if (giveKeyReturnTEMP == null) {
-                plugin.getServer().getConsoleSender().sendMessage(Translate.chat(
-                        API.USELESS + " &9The Player: " + p.getDisplayName()
-                                + " is not in the Database so gonna add them..."));
-                keyapi.SetKey(mysql, 1, p, "null");
-            } else {
-                //GETS THE 1 KEY FROM THE PLAYER AND THEN IT STORES IT IN RAM FOR EASY ACCESS
-                keyDataM.put(p.getDisplayName(), new KeyObject(p.getDisplayName(), giveKeyReturnTEMP));
-            }
+            keyDataM.remove(p.getDisplayName());
+            keyDataM.put(p.getDisplayName(), new KeyObject(p.getDisplayName(), 1,"null"));
+            keyapi.giveAllKeysToRam(p.getDisplayName(),mysql);
         } else {
             plugin.getServer().getConsoleSender()
                     .sendMessage(Translate.chat(API.USELESS

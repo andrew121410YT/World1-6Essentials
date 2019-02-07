@@ -56,6 +56,7 @@ public class MutiKeys implements CommandExecutor {
             p.sendMessage(Translate.chat("&3/mkey set <KeyID> <PlayerName> <Lore>"));
             p.sendMessage(Translate.chat("&c/mkey reset <KeyID> <PlayerName>"));
             p.sendMessage(Translate.chat("&c/mkey fetch"));
+            p.sendMessage(Translate.chat("&c/mkey list"));
             p.sendMessage(Translate.chat("&b---------------"));
             return true;
         } else {
