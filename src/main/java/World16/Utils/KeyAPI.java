@@ -207,7 +207,7 @@ public class KeyAPI {
     }
 
     //1
-    public void ClearKeyDataID(MySQL mysql, Player p, int INT) {
+    public void DeleteKeyDataID(MySQL mysql, Player p, int INT) {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -219,7 +219,7 @@ public class KeyAPI {
     }
 
     //2
-    public void ClearKeyDataID(MySQL mysql, String p, int INT) {
+    public void DeleteKeyDataID(MySQL mysql, String p, int INT) {
         new BukkitRunnable() {
             @Override
             public void run() {

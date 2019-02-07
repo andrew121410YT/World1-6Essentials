@@ -49,9 +49,10 @@ public class API {
 
     //Finals
     public static final Integer VERSION = 7;
-    public static final String DATE_OF_VERSION = "2/6/2019";
+    public static final String DATE_OF_VERSION = "2/7/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
-    public static final String USELESS = "" + PREFIX + "->[&bUSELESS&r]";
+    public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
+    public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
     public static final String TOO_DAMN_OLD = "Your mc version is too damn old 1.11 up too 1.13.2 please.";
     public static final String SOMETHING_WENT_WRONG = "Something went wrong.";
     //...
@@ -399,23 +400,23 @@ public class API {
     }
 
     public void ClearHashMapMessage(String place) {
-        plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS
+        plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS_TAG
                 + " Class: World16.Utils.API has cleared the HashMap of " + place + " For EVERY PLAYER"));
     }
 
     public void ClearHashMapMessage(String place, Player p) {
-        plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS
+        plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS_TAG
                 + " Class: World16.Utils.API has cleared the HashMap of " + place + " For Player: " + p
                 .getDisplayName()));
     }
 
     public void ClearArrayListMessage(String place) {
-        plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS
+        plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS_TAG
                 + " Class: World16.Utils.API has cleared the ArrayList of " + place + " For EVERY PLAYER"));
     }
 
     public void ClearArrayListMessage(String place, Player p) {
-        plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS
+        plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS_TAG
                 + " Class: World16.Utils.API has cleared the ArrayList of " + place + " For Player: " + p
                 .getDisplayName()));
     }

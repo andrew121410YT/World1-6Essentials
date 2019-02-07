@@ -98,7 +98,7 @@ public class MutiKeys implements CommandExecutor {
                             p.sendMessage(Translate.chat("&cFor reseting KeyID 1 please use /key reset"));
                             return true;
                         }
-                        keyapi.ClearKeyDataID(mysql, playertarget, keydataidDONE);
+                        keyapi.DeleteKeyDataID(mysql, playertarget, keydataidDONE);
                         p.sendMessage(Translate.chat("&bOK..."));
                         return true;
                     } else {
@@ -107,7 +107,7 @@ public class MutiKeys implements CommandExecutor {
                             String playertarget = args[2];
                             Integer keydataidDONE = Integer.valueOf(keydataid);
                             if (args[3].equalsIgnoreCase("@bypass")) {
-                                keyapi.ClearKeyDataID(mysql, playertarget, keydataidDONE);
+                                keyapi.DeleteKeyDataID(mysql, playertarget, keydataidDONE);
                                 p.sendMessage(Translate.chat("&bOK..."));
                                 p.sendMessage(Translate.chat("YOU Bypassed!!!"));
                             } else {

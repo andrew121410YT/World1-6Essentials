@@ -57,7 +57,7 @@ public class OnJoinEvent implements Listener {
             keyapi.giveAllKeysToRam(p.getDisplayName(),mysql);
         } else {
             plugin.getServer().getConsoleSender()
-                    .sendMessage(Translate.chat(API.USELESS
+                    .sendMessage(Translate.chat(API.USELESS_TAG
                             + " Please make sure too put in the mysql details in the config.yml."));
         }
     }
