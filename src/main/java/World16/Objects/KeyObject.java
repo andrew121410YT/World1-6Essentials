@@ -84,6 +84,26 @@ public class KeyObject {
             }
         }.runTaskAsynchronously(this.plugin);
     }
+
+    public String getKey(Integer keyID) {
+        switch (keyID) {
+            case 0:
+                break;
+            case 1:
+                return getKey1();
+            case 2:
+                return getKey2();
+            case 3:
+                return getKey3();
+            case 4:
+                return getKey4();
+            case 5:
+                return getKey5();
+            default:
+                return null;
+        }
+        return null;
+    }
     //...
 
     public String getPlayerName() {

@@ -26,7 +26,7 @@ public class KeyAPI {
 
     // START
 
-    public void giveKeyFromMysql(Player p, MySQL mysql, Integer keyDataID, String playerToGet) { //GIVES DEFAULT ID 1 KEY
+    public void giveKeyToPlayerFromMySQL(Player p, MySQL mysql, Integer keyDataID, String playerToGet) { //GIVES DEFAULT ID 1 KEY
         new BukkitRunnable() {
 
             @Override
@@ -155,25 +155,8 @@ public class KeyAPI {
         ItemStack item = new ItemStack(material, ammount);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setDisplayName(name);
-        switch (keyDataID) {
-            case 1:
-                itemMeta.setLore(Arrays.asList(keyDatam.get(p.getDisplayName()).getKey1()));
-                break;
-            case 2:
-                itemMeta.setLore(Arrays.asList(keyDatam.get(p.getDisplayName()).getKey2()));
-                break;
-            case 3:
-                itemMeta.setLore(Arrays.asList(keyDatam.get(p.getDisplayName()).getKey3()));
-                break;
-            case 4:
-                itemMeta.setLore(Arrays.asList(keyDatam.get(p.getDisplayName()).getKey4()));
-                break;
-            case 5:
-                itemMeta.setLore(Arrays.asList(keyDatam.get(p.getDisplayName()).getKey5()));
-                break;
-            default:
-                itemMeta.setLore(Arrays.asList(keyDatam.get(p.getDisplayName()).getKey1()));
-        }
+        itemMeta.setLore(Arrays.asList(keyDatam.get(p.getDisplayName()).getKey(keyDataID)));
+
         item.setItemMeta(itemMeta);
         p.getInventory().addItem(new ItemStack(item));
         p.sendMessage(Translate.chat("&aThere You Go."));
@@ -236,7 +219,6 @@ public class KeyAPI {
             @Override
             public void run() {
                 mysql.Connect();
-//                mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + KeyDataID + "' AND Player='" + p.getDisplayName() + "'");
                 mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
                         + p.getDisplayName() + "', '" + Lore + "')");
                 mysql.Disconnect();
@@ -250,7 +232,6 @@ public class KeyAPI {
             @Override
             public void run() {
                 mysql.Connect();
-//                mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + KeyDataID + "' AND Player='" + p + "'");
                 mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
                         + p + "', '" + Lore + "')");
                 mysql.Disconnect();

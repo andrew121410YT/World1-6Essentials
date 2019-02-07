@@ -70,7 +70,7 @@ public class MutiKeys implements CommandExecutor {
                     String KeyDataDone = args[1];
                     String PlayerNameDataDone = args[2];
 
-                    keyapi.giveKeyFromMysql(p, mysql, Integer.valueOf(KeyDataDone), PlayerNameDataDone);
+                    keyapi.giveKeyToPlayerFromMySQL(p, mysql, Integer.valueOf(KeyDataDone), PlayerNameDataDone);
                     return true;
                 } else if (args.length == 2) {
                     if (!p.hasPermission("world16.mkey.give")) {
@@ -79,7 +79,7 @@ public class MutiKeys implements CommandExecutor {
                     }
                     String KeyDataID = args[1];
 
-                    keyapi.giveKeyFromMysql(p, mysql, Integer.valueOf(KeyDataID), p.getDisplayName());
+                    keyapi.giveKeyToPlayerFromMySQL(p, mysql, Integer.valueOf(KeyDataID), p.getDisplayName());
                     return true;
                 }
             } else if (args[0].equalsIgnoreCase("reset")) {

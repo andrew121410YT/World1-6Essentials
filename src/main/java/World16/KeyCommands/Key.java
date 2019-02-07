@@ -63,10 +63,10 @@ public class Key implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                if (args.length == 1){
+                if (args.length == 1) {
                     p.sendMessage(Translate.chat("&cUsage: /key set <KeyID> <Lore>"));
                     return true;
-                }else if (args.length == 3) {
+                } else if (args.length == 3) {
                     Integer keyID = Integer.valueOf(args[1]);
 
                     // STRING BUILDER
@@ -79,14 +79,14 @@ public class Key implements CommandExecutor {
 
                     if (keyDataM.get(p.getDisplayName()) != null) {
                         keyDataM.get(p.getDisplayName()).setKey(keyID, setDataDone);
-                        keyapi.SetKeyAndDeleteOldKey(mysql,keyID,p,setDataDone);
+                        keyapi.SetKeyAndDeleteOldKey(mysql, keyID, p, setDataDone);
                         p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
                         return true;
                     } else {
                         p.kickPlayer("Please rejoin the server something went wrong.");
                         return true;
                     }
-                }else{
+                } else {
                     p.sendMessage(Translate.chat("&cUsage: /key set <KeyID> <Lore>"));
                     return true;
                 }
@@ -97,14 +97,14 @@ public class Key implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                if (args.length == 1){
+                if (args.length == 1) {
                     p.sendMessage(Translate.chat("&cUsage: /key give <KeyID>"));
-                }else if (args.length >= 2) {
+                } else if (args.length >= 2) {
                     Integer keyID = Integer.valueOf(args[1]);
                     if (keyID <= 5) {
                         keyapi.giveKeyToPlayerFromRam(p, keyID);
                         return true;
-                    }else{
+                    } else {
                         p.sendMessage(Translate.chat("&cRight now keys can only go up too 5."));
                     }
                 }
@@ -129,9 +129,9 @@ public class Key implements CommandExecutor {
                     p.sendMessage(Translate.chat("&bOK..."));
                     return true;
                 }
-            }else if (args.length >= 1 && args[0].equalsIgnoreCase("list")){
-                if (args.length == 1){
-                    if (keyDataM.get(p.getDisplayName())!= null) {
+            } else if (args.length >= 1 && args[0].equalsIgnoreCase("list")) {
+                if (args.length == 1) {
+                    if (keyDataM.get(p.getDisplayName()) != null) {
                         KeyObject keyObject = keyDataM.get(p.getDisplayName());
                         p.sendMessage(Translate.chat("&6Keys: &aKeyID1 =&9 {key1} &aKeyID2 =&9 {key2} &aKeyID3 =&9 {key3} &aKeyID4 =&9 {key4} &aKeyID5 =&9 {key5}")
                                 .replace("{key1}", keyObject.getKey1())

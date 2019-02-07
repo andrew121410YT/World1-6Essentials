@@ -53,8 +53,8 @@ public class OnJoinEvent implements Listener {
 
         if (!api.getHOST().equals("null")) {
             keyDataM.remove(p.getDisplayName());
-            keyDataM.put(p.getDisplayName(), new KeyObject(p.getDisplayName(), 1,"null"));
-            keyapi.giveAllKeysToRam(p.getDisplayName(),mysql);
+            keyDataM.put(p.getDisplayName(), new KeyObject(p.getDisplayName(), 1, "null"));
+            keyapi.giveAllKeysToRam(p.getDisplayName(), mysql);
         } else {
             plugin.getServer().getConsoleSender()
                     .sendMessage(Translate.chat(API.USELESS_TAG
