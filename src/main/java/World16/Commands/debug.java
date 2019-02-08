@@ -5,6 +5,7 @@ import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Objects.KeyObject;
+import World16.Objects.LocationObject;
 import World16.Utils.API;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
@@ -26,7 +27,7 @@ public class debug implements CommandExecutor {
 
     //Maps
     HashMap<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    LinkedHashMap<String, Location> backm = back.backm;
+    LinkedHashMap<String, LocationObject> backm = back.backm;
     LinkedHashMap<Player, Player> tpam = tpa.tpam;
     //...
 

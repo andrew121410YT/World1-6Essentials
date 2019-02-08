@@ -1,6 +1,7 @@
 package World16.Commands;
 
 import World16.Main.Main;
+import World16.Objects.LocationObject;
 import World16.Utils.API;
 import World16.Utils.Translate;
 import org.bukkit.Location;
@@ -19,13 +20,19 @@ public class back implements CommandExecutor {
     private Main plugin;
 
     //Maps
-    public static LinkedHashMap<String, Location> backm = new LinkedHashMap<>();
+    public static LinkedHashMap<String, LocationObject> backm = new LinkedHashMap<>();
     //...
 
     public back(Main getPlugin) {
         this.plugin = getPlugin;
         this.plugin.getCommand("back").setExecutor(this);
     }
+
+    /**
+     * Death ID for getLocation is 1;
+     * Tp ID for GetLocation is 2;
+     * Set ID for GetLocation is 3;
+     */
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -51,8 +58,8 @@ public class back implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                if (backm.get(p.getDisplayName() + "death") != null) {
-                    Location deathlocation = backm.get(p.getDisplayName() + "death");
+                if (backm.get(p.getDisplayName()).getLocation("death") != null) {
+                    Location deathlocation = backm.get(p.getDisplayName()).getLocation("back");
 
                     if (deathlocation.getBlock().isLiquid() || deathlocation.getBlock().getRelative(BlockFace.DOWN).isLiquid()) {
                         deathlocation.getBlock().getRelative(BlockFace.DOWN).setType(Material.LOG);
@@ -75,8 +82,8 @@ public class back implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                if (backm.get(p.getDisplayName() + "tp") != null) {
-                    p.teleport(backm.get(p.getDisplayName() + "tp"));
+                if (backm.get(p.getDisplayName()) != null && backm.get(p.getDisplayName()).getLocation("tp") != null) {
+                    p.teleport(backm.get(p.getDisplayName()).getLocation("tp"));
                 } else {
                     p.sendMessage(Translate.chat("&4Something went wrong."));
                     return true;
@@ -87,8 +94,8 @@ public class back implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                backm.remove(p.getDisplayName() + "set");
-                backm.put(p.getDisplayName() + "set", p.getLocation());
+//                backm.put(p.getDisplayName() + "set", p.getLocation());
+                backm.get(p.getDisplayName()).setLocation("set", 3, p.getLocation());
                 p.sendMessage(Translate.chat("[&9Back&r] &aYour back has been set."));
                 return true;
             }
@@ -98,8 +105,8 @@ public class back implements CommandExecutor {
                 api.PermissionErrorMessage(p);
                 return true;
             }
-            if (backm.get(p.getDisplayName() + "set") != null) {
-                p.teleport(backm.get(p.getDisplayName() + "set"));
+            if (backm.get(p.getDisplayName()) != null && backm.get(p.getDisplayName()).getLocation("set") != null) {
+                p.teleport(backm.get(p.getDisplayName()).getLocation("set"));
                 p.sendMessage(Translate.chat("[&9Back&r] &aTheir you go."));
                 return true;
             } else {

@@ -9,6 +9,7 @@ import World16.CustomExceptions.CustomYmlManagerInstanceException;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
+import World16.Objects.LocationObject;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -32,7 +33,7 @@ public class API {
 
     // Maps
     HashMap<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    LinkedHashMap<String, Location> backm = back.backm;
+    LinkedHashMap<String, LocationObject> backm = back.backm;
     LinkedHashMap<Player, Player> tpam = tpa.tpam;
     //...
 
@@ -49,7 +50,7 @@ public class API {
 
     //Finals
     public static final Integer VERSION = 7;
-    public static final String DATE_OF_VERSION = "2/7/2019";
+    public static final String DATE_OF_VERSION = "2/8/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
@@ -159,9 +160,6 @@ public class API {
         keyDataM.remove(p.getDisplayName());
 
         backm.remove(p.getDisplayName());
-        backm.remove(p.getDisplayName() + "death");
-        backm.remove(p.getDisplayName() + "tp");
-        backm.remove(p.getDisplayName() + "set");
 
         tpam.remove(p);
 

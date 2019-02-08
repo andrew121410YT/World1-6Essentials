@@ -2,6 +2,7 @@ package World16.Events;
 
 import World16.Commands.back;
 import World16.Main.Main;
+import World16.Objects.LocationObject;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,7 +16,7 @@ public class OnDeathEvent implements Listener {
     private static Main plugin;
 
     //HASHMAPS
-    LinkedHashMap<String, Location> backm = back.backm;
+    LinkedHashMap<String, LocationObject> backm = back.backm;
 
     public OnDeathEvent(Main getPlugin) {
         plugin = getPlugin;
@@ -27,8 +28,6 @@ public class OnDeathEvent implements Listener {
     public void OnDeath(PlayerDeathEvent event) {
         Player p = event.getEntity();
 
-        backm.remove(p.getDisplayName() + "death");
-
-        backm.put(p.getDisplayName() + "death", p.getLocation());
+        backm.get(p.getDisplayName()).setLocation("death",1,p.getLocation());
     }
 }
