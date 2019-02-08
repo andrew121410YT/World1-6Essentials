@@ -1,8 +1,10 @@
 package World16.Events;
 
+import World16.Commands.back;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Objects.KeyObject;
+import World16.Objects.LocationObject;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
 import World16.Utils.Translate;
@@ -14,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class OnJoinEvent implements Listener {
 
@@ -21,6 +24,7 @@ public class OnJoinEvent implements Listener {
 
     //Maps
     public static HashMap<String, KeyObject> keyDataM = new HashMap<>();
+    LinkedHashMap<String, LocationObject> backM = back.backm;
     //...
 
     MySQL mysql = new MySQL();
@@ -60,6 +64,8 @@ public class OnJoinEvent implements Listener {
                     .sendMessage(Translate.chat(API.USELESS_TAG
                             + " Please make sure too put in the mysql details in the config.yml."));
         }
+
+        backM.put(p.getDisplayName(), new LocationObject(p.getDisplayName()));
     }
 
     public void version(Player p) {

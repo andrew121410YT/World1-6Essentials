@@ -35,6 +35,10 @@ public class LocationObject {
     public LocationObject() {
     }
 
+    public LocationObject(String playerName) {
+        this.playerName = playerName;
+    }
+
     public LocationObject(Integer locationID1, Location location1) {
         this("UNKNOWN", "default", locationID1, location1);
     }
