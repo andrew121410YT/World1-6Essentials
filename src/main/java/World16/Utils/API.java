@@ -146,6 +146,18 @@ public class API {
         return god.godm;
     }
 
+    public HashMap<String, KeyObject> getKeyDataHashMap() {
+        return OnJoinEvent.keyDataM;
+    }
+
+    public LinkedHashMap<String, LocationObject> getBackLinkedHashMap() {
+        return back.backm;
+    }
+
+    public LinkedHashMap<Player, Player> getTpaLinkedHashMap() {
+        return tpa.tpam;
+    }
+
     public void clearArrayListAndHashMaps(Player p) {
         clearAllHashMaps(p);
         clearAllArrayList(p);
@@ -353,7 +365,7 @@ public class API {
             return location;
         } else {
             try {
-                throw new CustomYmlManagerInstanceException("In World16.Utils.API this.configinstance2 == null");
+                throw new CustomYmlManagerInstanceException(Translate.chat(EMERGENCY_TAG + " In World16.Utils.API this.configinstance2 == null"));
             } catch (CustomYmlManagerInstanceException e) {
                 e.printStackTrace();
             }
@@ -385,7 +397,7 @@ public class API {
             this.configinstance3.saveConfig();
         } else {
             try {
-                throw new CustomYmlManagerInstanceException("In World16.Utils.API this.configinstance3 == null");
+                throw new CustomYmlManagerInstanceException(Translate.chat(EMERGENCY_TAG + " In World16.Utils.API this.configinstance3 == null"));
             } catch (CustomYmlManagerInstanceException e) {
                 e.printStackTrace();
             }
