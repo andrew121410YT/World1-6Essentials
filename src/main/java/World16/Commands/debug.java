@@ -9,7 +9,6 @@ import World16.Objects.LocationObject;
 import World16.Utils.API;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,10 +17,7 @@ import org.bukkit.entity.Player;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 public class debug implements CommandExecutor {
 
@@ -71,6 +67,7 @@ public class debug implements CommandExecutor {
             p.sendMessage(Translate.chat("/debug1-6 playerversion"));
             p.sendMessage(Translate.chat("/debug1-6 checkuuid"));
             p.sendMessage(Translate.chat("/debug1-6 debugmessages"));
+            p.sendMessage(Translate.chat("/debug1-6 finddefaultspawn"));
             p.sendMessage(Translate.chat("/debug1-6 sql"));
             //p.sendMessage(World16.Translate.chat("/debug1-6 "));
             return true;
@@ -116,6 +113,7 @@ public class debug implements CommandExecutor {
                             "[&3/debug1-6 checkhashmaps &5@checkmine&r] &9<-- show's what is stored in the HashMap of you."));
                     p.sendMessage(Translate.chat(
                             "[&3/debug1-6 checkhashmaps &c@all&r] &9<-- Show's everything in the HashMap"));
+                    p.sendMessage(Translate.chat("[&3/debug-1-6 checkhashmaps &c@checkAllWithDepth] &9<-- Show's Everything but you can see what's in the classes."));
                     return true;
                 } else if (args.length >= 2) {
                     if (args[1].equalsIgnoreCase("@all")) {
@@ -125,6 +123,22 @@ public class debug implements CommandExecutor {
                         return true;
                     } else if (args[1].equalsIgnoreCase("@checkmine")) {
                         p.sendMessage(Translate.chat("&4This is no longer working."));
+                        return true;
+                    }else if (args[1].equalsIgnoreCase("@checkAllWithDepth")){
+                        p.sendMessage(Translate.chat(String.valueOf(Arrays.asList(tpam))));
+
+                        for (Map.Entry<String, LocationObject> entry : backm.entrySet()){
+                            String key = entry.getKey();
+                            Object value = entry.getValue();
+                            p.sendMessage(Translate.chat("BackDataM: " +String.valueOf( ((LocationObject) value).getLocation("death") + "   "+ String.valueOf(((LocationObject) value).getLocation("tp")) + "   "+ String.valueOf(((LocationObject) value).getLocation("set")))));
+                        }
+
+                        for (Map.Entry<String, KeyObject> entry : keyDataM.entrySet()){
+                            String key = entry.getKey();
+                            Object value = entry.getValue();
+                            p.sendMessage(Translate.chat("KeyDataM: " + ((KeyObject) value).getKey(1) +"   "+ ((KeyObject) value).getKey(2) +"   "+ ((KeyObject) value).getKey(3) +"   "+ ((KeyObject) value).getKey(4) +"   "+ ((KeyObject) value).getKey(5)));
+                        }
+                        return true;
                     }
                 }
 
@@ -230,6 +244,10 @@ public class debug implements CommandExecutor {
                 }
                 //DEBUG MESSAGES
             } else if (args.length >= 1 && args[0].equalsIgnoreCase("debugmessages")) {
+                if (!p.hasPermission("world16.debug.debugmessages")){
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
                 if (args.length == 1) {
                     p.sendMessage(Translate.chat("&4Usage: /debug1-6 debugmessages on OR off"));
                 }
@@ -244,26 +262,36 @@ public class debug implements CommandExecutor {
                     this.plugin.reloadConfig();
                     p.sendMessage(Translate.chat("&bOK..."));
                 }
-            }
-            //SQL
-        } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
-            if (!p.hasPermission("world16.debug.sql")) { // Permission
-                api.PermissionErrorMessage(p);
+            } else if (args.length == 1 && args[0].equalsIgnoreCase("finddefaultspawn")) {
+                if (!p.hasPermission("world16.debug.finddefaultspawn")) {
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
+                p.teleport(this.plugin.getServer().getWorld(p.getWorld().getName()).getSpawnLocation());
+                return true;
+
+                //SQL
+            } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
+                if (!p.hasPermission("world16.debug.sql")) { // Permission
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
+                // String Builder
+                StringBuilder builder = new StringBuilder();
+                for (int i = 1; i < args.length; i++) {
+                    builder.append(args[i] + " ");
+                }
+                String msg = builder.toString();
+
+                mysql.Connect();
+                mysql.ExecuteCommand(msg);
+                mysql.Disconnect();
+                p.sendMessage(Translate.chat("&4&lYour command has been executed thru SQL."));
+                p.sendMessage(Translate.chat("&aHere's the command you did &r" + msg));
+                return true;
+            } else {
                 return true;
             }
-            // String Builder
-            StringBuilder builder = new StringBuilder();
-            for (int i = 1; i < args.length; i++) {
-                builder.append(args[i] + " ");
-            }
-            String msg = builder.toString();
-            mysql.Connect();
-            mysql.ExecuteCommand(msg);
-            p.sendMessage(Translate.chat("&4&lYour command has been executed thru SQL."));
-            p.sendMessage(Translate.chat("&aHere's the command you did &r" + msg));
-            return true;
-        } else {
-            return true;
         }
         return true;
     }
