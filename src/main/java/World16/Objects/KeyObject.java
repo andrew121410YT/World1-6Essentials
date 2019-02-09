@@ -56,7 +56,30 @@ public class KeyObject {
     }
 
     //---------------------------------------------------------------------------
-    //Start of functions
+
+    @Override
+    public String toString() {
+        return "KeyObject{" +
+                "playerName='" + playerName + '\'' +
+                ", keyName1='" + keyName1 + '\'' +
+                ", keyID1=" + keyID1 +
+                ", key1='" + key1 + '\'' +
+                ", keyName2='" + keyName2 + '\'' +
+                ", keyID2=" + keyID2 +
+                ", key2='" + key2 + '\'' +
+                ", keyName3='" + keyName3 + '\'' +
+                ", keyID3=" + keyID3 +
+                ", key3='" + key3 + '\'' +
+                ", keyName4='" + keyName4 + '\'' +
+                ", keyID4=" + keyID4 +
+                ", key4='" + key4 + '\'' +
+                ", keyName5='" + keyName5 + '\'' +
+                ", keyID5=" + keyID5 +
+                ", key5='" + key5 + '\'' +
+                '}';
+    }
+
+    //  Custom Functions:
     public void setKey(Integer keyID, String key) {
         new BukkitRunnable() {
             @Override

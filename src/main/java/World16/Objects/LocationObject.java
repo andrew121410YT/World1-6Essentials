@@ -63,7 +63,29 @@ public class LocationObject {
     }
 //...
 
-    //Functions:
+    @Override
+    public String toString() {
+        return "LocationObject{" +
+                "playerName='" + playerName + '\'' +
+                ", locationName1='" + locationName1 + '\'' +
+                ", locationID1=" + locationID1 +
+                ", location1=" + location1 +
+                ", locationName2='" + locationName2 + '\'' +
+                ", locationID2=" + locationID2 +
+                ", location2=" + location2 +
+                ", locationName3='" + locationName3 + '\'' +
+                ", locationID3=" + locationID3 +
+                ", location3=" + location3 +
+                ", locationName4='" + locationName4 + '\'' +
+                ", locationID4=" + locationID4 +
+                ", location4=" + location4 +
+                ", locationName5='" + locationName5 + '\'' +
+                ", locationID5=" + locationID5 +
+                ", location5=" + location5 +
+                '}';
+    }
+
+    //Custom Functions:
     public Location getLocation(Integer LocationID) {
         switch (LocationID) {
             case 0:

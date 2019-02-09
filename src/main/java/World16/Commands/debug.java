@@ -124,19 +124,19 @@ public class debug implements CommandExecutor {
                     } else if (args[1].equalsIgnoreCase("@checkmine")) {
                         p.sendMessage(Translate.chat("&4This is no longer working."));
                         return true;
-                    }else if (args[1].equalsIgnoreCase("@checkAllWithDepth")){
+                    }else if (args[1].equalsIgnoreCase("@AllWithDepth")){
                         p.sendMessage(Translate.chat(String.valueOf(Arrays.asList(tpam))));
 
                         for (Map.Entry<String, LocationObject> entry : backm.entrySet()){
                             String key = entry.getKey();
                             Object value = entry.getValue();
-                            p.sendMessage(Translate.chat("BackDataM: " +String.valueOf( ((LocationObject) value).getLocation("death") + "   "+ String.valueOf(((LocationObject) value).getLocation("tp")) + "   "+ String.valueOf(((LocationObject) value).getLocation("set")))));
+                            p.sendMessage(Translate.chat(value.toString()));
                         }
 
                         for (Map.Entry<String, KeyObject> entry : keyDataM.entrySet()){
                             String key = entry.getKey();
                             Object value = entry.getValue();
-                            p.sendMessage(Translate.chat("KeyDataM: " + ((KeyObject) value).getKey(1) +"   "+ ((KeyObject) value).getKey(2) +"   "+ ((KeyObject) value).getKey(3) +"   "+ ((KeyObject) value).getKey(4) +"   "+ ((KeyObject) value).getKey(5)));
+                            p.sendMessage(Translate.chat(value.toString()));
                         }
                         return true;
                     }
