@@ -1,3 +1,14 @@
 World16.Commands
+World16.Commands.tp
+World16.CustomConfigs
+World16.CustomEvents.Events
+World16.CustomEvents.handlers
+World16.CustomExceptions
 World16.Events
+World16.KeyCommands
+World16.Main
+World16.MysqlAPI
+World16.Objects
 World16.Utils
+World16.test
+World16.titleapi
