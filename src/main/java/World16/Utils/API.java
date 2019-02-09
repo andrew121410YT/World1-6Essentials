@@ -77,6 +77,9 @@ public class API {
     // END MAIN
     // START OF MYSQL
 
+    /**
+     * @return The ip/host domain
+     */
     public String getHOST() {
         if (this.HOST != null) {
             return this.HOST;
@@ -85,6 +88,9 @@ public class API {
         }
     }
 
+    /**
+     * @return MySQL database name
+     */
     public String getDATABASE() {
         if (this.DATABASE != null) {
             return this.DATABASE;
@@ -93,6 +99,9 @@ public class API {
         }
     }
 
+    /**
+     * @return the Username for MySQL
+     */
     public String getUSER() {
         if (this.USER != null) {
             return this.USER;
@@ -101,6 +110,10 @@ public class API {
         }
     }
 
+    /**
+     * @return the Password for MySQL
+     */
+    @Deprecated
     public String getPASSWORD() {
         if (this.PASSWORD != null) {
             return this.PASSWORD;
@@ -109,6 +122,9 @@ public class API {
         }
     }
 
+    /**
+     * @return Returns the port number in a string form
+     */
     public String getPORT() {
         if (this.PORT != null) {
             return this.PORT;
@@ -118,56 +134,122 @@ public class API {
     }
     // END OF MYSQL
 
+    /**
+     * Check weather or not the player is afk
+     * @param p Player
+     * @return True or False
+     */
     public boolean isAfk(Player p) {
         return Afk1.contains(p.getDisplayName());
     }
 
+    /**
+     * Check weather or not the player is flying
+     * @param p Player
+     * @return True or False
+     */
     public boolean isFlying(Player p) {
         return Fly1.contains(p.getDisplayName()) || p.isFlying();
     }
 
+    /**
+     * Check if the player is in god mode
+     * @param p Player
+     * @return True or False
+     */
     public boolean isGod(Player p) {
         return GodM.contains(p.getDisplayName());
     }
 
+    /**
+     * Check if the plugin is in debug mode
+     * @return True or False
+     */
     public boolean isDebug() {
         return plugin.getConfig().getString("debug").equalsIgnoreCase("true");
     }
 
+    /**
+     * Returns the afk ArrayList
+     * The ArrayList contains the names of players that our afk
+     *
+     * @return ArrayList
+     */
     public ArrayList<String> getAfkArrayList() {
         return afk.Afk;
     }
 
+    /**
+     * Returns the fly ArrayList
+     * The ArrayList contains the names of the players that did /fly
+     *
+     * @return ArrayList
+     */
     public ArrayList<String> getFlyArrayList() {
         return fly.Fly;
     }
 
+    /**
+     * Returns the god ArrayList
+     * The ArrayList contains the names of the players that our in god mode
+     *
+     * @return ArrayList
+     */
     public ArrayList<String> getGodArrayList() {
         return god.godm;
     }
 
+    /**
+     * Returns the keyDataM HashMap
+     * This hashmap stores the keys for /key
+     *
+     * @return HashMap
+     */
     public HashMap<String, KeyObject> getKeyDataHashMap() {
         return OnJoinEvent.keyDataM;
     }
 
+    /**
+     * Returns the backm LinkedHashMap
+     * This LinkedHashMap stores the back locations when you die and tp ETC.
+     *
+     * @return LinkedHashMap
+     */
     public LinkedHashMap<String, LocationObject> getBackLinkedHashMap() {
         return back.backm;
     }
 
+    /**
+     * Returns the tpam LinkedHashMap
+     * This LinkedHashMap stores the player that did the tpa request and the player who gonna receive the request.
+     *
+     * @return LinkedHashMap
+     */
     public LinkedHashMap<Player, Player> getTpaLinkedHashMap() {
         return tpa.tpam;
     }
 
+    /**
+     * Removes the player from every Maps And Lists.
+     * @param p Player
+     */
     public void clearArrayListAndHashMaps(Player p) {
         clearAllHashMaps(p);
         clearAllArrayList(p);
     }
 
+    /**
+     * Removes everything from the Maps And Lists.
+     */
     public void clearArrayListAndHashMaps() {
         clearAllHashMaps();
         clearAllArrayList();
     }
 
+    /**
+     * Removes the player from every Map And List
+     * @param p Player
+     */
     public void clearAllHashMaps(Player p) {
         keyDataM.remove(p.getDisplayName());
 
@@ -182,6 +264,9 @@ public class API {
         }
     }
 
+    /**
+     * Removes Everything from the Maps and Lists.
+     */
     public void clearAllHashMaps() {
         keyDataM.clear();
 
@@ -196,6 +281,10 @@ public class API {
         }
     }
 
+    /**
+     * Removes everything that contains too the player.
+     * @param p Player
+     */
     public void clearAllArrayList(Player p) {
         Afk1.remove(p.getDisplayName());
 
@@ -210,6 +299,9 @@ public class API {
         }
     }
 
+    /**
+     * Clears every Lists.
+     */
     public void clearAllArrayList() {
         Afk1.clear();
 
@@ -224,6 +316,11 @@ public class API {
         }
     }
 
+    /**
+     * Formats the time for you.
+     * @param time Give it LocationDataTime Object
+     * @return Formatted tiem in a string.
+     */
     public String FormatTime(LocalDateTime time) {
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
         String formattedDate = time.format(myFormatObj);
@@ -231,6 +328,10 @@ public class API {
         return formattedDate;
     }
 
+    /**
+     * Returns you the time.
+     * @return Time in a string.
+     */
     public String Time() {
         LocalDateTime time = LocalDateTime.now();
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
@@ -239,6 +340,10 @@ public class API {
         return formattedDate;
     }
 
+    /**
+     * Returns the SUM of the server version.
+     * @return Version in string.
+     */
     public String getServerVersion() {
         String version = plugin.getServer().getVersion();
         if (version.contains("1.13") || version.contains("1.13.1") || version.contains("1.13.2")) {
@@ -253,6 +358,10 @@ public class API {
         return TOO_DAMN_OLD;
     }
 
+    /**
+     * @param p Player
+     * @return Returns the SUM of the player minecraft version.
+     */
     public String getTheSumPlayerVersion(Player p) {
         if (viaapi == null) {
             return SOMETHING_WENT_WRONG;
@@ -287,6 +396,10 @@ public class API {
         }
     }
 
+    /**
+     * @param p Player
+     * @return Returns the player minecraft version
+     */
     public String getPlayerVersion(Player p) {
         switch (viaapi.getPlayerVersion(p)) {
             case 404:
@@ -324,6 +437,15 @@ public class API {
         return viaapi.getPlayerVersion(p);
     }
 
+    /**
+     * You give it a minecraft name and it returns the UUID for it
+     * BUT the UUID is a string.
+     *
+     * @param playername Give it a player name
+     * @return A UUID in stirng.
+     * @throws IOException IOException
+     * @throws ParseException ParseException
+     */
     public String getUUIDFromMojangAPI(String playername) throws IOException, ParseException {
         URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + playername);
         String uuid = (String) ((JSONObject) new JSONParser()
@@ -342,6 +464,13 @@ public class API {
     private String Path2;
     private CustomYmlManger configinstance3;
 
+    /**
+     * Gets the location from the file and it returns you a Location.
+     * @param configinstance CustomYmlManger
+     * @param Path  Just a path you want to set the data.
+     * @param nameoflocation Name of the lcoation?
+     * @return A Location.
+     */
     public Location getLocationFromFile(CustomYmlManger configinstance, String Path, String nameoflocation) {
         this.configinstance2 = configinstance;
         this.Path = Path;
@@ -373,6 +502,19 @@ public class API {
         return null;
     }
 
+    /**
+     * Sets the Location that you give it too the file.
+     * @param configinstance ConfigInstance is CustomYmlManager Object.
+     * @param path Where the data is gonna be stored.
+     * @param nameoflocation the name of the location that you want to set.
+     * @param p Player
+     * @param x The X Cord
+     * @param y The Y Cord
+     * @param z The Z Cord
+     * @param yaw The Yaw Cord
+     * @param pitch The Pitch Cord
+     * @param worldname The World name
+     */
     public void setLocationToFile(CustomYmlManger configinstance, String path, String nameoflocation, Player p, double x, double y, double z, double yaw, double pitch,
                                   String worldname) {
         this.locationname2 = nameoflocation.toLowerCase();
@@ -404,6 +546,10 @@ public class API {
         }
     }
 
+    /**
+     * Permission Deny Message
+     * @param p Player
+     */
     public void PermissionErrorMessage(Player p) {
         p.sendMessage(
                 Translate.chat(PREFIX + " &cYou Do Not Have Permission To Use This Command."));
