@@ -148,7 +148,7 @@ public class debug implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                api.clearAllArrayList();
+                api.clearAllLists();
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
 
@@ -158,7 +158,7 @@ public class debug implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                api.clearAllHashMaps();
+                api.clearAllMaps();
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
 
@@ -169,7 +169,7 @@ public class debug implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                api.clearAllHashMaps(p);
+                api.clearAllMaps(p);
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
 

@@ -49,8 +49,8 @@ public class API {
     ViaAPI viaapi = Via.getAPI(); // https://docs.viaversion.com/display/VIAVERSION/Basic+API+usage
 
     //Finals
-    public static final Integer VERSION = 7;
-    public static final String DATE_OF_VERSION = "2/8/2019";
+    public static final Integer VERSION = 8;
+    public static final String DATE_OF_VERSION = "2/9/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
@@ -136,6 +136,7 @@ public class API {
 
     /**
      * Check weather or not the player is afk
+     *
      * @param p Player
      * @return True or False
      */
@@ -145,6 +146,7 @@ public class API {
 
     /**
      * Check weather or not the player is flying
+     *
      * @param p Player
      * @return True or False
      */
@@ -154,6 +156,7 @@ public class API {
 
     /**
      * Check if the player is in god mode
+     *
      * @param p Player
      * @return True or False
      */
@@ -163,6 +166,7 @@ public class API {
 
     /**
      * Check if the plugin is in debug mode
+     *
      * @return True or False
      */
     public boolean isDebug() {
@@ -170,60 +174,54 @@ public class API {
     }
 
     /**
-     * Returns the afk ArrayList
      * The ArrayList contains the names of players that our afk
      *
-     * @return ArrayList
+     * @return the afk ArrayList
      */
     public ArrayList<String> getAfkArrayList() {
         return afk.Afk;
     }
 
     /**
-     * Returns the fly ArrayList
      * The ArrayList contains the names of the players that did /fly
      *
-     * @return ArrayList
+     * @return the fly ArrayList
      */
     public ArrayList<String> getFlyArrayList() {
         return fly.Fly;
     }
 
     /**
-     * Returns the god ArrayList
      * The ArrayList contains the names of the players that our in god mode
      *
-     * @return ArrayList
+     * @return the god ArrayList
      */
     public ArrayList<String> getGodArrayList() {
         return god.godm;
     }
 
     /**
-     * Returns the keyDataM HashMap
      * This hashmap stores the keys for /key
      *
-     * @return HashMap
+     * @return the keyDataM HashMap
      */
     public HashMap<String, KeyObject> getKeyDataHashMap() {
         return OnJoinEvent.keyDataM;
     }
 
     /**
-     * Returns the backm LinkedHashMap
      * This LinkedHashMap stores the back locations when you die and tp ETC.
      *
-     * @return LinkedHashMap
+     * @return the backm LinkedHashMap
      */
     public LinkedHashMap<String, LocationObject> getBackLinkedHashMap() {
         return back.backm;
     }
 
     /**
-     * Returns the tpam LinkedHashMap
      * This LinkedHashMap stores the player that did the tpa request and the player who gonna receive the request.
      *
-     * @return LinkedHashMap
+     * @return he tpam LinkedHashMap
      */
     public LinkedHashMap<Player, Player> getTpaLinkedHashMap() {
         return tpa.tpam;
@@ -231,26 +229,28 @@ public class API {
 
     /**
      * Removes the player from every Maps And Lists.
+     *
      * @param p Player
      */
-    public void clearArrayListAndHashMaps(Player p) {
-        clearAllHashMaps(p);
-        clearAllArrayList(p);
+    public void clearListAndMaps(Player p) {
+        clearAllMaps(p);
+        clearAllLists(p);
     }
 
     /**
      * Removes everything from the Maps And Lists.
      */
-    public void clearArrayListAndHashMaps() {
-        clearAllHashMaps();
-        clearAllArrayList();
+    public void clearListAndMaps() {
+        clearAllMaps();
+        clearAllLists();
     }
 
     /**
      * Removes the player from every Map And List
+     *
      * @param p Player
      */
-    public void clearAllHashMaps(Player p) {
+    public void clearAllMaps(Player p) {
         keyDataM.remove(p.getDisplayName());
 
         backm.remove(p.getDisplayName());
@@ -267,7 +267,7 @@ public class API {
     /**
      * Removes Everything from the Maps and Lists.
      */
-    public void clearAllHashMaps() {
+    public void clearAllMaps() {
         keyDataM.clear();
 
         backm.clear();
@@ -283,9 +283,10 @@ public class API {
 
     /**
      * Removes everything that contains too the player.
+     *
      * @param p Player
      */
-    public void clearAllArrayList(Player p) {
+    public void clearAllLists(Player p) {
         Afk1.remove(p.getDisplayName());
 
         Fly1.remove(p.getDisplayName());
@@ -302,7 +303,7 @@ public class API {
     /**
      * Clears every Lists.
      */
-    public void clearAllArrayList() {
+    public void clearAllLists() {
         Afk1.clear();
 
         Fly1.clear();
@@ -318,6 +319,7 @@ public class API {
 
     /**
      * Formats the time for you.
+     *
      * @param time Give it LocationDataTime Object
      * @return Formatted tiem in a string.
      */
@@ -330,6 +332,7 @@ public class API {
 
     /**
      * Returns you the time.
+     *
      * @return Time in a string.
      */
     public String Time() {
@@ -342,6 +345,7 @@ public class API {
 
     /**
      * Returns the SUM of the server version.
+     *
      * @return Version in string.
      */
     public String getServerVersion() {
@@ -443,7 +447,7 @@ public class API {
      *
      * @param playername Give it a player name
      * @return A UUID in stirng.
-     * @throws IOException IOException
+     * @throws IOException    IOException
      * @throws ParseException ParseException
      */
     public String getUUIDFromMojangAPI(String playername) throws IOException, ParseException {
@@ -466,8 +470,9 @@ public class API {
 
     /**
      * Gets the location from the file and it returns you a Location.
+     *
      * @param configinstance CustomYmlManger
-     * @param Path  Just a path you want to set the data.
+     * @param Path           Just a path you want to set the data.
      * @param nameoflocation Name of the lcoation?
      * @return A Location.
      */
@@ -504,16 +509,17 @@ public class API {
 
     /**
      * Sets the Location that you give it too the file.
+     *
      * @param configinstance ConfigInstance is CustomYmlManager Object.
-     * @param path Where the data is gonna be stored.
+     * @param path           Where the data is gonna be stored.
      * @param nameoflocation the name of the location that you want to set.
-     * @param p Player
-     * @param x The X Cord
-     * @param y The Y Cord
-     * @param z The Z Cord
-     * @param yaw The Yaw Cord
-     * @param pitch The Pitch Cord
-     * @param worldname The World name
+     * @param p              Player
+     * @param x              The X Cord
+     * @param y              The Y Cord
+     * @param z              The Z Cord
+     * @param yaw            The Yaw Cord
+     * @param pitch          The Pitch Cord
+     * @param worldname      The World name
      */
     public void setLocationToFile(CustomYmlManger configinstance, String path, String nameoflocation, Player p, double x, double y, double z, double yaw, double pitch,
                                   String worldname) {
@@ -548,6 +554,7 @@ public class API {
 
     /**
      * Permission Deny Message
+     *
      * @param p Player
      */
     public void PermissionErrorMessage(Player p) {
