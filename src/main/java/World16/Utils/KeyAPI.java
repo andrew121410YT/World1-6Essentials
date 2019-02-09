@@ -16,6 +16,10 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * The Key API for the /key and /mkey
+ * @author Andrew121410
+ */
 public class KeyAPI {
 
     private static Plugin plugin = Main.getPlugin();
@@ -27,7 +31,7 @@ public class KeyAPI {
     // START
 
     /**
-     * This gets the key stright from the database
+     * Gets the key stright from the database
      *
      * @param p           Player that your gonna give the key too
      * @param mysql       mysql object
@@ -73,7 +77,7 @@ public class KeyAPI {
     }
 
     /**
-     * Get a Key by it's ID and then it returns it.
+     * Get's a Key by it's ID and then it returns it.
      *
      * @param playerName Player Name String
      * @param mysql      mysql object

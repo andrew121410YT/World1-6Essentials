@@ -5,6 +5,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
+/**
+ * NO LONGER WORKING his runs when the player tp's
+ * @author Andrew121410
+ * @deprecated
+ */
 public class TpCustomEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
