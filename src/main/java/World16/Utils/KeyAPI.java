@@ -26,6 +26,14 @@ public class KeyAPI {
 
     // START
 
+    /**
+     * This gets the key stright from the database
+     *
+     * @param p           Player that your gonna give the key too
+     * @param mysql       mysql object
+     * @param keyDataID   the id
+     * @param playerToGet the player to get.
+     */
     public void giveKeyToPlayerFromMySQL(Player p, MySQL mysql, Integer keyDataID, String playerToGet) { //GIVES DEFAULT ID 1 KEY
         new BukkitRunnable() {
 
@@ -64,6 +72,14 @@ public class KeyAPI {
         }.runTask(plugin);
     }
 
+    /**
+     * Get a Key by it's ID and then it returns it.
+     *
+     * @param playerName Player Name String
+     * @param mysql      mysql object
+     * @param keyDataID  Key ID
+     * @return returns the key string from mysql.
+     */
     public String giveKeyReturn(String playerName, MySQL mysql, Integer keyDataID) { //RETURNS KEY
         mysql.Connect();
 //        ResultSet rs =
@@ -85,6 +101,13 @@ public class KeyAPI {
         return null;
     }
 
+    /**
+     * Gets the key from the mysql database and stores in ram for easy access.
+     *
+     * @param playerName Player name
+     * @param mysql      mysql object
+     * @param keyDataID  Key ID
+     */
     public void giveKeyToRam(String playerName, MySQL mysql, Integer keyDataID) { //RETURNS KEY
 
         new BukkitRunnable() {
@@ -117,6 +140,12 @@ public class KeyAPI {
         }.runTaskAsynchronously(this.plugin);
     }
 
+    /**
+     * Gets every key for the player and it stores it in ram for easy access.
+     *
+     * @param playerName Player name string
+     * @param mysql      mysql object
+     */
     public void giveAllKeysToRam(String playerName, MySQL mysql) { //RETURNS KEY
 
         new BukkitRunnable() {
@@ -147,6 +176,12 @@ public class KeyAPI {
         }.runTaskAsynchronously(this.plugin);
     }
 
+    /**
+     * Gets the key from the ram and it gives it too the player
+     *
+     * @param p         Player
+     * @param keyDataID Key ID
+     */
     public void giveKeyToPlayerFromRam(Player p, Integer keyDataID) { //GETS THE 1 KEY FROM THE MEMORY.
         Material material = Material.TRIPWIRE_HOOK;
         int ammount = 1;
