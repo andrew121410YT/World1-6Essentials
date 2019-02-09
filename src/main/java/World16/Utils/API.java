@@ -29,6 +29,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+/**
+ * The Bass API for World1-6Ess
+ *
+ * @author Andrew121410
+ */
 public class API {
 
     // Maps
@@ -70,6 +75,11 @@ public class API {
     public API() {
     }
 
+    /**
+     * This takes the CustomYmlManger Object For Config stuff.
+     *
+     * @param configinstance CustomYmlManger
+     */
     public API(CustomYmlManger configinstance) {
         this.configinstance = configinstance;
     }
@@ -78,6 +88,8 @@ public class API {
     // START OF MYSQL
 
     /**
+     * This just gets the ip/domain for MySQL from config.yml
+     *
      * @return The ip/host domain
      */
     public String getHOST() {
@@ -89,6 +101,8 @@ public class API {
     }
 
     /**
+     * Gets the DataBase name from the config.yml
+     *
      * @return MySQL database name
      */
     public String getDATABASE() {
@@ -100,6 +114,8 @@ public class API {
     }
 
     /**
+     * Get's the username from the config.yml for MySQL
+     *
      * @return the Username for MySQL
      */
     public String getUSER() {
@@ -111,6 +127,8 @@ public class API {
     }
 
     /**
+     * Get's the Password from config.yml for MySQL
+     *
      * @return the Password for MySQL
      */
     @Deprecated
@@ -123,6 +141,8 @@ public class API {
     }
 
     /**
+     * Get's the port number from the config.yml for MySQL
+     *
      * @return Returns the port number in a string form
      */
     public String getPORT() {
