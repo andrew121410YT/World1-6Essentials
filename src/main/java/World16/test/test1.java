@@ -1,5 +1,6 @@
 package World16.test;
 
+import World16.CustomInventorys.TestCustomInventory;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Utils.API;
@@ -38,6 +39,7 @@ public class test1 implements CommandExecutor {
         }
         if (args.length == 0) {
             //SOMETHING HERE
+            p.openInventory(TestCustomInventory.GUI(p));
         } else if (args.length >= 1) {
             //SOMETHING HERE
             return true;

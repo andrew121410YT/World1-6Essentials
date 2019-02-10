@@ -5,6 +5,7 @@ import World16.Commands.tp.tpa;
 import World16.Commands.tp.tpaccept;
 import World16.Commands.tp.tpdeny;
 import World16.CustomConfigs.ShitConfig;
+import World16.CustomInventorys.TestCustomInventory;
 import World16.Events.*;
 import World16.KeyCommands.Key;
 import World16.KeyCommands.MutiKeys;
@@ -17,7 +18,6 @@ import World16.Utils.Translate;
 import World16.test.test;
 import World16.test.test1;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -128,6 +128,9 @@ public class Main extends JavaPlugin {//implements Listener {
         //...
         new OnBedEnterEvent(this);
         new OnJoinTitleEvent(this);
+        //...
+        new InventoryClickEvent(this);
+        TestCustomInventory.createCustomInv();
     }
 
     public void regFileConfigGEN() {
