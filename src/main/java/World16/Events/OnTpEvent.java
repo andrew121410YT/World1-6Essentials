@@ -32,7 +32,7 @@ public class OnTpEvent implements Listener {
         // only save location if teleporting more than 5 blocks
         if (backm.get(p.getDisplayName()) != null && !to.getWorld().equals(from.getWorld()) || to.distanceSquared(from) > 25) {
 
-            backm.get(p.getDisplayName()).setLocation("tp",2,from);
+            backm.get(p.getDisplayName()).setLocation("tp", 2, from);
         }
     }
 }

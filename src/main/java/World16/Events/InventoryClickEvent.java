@@ -27,7 +27,7 @@ public class InventoryClickEvent implements Listener {
             if (event.getCurrentItem() == null || event.getCurrentItem().getType().equals(Material.AIR) || event.getClickedInventory() == null) {
                 return;
             } else {
-                CustomInventoryManager.testmenu.clicked((Player) event.getWhoClicked(), event.getSlot(), event.getCurrentItem(), event.getInventory());
+                CustomInventoryManager.getTestMenu().clicked((Player) event.getWhoClicked(), event.getSlot(), event.getCurrentItem(), event.getInventory());
             }
         }
     }

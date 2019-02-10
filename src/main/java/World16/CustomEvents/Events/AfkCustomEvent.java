@@ -34,6 +34,7 @@ public class AfkCustomEvent extends Event {
 
     /**
      * Get's the player name that did /afk
+     *
      * @return The name of player
      */
     public String getPlayerName() {
@@ -42,6 +43,7 @@ public class AfkCustomEvent extends Event {
 
     /**
      * Get's the Player Object
+     *
      * @return The Player Object
      */
     public Player getPlayer() {
@@ -50,6 +52,7 @@ public class AfkCustomEvent extends Event {
 
     /**
      * Get's the plugin
+     *
      * @return Returns the plugin
      */
     public Main getPlugin() {

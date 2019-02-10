@@ -3,7 +3,6 @@ package World16.Events;
 import World16.Commands.back;
 import World16.Main.Main;
 import World16.Objects.LocationObject;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,6 +27,6 @@ public class OnDeathEvent implements Listener {
     public void OnDeath(PlayerDeathEvent event) {
         Player p = event.getEntity();
 
-        backm.get(p.getDisplayName()).setLocation("death",1,p.getLocation());
+        backm.get(p.getDisplayName()).setLocation("death", 1, p.getLocation());
     }
 }

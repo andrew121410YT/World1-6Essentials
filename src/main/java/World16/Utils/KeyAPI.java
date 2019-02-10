@@ -18,6 +18,7 @@ import java.util.HashMap;
 
 /**
  * The Key API for the /key and /mkey
+ *
  * @author Andrew121410
  */
 public class KeyAPI {

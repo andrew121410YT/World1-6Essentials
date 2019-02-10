@@ -2,14 +2,18 @@ package World16.CustomInventorys;
 
 public class CustomInventoryManager {
 
-    public static TestCustomInventory testmenu = null;
+    public static TestCustomInventory testMenu = null;
 
-    public CustomInventoryManager(){
+    public CustomInventoryManager() {
 
     }
 
-    public void registerAllCustomInventory(){
-        this.testmenu = new TestCustomInventory();
-        this.testmenu.createCustomInv();
+    public void registerAllCustomInventory() {
+        this.testMenu = new TestCustomInventory();
+        this.testMenu.createCustomInv();
+    }
+
+    public static TestCustomInventory getTestMenu() {
+        return testMenu;
     }
 }

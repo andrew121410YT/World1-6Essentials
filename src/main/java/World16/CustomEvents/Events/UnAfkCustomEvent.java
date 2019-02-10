@@ -7,6 +7,7 @@ import org.bukkit.event.HandlerList;
 
 /**
  * This runs when the player gets back from afk
+ *
  * @author Andrew121410
  */
 public class UnAfkCustomEvent extends Event {
@@ -33,6 +34,7 @@ public class UnAfkCustomEvent extends Event {
 
     /**
      * Get's the player name
+     *
      * @return Player name
      */
     public String getPlayerName() {
@@ -41,6 +43,7 @@ public class UnAfkCustomEvent extends Event {
 
     /**
      * Get's the Player Object
+     *
      * @return Player Object
      */
     public Player getPlayer() {
@@ -49,6 +52,7 @@ public class UnAfkCustomEvent extends Event {
 
     /**
      * Get's the plugin
+     *
      * @return Plugin
      */
     public Main getPlugin() {

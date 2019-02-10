@@ -36,6 +36,7 @@ public class TpaCustomEvent extends Event {
 
     /**
      * Get's the player name that did the tpa request
+     *
      * @return Returns the name of the player
      */
     public String getPlayerName() {
@@ -44,6 +45,7 @@ public class TpaCustomEvent extends Event {
 
     /**
      * Get's the Player object from the player
+     *
      * @return Returns the Player Object
      */
     public Player getPlayer() {
@@ -52,6 +54,7 @@ public class TpaCustomEvent extends Event {
 
     /**
      * Get's the plugin
+     *
      * @return the plugin
      */
     public Main getPlugin() {
@@ -60,6 +63,7 @@ public class TpaCustomEvent extends Event {
 
     /**
      * Get's the target name that the player sent the request too
+     *
      * @return the Target name
      */
     public String getTargetName() {
@@ -68,6 +72,7 @@ public class TpaCustomEvent extends Event {
 
     /**
      * Get's the Target Player Object that the player sent the request too
+     *
      * @return Player Object
      */
     public Player getTargetPlayer() {
