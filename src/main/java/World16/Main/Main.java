@@ -5,7 +5,7 @@ import World16.Commands.tp.tpa;
 import World16.Commands.tp.tpaccept;
 import World16.Commands.tp.tpdeny;
 import World16.CustomConfigs.ShitConfig;
-import World16.CustomInventorys.TestCustomInventory;
+import World16.CustomInventorys.CustomInventoryManager;
 import World16.Events.*;
 import World16.KeyCommands.Key;
 import World16.KeyCommands.MutiKeys;
@@ -130,7 +130,7 @@ public class Main extends JavaPlugin {//implements Listener {
         new OnJoinTitleEvent(this);
         //...
         new InventoryClickEvent(this);
-        TestCustomInventory.createCustomInv();
+        new CustomInventoryManager().registerAllCustomInventory();
     }
 
     public void regFileConfigGEN() {
