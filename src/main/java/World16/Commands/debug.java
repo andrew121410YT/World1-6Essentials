@@ -59,10 +59,11 @@ public class debug implements CommandExecutor {
             }
             p.sendMessage(Translate.chat("/debug1-6 op"));
             p.sendMessage(Translate.chat("/debug1-6 defaultstuff"));
-            p.sendMessage(Translate.chat("/debug1-6 checkhashmaps"));
-            p.sendMessage(Translate.chat("/debug1-6 clearallarraylists"));
-            p.sendMessage(Translate.chat("/debug1-6 clearallhashmaps"));
-            p.sendMessage(Translate.chat("/debug1-6 clearallhashmapswithname"));
+            p.sendMessage(Translate.chat("/debug1-6 checkmaps"));
+            p.sendMessage(Translate.chat("/debug1-6 clearalllists")); //1
+            p.sendMessage(Translate.chat("/debug1-6 clearallmaps")); //2
+            p.sendMessage(Translate.chat("/debug1-6 clearalllistswithname"));
+            p.sendMessage(Translate.chat("/debug1-6 clearallmapswithname")); //2
             p.sendMessage(Translate.chat("/debug1-6 date"));
             p.sendMessage(Translate.chat("/debug1-6 playerversion"));
             p.sendMessage(Translate.chat("/debug1-6 checkuuid"));
@@ -106,14 +107,18 @@ public class debug implements CommandExecutor {
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
 
-                //CHECK HASHMAPS
-            } else if (args.length >= 1 && (args[0].equalsIgnoreCase("checkhashmaps"))) {
+                //CHECK MAPS
+            } else if (args.length >= 1 && (args[0].equalsIgnoreCase("checkmaps"))) {
+                if (!p.hasPermission("world16.debug.checkmaps")) { // Permission
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
                 if (args.length == 1) {
                     p.sendMessage(Translate.chat(
-                            "[&3/debug1-6 checkhashmaps &5@checkmine&r] &9<-- show's what is stored in the HashMap of you."));
+                            "[&3/debug1-6 checkmaps &5@checkmine&r] &9<-- Show's what is stored in the HashMap of you."));
                     p.sendMessage(Translate.chat(
-                            "[&3/debug1-6 checkhashmaps &c@all&r] &9<-- Show's everything in the HashMap"));
-                    p.sendMessage(Translate.chat("[&3/debug-1-6 checkhashmaps &c@checkAllWithDepth] &9<-- Show's Everything but you can see what's in the classes."));
+                            "[&3/debug1-6 checkmaps &c@all&r] &9<-- Show's everything in the Maps"));
+                    p.sendMessage(Translate.chat("[&3/debug-1-6 checkhashmaps &c@AllWithDepth] &9<-- Show's Everything but you can see what's in the classes."));
                     return true;
                 } else if (args.length >= 2) {
                     if (args[1].equalsIgnoreCase("@all")) {
@@ -124,16 +129,16 @@ public class debug implements CommandExecutor {
                     } else if (args[1].equalsIgnoreCase("@checkmine")) {
                         p.sendMessage(Translate.chat("&4This is no longer working."));
                         return true;
-                    }else if (args[1].equalsIgnoreCase("@AllWithDepth")){
+                    } else if (args[1].equalsIgnoreCase("@AllWithDepth")) {
                         p.sendMessage(Translate.chat(String.valueOf(Arrays.asList(tpam))));
 
-                        for (Map.Entry<String, LocationObject> entry : backm.entrySet()){
+                        for (Map.Entry<String, LocationObject> entry : backm.entrySet()) {
                             String key = entry.getKey();
                             Object value = entry.getValue();
                             p.sendMessage(Translate.chat(value.toString()));
                         }
 
-                        for (Map.Entry<String, KeyObject> entry : keyDataM.entrySet()){
+                        for (Map.Entry<String, KeyObject> entry : keyDataM.entrySet()) {
                             String key = entry.getKey();
                             Object value = entry.getValue();
                             p.sendMessage(Translate.chat(value.toString()));
@@ -142,9 +147,9 @@ public class debug implements CommandExecutor {
                     }
                 }
 
-                //CLEAR ALL ARRAYLIST
-            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallarraylists"))) {
-                if (!p.hasPermission("world16.debug.clearallarraylists")) { // Permission
+                //CLEAR ALL LISTS
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearalllists"))) {
+                if (!p.hasPermission("world16.debug.clearalllists")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -152,9 +157,9 @@ public class debug implements CommandExecutor {
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
 
-                //CLEAR ALL HASHMAPS
-            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmaps"))) {
-                if (!p.hasPermission("world16.debug.clearallhashmaps")) { // Permission
+                //CLEAR ALL MAPS
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallmaps"))) {
+                if (!p.hasPermission("world16.debug.clearallmaps")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -162,10 +167,21 @@ public class debug implements CommandExecutor {
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
 
-                //CLEAR ALL HASHMAPS WITH THE NAME.
-            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallhashmapswithname"))) {
+                //CLEAR ALL LISTS WITH THE NAME.
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearalllistswithname"))) {
                 if (!p.hasPermission(
-                        "world16.debug.clearallhashmapswithname")) { // Permission
+                        "world16.debug.clearalllistswithname")) { // Permission
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
+                api.clearAllLists(p);
+                p.sendMessage(Translate.chat("&bOK..."));
+                return true;
+
+                //CLEAR ALL MAPS WITH THE NAME.
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallmapswithname"))) {
+                if (!p.hasPermission(
+                        "world16.debug.clearallmapswithname")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
                 }
@@ -244,7 +260,7 @@ public class debug implements CommandExecutor {
                 }
                 //DEBUG MESSAGES
             } else if (args.length >= 1 && args[0].equalsIgnoreCase("debugmessages")) {
-                if (!p.hasPermission("world16.debug.debugmessages")){
+                if (!p.hasPermission("world16.debug.debugmessages")) {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
