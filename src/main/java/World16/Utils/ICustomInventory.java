@@ -7,9 +7,9 @@ import org.bukkit.inventory.ItemStack;
 public interface ICustomInventory {
 
     //Vars
-    Inventory inv = null;
-    String inventory_name = null;
-    int inv_rows = 4 * 9;
+//    Inventory inv = null;
+//    String inventory_name = null;
+//    int inv_rows = 4 * 9;
     //...
 
     void createCustomInv();

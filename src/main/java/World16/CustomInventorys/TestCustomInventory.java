@@ -12,9 +12,9 @@ import org.bukkit.inventory.ItemStack;
 public class TestCustomInventory implements ICustomInventory {
 
 
-    public static Inventory inv;
-    public static String inventory_name;
-    public static int inv_rows = 4 * 9;
+    private Inventory inv;
+    private String inventory_name;
+    private int inv_rows = 4 * 9;
 
     public void createCustomInv() {
         inventory_name = Translate.chat("Test GUI");

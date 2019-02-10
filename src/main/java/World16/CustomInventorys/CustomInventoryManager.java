@@ -2,7 +2,7 @@ package World16.CustomInventorys;
 
 public class CustomInventoryManager {
 
-    public static TestCustomInventory testMenu = null;
+    private static TestCustomInventory testMenu = null;
 
     public CustomInventoryManager() {
 

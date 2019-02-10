@@ -22,7 +22,7 @@ public class InventoryClickEvent implements Listener {
     public void onClick(org.bukkit.event.inventory.InventoryClickEvent event) {
         String inv_name = event.getInventory().getTitle();
 
-        if (inv_name.equals(TestCustomInventory.inventory_name)) {
+        if (inv_name.equals(CustomInventoryManager.getTestMenu().getInventoryName())) {
             event.setCancelled(true);
             if (event.getCurrentItem() == null || event.getCurrentItem().getType().equals(Material.AIR) || event.getClickedInventory() == null) {
                 return;
