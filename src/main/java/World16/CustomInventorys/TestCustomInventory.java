@@ -13,24 +13,21 @@ public class TestCustomInventory implements ICustomInventory {
 
 
     private Inventory inv;
+
     private String inventory_name;
     private int inv_rows = 4 * 9;
 
     public void createCustomInv() {
         inventory_name = Translate.chat("Test GUI");
 
-        inv = Bukkit.createInventory(null, inv_rows);
+        inv = Bukkit.createInventory(null, inv_rows, inventory_name);
     }
 
     public Inventory GUI(Player player) {
 
-        Inventory toReturn = Bukkit.createInventory(null, inv_rows, inventory_name);
-
         InventoryUtils.createItem(inv, Material.REDSTONE, 1, 1, "Test101", "Test Lore");
 
-        toReturn.setContents(inv.getContents());
-
-        return toReturn;
+        return inv;
     }
 
     public void clicked(Player player, int slot, ItemStack clicked, Inventory inv) {
