@@ -1,7 +1,6 @@
 package World16.Events;
 
 import World16.CustomInventorys.CustomInventoryManager;
-import World16.CustomInventorys.TestCustomInventory;
 import World16.Main.Main;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -22,13 +21,11 @@ public class InventoryClickEvent implements Listener {
     public void onClick(org.bukkit.event.inventory.InventoryClickEvent event) {
         String inv_name = event.getInventory().getTitle();
 
-        if (inv_name.equals(CustomInventoryManager.getTestMenu().getInventoryName())) {
+        if (inv_name.equals(CustomInventoryManager.getTestMenu().getInventoryName()) && (event.getCurrentItem() != null) && (!event.getCurrentItem().getType().equals(Material.AIR) && (event.getClickedInventory() != null))) {
             event.setCancelled(true);
-            if (event.getCurrentItem() == null || event.getCurrentItem().getType().equals(Material.AIR) || event.getClickedInventory() == null) {
-                return;
-            } else {
-                CustomInventoryManager.getTestMenu().clicked((Player) event.getWhoClicked(), event.getSlot(), event.getCurrentItem(), event.getInventory());
-            }
+            CustomInventoryManager.getTestMenu().clicked((Player) event.getWhoClicked(), event.getSlot(), event.getCurrentItem(), event.getInventory());
+        } else {
+            return;
         }
     }
 }
