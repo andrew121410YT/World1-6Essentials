@@ -1,6 +1,6 @@
 package World16.Commands;
 
-import World16.CustomConfigs.ShitConfig;
+import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManager;
@@ -17,10 +17,10 @@ public class isafk implements CommandExecutor {
     API api = new API();
     ArrayList<String> Afk1 = afk.Afk;
     private Main plugin;
-    private CustomYmlManager configinstance = null;
+    private CustomYmlManager shitYml = null;
 
-    public isafk(ShitConfig getCustomYml, Main getPlugin) {
-        this.configinstance = getCustomYml.getInstance();
+    public isafk(CustomConfigManager getCustomYml, Main getPlugin) {
+        this.shitYml = getCustomYml.getShitYml();
         this.plugin = getPlugin;
         this.plugin.getCommand("isafk").setExecutor(this);
     }

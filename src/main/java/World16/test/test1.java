@@ -1,5 +1,6 @@
 package World16.test;
 
+import World16.CustomConfigs.CustomConfigManager;
 import World16.CustomInventorys.CustomInventoryManager;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
@@ -19,10 +20,10 @@ public class test1 implements CommandExecutor {
     MySQL mysql = new MySQL();
     API api = new API();
 
-    private CustomYmlManager configinstance = null;
+    private CustomYmlManager shitYml = null;
 
-    public test1(CustomYmlManager getCustomYml, Main getPlugin) {
-        this.configinstance = getCustomYml;
+    public test1(CustomConfigManager getCustomYml, Main getPlugin) {
+        this.shitYml = getCustomYml.getShitYml();
         this.plugin = getPlugin;
 
         this.plugin.getCommand("testee1").setExecutor(this);

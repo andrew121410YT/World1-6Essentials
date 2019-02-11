@@ -1,5 +1,6 @@
 package World16.test;
 
+import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManager;
@@ -13,10 +14,10 @@ public class test implements CommandExecutor {
     private Main plugin;
     API api = new API();
 
-    private CustomYmlManager configinstance = null;
+    private CustomYmlManager shitYml = null;
 
-    public test(CustomYmlManager getCustomYml, Main getPlugin) {
-        this.configinstance = getCustomYml;
+    public test(CustomConfigManager getCustomYml, Main getPlugin) {
+        this.shitYml = getCustomYml.getShitYml();
         this.plugin = getPlugin;
 
         this.plugin.getCommand("testee").setExecutor(this);

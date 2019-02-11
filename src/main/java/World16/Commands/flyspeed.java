@@ -1,6 +1,6 @@
 package World16.Commands;
 
-import World16.CustomConfigs.ShitConfig;
+import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManager;
@@ -17,10 +17,10 @@ public class flyspeed implements CommandExecutor {
     private Main plugin;
 
     // NEW ONE
-    private CustomYmlManager configinstance = null;
+    private CustomYmlManager shitYml = null;
 
-    public flyspeed(ShitConfig getConfigInstance, Main plugin) {
-        this.configinstance = getConfigInstance.getInstance();
+    public flyspeed(CustomConfigManager getConfigInstance, Main plugin) {
+        this.shitYml = getConfigInstance.getShitYml();
         this.plugin = plugin;
         plugin.getCommand("fs").setExecutor(this);
     }

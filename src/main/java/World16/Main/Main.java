@@ -4,7 +4,7 @@ import World16.Commands.*;
 import World16.Commands.tp.tpa;
 import World16.Commands.tp.tpaccept;
 import World16.Commands.tp.tpdeny;
-import World16.CustomConfigs.ShitConfig;
+import World16.CustomConfigs.CustomConfigManager;
 import World16.CustomInventorys.CustomInventoryManager;
 import World16.Events.*;
 import World16.KeyCommands.Key;
@@ -12,7 +12,6 @@ import World16.KeyCommands.MutiKeys;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
 import World16.Utils.API;
-import World16.Utils.CustomYmlManager;
 import World16.Utils.Metrics;
 import World16.Utils.Translate;
 import World16.test.test;
@@ -33,8 +32,7 @@ public class Main extends JavaPlugin {//implements Listener {
     private static Main plugin;
 
     //Configs
-    private CustomYmlManager customyml;
-    private ShitConfig shityml;
+    private CustomConfigManager customconfig;
 
     private API api;
 
@@ -53,7 +51,7 @@ public class Main extends JavaPlugin {//implements Listener {
 
     public void onEnable() {
         plugin = this;
-        regCustomConfigs();
+        regCustomConfigManager();
         regFileConfigGEN();
         regAPIS();
         regEvents();
@@ -92,28 +90,28 @@ public class Main extends JavaPlugin {//implements Listener {
         new commandblock(this);
         new bed(this);
         new ram(this);
-        new spawn(this.shityml, this);
+        new spawn(this.customconfig, this);
         new echest(this);
         new sign(this);
         new Key(this); //KEY COMMAND
         new MutiKeys(this); //MKEY COMMAND
         new colors(this);
-        new setjail(this.shityml, this);
-        new setspawn(this.shityml, this);
-        new jail(this.shityml, this);
+        new setjail(this.customconfig, this);
+        new setspawn(this.customconfig, this);
+        new jail(this.customconfig, this);
         new afk(this);
-        new flyspeed(this.shityml, this);
-        new isafk(this.shityml, this);
+        new flyspeed(this.customconfig, this);
+        new isafk(this.customconfig, this);
         new back(this);
-        new broadcast(this.shityml, this);
+        new broadcast(this.customconfig, this);
         new god(this);
 
-        new tpa(this.shityml, this);
-        new tpaccept(this.shityml, this);
-        new tpdeny(this.shityml, this);
+        new tpa(this.customconfig, this);
+        new tpaccept(this.customconfig, this);
+        new tpdeny(this.customconfig, this);
 
-        new test(customyml, this);
-        new test1(customyml, this);
+        new test(customconfig, this);
+        new test1(customconfig, this);
     }
 
     public void regEvents() {
@@ -139,8 +137,9 @@ public class Main extends JavaPlugin {//implements Listener {
         this.reloadConfig();
     }
 
-    public void regCustomConfigs() {
-        this.shityml = new ShitConfig();
+    public void regCustomConfigManager() {
+        this.customconfig = new CustomConfigManager();
+        customconfig.registerAllCustomConfigs();
     }
 
     public void checkForPlugins() {

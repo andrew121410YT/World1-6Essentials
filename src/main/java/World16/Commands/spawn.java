@@ -1,6 +1,6 @@
 package World16.Commands;
 
-import World16.CustomConfigs.ShitConfig;
+import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManager;
@@ -16,12 +16,12 @@ public class spawn implements CommandExecutor {
     private Main plugin;
     private API api;
 
-    private CustomYmlManager configinstance = null;
+    private CustomYmlManager shitYml = null;
 
-    public spawn(ShitConfig getShitConfig, Main getPlugin) {
-        this.configinstance = getShitConfig.getInstance();
+    public spawn(CustomConfigManager getShitConfig, Main getPlugin) {
+        this.shitYml = getShitConfig.getShitYml();
         this.plugin = getPlugin;
-        this.api = new API(this.configinstance);
+        this.api = new API(this.shitYml);
         this.plugin.getCommand("spawn").setExecutor(this);
     }
 

@@ -1,6 +1,6 @@
 package World16.Commands.tp;
 
-import World16.CustomConfigs.ShitConfig;
+import World16.CustomConfigs.CustomConfigManager;
 import World16.CustomEvents.handlers.TpaEventHandler;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
@@ -24,10 +24,10 @@ public class tpa implements CommandExecutor {
     //HASHMAPS
     public static LinkedHashMap<Player, Player> tpam = new LinkedHashMap<>();
 
-    private CustomYmlManager configinstance = null;
+    private CustomYmlManager shitYml = null;
 
-    public tpa(ShitConfig getCustomYml, Main getPlugin) {
-        this.configinstance = getCustomYml.getInstance();
+    public tpa(CustomConfigManager getCustomYml, Main getPlugin) {
+        this.shitYml = getCustomYml.getShitYml();
         this.plugin = getPlugin;
 
         this.plugin.getCommand("tpa").setExecutor(this);

@@ -1,6 +1,6 @@
 package World16.Commands.tp;
 
-import World16.CustomConfigs.ShitConfig;
+import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Utils.API;
@@ -23,10 +23,10 @@ public class tpdeny implements CommandExecutor {
     //HASHMAPS
     private static LinkedHashMap<Player, Player> tpam = tpa.tpam;
 
-    private CustomYmlManager configinstance = null;
+    private CustomYmlManager shitYml = null;
 
-    public tpdeny(ShitConfig getCustomYml, Main getPlugin) {
-        this.configinstance = getCustomYml.getInstance();
+    public tpdeny(CustomConfigManager getCustomYml, Main getPlugin) {
+        this.shitYml = getCustomYml.getShitYml();
         this.plugin = getPlugin;
 
         this.plugin.getCommand("tpdeny").setExecutor(this);

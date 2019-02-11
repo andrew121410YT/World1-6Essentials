@@ -1,6 +1,6 @@
 package World16.Commands;
 
-import World16.CustomConfigs.ShitConfig;
+import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManager;
@@ -14,11 +14,11 @@ public class setjail implements CommandExecutor {
 
     API api;
     private Main plugin;
-    private CustomYmlManager configinstance = null;
+    private CustomYmlManager shitYml = null;
 
-    public setjail(ShitConfig getCustomYml, Main getPlugin) {
-        this.configinstance = getCustomYml.getInstance();
-        this.api = new API(this.configinstance);
+    public setjail(CustomConfigManager getCustomYml, Main getPlugin) {
+        this.shitYml = getCustomYml.getShitYml();
+        this.api = new API(this.shitYml);
 
         this.plugin = getPlugin;
         this.plugin.getCommand("setjail").setExecutor(this);
