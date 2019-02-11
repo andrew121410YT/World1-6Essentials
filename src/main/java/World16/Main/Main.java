@@ -128,7 +128,7 @@ public class Main extends JavaPlugin {//implements Listener {
         new OnJoinTitleEvent(this);
         //...
         new InventoryClickEvent(this);
-        new CustomInventoryManager().registerAllCustomInventory();
+        new CustomInventoryManager().registerAllCustomInventorys();
     }
 
     public void regFileConfigGEN() {
