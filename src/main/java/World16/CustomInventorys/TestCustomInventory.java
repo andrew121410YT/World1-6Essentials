@@ -40,11 +40,6 @@ public class TestCustomInventory implements ICustomInventory {
     }
 
     @Override
-    public Inventory getInventory() {
-        return inv;
-    }
-
-    @Override
     public String getInventoryName() {
         return inventory_name;
     }
@@ -52,5 +47,10 @@ public class TestCustomInventory implements ICustomInventory {
     @Override
     public int getInvRows() {
         return inv_rows;
+    }
+
+    @Override
+    public Inventory getInventory() {
+        return inv;
     }
 }

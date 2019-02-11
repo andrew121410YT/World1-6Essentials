@@ -2,9 +2,10 @@ package World16.Utils;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
-public interface ICustomInventory {
+public interface ICustomInventory extends InventoryHolder {
 
     //Vars
 //    Inventory inv = null;
@@ -18,7 +19,7 @@ public interface ICustomInventory {
 
     void clicked(Player player, int slot, ItemStack clicked, Inventory inv);
 
-    Inventory getInventory();
+//    Inventory getInventory();
 
     String getInventoryName();
 
