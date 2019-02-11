@@ -3,7 +3,7 @@ package World16.Commands;
 import World16.CustomConfigs.ShitConfig;
 import World16.Main.Main;
 import World16.Utils.API;
-import World16.Utils.CustomYmlManger;
+import World16.Utils.CustomYmlManager;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,7 +15,7 @@ public class setspawn implements CommandExecutor {
     private Main plugin;
     private API api;
 
-    private CustomYmlManger configinstance = null;
+    private CustomYmlManager configinstance = null;
 
     public setspawn(ShitConfig getCustomYml, Main getPlugin) {
         this.configinstance = getCustomYml.getInstance();

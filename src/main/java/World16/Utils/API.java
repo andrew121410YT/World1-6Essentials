@@ -49,7 +49,7 @@ public class API {
     //...
 
     private static Main plugin = Main.getPlugin();
-    private CustomYmlManger configinstance = null;
+    private CustomYmlManager configinstance = null;
 
     ViaAPI viaapi = Via.getAPI(); // https://docs.viaversion.com/display/VIAVERSION/Basic+API+usage
 
@@ -76,11 +76,11 @@ public class API {
     }
 
     /**
-     * This takes the CustomYmlManger Object For Config stuff.
+     * This takes the CustomYmlManager Object For Config stuff.
      *
-     * @param configinstance CustomYmlManger
+     * @param configinstance CustomYmlManager
      */
-    public API(CustomYmlManger configinstance) {
+    public API(CustomYmlManager configinstance) {
         this.configinstance = configinstance;
     }
 
@@ -482,21 +482,21 @@ public class API {
 
     private String locationname;
     private String Path;
-    private CustomYmlManger configinstance2;
+    private CustomYmlManager configinstance2;
 
     private String locationname2;
     private String Path2;
-    private CustomYmlManger configinstance3;
+    private CustomYmlManager configinstance3;
 
     /**
      * Gets the location from the file and it returns you a Location.
      *
-     * @param configinstance CustomYmlManger
+     * @param configinstance CustomYmlManager
      * @param Path           Just a path you want to set the data.
      * @param nameoflocation Name of the lcoation?
      * @return A Location.
      */
-    public Location getLocationFromFile(CustomYmlManger configinstance, String Path, String nameoflocation) {
+    public Location getLocationFromFile(CustomYmlManager configinstance, String Path, String nameoflocation) {
         this.configinstance2 = configinstance;
         this.Path = Path;
         this.locationname = nameoflocation.toLowerCase();
@@ -541,7 +541,7 @@ public class API {
      * @param pitch          The Pitch Cord
      * @param worldname      The World name
      */
-    public void setLocationToFile(CustomYmlManger configinstance, String path, String nameoflocation, Player p, double x, double y, double z, double yaw, double pitch,
+    public void setLocationToFile(CustomYmlManager configinstance, String path, String nameoflocation, Player p, double x, double y, double z, double yaw, double pitch,
                                   String worldname) {
         this.locationname2 = nameoflocation.toLowerCase();
         this.Path2 = path;

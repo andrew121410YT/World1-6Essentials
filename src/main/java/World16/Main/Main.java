@@ -12,7 +12,7 @@ import World16.KeyCommands.MutiKeys;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
 import World16.Utils.API;
-import World16.Utils.CustomYmlManger;
+import World16.Utils.CustomYmlManager;
 import World16.Utils.Metrics;
 import World16.Utils.Translate;
 import World16.test.test;
@@ -33,7 +33,7 @@ public class Main extends JavaPlugin {//implements Listener {
     private static Main plugin;
 
     //Configs
-    private CustomYmlManger customyml;
+    private CustomYmlManager customyml;
     private ShitConfig shityml;
 
     private API api;

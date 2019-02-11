@@ -2,7 +2,7 @@ package World16.test;
 
 import World16.Main.Main;
 import World16.Utils.API;
-import World16.Utils.CustomYmlManger;
+import World16.Utils.CustomYmlManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,9 +13,9 @@ public class test implements CommandExecutor {
     private Main plugin;
     API api = new API();
 
-    private CustomYmlManger configinstance = null;
+    private CustomYmlManager configinstance = null;
 
-    public test(CustomYmlManger getCustomYml, Main getPlugin) {
+    public test(CustomYmlManager getCustomYml, Main getPlugin) {
         this.configinstance = getCustomYml;
         this.plugin = getPlugin;
 

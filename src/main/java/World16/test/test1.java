@@ -5,7 +5,7 @@ import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Utils.API;
 import World16.Utils.CountdownTimer;
-import World16.Utils.CustomYmlManger;
+import World16.Utils.CustomYmlManager;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,9 +19,9 @@ public class test1 implements CommandExecutor {
     MySQL mysql = new MySQL();
     API api = new API();
 
-    private CustomYmlManger configinstance = null;
+    private CustomYmlManager configinstance = null;
 
-    public test1(CustomYmlManger getCustomYml, Main getPlugin) {
+    public test1(CustomYmlManager getCustomYml, Main getPlugin) {
         this.configinstance = getCustomYml;
         this.plugin = getPlugin;
 

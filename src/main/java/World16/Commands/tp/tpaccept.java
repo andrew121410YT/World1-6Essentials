@@ -4,7 +4,7 @@ import World16.CustomConfigs.ShitConfig;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Utils.API;
-import World16.Utils.CustomYmlManger;
+import World16.Utils.CustomYmlManager;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,7 +23,7 @@ public class tpaccept implements CommandExecutor {
     //HASHMAPS
     private static LinkedHashMap<Player, Player> tpam = tpa.tpam;
 
-    private CustomYmlManger configinstance = null;
+    private CustomYmlManager configinstance = null;
 
     public tpaccept(ShitConfig getCustomYml, Main getPlugin) {
         this.configinstance = getCustomYml.getInstance();

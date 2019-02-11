@@ -8,7 +8,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 
-public class CustomYmlManger {
+public class CustomYmlManager {
 
     private Main plugin = Main.getPlugin();
 
