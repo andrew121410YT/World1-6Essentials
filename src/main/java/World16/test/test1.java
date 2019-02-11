@@ -4,7 +4,9 @@ import World16.CustomInventorys.CustomInventoryManager;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Utils.API;
+import World16.Utils.CountdownTimer;
 import World16.Utils.CustomYmlManger;
+import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -40,6 +42,8 @@ public class test1 implements CommandExecutor {
         if (args.length == 0) {
             //SOMETHING HERE
             p.openInventory(CustomInventoryManager.getTestMenu().GUI(p));
+            CountdownTimer timer = new CountdownTimer(this.plugin, 20, () -> p.sendMessage(Translate.chat("Starting")), () -> p.sendMessage(Translate.chat("END")),(t) -> p.sendMessage(Translate.chat("Timer:" + t.getSecondsLeft())));
+            timer.scheduleTimer();
         } else if (args.length >= 1) {
             //SOMETHING HERE
             return true;
