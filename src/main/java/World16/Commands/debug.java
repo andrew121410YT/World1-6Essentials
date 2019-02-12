@@ -17,7 +17,10 @@ import org.bukkit.entity.Player;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class debug implements CommandExecutor {
 
@@ -28,30 +31,27 @@ public class debug implements CommandExecutor {
     //...
 
     //Lists
-    ArrayList<String> Afk1 = afk.Afk;
-    ArrayList<String> Fly1 = fly.Fly;
     //...
 
-    API api = new API();
-    MySQL mysql = new MySQL();
+    private API api;
+    private MySQL mysql = new MySQL();
 
     private Main plugin;
 
     public debug(Main getPlugin) {
         this.plugin = getPlugin;
+        api = new API();
 
         this.plugin.getCommand("debug1-6").setExecutor(this);
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        Player p = (Player) sender;
-
-        // IF THE PLAYER IS THE CONSOLE OR COMMAND BLOCk
         if (!(sender instanceof Player)) {
             sender.sendMessage("Only Players Can Use This Command.");
             return true;
         }
+        Player p = (Player) sender;
         if (args.length == 0) {
             if (!p.hasPermission("world16.debug")) { // Permission
                 api.PermissionErrorMessage(p);
@@ -118,7 +118,7 @@ public class debug implements CommandExecutor {
                             "[&3/debug1-6 checkmaps &5@checkmine&r] &9<-- Show's what is stored in the HashMap of you."));
                     p.sendMessage(Translate.chat(
                             "[&3/debug1-6 checkmaps &c@all&r] &9<-- Show's everything in the Maps"));
-                    p.sendMessage(Translate.chat("[&3/debug-1-6 checkhashmaps &c@AllWithDepth] &9<-- Show's Everything but you can see what's in the classes."));
+                    p.sendMessage(Translate.chat("[&3/debug-1-6 checkmaps &c@AllWithDepth] &9<-- Show's Everything but you can see what's in the classes."));
                     return true;
                 } else if (args.length >= 2) {
                     if (args[1].equalsIgnoreCase("@all")) {
@@ -131,17 +131,20 @@ public class debug implements CommandExecutor {
                         return true;
                     } else if (args[1].equalsIgnoreCase("@AllWithDepth")) {
                         p.sendMessage(Translate.chat(String.valueOf(Arrays.asList(tpam))));
+                        p.sendMessage(Translate.chat("&b{SPACE}"));
 
                         for (Map.Entry<String, LocationObject> entry : backm.entrySet()) {
                             String key = entry.getKey();
                             Object value = entry.getValue();
                             p.sendMessage(Translate.chat(value.toString()));
+                            p.sendMessage(Translate.chat("&b{SPACE}"));
                         }
-
+                        p.sendMessage(Translate.chat("&b{SPACE}"));
                         for (Map.Entry<String, KeyObject> entry : keyDataM.entrySet()) {
                             String key = entry.getKey();
                             Object value = entry.getValue();
                             p.sendMessage(Translate.chat(value.toString()));
+                            p.sendMessage(Translate.chat("&b{SPACE}"));
                         }
                         return true;
                     }
