@@ -44,7 +44,7 @@ public class AsyncPlayerChatEvent implements Listener {
             }
             if (args.length == 1) {
                 p.sendMessage(Translate.chat("&cUsage: :msg <Player> <Message>"));
-            } else if (args.length == 3) {
+            } else if (args.length >= 3) {
                 Player ptarget = this.plugin.getServer().getPlayerExact(args[1]);
                 if (args[1] != null && args[2] != null && ptarget != null && ptarget.isOnline()) {
                     String messageFrom = args[2];
