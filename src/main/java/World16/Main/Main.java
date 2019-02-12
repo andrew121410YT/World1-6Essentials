@@ -106,6 +106,8 @@ public class Main extends JavaPlugin {//implements Listener {
         new broadcast(this.customconfig, this);
         new god(this);
 
+        new emsg(this, customconfig);
+
         new tpa(this.customconfig, this);
         new tpaccept(this.customconfig, this);
         new tpdeny(this.customconfig, this);
