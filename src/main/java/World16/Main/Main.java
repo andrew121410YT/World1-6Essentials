@@ -7,7 +7,6 @@ import World16.Commands.tp.tpdeny;
 import World16.CustomConfigs.CustomConfigManager;
 import World16.CustomInventorys.CustomInventoryManager;
 import World16.Events.*;
-import World16.Commands.key;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
 import World16.Utils.API;
@@ -93,7 +92,6 @@ public class Main extends JavaPlugin {//implements Listener {
         new echest(this);
         new sign(this);
         new key(this); //KEY COMMAND
-        new MutiKeys(this); //MKEY COMMAND
         new colors(this);
         new setjail(this.customconfig, this);
         new setspawn(this.customconfig, this);
