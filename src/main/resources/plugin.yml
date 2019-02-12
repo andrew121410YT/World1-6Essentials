@@ -34,7 +34,6 @@ commands:
   tpdeny:
   broadcast:
   god:
-  emsg:
 
   gmc:
     aliases:
