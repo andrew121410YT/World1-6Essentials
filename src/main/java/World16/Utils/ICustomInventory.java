@@ -19,8 +19,6 @@ public interface ICustomInventory extends InventoryHolder {
 
     void clicked(Player player, int slot, ItemStack clicked, Inventory inv);
 
-//    Inventory getInventory(); <- InventoryHolder does this
-
     String getInventoryName();
 
     int getInvRows();

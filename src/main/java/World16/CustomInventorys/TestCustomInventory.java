@@ -20,7 +20,7 @@ public class TestCustomInventory implements ICustomInventory {
     public void createCustomInv() {
         inventory_name = Translate.chat("Test GUI");
 
-        inv = Bukkit.createInventory(null, inv_rows, inventory_name);
+        inv = Bukkit.createInventory(this, inv_rows, inventory_name);
     }
 
     public Inventory GUI(Player player) {
