@@ -1,4 +1,4 @@
-package World16.KeyCommands;
+package World16.Commands;
 
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 
-public class Key implements CommandExecutor {
+public class key implements CommandExecutor {
 
     //Maps
     HashMap<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
@@ -22,12 +22,14 @@ public class Key implements CommandExecutor {
 
     private Main plugin;
 
-    API api = new API();
-    KeyAPI keyapi = new KeyAPI();
-    MySQL mysql = new MySQL();
+    private API api;
+    private KeyAPI keyapi = new KeyAPI();
+    private MySQL mysql = new MySQL();
 
-    public Key(Main getPlugin) {
+    public key(Main getPlugin) {
         this.plugin = getPlugin;
+
+        this.api = new API();
 
         this.plugin.getCommand("key").setExecutor(this);
     }

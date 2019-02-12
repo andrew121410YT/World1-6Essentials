@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
- * The Key API for the /key and /mkey
+ * The key API for the /key and /mkey
  *
  * @author Andrew121410
  */
@@ -46,7 +46,7 @@ public class KeyAPI {
             public void run() {
                 Material material = Material.TRIPWIRE_HOOK;
                 int ammount = 1;
-                String name = "Key";
+                String name = "key";
 
                 ItemStack item = new ItemStack(material, ammount);
                 ItemMeta itemMeta = item.getItemMeta();
@@ -78,11 +78,11 @@ public class KeyAPI {
     }
 
     /**
-     * Get's a Key by it's ID and then it returns it.
+     * Get's a key by it's ID and then it returns it.
      *
      * @param playerName Player Name String
      * @param mysql      mysql object
-     * @param keyDataID  Key ID
+     * @param keyDataID  key ID
      * @return returns the key string from mysql.
      */
     public String giveKeyReturn(String playerName, MySQL mysql, Integer keyDataID) { //RETURNS KEY
@@ -111,7 +111,7 @@ public class KeyAPI {
      *
      * @param playerName Player name
      * @param mysql      mysql object
-     * @param keyDataID  Key ID
+     * @param keyDataID  key ID
      */
     public void giveKeyToRam(String playerName, MySQL mysql, Integer keyDataID) { //RETURNS KEY
 
@@ -185,12 +185,12 @@ public class KeyAPI {
      * Gets the key from the ram and it gives it too the player
      *
      * @param p         Player
-     * @param keyDataID Key ID
+     * @param keyDataID key ID
      */
     public void giveKeyToPlayerFromRam(Player p, Integer keyDataID) { //GETS THE 1 KEY FROM THE MEMORY.
         Material material = Material.TRIPWIRE_HOOK;
         int ammount = 1;
-        String name = "Key";
+        String name = "key";
 
         ItemStack item = new ItemStack(material, ammount);
         ItemMeta itemMeta = item.getItemMeta();

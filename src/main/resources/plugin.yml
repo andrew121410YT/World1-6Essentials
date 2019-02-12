@@ -18,7 +18,6 @@ commands:
   setspawn:
   sign:
   key:
-  mkey:
   colors:
   setjail:
   jail:
