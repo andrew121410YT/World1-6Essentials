@@ -10,11 +10,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class OnTpEvent implements Listener {
 
     private static Main plugin;
-    LinkedHashMap<String, LocationObject> backm = back.backm;
+    Map<String, LocationObject> backm = back.backm;
 
     public OnTpEvent(Main getPlugin) {
         plugin = getPlugin;

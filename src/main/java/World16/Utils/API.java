@@ -28,6 +28,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * The Bass API for World1-6Ess
@@ -37,9 +38,9 @@ import java.util.LinkedHashMap;
 public class API {
 
     // Maps
-    HashMap<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    LinkedHashMap<String, LocationObject> backm = back.backm;
-    LinkedHashMap<Player, Player> tpam = tpa.tpam;
+    Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
+    Map<String, LocationObject> backm = back.backm;
+    Map<Player, Player> tpam = tpa.tpam;
     //...
 
     // Lists
@@ -225,7 +226,7 @@ public class API {
      *
      * @return the keyDataM HashMap
      */
-    public HashMap<String, KeyObject> getKeyDataHashMap() {
+    public Map<String, KeyObject> getKeyDataHashMap() {
         return OnJoinEvent.keyDataM;
     }
 
@@ -234,7 +235,7 @@ public class API {
      *
      * @return the backm LinkedHashMap
      */
-    public LinkedHashMap<String, LocationObject> getBackLinkedHashMap() {
+    public Map<String, LocationObject> getBackLinkedHashMap() {
         return back.backm;
     }
 
@@ -243,7 +244,7 @@ public class API {
      *
      * @return he tpam LinkedHashMap
      */
-    public LinkedHashMap<Player, Player> getTpaLinkedHashMap() {
+    public Map<Player, Player> getTpaLinkedHashMap() {
         return tpa.tpam;
     }
 

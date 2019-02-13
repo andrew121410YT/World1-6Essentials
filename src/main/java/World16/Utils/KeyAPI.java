@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The key API for the /key and /mkey
@@ -26,7 +27,7 @@ public class KeyAPI {
     private static Plugin plugin = Main.getPlugin();
 
     //Maps
-    HashMap<String, KeyObject> keyDatam = OnJoinEvent.keyDataM;
+    Map<String, KeyObject> keyDatam = OnJoinEvent.keyDataM;
     //...
 
     // START

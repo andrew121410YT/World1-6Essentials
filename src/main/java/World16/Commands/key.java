@@ -13,11 +13,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class key implements CommandExecutor {
 
     //Maps
-    HashMap<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
+    Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
     //...
 
     private Main plugin;

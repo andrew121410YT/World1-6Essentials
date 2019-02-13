@@ -24,6 +24,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Main extends JavaPlugin {//implements Listener {
 
@@ -41,9 +42,9 @@ public class Main extends JavaPlugin {//implements Listener {
     //...
 
     //Maps
-    HashMap<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    LinkedHashMap<String, LocationObject> backm = back.backm;
-    LinkedHashMap<Player, Player> tpam = tpa.tpam;
+    Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
+    Map<String, LocationObject> backm = back.backm;
+    Map<Player, Player> tpam = tpa.tpam;
     //...
     PluginManager pm = Bukkit.getPluginManager();
 

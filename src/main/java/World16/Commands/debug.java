@@ -25,9 +25,9 @@ import java.util.Map;
 public class debug implements CommandExecutor {
 
     //Maps
-    HashMap<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    LinkedHashMap<String, LocationObject> backm = back.backm;
-    LinkedHashMap<Player, Player> tpam = tpa.tpam;
+    Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
+    Map<String, LocationObject> backm = back.backm;
+    Map<Player, Player> tpam = tpa.tpam;
     //...
 
     //Lists

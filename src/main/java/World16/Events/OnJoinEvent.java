@@ -17,14 +17,15 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class OnJoinEvent implements Listener {
 
     private static Main plugin;
 
     //Maps
-    public static HashMap<String, KeyObject> keyDataM = new HashMap<>();
-    LinkedHashMap<String, LocationObject> backM = back.backm;
+    public static Map<String, KeyObject> keyDataM = new HashMap<>();
+    Map<String, LocationObject> backM = back.backm;
     //...
 
     MySQL mysql = new MySQL();

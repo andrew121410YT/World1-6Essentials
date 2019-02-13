@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class tpdeny implements CommandExecutor {
 
@@ -21,7 +22,7 @@ public class tpdeny implements CommandExecutor {
     API api = new API();
 
     //HASHMAPS
-    private static LinkedHashMap<Player, Player> tpam = tpa.tpam;
+    private static Map<Player, Player> tpam = tpa.tpam;
 
     private CustomYmlManager shitYml = null;
 

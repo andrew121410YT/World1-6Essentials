@@ -13,6 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class tpa implements CommandExecutor {
 
@@ -22,7 +23,7 @@ public class tpa implements CommandExecutor {
     API api = new API();
 
     //HASHMAPS
-    public static LinkedHashMap<Player, Player> tpam = new LinkedHashMap<>();
+    public static Map<Player, Player> tpam = new LinkedHashMap<>();
 
     private CustomYmlManager shitYml = null;
 

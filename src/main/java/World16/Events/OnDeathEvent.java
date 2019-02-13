@@ -9,13 +9,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class OnDeathEvent implements Listener {
 
     private static Main plugin;
 
     //HASHMAPS
-    LinkedHashMap<String, LocationObject> backm = back.backm;
+    Map<String, LocationObject> backm = back.backm;
 
     public OnDeathEvent(Main getPlugin) {
         plugin = getPlugin;

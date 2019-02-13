@@ -13,6 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class back implements CommandExecutor {
 
@@ -20,7 +21,7 @@ public class back implements CommandExecutor {
     private Main plugin;
 
     //Maps
-    public static LinkedHashMap<String, LocationObject> backm = new LinkedHashMap<>();
+    public static Map<String, LocationObject> backm = new LinkedHashMap<>();
     //...
 
     public back(Main getPlugin) {
