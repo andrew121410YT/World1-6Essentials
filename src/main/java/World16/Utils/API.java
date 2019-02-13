@@ -5,6 +5,7 @@ import World16.Commands.back;
 import World16.Commands.fly;
 import World16.Commands.god;
 import World16.Commands.tp.tpa;
+import World16.CustomConfigs.CustomConfigManager;
 import World16.CustomExceptions.CustomYmlManagerInstanceException;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
@@ -25,7 +26,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -54,8 +54,8 @@ public class API {
     ViaAPI viaapi = Via.getAPI(); // https://docs.viaversion.com/display/VIAVERSION/Basic+API+usage
 
     //Finals
-    public static final Integer VERSION = 8;
-    public static final String DATE_OF_VERSION = "2/12/2019";
+    public static final Integer VERSION = 9;
+    public static final String DATE_OF_VERSION = "2/13/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
@@ -64,11 +64,11 @@ public class API {
     //...
 
     // FOR MYSQL
-    private String HOST = plugin.getConfig().getString("MysqlHOST");
-    private String DATABASE = plugin.getConfig().getString("MysqlDATABASE");
-    private String USER = plugin.getConfig().getString("MysqlUSER");
-    private String PASSWORD = plugin.getConfig().getString("MysqlPASSWORD");
-    private String PORT = plugin.getConfig().getString("MysqlPORT");
+    private String mysql_HOST = plugin.getConfig().getString("MysqlHOST");
+    private String mysql_DATABASE = plugin.getConfig().getString("MysqlDATABASE");
+    private String mysql_USER = plugin.getConfig().getString("MysqlUSER");
+    private String mysql_PASSWORD = plugin.getConfig().getString("MysqlPASSWORD");
+    private String mysql_PORT = plugin.getConfig().getString("MysqlPORT");
     // END MYSQL
 
     // MAIN
@@ -76,12 +76,21 @@ public class API {
     }
 
     /**
-     * This takes the CustomYmlManager Object For Config stuff.
+     * This takes the CustomYmlManager Object for Config stuff.
      *
-     * @param configinstance CustomYmlManager
+     * @param configInstance CustomYmlManager
      */
-    public API(CustomYmlManager configinstance) {
-        this.configinstance = configinstance;
+    public API(CustomYmlManager configInstance) {
+        this.configinstance = configInstance;
+    }
+
+    /**
+     * This takes the CustomConfigManager Object for config and stuff.
+     *
+     * @param configManager
+     */
+    public API(CustomConfigManager configManager) {
+
     }
 
     // END MAIN
@@ -92,9 +101,9 @@ public class API {
      *
      * @return The ip/host domain
      */
-    public String getHOST() {
-        if (this.HOST != null) {
-            return this.HOST;
+    public String getMysql_HOST() {
+        if (this.mysql_HOST != null) {
+            return this.mysql_HOST;
         } else {
             return null;
         }
@@ -105,9 +114,9 @@ public class API {
      *
      * @return MySQL database name
      */
-    public String getDATABASE() {
-        if (this.DATABASE != null) {
-            return this.DATABASE;
+    public String getMysql_DATABASE() {
+        if (this.mysql_DATABASE != null) {
+            return this.mysql_DATABASE;
         } else {
             return null;
         }
@@ -118,9 +127,9 @@ public class API {
      *
      * @return the Username for MySQL
      */
-    public String getUSER() {
-        if (this.USER != null) {
-            return this.USER;
+    public String getMysql_USER() {
+        if (this.mysql_USER != null) {
+            return this.mysql_USER;
         } else {
             return null;
         }
@@ -132,9 +141,9 @@ public class API {
      * @return the Password for MySQL
      */
     @Deprecated
-    public String getPASSWORD() {
-        if (this.PASSWORD != null) {
-            return this.PASSWORD;
+    public String getMysql_PASSWORD() {
+        if (this.mysql_PASSWORD != null) {
+            return this.mysql_PASSWORD;
         } else {
             return null;
         }
@@ -145,9 +154,9 @@ public class API {
      *
      * @return Returns the port number in a string form
      */
-    public String getPORT() {
-        if (this.PORT != null) {
-            return this.PORT;
+    public String getMysql_PORT() {
+        if (this.mysql_PORT != null) {
+            return this.mysql_PORT;
         } else {
             return null;
         }
@@ -194,7 +203,7 @@ public class API {
     }
 
     /**
-     * The ArrayList contains the names of players that our afk
+     * This returns the Afk ArrayList in a List form the afk arraylist has all of the afk people names.
      *
      * @return the afk ArrayList
      */
@@ -203,7 +212,7 @@ public class API {
     }
 
     /**
-     * The ArrayList contains the names of the players that did /fly
+     * This ArrayList is in a List form but it the arraylist contrains all the people names that did /fly
      *
      * @return the fly ArrayList
      */
@@ -212,7 +221,7 @@ public class API {
     }
 
     /**
-     * The ArrayList contains the names of the players that our in god mode
+     * This ArrayList is in a List form but its the arraylist contains the poeple that are in god mode
      *
      * @return the god ArrayList
      */

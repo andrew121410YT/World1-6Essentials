@@ -21,11 +21,11 @@ public class MySQL {
          * this.Host = host; this.Database = database; this.Username = username; this.Password =
          * password; this.Port = port;
          */
-        this.Host = api.getHOST();
-        this.Database = api.getDATABASE();
-        this.Username = api.getUSER();
-        this.Password = api.getPASSWORD();
-        this.Port = api.getPORT();
+        this.Host = api.getMysql_HOST();
+        this.Database = api.getMysql_DATABASE();
+        this.Username = api.getMysql_USER();
+        this.Password = api.getMysql_PASSWORD();
+        this.Port = api.getMysql_PORT();
     }
 
     public void Connect() {

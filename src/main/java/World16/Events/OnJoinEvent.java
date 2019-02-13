@@ -16,7 +16,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class OnJoinEvent implements Listener {
@@ -56,7 +55,7 @@ public class OnJoinEvent implements Listener {
         version(p);
         //...
 
-        if (!api.getHOST().equals("null")) {
+        if (!api.getMysql_HOST().equals("null")) {
             keyDataM.remove(p.getDisplayName());
             keyDataM.put(p.getDisplayName(), new KeyObject(p.getDisplayName(), 1, "null"));
             keyapi.giveAllKeysToRam(p.getDisplayName(), mysql);
