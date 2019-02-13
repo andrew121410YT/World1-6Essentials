@@ -8,6 +8,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Arrays;
+
 public class AsyncPlayerChatEvent implements Listener {
 
     private Main plugin;
@@ -48,7 +50,7 @@ public class AsyncPlayerChatEvent implements Listener {
             } else if (args.length >= 3) {
                 Player ptarget = this.plugin.getServer().getPlayerExact(args[1]);
                 if (args[1] != null && args[2] != null && ptarget != null && ptarget.isOnline()) {
-                    String messageFrom = args[2];
+                    String messageFrom = String.join(" ", Arrays.copyOfRange(args, 2, args.length));
                     p.sendMessage(Translate.chat("&2[&a{me} &6->&c {target}&2]&9 ->&r {message}").replace("{me}", "me").replace("{target}", ptarget.getDisplayName()).replace("{message}", messageFrom));
                     ptarget.sendMessage(Translate.chat("&2[&a{me} &6->&c {target}&2]&9 ->&r {message}").replace("{me}", p.getDisplayName()).replace("{target}", "me").replace("{message}", messageFrom));
                 } else {
@@ -60,14 +62,14 @@ public class AsyncPlayerChatEvent implements Listener {
                 p.sendMessage(Translate.chat("-> &cUsage: :msg <Player> <Message>"));
             }
         }
-        if (args[0].equalsIgnoreCase(":tp")) {
+        if (args[0].equalsIgnoreCase(":oktp")) {
             event.setCancelled(true);
-            if (!p.hasPermission("world16.tp")) {
+            if (!p.hasPermission("world16.oktp")) {
                 api.PermissionErrorMessage(p);
                 return;
             }
             if (args.length == 1) {
-                p.sendMessage(Translate.chat("&cUsage: :tp <Player>"));
+                p.sendMessage(Translate.chat("&cUsage: :oktp <Player>"));
             } else if (args.length == 2) {
                 Player pTarget = this.plugin.getServer().getPlayerExact(args[1]);
                 if (args[1] != null && pTarget != null && pTarget.isOnline()) {
@@ -78,15 +80,16 @@ public class AsyncPlayerChatEvent implements Listener {
                             if (!pTarget.canSee(p)) {
                                 p.teleport(pTarget.getLocation());
                                 p.sendMessage(Translate.chat("&bOk..."));
+                                p.sendMessage(Translate.chat("Too unhide use :okunhide"));
                             }
                         }
                     }.runTask(this.plugin);
                 }
             }
         }
-        if (args[0].equalsIgnoreCase(":unhide")) {
+        if (args[0].equalsIgnoreCase(":okunhide")) {
             event.setCancelled(true);
-            if (!p.hasPermission("world16.tp")) {
+            if (!p.hasPermission("world16.okunhide")) {
                 api.PermissionErrorMessage(p);
                 return;
             }
@@ -94,6 +97,20 @@ public class AsyncPlayerChatEvent implements Listener {
                 @Override
                 public void run() {
                     plugin.getServer().getOnlinePlayers().forEach(player -> player.showPlayer(p));
+                    p.sendMessage(Translate.chat("&bOk..."));
+                }
+            }.runTask(this.plugin);
+        }
+        if (args[0].equalsIgnoreCase(":okhide")) {
+            event.setCancelled(true);
+            if (!p.hasPermission("world16.okhide")) {
+                api.PermissionErrorMessage(p);
+                return;
+            }
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    plugin.getServer().getOnlinePlayers().forEach(player -> player.hidePlayer(p));
                     p.sendMessage(Translate.chat("&bOk..."));
                 }
             }.runTask(this.plugin);
