@@ -87,7 +87,7 @@ public class API {
     /**
      * This takes the CustomConfigManager Object for config and stuff.
      *
-     * @param configManager
+     * @param configManager CustomConfigManager Object
      */
     public API(CustomConfigManager configManager) {
 
