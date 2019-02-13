@@ -21,9 +21,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main extends JavaPlugin {//implements Listener {
@@ -36,9 +34,9 @@ public class Main extends JavaPlugin {//implements Listener {
     private API api;
 
     //Lists
-    ArrayList<String> Afk = afk.Afk;
-    ArrayList<String> Fly = fly.Fly;
-    ArrayList<String> GodM = god.godm;
+    List<String> Afk = afk.Afk;
+    List<String> Fly = fly.Fly;
+    List<String> GodM = god.godm;
     //...
 
     //Maps

@@ -8,13 +8,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerDamageEvent implements Listener {
 
     private static Main plugin;
 
-    ArrayList<String> godm = god.godm;
+    List<String> godm = god.godm;
 
     public PlayerDamageEvent(Main getPlugin) {
         plugin = getPlugin;

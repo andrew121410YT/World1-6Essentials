@@ -13,10 +13,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class afk implements Listener, CommandExecutor {
 
-    public static ArrayList<String> Afk = new ArrayList<>();
+    //Maps
+    //...
+    //Lists
+    public static List<String> Afk = new ArrayList<>();
+    //....
 
     public Main plugin;
     API api = new API();

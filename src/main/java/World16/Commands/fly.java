@@ -9,10 +9,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class fly implements CommandExecutor {
 
-    public static ArrayList<String> Fly = new ArrayList<>();
+    //Maps
+    //...
+    //Lists
+    public static List<String> Fly = new ArrayList<>();
+    //....
+
     API api = new API();
     private Main plugin;
 

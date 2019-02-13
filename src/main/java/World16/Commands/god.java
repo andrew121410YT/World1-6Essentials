@@ -9,14 +9,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class god implements CommandExecutor {
 
     API api = new API();
     private Main plugin;
 
-    //
-    public static ArrayList<String> godm = new ArrayList<>();
+    //Lists
+    public static List<String> godm = new ArrayList<>();
     //...
 
     public god(Main plugin) {

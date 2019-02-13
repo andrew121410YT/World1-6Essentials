@@ -26,8 +26,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,9 +43,9 @@ public class API {
     //...
 
     // Lists
-    ArrayList<String> Afk1 = afk.Afk;
-    ArrayList<String> Fly1 = fly.Fly;
-    ArrayList<String> GodM = god.godm;
+    List<String> Afk1 = afk.Afk;
+    List<String> Fly1 = fly.Fly;
+    List<String> GodM = god.godm;
     //...
 
     private static Main plugin = Main.getPlugin();
@@ -199,7 +198,7 @@ public class API {
      *
      * @return the afk ArrayList
      */
-    public ArrayList<String> getAfkArrayList() {
+    public List<String> getAfkArrayList() {
         return afk.Afk;
     }
 
@@ -208,7 +207,7 @@ public class API {
      *
      * @return the fly ArrayList
      */
-    public ArrayList<String> getFlyArrayList() {
+    public List<String> getFlyArrayList() {
         return fly.Fly;
     }
 
@@ -217,7 +216,7 @@ public class API {
      *
      * @return the god ArrayList
      */
-    public ArrayList<String> getGodArrayList() {
+    public List<String> getGodArrayList() {
         return god.godm;
     }
 

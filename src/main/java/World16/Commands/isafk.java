@@ -10,12 +10,16 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class isafk implements CommandExecutor {
 
     API api = new API();
-    ArrayList<String> Afk1 = afk.Afk;
+    //Maps
+    //...
+    //Lists
+    List<String> Afk1 = afk.Afk;
+    //...
     private Main plugin;
     private CustomYmlManager shitYml = null;
 
