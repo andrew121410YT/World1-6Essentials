@@ -4,10 +4,7 @@ import World16.CustomConfigs.CustomConfigManager;
 import World16.CustomInventorys.CustomInventoryManager;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
-import World16.Utils.API;
-import World16.Utils.CountdownTimer;
-import World16.Utils.CustomYmlManager;
-import World16.Utils.Translate;
+import World16.Utils.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,6 +15,7 @@ public class test1 implements CommandExecutor {
     private Main plugin;
 
     MySQL mysql = new MySQL();
+    KeyAPI keyapi = new KeyAPI();
     API api = new API();
 
     private CustomYmlManager shitYml = null;
@@ -42,7 +40,7 @@ public class test1 implements CommandExecutor {
         }
         if (args.length == 0) {
             //SOMETHING HERE
-            p.openInventory(CustomInventoryManager.getTestMenu().GUI(p));
+            keyapi.getAllKeysFromRamAndStoreItInMySql(mysql, p.getDisplayName());
             CountdownTimer timer = new CountdownTimer(this.plugin, 20, () -> p.sendMessage(Translate.chat("Starting")), () -> p.sendMessage(Translate.chat("END")),(t) -> p.sendMessage(Translate.chat("Timer:" + t.getSecondsLeft())));
             timer.scheduleTimer();
         } else if (args.length >= 1) {

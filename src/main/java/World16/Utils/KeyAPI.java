@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 /**
  * The key API for the /key
@@ -35,6 +36,20 @@ public class KeyAPI {
     //...
 
     // START
+
+    /**
+     * Get's all keys from ram and stores it in the mySQL database
+     *
+     * @param mySQL mySQL Object
+     * @param playerName Player name String
+     */
+    public void getAllKeysFromRamAndStoreItInMySql(MySQL mySQL, String playerName) {
+        mySQL.Connect();
+        IntStream.range(1, 6).forEach(i -> {
+            SetKeyAndDeleteOldKey(mySQL, i, playerName, keyDatam.get(playerName).getKey(i), false);
+        });
+        mySQL.Disconnect();
+    }
 
     /**
      * Gets the key stright from the database and gives it too the player
@@ -308,6 +323,24 @@ public class KeyAPI {
                 mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
                         + p + "', '" + Lore + "')");
                 mysql.Disconnect();
+            }
+        }.runTaskAsynchronously(plugin);
+    }
+
+    //3
+    public void SetKeyAndDeleteOldKey(MySQL mysql, int KeyDataID, String p, String Lore, boolean autoConnectAndAutoDisconnect) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (autoConnectAndAutoDisconnect) {
+                    mysql.Connect();
+                }
+                mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + KeyDataID + "' AND Player='" + p + "'");
+                mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
+                        + p + "', '" + Lore + "')");
+                if (autoConnectAndAutoDisconnect) {
+                    mysql.Disconnect();
+                }
             }
         }.runTaskAsynchronously(plugin);
     }
