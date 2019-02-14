@@ -16,11 +16,7 @@ public class MySQL {
 
     API api = new API();
 
-    public MySQL(/* String host, String database, String username, String password, String port */) {
-        /*
-         * this.Host = host; this.Database = database; this.Username = username; this.Password =
-         * password; this.Port = port;
-         */
+    public MySQL() {
         this.Host = api.getMysql_HOST();
         this.Database = api.getMysql_DATABASE();
         this.Username = api.getMysql_USER();
@@ -37,7 +33,7 @@ public class MySQL {
             e1.printStackTrace();
         }
         String url =
-                "jdbc:mysql://" + this.Host + ":" + this.Port + "/" + this.Database + "?autoReconnect=true";
+                "jdbc:mysql://" + this.Host + ":" + this.Port + "/" + this.Database + "?autoReconnect=true&verifyServerCertificate=false&useSSL=true";
         try {
             this.connection = DriverManager.getConnection(url, this.Username, this.Password);
         } catch (SQLException e2) {
