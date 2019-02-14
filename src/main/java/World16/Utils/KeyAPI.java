@@ -14,13 +14,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The key API for the /key and /mkey
+ * The key API for the /key
  *
  * @author Andrew121410
+ * @version 1
+ * @since 2/4/2019
  */
 public class KeyAPI {
 
@@ -30,10 +31,13 @@ public class KeyAPI {
     Map<String, KeyObject> keyDatam = OnJoinEvent.keyDataM;
     //...
 
+    //Lists
+    //...
+
     // START
 
     /**
-     * Gets the key stright from the database
+     * Gets the key stright from the database and gives it too the player
      *
      * @param p           Player that your gonna give the key too
      * @param mysql       mysql object
@@ -86,7 +90,7 @@ public class KeyAPI {
      * @param keyDataID  key ID
      * @return returns the key string from mysql.
      */
-    public String giveKeyReturn(String playerName, MySQL mysql, Integer keyDataID) { //RETURNS KEY
+    public String getKeyFromMysqlReturn(String playerName, MySQL mysql, Integer keyDataID) { //RETURNS KEY
         mysql.Connect();
 //        ResultSet rs =
 //                mysql.GetResult("SELECT * FROM KeyData WHERE Player='" + p.getPlayer().getDisplayName() + "';");
@@ -114,7 +118,7 @@ public class KeyAPI {
      * @param mysql      mysql object
      * @param keyDataID  key ID
      */
-    public void giveKeyToRam(String playerName, MySQL mysql, Integer keyDataID) { //RETURNS KEY
+    public void getKeyFromMysqlAndThenGiveItTooRam(String playerName, MySQL mysql, Integer keyDataID) { //RETURNS KEY
 
         new BukkitRunnable() {
             @Override
@@ -152,7 +156,7 @@ public class KeyAPI {
      * @param playerName Player name string
      * @param mysql      mysql object
      */
-    public void giveAllKeysToRam(String playerName, MySQL mysql) { //RETURNS KEY
+    public void getAllKeysFromMysqlTooRam(String playerName, MySQL mysql) { //RETURNS KEY
 
         new BukkitRunnable() {
             @Override
