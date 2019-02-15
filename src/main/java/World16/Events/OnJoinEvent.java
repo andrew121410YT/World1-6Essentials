@@ -56,7 +56,7 @@ public class OnJoinEvent implements Listener {
         //...
 
         if (!api.getMysql_HOST().equals("null")) {
-            keyDataM.remove(p.getDisplayName());
+            keyDataM.remove(p.getDisplayName()); //<-- just incase
             keyDataM.put(p.getDisplayName(), new KeyObject(p.getDisplayName(), 1, "null"));
             keyapi.getAllKeysFromMysqlTooRam(p.getDisplayName(), mysql);
         } else {

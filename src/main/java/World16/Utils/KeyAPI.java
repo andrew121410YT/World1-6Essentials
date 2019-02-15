@@ -40,15 +40,20 @@ public class KeyAPI {
     /**
      * Get's all keys from ram and stores it in the mySQL database
      *
-     * @param mySQL mySQL Object
+     * @param mySQL      mySQL Object
      * @param playerName Player name String
      */
     public void getAllKeysFromRamAndStoreItInMySql(MySQL mySQL, String playerName) {
-        mySQL.Connect();
-        IntStream.range(1, 6).forEach(i -> {
-            SetKeyAndDeleteOldKey(mySQL, i, playerName, keyDatam.get(playerName).getKey(i), false);
-        });
-        mySQL.Disconnect();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                mySQL.Connect();
+                IntStream.range(1, 6).forEach(i -> {
+                    SetKeyAndDeleteOldKey(mySQL, i, playerName, keyDatam.get(playerName).getKey(i), false);
+                });
+                mySQL.Disconnect();
+            }
+        }.runTaskAsynchronously(plugin);
     }
 
     /**
