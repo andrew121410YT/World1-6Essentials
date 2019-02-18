@@ -4,6 +4,9 @@ import World16.Main.Main;
 import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitRunnable;
 
+/**
+ * CLASS IS NOT BEING USED BUT IS GONNA STAY FOR MEMORIES
+ */
 public class LocationObject {
 
     private Main plugin = Main.getPlugin();

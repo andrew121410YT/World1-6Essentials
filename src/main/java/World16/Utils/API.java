@@ -38,7 +38,7 @@ public class API {
 
     // Maps
     Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    Map<String, LocationObject> backm = back.backm;
+    Map<String, List<Location>> backm = back.backm; // THIS
     Map<Player, Player> tpam = tpa.tpam;
     //...
 
@@ -55,7 +55,7 @@ public class API {
 
     //Finals
     public static final Integer VERSION = 9;
-    public static final String DATE_OF_VERSION = "2/14/2019";
+    public static final String DATE_OF_VERSION = "2/17/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
@@ -239,11 +239,11 @@ public class API {
     }
 
     /**
-     * This LinkedHashMap stores the back locations when you die and tp ETC.
+     * This HashMap stores the back locations when you die and tp ETC.
      *
-     * @return the backm LinkedHashMap
+     * @return the backm HashMap
      */
-    public Map<String, LocationObject> getBackLinkedHashMap() {
+    public Map<String, List<Location>> getBackLinkedHashMap() {
         return back.backm;
     }
 

@@ -1,7 +1,6 @@
 package World16.Commands;
 
 import World16.Main.Main;
-import World16.Objects.LocationObject;
 import World16.Utils.API;
 import World16.Utils.Translate;
 import org.bukkit.Location;
@@ -12,7 +11,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class back implements CommandExecutor {
@@ -21,7 +21,7 @@ public class back implements CommandExecutor {
     private Main plugin;
 
     //Maps
-    public static Map<String, LocationObject> backm = new LinkedHashMap<>();
+    public static Map<String, List<Location>> backm = new HashMap<>();
     //...
 
     public back(Main getPlugin) {
@@ -59,8 +59,13 @@ public class back implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                if (backm.get(p.getDisplayName()) != null && backm.get(p.getDisplayName()).getLocation("death") != null) {
-                    Location deathlocation = backm.get(p.getDisplayName()).getLocation("death");
+                boolean indexExists = 0 >= 0 && 0 < backm.get(p.getDisplayName()).size();
+                if (backm.get(p.getDisplayName()) != null && indexExists) {
+                    if(backm.get(p.getDisplayName()).get(0) == null){
+                        p.sendMessage(Translate.chat("&4Something went wrong."));
+                        return true;
+                    }
+                    Location deathlocation = backm.get(p.getDisplayName()).get(0);
 
                     if (deathlocation.getBlock().isLiquid() || deathlocation.getBlock().getRelative(BlockFace.DOWN).isLiquid()) {
                         deathlocation.getBlock().getRelative(BlockFace.DOWN).setType(Material.LOG);
@@ -83,8 +88,14 @@ public class back implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                if (backm.get(p.getDisplayName()) != null && backm.get(p.getDisplayName()).getLocation("tp") != null) {
-                    p.teleport(backm.get(p.getDisplayName()).getLocation("tp"));
+                boolean indexExists = 1 >= 0 && 1 < backm.get(p.getDisplayName()).size();
+                if (backm.get(p.getDisplayName()) != null && indexExists) {
+                    if(backm.get(p.getDisplayName()).get(1) == null){
+                        p.sendMessage(Translate.chat("&4Something went wrong."));
+                        return true;
+                    }
+                    Location tpLoc = backm.get(p.getDisplayName()).get(1);
+                    p.teleport(tpLoc);
                 } else {
                     p.sendMessage(Translate.chat("&4Something went wrong."));
                     return true;
@@ -97,7 +108,11 @@ public class back implements CommandExecutor {
                     return true;
                 }
                 if (backm.get(p.getDisplayName()) != null) {
-                    backm.get(p.getDisplayName()).setLocation("set", 3, p.getLocation());
+                    if(backm.get(p.getDisplayName()).get(2) == null){
+                        p.sendMessage(Translate.chat("&4Something went wrong."));
+                        return true;
+                    }
+                    backm.get(p.getDisplayName()).set(2, p.getLocation());
                     p.sendMessage(Translate.chat("[&9Back&r] &aYour back has been set."));
                     return true;
                 } else {
@@ -109,8 +124,13 @@ public class back implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                if (backm.get(p.getDisplayName()) != null && backm.get(p.getDisplayName()).getLocation("set") != null) {
-                    p.teleport(backm.get(p.getDisplayName()).getLocation("set"));
+                boolean indexExists = 2 >= 0 && 2 < backm.get(p.getDisplayName()).size();
+                if (backm.get(p.getDisplayName()) != null && indexExists) {
+                    if(backm.get(p.getDisplayName()).get(2) == null){
+                        p.sendMessage(Translate.chat("&4Something went wrong."));
+                        return true;
+                    }
+                    p.teleport(backm.get(p.getDisplayName()).get(2));
                     p.sendMessage(Translate.chat("[&9Back&r] &aTheir you go."));
                     return true;
                 } else {

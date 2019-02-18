@@ -9,6 +9,7 @@ import World16.Objects.LocationObject;
 import World16.Utils.API;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,16 +18,13 @@ import org.bukkit.entity.Player;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class debug implements CommandExecutor {
 
     //Maps
     Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    Map<String, LocationObject> backm = back.backm;
+    Map<String, List<Location>> backm = back.backm;
     Map<Player, Player> tpam = tpa.tpam;
     //...
 
@@ -133,7 +131,7 @@ public class debug implements CommandExecutor {
                         p.sendMessage(Translate.chat(String.valueOf(Arrays.asList(tpam))));
                         p.sendMessage(Translate.chat("&b{SPACE}"));
 
-                        for (Map.Entry<String, LocationObject> entry : backm.entrySet()) {
+                        for (Map.Entry<String, List<Location>> entry : backm.entrySet()) {
                             String key = entry.getKey();
                             Object value = entry.getValue();
                             p.sendMessage(Translate.chat(value.toString()));

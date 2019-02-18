@@ -4,19 +4,22 @@ import World16.Commands.back;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Objects.KeyObject;
-import World16.Objects.LocationObject;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class OnJoinEvent implements Listener {
 
@@ -24,7 +27,7 @@ public class OnJoinEvent implements Listener {
 
     //Maps
     public static Map<String, KeyObject> keyDataM = new HashMap<>();
-    Map<String, LocationObject> backM = back.backm;
+    Map<String, List<Location>> backM = back.backm;
     //...
 
     MySQL mysql = new MySQL();
@@ -65,7 +68,8 @@ public class OnJoinEvent implements Listener {
                             + " Please make sure too put in the mysql details in the config.yml."));
         }
 
-        backM.put(p.getDisplayName(), new LocationObject(p.getDisplayName()));
+        backM.put(p.getDisplayName(), new ArrayList<>());
+        IntStream.range(0, 3).forEach((i) -> backM.get(p.getDisplayName()).add(null));
     }
 
     public void version(Player p) {

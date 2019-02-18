@@ -15,6 +15,7 @@ import World16.Utils.Translate;
 import World16.test.test;
 import World16.test.test1;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -41,7 +42,7 @@ public class Main extends JavaPlugin {//implements Listener {
 
     //Maps
     Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    Map<String, LocationObject> backm = back.backm;
+    Map<String, List<Location>> backm = back.backm;
     Map<Player, Player> tpam = tpa.tpam;
     //...
     PluginManager pm = Bukkit.getPluginManager();
