@@ -206,7 +206,7 @@ public class API {
      *
      * @return the afk ArrayList
      */
-    public List<String> getAfkArrayList() {
+    public List<String> getAfkList() {
         return afk.Afk;
     }
 
@@ -215,7 +215,7 @@ public class API {
      *
      * @return the fly ArrayList
      */
-    public List<String> getFlyArrayList() {
+    public List<String> getFlyList() {
         return fly.Fly;
     }
 
@@ -224,16 +224,16 @@ public class API {
      *
      * @return the god ArrayList
      */
-    public List<String> getGodArrayList() {
+    public List<String> getGodList() {
         return god.godm;
     }
 
     /**
-     * This hashmap stores the keys for /key
+     * This HashMap stores the keys for /key
      *
      * @return the keyDataM HashMap
      */
-    public Map<String, KeyObject> getKeyDataHashMap() {
+    public Map<String, KeyObject> getKeyDataMap() {
         return OnJoinEvent.keyDataM;
     }
 
@@ -242,7 +242,7 @@ public class API {
      *
      * @return the backm HashMap
      */
-    public Map<String, List<Location>> getBackLinkedHashMap() {
+    public Map<String, List<Location>> getBackMap() {
         return back.backm;
     }
 
@@ -251,7 +251,7 @@ public class API {
      *
      * @return he tpam LinkedHashMap
      */
-    public Map<Player, Player> getTpaLinkedHashMap() {
+    public Map<Player, Player> getTpaMap() {
         return tpa.tpam;
     }
 
