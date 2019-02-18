@@ -10,7 +10,6 @@ import World16.CustomExceptions.CustomYmlManagerInstanceException;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
-import World16.Objects.LocationObject;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;

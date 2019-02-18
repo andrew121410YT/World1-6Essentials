@@ -5,7 +5,6 @@ import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Objects.KeyObject;
-import World16.Objects.LocationObject;
 import World16.Utils.API;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
