@@ -3,7 +3,7 @@ package World16.Objects;
 import World16.Main.Main;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class KeyObject {
+public class KeyObject extends LocationObject{
 
     private Main plugin = Main.getPlugin();
 

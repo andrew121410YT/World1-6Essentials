@@ -10,6 +10,7 @@ import World16.CustomExceptions.CustomYmlManagerInstanceException;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
+import World16.Objects.UserObject;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -37,7 +38,7 @@ public class API {
 
     // Maps
     Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    Map<String, List<Location>> backm = back.backm; // THIS
+    Map<String, UserObject> backm = back.backm; // THIS
     Map<Player, Player> tpam = tpa.tpam;
     //...
 
@@ -53,8 +54,8 @@ public class API {
     ViaAPI viaapi = Via.getAPI(); // https://docs.viaversion.com/display/VIAVERSION/Basic+API+usage
 
     //Finals
-    public static final Integer VERSION = 9;
-    public static final String DATE_OF_VERSION = "2/17/2019";
+    public static final Integer VERSION = 10;
+    public static final String DATE_OF_VERSION = "2/24/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
@@ -238,11 +239,11 @@ public class API {
     }
 
     /**
-     * This HashMap stores the back locations when you die and tp ETC.
+     * This Hashmap stores the locations of when you die or tp.
      *
      * @return the backm HashMap
      */
-    public Map<String, List<Location>> getBackMap() {
+    public Map<String, UserObject> getBackMap() {
         return back.backm;
     }
 

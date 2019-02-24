@@ -5,6 +5,7 @@ import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Objects.KeyObject;
+import World16.Objects.UserObject;
 import World16.Utils.API;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
@@ -23,7 +24,7 @@ public class debug implements CommandExecutor {
 
     //Maps
     Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    Map<String, List<Location>> backm = back.backm;
+    Map<String, UserObject> backm = back.backm;
     Map<Player, Player> tpam = tpa.tpam;
     //...
 
@@ -129,12 +130,10 @@ public class debug implements CommandExecutor {
                     } else if (args[1].equalsIgnoreCase("@AllWithDepth")) {
                         p.sendMessage(Translate.chat(String.valueOf(Arrays.asList(tpam))));
                         p.sendMessage(Translate.chat("&b{SPACE}"));
-
-                        for (Map.Entry<String, List<Location>> entry : backm.entrySet()) {
-                            String key = entry.getKey();
-                            Object value = entry.getValue();
-                            p.sendMessage(Translate.chat(value.toString()));
-                            p.sendMessage(Translate.chat("&b{SPACE}"));
+                        for (Map.Entry<String, UserObject> e : backm.entrySet()) {
+                            String k = e.getKey();
+                            UserObject v = e.getValue();
+                            p.sendMessage(Translate.chat(v.toString()));
                         }
                         p.sendMessage(Translate.chat("&b{SPACE}"));
                         for (Map.Entry<String, KeyObject> entry : keyDataM.entrySet()) {
