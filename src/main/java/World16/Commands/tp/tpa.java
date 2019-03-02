@@ -19,8 +19,8 @@ public class tpa implements CommandExecutor {
 
     private Main plugin;
 
-    MySQL mysql = new MySQL();
     API api = new API();
+    MySQL mysql = new MySQL(this.api);
 
     //HASHMAPS
     public static Map<Player, Player> tpam = new LinkedHashMap<>();

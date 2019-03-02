@@ -27,13 +27,13 @@ public class OnJoinEvent implements Listener {
     Map<String, UserObject> backM = back.backm;
     //...
 
-    MySQL mysql = new MySQL();
+    MySQL mysql;
     API api = new API();
     KeyAPI keyapi = new KeyAPI();
 
     public OnJoinEvent(Main getPlugin) {
         plugin = getPlugin;
-
+        this.mysql = new MySQL(this.api);
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 

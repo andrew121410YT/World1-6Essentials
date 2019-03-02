@@ -1,7 +1,6 @@
 package World16.test;
 
 import World16.CustomConfigs.CustomConfigManager;
-import World16.CustomInventorys.CustomInventoryManager;
 import World16.Main.Main;
 import World16.MysqlAPI.MySQL;
 import World16.Utils.*;
@@ -14,7 +13,7 @@ public class test1 implements CommandExecutor {
 
     private Main plugin;
 
-    MySQL mysql = new MySQL();
+    MySQL mysql;
     KeyAPI keyapi = new KeyAPI();
     API api = new API();
 
@@ -23,6 +22,7 @@ public class test1 implements CommandExecutor {
     public test1(CustomConfigManager getCustomYml, Main getPlugin) {
         this.shitYml = getCustomYml.getShitYml();
         this.plugin = getPlugin;
+        this.mysql = new MySQL(this.api);
 
         this.plugin.getCommand("testee1").setExecutor(this);
     }
@@ -41,7 +41,7 @@ public class test1 implements CommandExecutor {
         if (args.length == 0) {
             //SOMETHING HERE
             keyapi.getAllKeysFromRamAndStoreItInMySql(mysql, p.getDisplayName());
-            CountdownTimer timer = new CountdownTimer(this.plugin, 20, () -> p.sendMessage(Translate.chat("Starting")), () -> p.sendMessage(Translate.chat("END")),(t) -> p.sendMessage(Translate.chat("Timer:" + t.getSecondsLeft())));
+            CountdownTimer timer = new CountdownTimer(this.plugin, 20, () -> p.sendMessage(Translate.chat("Starting")), () -> p.sendMessage(Translate.chat("END")), (t) -> p.sendMessage(Translate.chat("Timer:" + t.getSecondsLeft())));
             timer.scheduleTimer();
         } else if (args.length >= 1) {
             //SOMETHING HERE

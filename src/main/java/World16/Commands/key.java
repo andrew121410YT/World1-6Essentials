@@ -27,12 +27,13 @@ public class key implements CommandExecutor {
 
     private API api;
     private KeyAPI keyapi = new KeyAPI();
-    private MySQL mysql = new MySQL();
+    private MySQL mysql;
 
     public key(Main getPlugin) {
         this.plugin = getPlugin;
 
         this.api = new API();
+        this.mysql = new MySQL(this.api);
 
         this.plugin.getCommand("key").setExecutor(this);
     }

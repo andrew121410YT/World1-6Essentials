@@ -11,15 +11,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class tpaccept implements CommandExecutor {
 
     private Main plugin;
 
-    MySQL mysql = new MySQL();
     API api = new API();
+    MySQL mysql = new MySQL(this.api);
 
     //HASHMAPS
     private static Map<Player, Player> tpam = tpa.tpam;

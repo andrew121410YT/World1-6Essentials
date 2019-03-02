@@ -55,10 +55,6 @@
           <artifactId>json-simple</artifactId>
           <groupId>com.googlecode.json-simple</groupId>
         </exclusion>
-        <exclusion>
-          <artifactId>snakeyaml</artifactId>
-          <groupId>org.yaml</groupId>
-        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -74,10 +70,6 @@
         <exclusion>
           <artifactId>json-simple</artifactId>
           <groupId>com.googlecode.json-simple</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>snakeyaml</artifactId>
-          <groupId>org.yaml</groupId>
         </exclusion>
       </exclusions>
     </dependency>

@@ -16,7 +16,7 @@ public class OnLeaveEvent implements Listener {
     private static Main plugin;
     KeyAPI keyAPI = new KeyAPI();
     API api = new API();
-    MySQL mySQL = new MySQL();
+    MySQL mySQL = new MySQL(this.api);
 
     public OnLeaveEvent(Main getPlugin) {
         plugin = getPlugin;

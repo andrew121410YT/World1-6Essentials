@@ -32,13 +32,14 @@ public class debug implements CommandExecutor {
     //...
 
     private API api;
-    private MySQL mysql = new MySQL();
+    private MySQL mysql;
 
     private Main plugin;
 
     public debug(Main getPlugin) {
         this.plugin = getPlugin;
-        api = new API();
+        this.api = new API();
+        this.mysql = new MySQL(this.api);
 
         this.plugin.getCommand("debug1-6").setExecutor(this);
     }
