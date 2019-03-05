@@ -2,7 +2,7 @@ package World16.Commands.tp;
 
 import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
-import World16.MysqlAPI.MySQL;
+import World16.Storage.OldMySQL;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManager;
 import World16.Utils.Translate;
@@ -17,8 +17,8 @@ public class tpaccept implements CommandExecutor {
 
     private Main plugin;
 
-    API api = new API();
-    MySQL mysql = new MySQL(this.api);
+    private API api;
+    private OldMySQL mysql;
 
     //HASHMAPS
     private static Map<Player, Player> tpam = tpa.tpam;
@@ -28,6 +28,8 @@ public class tpaccept implements CommandExecutor {
     public tpaccept(CustomConfigManager getCustomYml, Main getPlugin) {
         this.shitYml = getCustomYml.getShitYml();
         this.plugin = getPlugin;
+        this.api = new API();
+        this.mysql = new OldMySQL();
 
         this.plugin.getCommand("tpaccept").setExecutor(this);
     }

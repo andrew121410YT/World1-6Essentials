@@ -2,7 +2,7 @@ package World16.test;
 
 import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
-import World16.MysqlAPI.MySQL;
+import World16.Storage.OldMySQL;
 import World16.Utils.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,7 +13,7 @@ public class test1 implements CommandExecutor {
 
     private Main plugin;
 
-    MySQL mysql;
+    OldMySQL mysql;
     KeyAPI keyapi = new KeyAPI();
     API api = new API();
 
@@ -22,7 +22,7 @@ public class test1 implements CommandExecutor {
     public test1(CustomConfigManager getCustomYml, Main getPlugin) {
         this.shitYml = getCustomYml.getShitYml();
         this.plugin = getPlugin;
-        this.mysql = new MySQL(this.api);
+        this.mysql = new OldMySQL();
 
         this.plugin.getCommand("testee1").setExecutor(this);
     }

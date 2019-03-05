@@ -2,8 +2,8 @@ package World16.Utils;
 
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
-import World16.MysqlAPI.MySQL;
 import World16.Objects.KeyObject;
+import World16.Storage.OldMySQL;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -43,7 +43,7 @@ public class KeyAPI {
      * @param mySQL      mySQL Object
      * @param playerName Player name String
      */
-    public void getAllKeysFromRamAndStoreItInMySql(MySQL mySQL, String playerName) {
+    public void getAllKeysFromRamAndStoreItInMySql(OldMySQL mySQL, String playerName) {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -64,7 +64,7 @@ public class KeyAPI {
      * @param keyDataID   the id
      * @param playerToGet the player to get.
      */
-    public void giveKeyToPlayerFromMySQL(Player p, MySQL mysql, Integer keyDataID, String playerToGet) { //GIVES DEFAULT ID 1 KEY
+    public void giveKeyToPlayerFromMySQL(Player p, OldMySQL mysql, Integer keyDataID, String playerToGet) { //GIVES DEFAULT ID 1 KEY
         new BukkitRunnable() {
 
             @Override
@@ -110,7 +110,7 @@ public class KeyAPI {
      * @param keyDataID  key ID
      * @return returns the key string from mysql.
      */
-    public String getKeyFromMysqlReturn(String playerName, MySQL mysql, Integer keyDataID) { //RETURNS KEY
+    public String getKeyFromMysqlReturn(String playerName, OldMySQL mysql, Integer keyDataID) { //RETURNS KEY
         mysql.Connect();
 //        ResultSet rs =
 //                mysql.GetResult("SELECT * FROM KeyData WHERE Player='" + p.getPlayer().getDisplayName() + "';");
@@ -138,7 +138,7 @@ public class KeyAPI {
      * @param mysql      mysql object
      * @param keyDataID  key ID
      */
-    public void getKeyFromMysqlAndThenGiveItTooRam(String playerName, MySQL mysql, Integer keyDataID) { //RETURNS KEY
+    public void getKeyFromMysqlAndThenGiveItTooRam(String playerName, OldMySQL mysql, Integer keyDataID) { //RETURNS KEY
 
         new BukkitRunnable() {
             @Override
@@ -176,7 +176,7 @@ public class KeyAPI {
      * @param playerName Player name string
      * @param mysql      mysql object
      */
-    public void getAllKeysFromMysqlTooRam(String playerName, MySQL mysql) { //RETURNS KEY
+    public void getAllKeysFromMysqlTooRam(String playerName, OldMySQL mysql) { //RETURNS KEY
 
         new BukkitRunnable() {
             @Override
@@ -231,7 +231,7 @@ public class KeyAPI {
 //
 //
     //1
-    public void ResetEverythingFromPlayerMySQL(MySQL mysql, Player p) {
+    public void ResetEverythingFromPlayerMySQL(OldMySQL mysql, Player p) {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -243,7 +243,7 @@ public class KeyAPI {
     }
 
     //2
-    public void ResetEverythingFromPlayerMySQL(MySQL mysql, String p) {
+    public void ResetEverythingFromPlayerMySQL(OldMySQL mysql, String p) {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -255,7 +255,7 @@ public class KeyAPI {
     }
 
     //1
-    public void DeleteKeyDataID(MySQL mysql, Player p, int INT) {
+    public void DeleteKeyDataID(OldMySQL mysql, Player p, int INT) {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -267,7 +267,7 @@ public class KeyAPI {
     }
 
     //2
-    public void DeleteKeyDataID(MySQL mysql, String p, int INT) {
+    public void DeleteKeyDataID(OldMySQL mysql, String p, int INT) {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -279,7 +279,7 @@ public class KeyAPI {
     }
 
     //1
-    public void SetKey(MySQL mysql, int KeyDataID, Player p, String Lore) {
+    public void SetKey(OldMySQL mysql, int KeyDataID, Player p, String Lore) {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -292,7 +292,7 @@ public class KeyAPI {
     }
 
     //2
-    public void SetKey(MySQL mysql, int KeyDataID, String p, String Lore) {
+    public void SetKey(OldMySQL mysql, int KeyDataID, String p, String Lore) {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -305,7 +305,7 @@ public class KeyAPI {
     }
 
     //1
-    public void SetKeyAndDeleteOldKey(MySQL mysql, int KeyDataID, Player p, String Lore) {
+    public void SetKeyAndDeleteOldKey(OldMySQL mysql, int KeyDataID, Player p, String Lore) {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -319,7 +319,7 @@ public class KeyAPI {
     }
 
     //2
-    public void SetKeyAndDeleteOldKey(MySQL mysql, int KeyDataID, String p, String Lore) {
+    public void SetKeyAndDeleteOldKey(OldMySQL mysql, int KeyDataID, String p, String Lore) {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -333,7 +333,7 @@ public class KeyAPI {
     }
 
     //3
-    public void SetKeyAndDeleteOldKey(MySQL mysql, int KeyDataID, String p, String Lore, boolean autoConnectAndAutoDisconnect) {
+    public void SetKeyAndDeleteOldKey(OldMySQL mysql, int KeyDataID, String p, String Lore, boolean autoConnectAndAutoDisconnect) {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -351,7 +351,7 @@ public class KeyAPI {
     }
 
     //1
-    public void ReplaceKey(MySQL mysql, int KeyDataID, Player p, String Lore) {
+    public void ReplaceKey(OldMySQL mysql, int KeyDataID, Player p, String Lore) {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -363,7 +363,7 @@ public class KeyAPI {
     }
 
     //2
-    public void ReplaceKey(MySQL mysql, int KeyDataID, String p, String Lore) {
+    public void ReplaceKey(OldMySQL mysql, int KeyDataID, String p, String Lore) {
         new BukkitRunnable() {
             @Override
             public void run() {

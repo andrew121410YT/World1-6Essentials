@@ -3,13 +3,12 @@ package World16.Commands;
 import World16.Commands.tp.tpa;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
-import World16.MysqlAPI.MySQL;
 import World16.Objects.KeyObject;
 import World16.Objects.UserObject;
+import World16.Storage.OldMySQL;
 import World16.Utils.API;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,7 +17,8 @@ import org.bukkit.entity.Player;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Map;
 
 public class debug implements CommandExecutor {
 
@@ -32,14 +32,14 @@ public class debug implements CommandExecutor {
     //...
 
     private API api;
-    private MySQL mysql;
+    private OldMySQL mysql;
 
     private Main plugin;
 
     public debug(Main getPlugin) {
         this.plugin = getPlugin;
         this.api = new API();
-        this.mysql = new MySQL(this.api);
+        this.mysql = new OldMySQL();
 
         this.plugin.getCommand("debug1-6").setExecutor(this);
     }

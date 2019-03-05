@@ -1,7 +1,7 @@
 package World16.Events;
 
 import World16.Main.Main;
-import World16.MysqlAPI.MySQL;
+import World16.Storage.OldMySQL;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
 import World16.Utils.Translate;
@@ -16,7 +16,7 @@ public class OnLeaveEvent implements Listener {
     private static Main plugin;
     KeyAPI keyAPI = new KeyAPI();
     API api = new API();
-    MySQL mySQL = new MySQL(this.api);
+    OldMySQL mySQL = new OldMySQL();
 
     public OnLeaveEvent(Main getPlugin) {
         plugin = getPlugin;

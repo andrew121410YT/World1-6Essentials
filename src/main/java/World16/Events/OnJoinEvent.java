@@ -2,9 +2,9 @@ package World16.Events;
 
 import World16.Commands.back;
 import World16.Main.Main;
-import World16.MysqlAPI.MySQL;
 import World16.Objects.KeyObject;
 import World16.Objects.UserObject;
+import World16.Storage.OldMySQL;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
 import World16.Utils.Translate;
@@ -27,13 +27,13 @@ public class OnJoinEvent implements Listener {
     Map<String, UserObject> backM = back.backm;
     //...
 
-    MySQL mysql;
+    OldMySQL mysql;
     API api = new API();
     KeyAPI keyapi = new KeyAPI();
 
     public OnJoinEvent(Main getPlugin) {
         plugin = getPlugin;
-        this.mysql = new MySQL(this.api);
+        this.mysql = new OldMySQL();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 

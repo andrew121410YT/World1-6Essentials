@@ -20,6 +20,22 @@
               <transformers>
                 <transformer />
               </transformers>
+              <filters>
+                <filter>
+                  <artifact>CCUtilsJava:CCUtilsJava</artifact>
+                  <includes>
+                    <include>CCUtilsJava/**</include>
+                  </includes>
+                </filter>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                  </excludes>
+                </filter>
+              </filters>
             </configuration>
           </execution>
         </executions>
