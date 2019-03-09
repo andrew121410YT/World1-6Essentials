@@ -3,6 +3,7 @@ package World16.Events;
 import World16.Main.Main;
 import World16.Utils.API;
 import World16.Utils.Translate;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,6 +30,18 @@ public class AsyncPlayerChatEvent implements Listener {
         Player p = event.getPlayer();
 
         String cmd = event.getMessage();
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Player player : plugin.getServer().getOnlinePlayers()) {
+                    if (cmd.contains(player.getDisplayName())) {
+                        player.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10.0f, 1.0f);
+                    }
+                }
+            }
+        }.runTask(this.plugin);
+
 
         if (!cmd.startsWith(":")) {
             return;

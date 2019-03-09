@@ -119,7 +119,6 @@ public class Main extends JavaPlugin {//implements Listener {
         new OnDeathEvent(this);
         new PlayerDamageEvent(this);
         new OnTpEvent(this);
-        new PistonEvent(this);
         //...
         new OnBedEnterEvent(this);
         new OnJoinTitleEvent(this);

@@ -54,8 +54,8 @@ public class API {
     ViaAPI viaapi = Via.getAPI(); // https://docs.viaversion.com/display/VIAVERSION/Basic+API+usage
 
     //Finals
-    public static final Integer VERSION = 10;
-    public static final String DATE_OF_VERSION = "3/2/2019";
+    public static final Integer VERSION = 11;
+    public static final String DATE_OF_VERSION = "3/9/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";

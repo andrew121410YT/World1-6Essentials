@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class OnLeaveEvent implements Listener {
     private static Main plugin;
@@ -28,15 +27,8 @@ public class OnLeaveEvent implements Listener {
     public void onQUIT(PlayerQuitEvent event) {
         Player p = event.getPlayer();
 
-        keyAPI.getAllKeysFromRamAndStoreItInMySql(mySQL, p.getDisplayName());
-
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                //CLEAR ARRAYLIST AND HASHMAPS ETC
-                api.clearListAndMaps(p);
-            }
-        }.runTaskLaterAsynchronously(plugin, 20 * 3);
+        //CLEAR ARRAYLIST AND HASHMAPS ETC
+        api.clearListAndMaps(p);
 
         event.setQuitMessage("");
         Bukkit.broadcastMessage(Translate.chat(API.PREFIX + " &5Bye Bye, " + p.getDisplayName()));

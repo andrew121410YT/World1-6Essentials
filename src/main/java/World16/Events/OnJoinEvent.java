@@ -41,12 +41,6 @@ public class OnJoinEvent implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
 
-        if (p.getDisplayName().equals("andrew121410")) {
-            p.sendMessage(Translate.chat("&4Hello, Owner."));
-        }
-        if (p.getDisplayName().equals("AlphaGibbon43")) {
-            p.sendMessage(Translate.chat("&4Hello, Owner."));
-        }
         //JOIN MESSAGE STUFF
         event.setJoinMessage("");
 
