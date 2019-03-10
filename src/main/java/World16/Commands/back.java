@@ -113,8 +113,8 @@ public class back implements CommandExecutor {
                     return true;
                 }
                 if (backm.get(p.getDisplayName()) != null) {
-                    if (backm.get(p.getDisplayName()).getLocation("set") == null) return true;
-                    p.teleport(backm.get(p.getDisplayName()).getLocation("set"));
+                    if (backm.get(p.getDisplayName()).getLocation(3) == null) return true;
+                    p.teleport(backm.get(p.getDisplayName()).getLocation(3));
                     p.sendMessage(Translate.chat("[&9Back&r] &aTheir you go."));
                     return true;
                 } else {

@@ -31,6 +31,7 @@ public class AsyncPlayerChatEvent implements Listener {
 
         String cmd = event.getMessage();
 
+        //if msg contains username from anyone on the server then ping them.
         new BukkitRunnable() {
             @Override
             public void run() {

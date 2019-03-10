@@ -14,8 +14,9 @@ public class OnDeathEvent implements Listener {
 
     private static Main plugin;
 
-    //HASHMAPS
+    //Maps
     Map<String, UserObject> backm = back.backm;
+    //...
 
     public OnDeathEvent(Main getPlugin) {
         plugin = getPlugin;

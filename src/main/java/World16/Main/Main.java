@@ -12,10 +12,8 @@ import World16.Objects.UserObject;
 import World16.Utils.API;
 import World16.Utils.Metrics;
 import World16.Utils.Translate;
-import World16.test.test;
 import World16.test.test1;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -107,7 +105,6 @@ public class Main extends JavaPlugin {//implements Listener {
         new tpaccept(this.customconfig, this);
         new tpdeny(this.customconfig, this);
 
-        new test(customconfig, this);
         new test1(customconfig, this);
     }
 

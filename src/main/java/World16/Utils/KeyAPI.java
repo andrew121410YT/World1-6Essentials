@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -30,9 +31,6 @@ public class KeyAPI {
 
     //Maps
     Map<String, KeyObject> keyDatam = OnJoinEvent.keyDataM;
-    //...
-
-    //Lists
     //...
 
     // START
@@ -284,9 +282,17 @@ public class KeyAPI {
             @Override
             public void run() {
                 mysql.Connect();
-                mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
-                        + p.getDisplayName() + "', '" + Lore + "')");
-                mysql.Disconnect();
+                try {
+                    PreparedStatement preparedStatement = mysql.ExecuteCommandPreparedStatement("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES (?,?,?);");
+                    preparedStatement.setInt(1, KeyDataID);
+                    preparedStatement.setString(2, p.getDisplayName());
+                    preparedStatement.setString(3, Lore);
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    mysql.Disconnect();
+                }
             }
         }.runTaskAsynchronously(plugin);
     }
@@ -297,9 +303,17 @@ public class KeyAPI {
             @Override
             public void run() {
                 mysql.Connect();
-                mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
-                        + p + "', '" + Lore + "')");
-                mysql.Disconnect();
+                try {
+                    PreparedStatement preparedStatement = mysql.ExecuteCommandPreparedStatement("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES (?,?,?);");
+                    preparedStatement.setInt(1, KeyDataID);
+                    preparedStatement.setString(2, p);
+                    preparedStatement.setString(3, Lore);
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    mysql.Disconnect();
+                }
             }
         }.runTaskAsynchronously(plugin);
     }
@@ -311,9 +325,17 @@ public class KeyAPI {
             public void run() {
                 mysql.Connect();
                 mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + KeyDataID + "' AND Player='" + p.getDisplayName() + "'");
-                mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
-                        + p.getDisplayName() + "', '" + Lore + "')");
-                mysql.Disconnect();
+                try {
+                    PreparedStatement preparedStatement = mysql.ExecuteCommandPreparedStatement("INSERT INTO KeyData (KeyDataID, PLayer, Lore) VALUES (?,?,?);");
+                    preparedStatement.setInt(1, KeyDataID);
+                    preparedStatement.setString(2, p.getDisplayName());
+                    preparedStatement.setString(3, Lore);
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    mysql.Disconnect();
+                }
             }
         }.runTaskAsynchronously(plugin);
     }
@@ -325,9 +347,17 @@ public class KeyAPI {
             public void run() {
                 mysql.Connect();
                 mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + KeyDataID + "' AND Player='" + p + "'");
-                mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
-                        + p + "', '" + Lore + "')");
-                mysql.Disconnect();
+                try {
+                    PreparedStatement preparedStatement = mysql.ExecuteCommandPreparedStatement("INSERT INTO KeyData (KeyDataID, PLayer, Lore) VALUES (?,?,?);");
+                    preparedStatement.setInt(1, KeyDataID);
+                    preparedStatement.setString(2, p);
+                    preparedStatement.setString(3, Lore);
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    mysql.Disconnect();
+                }
             }
         }.runTaskAsynchronously(plugin);
     }
@@ -341,10 +371,19 @@ public class KeyAPI {
                     mysql.Connect();
                 }
                 mysql.ExecuteCommand("DELETE FROM KeyData WHERE KeyDataID='" + KeyDataID + "' AND Player='" + p + "'");
-                mysql.ExecuteCommand("INSERT INTO KeyData (KeyDataID, Player, Lore) VALUES ('" + KeyDataID + "', '"
-                        + p + "', '" + Lore + "')");
-                if (autoConnectAndAutoDisconnect) {
+                try {
+                    PreparedStatement preparedStatement = mysql.ExecuteCommandPreparedStatement("INSERT INTO KeyData (KeyDataID, PLayer, Lore) VALUES (?,?,?);");
+                    preparedStatement.setInt(1, KeyDataID);
+                    preparedStatement.setString(2, p);
+                    preparedStatement.setString(3, Lore);
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
                     mysql.Disconnect();
+                    if (autoConnectAndAutoDisconnect) {
+                        mysql.Disconnect();
+                    }
                 }
             }
         }.runTaskAsynchronously(plugin);

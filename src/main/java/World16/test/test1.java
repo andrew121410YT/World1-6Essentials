@@ -40,7 +40,6 @@ public class test1 implements CommandExecutor {
         }
         if (args.length == 0) {
             //SOMETHING HERE
-            keyapi.getAllKeysFromRamAndStoreItInMySql(mysql, p.getDisplayName());
             CountdownTimer timer = new CountdownTimer(this.plugin, 20, () -> p.sendMessage(Translate.chat("Starting")), () -> p.sendMessage(Translate.chat("END")), (t) -> p.sendMessage(Translate.chat("Timer:" + t.getSecondsLeft())));
             timer.scheduleTimer();
         } else if (args.length >= 1) {
