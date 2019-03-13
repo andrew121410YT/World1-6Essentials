@@ -89,6 +89,12 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.andrew121410</groupId>
+            <artifactId>CCBot</artifactId>
+            <version>f3faaaf24e</version>
+        </dependency>
+
     </dependencies>
 
 </project>
