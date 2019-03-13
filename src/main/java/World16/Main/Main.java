@@ -20,6 +20,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.security.auth.login.LoginException;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +54,16 @@ public class Main extends JavaPlugin {//implements Listener {
         regEvents();
         regCommands();
         regbstats();
+
+        //CCBot
+        try {
+            new CCBot.Main();
+        } catch (LoginException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         getLogger().info("[World1-6Essentials] is now loaded!");
     }
 

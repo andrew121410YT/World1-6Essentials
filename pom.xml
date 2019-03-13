@@ -92,7 +92,8 @@
         <dependency>
             <groupId>com.github.andrew121410</groupId>
             <artifactId>CCBot</artifactId>
-            <version>f3faaaf24e</version>
+            <version>3647147a59</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
