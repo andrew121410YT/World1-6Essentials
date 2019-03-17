@@ -1,9 +1,9 @@
 package World16.Commands;
 
+import CCUtils.Storage.SQLite;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
-import World16.Storage.OldMySQL;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
 import World16.Utils.Translate;
@@ -26,14 +26,16 @@ public class key implements CommandExecutor {
     private Main plugin;
 
     private API api;
-    private KeyAPI keyapi = new KeyAPI();
-    private OldMySQL mysql;
+    private KeyAPI keyapi;
+    private SQLite mysql;
 
     public key(Main getPlugin) {
         this.plugin = getPlugin;
 
         this.api = new API();
-        this.mysql = new OldMySQL();
+        this.mysql = new SQLite(this.plugin.getDataFolder(), "keys");
+
+        this.keyapi = new KeyAPI(this.mysql);
 
         this.plugin.getCommand("key").setExecutor(this);
     }

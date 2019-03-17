@@ -1,10 +1,11 @@
 package World16.Events;
 
+import CCUtils.Storage.ISQL;
+import CCUtils.Storage.SQLite;
 import World16.Commands.back;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
 import World16.Objects.UserObject;
-import World16.Storage.OldMySQL;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
 import World16.Utils.Translate;
@@ -27,14 +28,15 @@ public class OnJoinEvent implements Listener {
     Map<String, UserObject> backM = back.backm;
     //...
 
-    OldMySQL mysql;
+    ISQL mysql;
     API api = new API();
-    KeyAPI keyapi = new KeyAPI();
+    KeyAPI keyapi;
 
     public OnJoinEvent(Main getPlugin) {
-        plugin = getPlugin;
-        this.mysql = new OldMySQL();
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        this.plugin = getPlugin;
+        this.mysql = new SQLite(plugin.getDataFolder(), "keys");
+        this.keyapi = new KeyAPI(this.mysql);
+        this.plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler

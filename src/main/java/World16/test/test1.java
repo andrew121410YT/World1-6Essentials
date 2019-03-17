@@ -45,6 +45,7 @@ public class test1 implements CommandExecutor {
             //SOMETHING HERE
 //            CountdownTimer timer = new CountdownTimer(this.plugin, 20, () -> p.sendMessage(Translate.chat("Starting")), () -> p.sendMessage(Translate.chat("END")), (t) -> p.sendMessage(Translate.chat("Timer:" + t.getSecondsLeft())));
 //            timer.scheduleTimer();
+            p.sendMessage(this.plugin.getDataFolder().getAbsolutePath());
         } else if (args.length >= 1) {
             //SOMETHING HERE
             return true;

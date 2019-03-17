@@ -33,6 +33,19 @@ public class KeyAPI {
     Map<String, KeyObject> keyDatam = OnJoinEvent.keyDataM;
     //...
 
+    public KeyAPI(){
+    }
+
+    public KeyAPI(ISQL isql) {
+        isql.Connect();
+        isql.ExecuteCommand("CREATE TABLE IF NOT EXISTS `KeyData` (" +
+                "`KeyDataID` INT," +
+                "`Player` TEXT," +
+                "`Lore` TEXT" +
+                ");");
+        isql.Disconnect();
+    }
+
     /**
      * Get's all keys from ram and stores it in the mySQL database
      *
@@ -179,8 +192,6 @@ public class KeyAPI {
             public void run() {
 
                 mysql.Connect();
-//        ResultSet rs =
-//                mysql.GetResult("SELECT * FROM KeyData WHERE Player='" + p.getPlayer().getDisplayName() + "';");
                 ResultSet rs = mysql.GetResult("SELECT * FROM KeyData WHERE (Player='" + playerName + "')");
                 try {
                     while (rs.next()) {
