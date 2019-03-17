@@ -1,9 +1,12 @@
 package World16.test;
 
+import CCUtils.Storage.SQLite;
 import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
 import World16.Storage.OldMySQL;
-import World16.Utils.*;
+import World16.Utils.API;
+import World16.Utils.CustomYmlManager;
+import World16.Utils.KeyAPI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -40,8 +43,8 @@ public class test1 implements CommandExecutor {
         }
         if (args.length == 0) {
             //SOMETHING HERE
-            CountdownTimer timer = new CountdownTimer(this.plugin, 20, () -> p.sendMessage(Translate.chat("Starting")), () -> p.sendMessage(Translate.chat("END")), (t) -> p.sendMessage(Translate.chat("Timer:" + t.getSecondsLeft())));
-            timer.scheduleTimer();
+//            CountdownTimer timer = new CountdownTimer(this.plugin, 20, () -> p.sendMessage(Translate.chat("Starting")), () -> p.sendMessage(Translate.chat("END")), (t) -> p.sendMessage(Translate.chat("Timer:" + t.getSecondsLeft())));
+//            timer.scheduleTimer();
         } else if (args.length >= 1) {
             //SOMETHING HERE
             return true;
