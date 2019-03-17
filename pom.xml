@@ -92,7 +92,7 @@
         <dependency>
             <groupId>com.github.andrew121410</groupId>
             <artifactId>CCUtilsJava</artifactId>
-            <version>ced9d6e68a</version>
+            <version>5c9cab9902</version>
             <scope>compile</scope>
         </dependency>
 

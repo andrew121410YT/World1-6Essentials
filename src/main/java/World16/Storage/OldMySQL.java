@@ -1,10 +1,11 @@
 package World16.Storage;
 
+import CCUtils.Storage.ISQL;
 import World16.Utils.API;
 
 import java.sql.*;
 
-public class OldMySQL {
+public class OldMySQL implements ISQL {
 
     private String Host;
     private String Database;
