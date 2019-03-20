@@ -37,25 +37,25 @@ import java.util.Map;
 public class API {
 
     // Maps
-    private Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    private Map<String, UserObject> backm = back.backm;
-    private Map<Player, Player> tpam = tpa.tpam;
+    Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
+    Map<String, UserObject> backm = back.backm;
+    Map<Player, Player> tpam = tpa.tpam;
     //...
 
     // Lists
-    private List<String> Afk1 = afk.Afk;
-    private List<String> Fly1 = fly.Fly;
-    private List<String> GodM = god.godm;
+    List<String> Afk1 = afk.Afk;
+    List<String> Fly1 = fly.Fly;
+    List<String> GodM = god.godm;
     //...
 
     private static Main plugin = Main.getPlugin();
     private CustomYmlManager configinstance = null;
 
-    ViaAPI viaapi = Via.getAPI(); // https://docs.viaversion.com/display/VIAVERSION/Basic+API+usage
+    private ViaAPI viaapi = Via.getAPI(); // https://docs.viaversion.com/display/VIAVERSION/Basic+API+usage
 
     //Finals
     public static final Integer VERSION = 202;
-    public static final String DATE_OF_VERSION = "3/19/2019";
+    public static final String DATE_OF_VERSION = "3/20/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";

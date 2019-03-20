@@ -28,15 +28,15 @@ public class OnJoinEvent implements Listener {
     Map<String, UserObject> backM = back.backm;
     //...
 
-    ISQL mysql;
-    API api = new API();
-    KeyAPI keyapi;
+    private ISQL mysql;
+    private API api = new API();
+    private KeyAPI keyapi;
 
     public OnJoinEvent(Main getPlugin) {
-        this.plugin = getPlugin;
+        plugin = getPlugin;
         this.mysql = new SQLite(plugin.getDataFolder(), "keys");
         this.keyapi = new KeyAPI(this.mysql);
-        this.plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler

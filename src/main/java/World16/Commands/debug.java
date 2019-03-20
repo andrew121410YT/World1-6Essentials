@@ -18,6 +18,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 
 public class debug implements CommandExecutor {
@@ -121,9 +122,9 @@ public class debug implements CommandExecutor {
                     return true;
                 } else if (args.length >= 2) {
                     if (args[1].equalsIgnoreCase("@all")) {
-                        p.sendMessage(String.valueOf(Arrays.asList(keyDataM)));
-                        p.sendMessage(String.valueOf(Arrays.asList(backm)));
-                        p.sendMessage(String.valueOf(Arrays.asList(tpam)));
+                        p.sendMessage(String.valueOf(Collections.singletonList(keyDataM)));
+                        p.sendMessage(String.valueOf(Collections.singletonList(backm)));
+                        p.sendMessage(String.valueOf(Collections.singletonList(tpam)));
                         return true;
                     } else if (args[1].equalsIgnoreCase("@checkmine")) {
                         p.sendMessage(Translate.chat("&4This is no longer working."));

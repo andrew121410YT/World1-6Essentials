@@ -23,7 +23,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.List;
 import java.util.Map;
 
-public class Main extends JavaPlugin {//implements Listener {
+public class Main extends JavaPlugin {
 
     private static Main plugin;
 
@@ -72,7 +72,7 @@ public class Main extends JavaPlugin {//implements Listener {
         tpam.clear();
     }
 
-    public void regCommands() {
+    private void regCommands() {
         new gmc(this);
         new gms(this);
         new gmsp(this);
@@ -109,7 +109,7 @@ public class Main extends JavaPlugin {//implements Listener {
         new test1(customconfig, this);
     }
 
-    public void regEvents() {
+    private void regEvents() {
         //Bukkit.getServer().getPluginManager().registerEvents(this, this);
         new OnJoinEvent(this);
         new OnLeaveEvent(this);
@@ -126,13 +126,13 @@ public class Main extends JavaPlugin {//implements Listener {
         new CustomInventoryManager().registerAllCustomInventorys();
     }
 
-    public void regFileConfigGEN() {
+    private void regFileConfigGEN() {
         this.getConfig().options().copyDefaults(true);
         this.saveConfig();
         this.reloadConfig();
     }
 
-    public void regCustomConfigManager() {
+    private void regCustomConfigManager() {
         this.customconfig = new CustomConfigManager();
         customconfig.registerAllCustomConfigs();
     }
