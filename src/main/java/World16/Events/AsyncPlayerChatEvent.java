@@ -37,7 +37,7 @@ public class AsyncPlayerChatEvent implements Listener {
             public void run() {
                 for (Player player : plugin.getServer().getOnlinePlayers()) {
                     if (cmd.contains(player.getDisplayName())) {
-                        player.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10.0f, 1.0f);
+                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10.0f, 1.0f);
                     }
                 }
             }
