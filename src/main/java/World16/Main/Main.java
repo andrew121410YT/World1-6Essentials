@@ -101,6 +101,7 @@ public class Main extends JavaPlugin {
         new back(this);
         new broadcast(this.customconfig, this);
         new god(this);
+        new msg(customconfig, this);
 
         new tpa(this.customconfig, this);
         new tpaccept(this.customconfig, this);

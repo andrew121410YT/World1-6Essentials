@@ -55,7 +55,7 @@ public class API {
 
     //Finals
     public static final Integer VERSION = 202;
-    public static final String DATE_OF_VERSION = "3/20/2019";
+    public static final String DATE_OF_VERSION = "3/23/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
@@ -236,17 +236,13 @@ public class API {
 
     public String FormatTime(LocalDateTime time) {
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
-        String formattedDate = time.format(myFormatObj);
-
-        return formattedDate;
+        return time.format(myFormatObj);
     }
 
     public String Time() {
         LocalDateTime time = LocalDateTime.now();
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
-        String formattedDate = time.format(myFormatObj);
-
-        return formattedDate;
+        return time.format(myFormatObj);
     }
 
     public String getServerVersion() {
@@ -338,10 +334,8 @@ public class API {
         URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + playername);
         String uuid = (String) ((JSONObject) new JSONParser()
                 .parse(new InputStreamReader(url.openStream()))).get("id");
-        String realUUID =
-                uuid.substring(0, 8) + "-" + uuid.substring(8, 12) + "-" + uuid.substring(12, 16) + "-"
-                        + uuid.substring(16, 20) + "-" + uuid.substring(20, 32);
-        return realUUID;
+        return uuid.substring(0, 8) + "-" + uuid.substring(8, 12) + "-" + uuid.substring(12, 16) + "-"
+                + uuid.substring(16, 20) + "-" + uuid.substring(20, 32);
     }
 
     private String locationname;
@@ -371,8 +365,7 @@ public class API {
                     .getWorld(
                             this.configinstance2.getConfig().getString(this.Path + "." + this.locationname + ".Data.World"));
 
-            Location location = new Location(world, x, y, z, yaw, pitch);
-            return location;
+            return new Location(world, x, y, z, yaw, pitch);
         } else {
             try {
                 throw new CustomYmlManagerInstanceException(Translate.chat(EMERGENCY_TAG + " In World16.Utils.API this.configinstance2 == null"));
