@@ -130,12 +130,13 @@ public class debug implements CommandExecutor {
                         p.sendMessage(Translate.chat("&4This is no longer working."));
                         return true;
                     } else if (args[1].equalsIgnoreCase("@AllWithDepth")) {
-                        p.sendMessage(Translate.chat(String.valueOf(Arrays.asList(tpam))));
+                        p.sendMessage(Translate.chat(String.valueOf(Collections.singletonList(tpam))));
                         p.sendMessage(Translate.chat("&b{SPACE}"));
                         for (Map.Entry<String, UserObject> e : backm.entrySet()) {
                             String k = e.getKey();
                             UserObject v = e.getValue();
                             p.sendMessage(Translate.chat(v.toString()));
+                            p.sendMessage(Translate.chat("&b{SPACE}"));
                         }
                         p.sendMessage(Translate.chat("&b{SPACE}"));
                         for (Map.Entry<String, KeyObject> entry : keyDataM.entrySet()) {
