@@ -63,6 +63,18 @@ permissions:
   world16.back:
     description: Allows to do back
     default: true
+
+  world16.back.all:
+    description: Allows to do every back command
+    default: true
+    children:
+      world16.back: true
+      world16.back.death: true
+      world16.back.tp: true
+      world16.back.set: true
+      world16.back.goto: true
+
+
   world16.bed:
     description: Allows to do bed
     default: op
@@ -81,6 +93,29 @@ permissions:
   world16.debug:
     description: Allows to do debug
     default: op
+
+  world16.debug.all:
+    description: Allows to do debug
+    default: op
+    children:
+      world16.debug: true
+      world16.debug.op: true
+      world16.debug.defaultstuff: true
+      world16.debug.checkmaps: true
+      world16.debug.clearalllists: true
+      world16.debug.clearallmaps: true
+      world16.debug.clearalllistswithname: true
+      world16.debug.clearallmapswithname: true
+      world16.debug.date: true
+      world16.debug.playerversion: true
+      world16.debug.playerversion.other: true
+      world16.debug.checkuuid: true
+      world16.debig.checkuuid.other: true
+      world16.debug.debugmessages: true
+      world16.debug.finddefaultspawn: true
+      world16.debug.sql: true
+
+
   world16.echest:
     description: Allows to do echest
     default: op
