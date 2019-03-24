@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class OnTpEvent implements Listener {
@@ -31,6 +32,8 @@ public class OnTpEvent implements Listener {
 
         // only save location if teleporting more than 5 blocks
         if (backm.get(p.getDisplayName()) != null && !to.getWorld().equals(from.getWorld()) || to.distanceSquared(from) > 25) {
+
+            backm.computeIfAbsent(p.getDisplayName(), k -> new UserObject());
 
             backm.get(p.getDisplayName()).setLocation("tp", 2, from);
         }
