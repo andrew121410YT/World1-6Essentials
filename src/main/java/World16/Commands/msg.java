@@ -29,7 +29,7 @@ public class msg implements CommandExecutor {
         this.plugin = getPlugin;
         this.mysql = new OldMySQL();
 
-        this.plugin.getCommand("msg").setExecutor(this);
+        this.plugin.getCommand("emsg").setExecutor(this);
     }
 
     @Override
@@ -39,25 +39,25 @@ public class msg implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
-        if (!p.hasPermission("world16.msg")) {
+        if (!p.hasPermission("world16.msg") || !p.hasPermission("world16.emsg")) {
             api.PermissionErrorMessage(p);
             return true;
         }
         if (args.length == 0) {
-            p.sendMessage(Translate.chat("&cUsage: /msg <Player> <Message>"));
+            p.sendMessage(Translate.chat("&cUsage: /emsg <Player> <Message>"));
         } else if (args.length >= 2) {
             Player ptarget = this.plugin.getServer().getPlayerExact(args[0]);
             if (args[0] != null && args[1] != null && ptarget != null && ptarget.isOnline()) {
-                String messageFrom = String.join(" ", Arrays.copyOfRange(args, 2, args.length));
+                String messageFrom = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
                 p.sendMessage(Translate.chat("&2[&a{me} &6->&c {target}&2]&9 ->&r {message}").replace("{me}", "me").replace("{target}", ptarget.getDisplayName()).replace("{message}", messageFrom));
                 ptarget.sendMessage(Translate.chat("&2[&a{me} &6->&c {target}&2]&9 ->&r {message}").replace("{me}", p.getDisplayName()).replace("{target}", "me").replace("{message}", messageFrom));
             } else {
                 p.sendMessage(Translate.chat("&4Something went wrong."));
-                p.sendMessage(Translate.chat("&cUsage: /msg <Player> <Message>"));
+                p.sendMessage(Translate.chat("&cUsage: /emsg <Player> <Message>"));
             }
         } else {
             p.sendMessage(Translate.chat("&4Something went wrong."));
-            p.sendMessage(Translate.chat("&cUsage: /msg <Player> <Message>"));
+            p.sendMessage(Translate.chat("&cUsage: /emsg <Player> <Message>"));
         }
         return true;
     }

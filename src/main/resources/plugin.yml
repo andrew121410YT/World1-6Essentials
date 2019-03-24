@@ -32,7 +32,7 @@ commands:
   tpdeny:
   broadcast:
   god:
-  msg:
+  emsg:
 
   gmc:
     aliases:
