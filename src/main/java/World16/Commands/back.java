@@ -1,6 +1,7 @@
 package World16.Commands;
 
 import World16.Main.Main;
+import World16.Objects.LocationObject;
 import World16.Objects.UserObject;
 import World16.Utils.API;
 import World16.Utils.Translate;
@@ -21,7 +22,7 @@ public class back implements CommandExecutor {
     private Main plugin;
 
     //Maps
-    public static Map<String, UserObject> backm = new HashMap<>();
+    public static Map<String, LocationObject> backm = new HashMap<>();
     //...
 
     public back(Main getPlugin) {

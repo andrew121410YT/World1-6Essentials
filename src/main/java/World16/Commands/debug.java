@@ -4,6 +4,7 @@ import World16.Commands.tp.tpa;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
+import World16.Objects.LocationObject;
 import World16.Objects.UserObject;
 import World16.Storage.OldMySQL;
 import World16.Utils.API;
@@ -17,7 +18,6 @@ import org.bukkit.entity.Player;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 
@@ -25,7 +25,7 @@ public class debug implements CommandExecutor {
 
     //Maps
     Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    Map<String, UserObject> backm = back.backm;
+    Map<String, LocationObject> backm = back.backm;
     Map<Player, Player> tpam = tpa.tpam;
     //...
 
@@ -132,9 +132,9 @@ public class debug implements CommandExecutor {
                     } else if (args[1].equalsIgnoreCase("@AllWithDepth")) {
                         p.sendMessage(Translate.chat(String.valueOf(Collections.singletonList(tpam))));
                         p.sendMessage(Translate.chat("&b{SPACE}"));
-                        for (Map.Entry<String, UserObject> e : backm.entrySet()) {
+                        for (Map.Entry<String, LocationObject> e : backm.entrySet()) {
                             String k = e.getKey();
-                            UserObject v = e.getValue();
+                            LocationObject v = e.getValue();
                             p.sendMessage(Translate.chat(v.toString()));
                             p.sendMessage(Translate.chat("&b{SPACE}"));
                         }

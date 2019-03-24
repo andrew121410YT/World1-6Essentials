@@ -5,6 +5,7 @@ import CCUtils.Storage.SQLite;
 import World16.Commands.back;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
+import World16.Objects.LocationObject;
 import World16.Objects.UserObject;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
@@ -25,7 +26,7 @@ public class OnJoinEvent implements Listener {
 
     //Maps
     public static Map<String, KeyObject> keyDataM = new HashMap<>();
-    Map<String, UserObject> backM = back.backm;
+    Map<String, LocationObject> backM = back.backm;
     //...
 
     private ISQL mysql;

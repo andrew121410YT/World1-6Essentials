@@ -2,6 +2,7 @@ package World16.Events;
 
 import World16.Commands.back;
 import World16.Main.Main;
+import World16.Objects.LocationObject;
 import World16.Objects.UserObject;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,7 +16,7 @@ public class OnDeathEvent implements Listener {
     private static Main plugin;
 
     //Maps
-    Map<String, UserObject> backm = back.backm;
+    Map<String, LocationObject> backm = back.backm;
     //...
 
     public OnDeathEvent(Main getPlugin) {

@@ -10,6 +10,7 @@ import World16.CustomExceptions.CustomYmlManagerInstanceException;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
+import World16.Objects.LocationObject;
 import World16.Objects.UserObject;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -38,7 +39,7 @@ public class API {
 
     // Maps
     Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    Map<String, UserObject> backm = back.backm;
+    Map<String, LocationObject> backm = back.backm;
     Map<Player, Player> tpam = tpa.tpam;
     //...
 
@@ -160,7 +161,7 @@ public class API {
         return OnJoinEvent.keyDataM;
     }
 
-    public Map<String, UserObject> getBackMap() {
+    public Map<String, LocationObject> getBackMap() {
         return back.backm;
     }
 
