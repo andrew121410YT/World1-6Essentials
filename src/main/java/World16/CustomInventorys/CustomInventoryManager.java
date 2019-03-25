@@ -9,8 +9,8 @@ public class CustomInventoryManager {
     }
 
     public void registerAllCustomInventorys() {
-        this.testMenu = new TestCustomInventory();
-        this.testMenu.createCustomInv();
+        testMenu = new TestCustomInventory();
+        testMenu.createCustomInv();
     }
 
     public static TestCustomInventory getTestMenu() {

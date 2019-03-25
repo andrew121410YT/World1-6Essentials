@@ -5,7 +5,6 @@ import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
-import World16.Objects.UserObject;
 import World16.Storage.OldMySQL;
 import World16.Utils.API;
 import World16.Utils.Translate;
@@ -132,19 +131,14 @@ public class debug implements CommandExecutor {
                     } else if (args[1].equalsIgnoreCase("@AllWithDepth")) {
                         p.sendMessage(Translate.chat(String.valueOf(Collections.singletonList(tpam))));
                         p.sendMessage(Translate.chat("&b{SPACE}"));
-                        for (Map.Entry<String, LocationObject> e : backm.entrySet()) {
-                            String k = e.getKey();
-                            LocationObject v = e.getValue();
+                        backm.forEach((k, v) -> {
                             p.sendMessage(Translate.chat(v.toString()));
                             p.sendMessage(Translate.chat("&b{SPACE}"));
-                        }
-                        p.sendMessage(Translate.chat("&b{SPACE}"));
-                        for (Map.Entry<String, KeyObject> entry : keyDataM.entrySet()) {
-                            String key = entry.getKey();
-                            Object value = entry.getValue();
-                            p.sendMessage(Translate.chat(value.toString()));
+                        });
+                        keyDataM.forEach((k, v) -> {
+                            p.sendMessage(Translate.chat(v.toString()));
                             p.sendMessage(Translate.chat("&b{SPACE}"));
-                        }
+                        });
                         return true;
                     }
                 }

@@ -56,7 +56,7 @@ public class API {
 
     //Finals
     public static final Integer VERSION = 202;
-    public static final String DATE_OF_VERSION = "3/23/2019";
+    public static final String DATE_OF_VERSION = "3/25/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
