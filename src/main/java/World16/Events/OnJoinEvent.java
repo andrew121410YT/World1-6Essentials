@@ -71,7 +71,7 @@ public class OnJoinEvent implements Listener {
 
         adminListPlayer.forEach((k) -> {
             p.hidePlayer(k);
-            k.sendMessage(Translate.chat("[&6SimpleHomes2&r] &9Player: " + p.getDisplayName() + " &cnow cannot see you,"));
+            k.sendMessage(Translate.chat("[&9World1-6&r] &9Player: " + p.getDisplayName() + " &cnow cannot see you,"));
         });
     }
 
