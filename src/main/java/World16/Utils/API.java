@@ -11,7 +11,6 @@ import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
-import World16.Objects.UserObject;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -52,7 +51,7 @@ public class API {
     private static Main plugin = Main.getPlugin();
     private CustomYmlManager configinstance = null;
 
-    private ViaAPI viaapi = Via.getAPI(); // https://docs.viaversion.com/display/VIAVERSION/Basic+API+usage
+    private ViaAPI viaapi;
 
     //Finals
     public static final Integer VERSION = 202;
@@ -74,17 +73,29 @@ public class API {
 
     // MAIN
     public API() {
+        regPluginViaVersion();
     }
 
     @Deprecated
     public API(CustomYmlManager configInstance) {
         this.configinstance = configInstance;
+
+        regPluginViaVersion();
     }
 
     public API(CustomConfigManager configManager) {
+        regPluginViaVersion();
     }
 
     // END MAIN
+
+    private void regPluginViaVersion() {
+        if (isClass("us.myles.ViaVersion.api.ViaAPI")) {
+            viaapi = Via.getAPI();
+        }else{
+            Bukkit.getServer().getConsoleSender().sendMessage(Translate.chat("[&9World1-6Ess&r] &cViaVersion is not required but kinda is."));
+        }
+    }
     // START OF MYSQL
 
     public String getMysql_HOST() {
@@ -432,6 +443,15 @@ public class API {
             return Long.valueOf(input);
         } catch (Exception e) {
             return default1;
+        }
+    }
+
+    public boolean isClass(String className) {
+        try {
+            Class.forName(className);
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
         }
     }
 
