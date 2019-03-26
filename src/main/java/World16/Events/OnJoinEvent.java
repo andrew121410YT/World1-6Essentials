@@ -27,6 +27,7 @@ public class OnJoinEvent implements Listener {
     //Maps
     public static Map<String, KeyObject> keyDataM = new HashMap<>();
     Map<String, LocationObject> backM = back.backm;
+    Map<String, Player> adminMap = AsyncPlayerChatEvent.adminMap;
     //...
 
     private ISQL mysql;
@@ -63,6 +64,11 @@ public class OnJoinEvent implements Listener {
         }
         backM.remove(p.getDisplayName()); //<-- just incase
         backM.put(p.getDisplayName(), new UserObject());
+
+        adminMap.forEach((k, v) -> {
+            p.hidePlayer(v);
+            v.sendMessage(Translate.chat("[&6SimpleHomes2&r] &9Player: " + p.getDisplayName() + " &cnow cannot see you,"));
+        });
     }
 
     public void version(Player p) {

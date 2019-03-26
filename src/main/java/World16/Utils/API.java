@@ -41,6 +41,7 @@ public class API {
     Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
     Map<String, LocationObject> backm = back.backm;
     Map<Player, Player> tpam = tpa.tpam;
+    Map<String, Player> adminMap = AsyncPlayerChatEvent.adminMap;
     //...
 
     // Lists
@@ -197,10 +198,13 @@ public class API {
 
         tpam.remove(p);
 
+        adminMap.remove(p.getDisplayName());
+
         if (this.isDebug()) {
             ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM", p);
             ClearHashMapMessage("World16.Commands.back.backm", p);
             ClearHashMapMessage("World16.Commands.tp.tpa.tpam", p);
+            ClearHashMapMessage("World16.Events.AsyncPlayerChatEvent", p);
         }
     }
 
@@ -211,10 +215,13 @@ public class API {
 
         tpam.clear();
 
+        adminMap.clear();
+
         if (this.isDebug()) {
             ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM");
             ClearHashMapMessage("World16.Commands.back.backm");
             ClearHashMapMessage("World16.Commands.tp.tpa.tpam");
+            ClearHashMapMessage("World16.Events.AsyncPlayerChatEvent");
         }
     }
 

@@ -9,9 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class AsyncPlayerChatEvent implements Listener {
 
@@ -20,6 +18,10 @@ public class AsyncPlayerChatEvent implements Listener {
 
     //Lists
     public static List<String> adminList = new ArrayList<>();
+    //...
+
+    //Maps
+    public static Map<String, Player> adminMap = new HashMap<>();
     //...
 
     public AsyncPlayerChatEvent(Main getPlugin) {
@@ -62,7 +64,7 @@ public class AsyncPlayerChatEvent implements Listener {
             return;
         }
 
-        if(!adminList.contains(p.getDisplayName())){
+        if (!adminList.contains(p.getDisplayName())) {
             return;
         }
 
@@ -103,6 +105,7 @@ public class AsyncPlayerChatEvent implements Listener {
                     new BukkitRunnable() {
                         @Override
                         public void run() {
+                            adminMap.put(p.getDisplayName(), p);
                             plugin.getServer().getOnlinePlayers().forEach(player -> player.hidePlayer(p));
                             if (!pTarget.canSee(p)) {
                                 p.teleport(pTarget.getLocation());
@@ -123,6 +126,7 @@ public class AsyncPlayerChatEvent implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
+                    adminMap.remove(p.getDisplayName());
                     plugin.getServer().getOnlinePlayers().forEach(player -> player.showPlayer(p));
                     p.sendMessage(Translate.chat("&bOk..."));
                 }
@@ -137,7 +141,9 @@ public class AsyncPlayerChatEvent implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
+                    adminMap.put(p.getDisplayName(), p);
                     plugin.getServer().getOnlinePlayers().forEach(player -> player.hidePlayer(p));
+                    adminMap.put(p.getDisplayName(), p);
                     p.sendMessage(Translate.chat("&bOk..."));
                 }
             }.runTask(this.plugin);
