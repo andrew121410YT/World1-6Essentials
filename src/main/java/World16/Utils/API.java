@@ -41,7 +41,6 @@ public class API {
     Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
     Map<String, LocationObject> backm = back.backm;
     Map<Player, Player> tpam = tpa.tpam;
-    Map<String, Player> adminMap = AsyncPlayerChatEvent.adminMap;
     //...
 
     // Lists
@@ -49,6 +48,7 @@ public class API {
     List<String> Fly1 = fly.Fly;
     List<String> GodM = god.godm;
     List<String> adminList = AsyncPlayerChatEvent.adminList;
+    List<Player> adminListPLayer = AsyncPlayerChatEvent.adminListPlayer;
     //...
 
     private static Main plugin = Main.getPlugin();
@@ -198,13 +198,10 @@ public class API {
 
         tpam.remove(p);
 
-        adminMap.remove(p.getDisplayName());
-
         if (this.isDebug()) {
             ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM", p);
             ClearHashMapMessage("World16.Commands.back.backm", p);
             ClearHashMapMessage("World16.Commands.tp.tpa.tpam", p);
-            ClearHashMapMessage("World16.Events.AsyncPlayerChatEvent", p);
         }
     }
 
@@ -214,8 +211,6 @@ public class API {
         backm.clear();
 
         tpam.clear();
-
-        adminMap.clear();
 
         if (this.isDebug()) {
             ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM");
@@ -232,10 +227,13 @@ public class API {
 
         GodM.remove(p.getDisplayName());
 
+        adminListPLayer.remove(p);
+
         if (this.isDebug()) {
             ClearArrayListMessage("World16.Commands.afk.Afk", p);
             ClearArrayListMessage("World16.Commands.fly.Fly", p);
             ClearArrayListMessage("World16.Commands.god.godm", p);
+            ClearArrayListMessage("World16.Events.AsyncPlayerChatEvent", p);
         }
     }
 
@@ -246,10 +244,13 @@ public class API {
 
         GodM.clear();
 
+        adminListPLayer.clear();
+
         if (this.isDebug()) {
             ClearArrayListMessage("World16.Commands.afk.Afk");
             ClearArrayListMessage("World16.Commands.fly.Fly");
             ClearArrayListMessage("World16.Commands.god.godm");
+            ClearArrayListMessage("World16.Events.AsyncPlayerChatEvent");
         }
     }
 

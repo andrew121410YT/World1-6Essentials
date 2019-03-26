@@ -9,7 +9,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class AsyncPlayerChatEvent implements Listener {
 
@@ -21,7 +23,7 @@ public class AsyncPlayerChatEvent implements Listener {
     //...
 
     //Maps
-    public static Map<String, Player> adminMap = new HashMap<>();
+    public static List<Player> adminListPlayer = new ArrayList<>();
     //...
 
     public AsyncPlayerChatEvent(Main getPlugin) {
@@ -105,7 +107,7 @@ public class AsyncPlayerChatEvent implements Listener {
                     new BukkitRunnable() {
                         @Override
                         public void run() {
-                            adminMap.put(p.getDisplayName(), p);
+                            adminListPlayer.add(p);
                             plugin.getServer().getOnlinePlayers().forEach(player -> player.hidePlayer(p));
                             if (!pTarget.canSee(p)) {
                                 p.teleport(pTarget.getLocation());
@@ -126,7 +128,7 @@ public class AsyncPlayerChatEvent implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    adminMap.remove(p.getDisplayName());
+                    adminListPlayer.remove(p);
                     plugin.getServer().getOnlinePlayers().forEach(player -> player.showPlayer(p));
                     p.sendMessage(Translate.chat("&bOk..."));
                 }
@@ -141,9 +143,8 @@ public class AsyncPlayerChatEvent implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    adminMap.put(p.getDisplayName(), p);
+                    adminListPlayer.add(p);
                     plugin.getServer().getOnlinePlayers().forEach(player -> player.hidePlayer(p));
-                    adminMap.put(p.getDisplayName(), p);
                     p.sendMessage(Translate.chat("&bOk..."));
                 }
             }.runTask(this.plugin);
