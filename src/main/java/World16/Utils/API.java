@@ -7,6 +7,7 @@ import World16.Commands.god;
 import World16.Commands.tp.tpa;
 import World16.CustomConfigs.CustomConfigManager;
 import World16.CustomExceptions.CustomYmlManagerInstanceException;
+import World16.Events.AsyncPlayerChatEvent;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
@@ -46,6 +47,7 @@ public class API {
     List<String> Afk1 = afk.Afk;
     List<String> Fly1 = fly.Fly;
     List<String> GodM = god.godm;
+    List<String> adminList = AsyncPlayerChatEvent.adminList;
     //...
 
     private static Main plugin = Main.getPlugin();

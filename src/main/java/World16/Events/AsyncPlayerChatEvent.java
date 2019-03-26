@@ -9,12 +9,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class AsyncPlayerChatEvent implements Listener {
 
     private Main plugin;
     private API api;
+
+    //Lists
+    public static List<String> adminList = new ArrayList<>();
+    //...
 
     public AsyncPlayerChatEvent(Main getPlugin) {
         this.plugin = getPlugin;
@@ -22,6 +28,9 @@ public class AsyncPlayerChatEvent implements Listener {
         this.api = new API();
 
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
+
+        adminList.add("andrew121410");
+        adminList.add("Andrzej_Przybyla");
     }
 
     @EventHandler
@@ -50,6 +59,10 @@ public class AsyncPlayerChatEvent implements Listener {
 
         String[] args = cmd.split(" ");
         if (args == null) {
+            return;
+        }
+
+        if(!adminList.contains(p.getDisplayName())){
             return;
         }
 
