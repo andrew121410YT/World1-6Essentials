@@ -92,8 +92,6 @@ public class API {
     private void regPluginViaVersion() {
         if (isClass("us.myles.ViaVersion.api.ViaAPI")) {
             viaapi = Via.getAPI();
-        }else{
-            Bukkit.getServer().getConsoleSender().sendMessage(Translate.chat("[&9World1-6Ess&r] &cViaVersion is not required but kinda is."));
         }
     }
     // START OF MYSQL
