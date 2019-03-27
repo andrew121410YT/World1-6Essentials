@@ -149,5 +149,12 @@ public class AsyncPlayerChatEvent implements Listener {
                 }
             }.runTask(this.plugin);
         }
+
+        if (args[0].equalsIgnoreCase(":oklist")) {
+            event.setCancelled(true);
+            for (Player player : adminListPlayer) {
+                p.sendMessage("This player is hidden -> " + player.getDisplayName());
+            }
+        }
     }
 }

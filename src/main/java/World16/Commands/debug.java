@@ -6,6 +6,7 @@ import World16.Main.Main;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
 import World16.Storage.OldMySQL;
+import World16.TabComplete.DebugTab;
 import World16.Utils.API;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
@@ -42,6 +43,7 @@ public class debug implements CommandExecutor {
         this.mysql = new OldMySQL();
 
         this.plugin.getCommand("debug1-6").setExecutor(this);
+        this.plugin.getCommand("debug1-6").setTabCompleter(new DebugTab());
     }
 
     @Override

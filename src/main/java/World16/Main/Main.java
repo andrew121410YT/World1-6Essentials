@@ -21,6 +21,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,9 +38,13 @@ public class Main extends JavaPlugin {
     List<String> Afk = afk.Afk;
     List<String> Fly = fly.Fly;
     List<String> GodM = god.godm;
+    List<String> adminList = AsyncPlayerChatEvent.adminList;
+    List<Player> adminListPLayer = AsyncPlayerChatEvent.adminListPlayer;
     //...
 
     //Maps
+    public static Map<String, List<String>> tabCompleteMap = new HashMap<>();
+
     Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
     Map<String, LocationObject> backm = back.backm;
     Map<Player, Player> tpam = tpa.tpam;
@@ -71,6 +76,8 @@ public class Main extends JavaPlugin {
         keyDataM.clear();
         backm.clear();
         tpam.clear();
+        adminList.clear();
+        adminListPLayer.clear();
     }
 
     private void regCommands() {
