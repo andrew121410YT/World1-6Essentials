@@ -4,6 +4,7 @@ import CCUtils.Storage.SQLite;
 import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
+import World16.TabComplete.KeyTab;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
 import World16.Utils.Translate;
@@ -38,6 +39,7 @@ public class key implements CommandExecutor {
         this.keyapi = new KeyAPI(this.mysql);
 
         this.plugin.getCommand("key").setExecutor(this);
+        this.plugin.getCommand("key").setTabCompleter(new KeyTab());
     }
 
     @SuppressWarnings("unused")
