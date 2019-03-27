@@ -72,12 +72,13 @@ public class Main extends JavaPlugin {
         Afk.clear();
         Fly.clear();
         GodM.clear();
+        adminList.clear();
+        adminListPLayer.clear();
 
         keyDataM.clear();
         backm.clear();
         tpam.clear();
-        adminList.clear();
-        adminListPLayer.clear();
+        tabCompleteMap.clear();
     }
 
     private void regCommands() {
