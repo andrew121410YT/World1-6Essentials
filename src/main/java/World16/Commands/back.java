@@ -2,7 +2,7 @@ package World16.Commands;
 
 import World16.Main.Main;
 import World16.Objects.LocationObject;
-import World16.Objects.UserObject;
+import World16.TabComplete.BackTab;
 import World16.Utils.API;
 import World16.Utils.Translate;
 import org.bukkit.Location;
@@ -28,6 +28,7 @@ public class back implements CommandExecutor {
     public back(Main getPlugin) {
         this.plugin = getPlugin;
         this.plugin.getCommand("back").setExecutor(this);
+        this.plugin.getCommand("back").setTabCompleter(new BackTab());
     }
 
     /**

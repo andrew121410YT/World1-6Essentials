@@ -58,7 +58,7 @@ public class API {
     private ViaAPI viaapi;
 
     //Finals
-    public static final Integer VERSION = 227;
+    public static final Integer VERSION = 229;
     public static final String DATE_OF_VERSION = "3/27/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
