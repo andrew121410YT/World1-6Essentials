@@ -9,7 +9,6 @@ import World16.CustomInventorys.CustomInventoryManager;
 import World16.Events.*;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
-import World16.Objects.UserObject;
 import World16.Utils.API;
 import World16.Utils.Metrics;
 import World16.Utils.Translate;
