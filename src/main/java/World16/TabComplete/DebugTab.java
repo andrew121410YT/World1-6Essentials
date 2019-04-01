@@ -54,7 +54,7 @@ public class DebugTab implements TabCompleter {
             return null;
         }
 
-        if (args.length <= 0) {
+        if (args.length == 1) {
             return getContains(args[0], tabCompleteMap.get("debug1-6"));
         }
 
