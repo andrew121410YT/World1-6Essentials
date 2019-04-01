@@ -7,6 +7,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -49,9 +50,17 @@ public class DebugTab implements TabCompleter {
         }
         Player player = (Player) sender;
 
-        if (cmd.getName().equalsIgnoreCase("debug1-6")) {
-            List<String> list = getContains(args[0], tabCompleteMap.get("debug1-6"));
-            return list;
+        if (!cmd.getName().equalsIgnoreCase("debug1-6")) {
+            return null;
+        }
+
+        if (args.length <= 0) {
+            return getContains(args[0], tabCompleteMap.get("debug1-6"));
+        }
+
+        if (args.length >= 2 && args[0].equalsIgnoreCase("checkmaps")) {
+            List<String> checkmaps = Arrays.asList("@checkmine", "@all", "@allwithdepth");
+            return getContains(args[1], checkmaps);
         }
         return null;
     }
