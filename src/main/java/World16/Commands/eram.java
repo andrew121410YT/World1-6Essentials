@@ -11,6 +11,7 @@ import World16.Utils.KeyAPI;
 import World16.Utils.Translate;
 import World16.test.ERamManager;
 import org.bukkit.Location;
+import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -50,46 +51,60 @@ public class eram implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("Only Players Can Use This Command.");
-            return true;
-        }
-        Player p = (Player) sender;
-        if (!p.hasPermission("world16.eram")) {
-            api.PermissionErrorMessage(p);
-            return true;
-        }
-        if (args.length == 0) {
-            p.sendMessage(Translate.chat("&cUsage: Please use tab complete!"));
-            return true;
-        } else if (args.length == 3 && args[0] != null && args[1] != null && args[2] != null && args[0].equalsIgnoreCase("save")) {
-            String saveName = args[1].toLowerCase();
-            String letter = args[2].toUpperCase();
-
-            aaa.computeIfAbsent(p.getDisplayName(), k -> new HashMap<>());
-            if (aaa.get(p.getDisplayName()).get(saveName) == null) {
-                aaa.get(p.getDisplayName()).put(saveName, new RawLocationObject());
+        if (sender instanceof BlockCommandSender) {
+            if (args.length == 3 && args[0].equalsIgnoreCase("do") && args[1] != null && args[2] != null) {
+                eRamManager.doIt(args[1], args[2]);
+                return true;
             }
-            aaa.get(p.getDisplayName()).get(saveName).set(letter, latestClickedBlocked.get(p.getDisplayName()));
-            eRamManager.saveThingy(p.getDisplayName(), p.getUniqueId(), saveName);
-//            eRamManager.loadUp(p);
-            return true;
-        } else if (args.length == 1 && args[0].equalsIgnoreCase("load")) {
-            eRamManager.loadUp(p);
-            return true;
-        } else if (args.length == 2 && args[0].equalsIgnoreCase("do") && args[1] != null) {
-            eRamManager.doIt(p.getDisplayName(), args[1]);
-            return true;
-        } else if (args.length == 1 && args[0].equalsIgnoreCase("list")) {
-            Set<String> homeSet = aaa.get(p.getDisplayName()).keySet();
-            String[] homeString = homeSet.toArray(new String[0]);
-            Arrays.sort(homeString);
-            String str = String.join(", ", homeString);
-            p.sendMessage(Translate.chat(str));
-            return true;
-        } else {
-            p.sendMessage("Something messed up!");
-            return true;
+
+            if (!(sender instanceof Player) && !(sender instanceof BlockCommandSender)) {
+                sender.sendMessage("Only Players Can Use This Command.");
+                return true;
+            }
+            Player p = (Player) sender;
+            if (!p.hasPermission("world16.eram")) {
+                api.PermissionErrorMessage(p);
+                return true;
+            }
+            if (args.length == 0) {
+                p.sendMessage(Translate.chat("&cUsage: Please use tab complete!"));
+                return true;
+            } else if (args.length == 3 && args[0] != null && args[1] != null && args[2] != null && args[0].equalsIgnoreCase("save")) {
+                String saveName = args[1].toLowerCase();
+                String letter = args[2].toUpperCase();
+
+                aaa.computeIfAbsent(p.getDisplayName(), k -> new HashMap<>());
+                if (aaa.get(p.getDisplayName()).get(saveName) == null) {
+                    aaa.get(p.getDisplayName()).put(saveName, new RawLocationObject());
+                }
+                aaa.get(p.getDisplayName()).get(saveName).set(letter, latestClickedBlocked.get(p.getDisplayName()));
+                eRamManager.saveThingy(p.getDisplayName(), p.getUniqueId(), saveName);
+                return true;
+            } else if (args.length == 1 && args[0].equalsIgnoreCase("load")) {
+                eRamManager.loadUp(p);
+                return true;
+            } else if (args.length == 2 && args[0].equalsIgnoreCase("do") && args[1] != null) {
+                eRamManager.doIt(p.getDisplayName(), args[1]);
+                return true;
+            } else if (args.length == 1 && args[0].equalsIgnoreCase("list")) {
+                if(aaa.get(p.getDisplayName()).isEmpty()){
+                    return true;
+                }
+                Set<String> homeSet = aaa.get(p.getDisplayName()).keySet();
+                String[] homeString = homeSet.toArray(new String[0]);
+                Arrays.sort(homeString);
+                String str = String.join(", ", homeString);
+                p.sendMessage(Translate.chat(str));
+                return true;
+            } else if (args.length == 2 && args[0].equalsIgnoreCase("delete") && args[1] != null) {
+                eRamManager.delete(p.getDisplayName(), p.getUniqueId(), args[1].toLowerCase());
+                p.sendMessage(Translate.chat("&cDone..."));
+                return true;
+            } else {
+                p.sendMessage("Something messed up!");
+                return true;
+            }
         }
+        return true;
     }
 }

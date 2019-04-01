@@ -38,10 +38,20 @@ public class ERamManager {
 
             for (String data2 : csdata.getKeys(false)) {
                 stringRawLocationObjectHashMap.get(player.getDisplayName()).get(data).set(data2, new Location(Bukkit.getWorld("world"), Double.valueOf(csdata.getString(data2 + ".X")), Double.valueOf(csdata.getString(data2 + ".Y")), Double.valueOf(csdata.getString(data2 + ".Z"))));
-                player.sendMessage("LOADED MEMORY: " + data + "->" + data2 + " " + csdata.getString(data2 + ".X")+" -> " + csdata.getString(data2 + ".Y") + " -> " + csdata.getString(data2 + ".Z"));
+                player.sendMessage("LOADED MEMORY: " + data + " -> " + data2 + " " + csdata.getString(data2 + ".X")+" -> " + csdata.getString(data2 + ".Y") + " -> " + csdata.getString(data2 + ".Z"));
             }
 
         }
+    }
+
+    public void delete(String playerName,UUID uuid, String saveName){
+        if(stringRawLocationObjectHashMap.get(playerName).get(saveName) != null){
+            stringRawLocationObjectHashMap.get(playerName).remove(saveName);
+            ConfigurationSection cs = this.customYmlManager.getConfig().getConfigurationSection(uuid.toString());
+            cs.set(saveName.toLowerCase(), null);
+            this.customYmlManager.saveConfigSilent();
+        }
+
     }
 
     public void saveThingy(String keyName, UUID uuid, String saveName) {
