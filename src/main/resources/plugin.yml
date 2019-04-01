@@ -33,6 +33,7 @@ commands:
   broadcast:
   god:
   emsg:
+  eram:
 
   gmc:
     aliases:
@@ -175,4 +176,7 @@ permissions:
     default: true
   world16.msg:
     description: Allows to do msg
+    default: op
+  world16.eram:
+    description: Allows to do eram
     default: op

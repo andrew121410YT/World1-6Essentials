@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public class ERamManager {
 
-    public static HashMap<String, Map<String, RawLocationObject>> stringRawLocationObjectHashMap = new HashMap<>();
+    public static Map<String, Map<String, RawLocationObject>> stringRawLocationObjectHashMap = new HashMap<>();
 
     private CustomYmlManager customYmlManager;
 

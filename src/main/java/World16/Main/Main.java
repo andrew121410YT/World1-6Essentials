@@ -116,6 +116,7 @@ public class Main extends JavaPlugin {
         new tpdeny(this.customconfig, this);
 
         new test1(customconfig, this);
+        new eram(this.customconfig, this);
     }
 
     private void regEvents() {
@@ -132,6 +133,7 @@ public class Main extends JavaPlugin {
         //...
         new InventoryClickEvent(this);
         new AsyncPlayerChatEvent(this);
+        new PlayerInteractEvent(this);
         new CustomInventoryManager().registerAllCustomInventorys();
     }
 

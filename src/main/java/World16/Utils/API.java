@@ -9,9 +9,12 @@ import World16.CustomConfigs.CustomConfigManager;
 import World16.CustomExceptions.CustomYmlManagerInstanceException;
 import World16.Events.AsyncPlayerChatEvent;
 import World16.Events.OnJoinEvent;
+import World16.Events.PlayerInteractEvent;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
+import World16.Objects.RawLocationObject;
+import World16.test.ERamManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -42,6 +45,8 @@ public class API {
     Map<String, LocationObject> backm = back.backm;
     Map<Player, Player> tpam = tpa.tpam;
     Map<String, List<String>> tabCompleteMap = Main.tabCompleteMap;
+    Map<String, Map<String, RawLocationObject>> eRamManager = ERamManager.stringRawLocationObjectHashMap;
+    Map<String, Location> latestClickedBlocked = PlayerInteractEvent.latestClickedBlocked;
     //...
 
     // Lists
@@ -199,10 +204,16 @@ public class API {
 
         tpam.remove(p);
 
+        eRamManager.remove(p.getDisplayName());
+
+        latestClickedBlocked.remove(p.getDisplayName());
+
         if (this.isDebug()) {
             ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM", p);
             ClearHashMapMessage("World16.Commands.back.backm", p);
             ClearHashMapMessage("World16.Commands.tp.tpa.tpam", p);
+            ClearHashMapMessage("World16.test.ERamManager.stringRawLocationObjectHashMap", p);
+            ClearHashMapMessage("World16.Events.PlayerInteractEvent.latestClickedBlocked", p);
         }
     }
 
@@ -213,11 +224,16 @@ public class API {
 
         tpam.clear();
 
+        eRamManager.clear();
+
+        latestClickedBlocked.clear();
+
         if (this.isDebug()) {
             ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM");
             ClearHashMapMessage("World16.Commands.back.backm");
             ClearHashMapMessage("World16.Commands.tp.tpa.tpam");
-            ClearHashMapMessage("World16.Events.AsyncPlayerChatEvent");
+            ClearHashMapMessage("World16.test.ERamManager.stringRawLocationObjectHashMap");
+            ClearHashMapMessage("World16.Events.PlayerInteractEvent.latestClickedBlocked");
         }
     }
 
@@ -234,7 +250,7 @@ public class API {
             ClearArrayListMessage("World16.Commands.afk.Afk", p);
             ClearArrayListMessage("World16.Commands.fly.Fly", p);
             ClearArrayListMessage("World16.Commands.god.godm", p);
-            ClearArrayListMessage("World16.Events.AsyncPlayerChatEvent", p);
+            ClearArrayListMessage("World16.Events.AsyncPlayerChatEvent.adminListPlayer", p);
         }
     }
 
@@ -251,7 +267,7 @@ public class API {
             ClearArrayListMessage("World16.Commands.afk.Afk");
             ClearArrayListMessage("World16.Commands.fly.Fly");
             ClearArrayListMessage("World16.Commands.god.godm");
-            ClearArrayListMessage("World16.Events.AsyncPlayerChatEvent");
+            ClearArrayListMessage("World16.Events.AsyncPlayerChatEvent.adminListPlayer");
         }
     }
 
