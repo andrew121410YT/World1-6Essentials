@@ -16,8 +16,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class eram implements CommandExecutor {
 
@@ -61,8 +63,8 @@ public class eram implements CommandExecutor {
             p.sendMessage(Translate.chat("&cUsage: Please use tab complete!"));
             return true;
         } else if (args.length == 3 && args[0] != null && args[1] != null && args[2] != null && args[0].equalsIgnoreCase("save")) {
-            String saveName = args[1];
-            String letter = args[2];
+            String saveName = args[1].toLowerCase();
+            String letter = args[2].toUpperCase();
 
             aaa.computeIfAbsent(p.getDisplayName(), k -> new HashMap<>());
             if (aaa.get(p.getDisplayName()).get(saveName) == null) {
@@ -72,11 +74,18 @@ public class eram implements CommandExecutor {
             eRamManager.saveThingy(p.getDisplayName(), p.getUniqueId(), saveName);
 //            eRamManager.loadUp(p);
             return true;
-        }else if(args.length == 1 && args[0].equalsIgnoreCase("load")){
+        } else if (args.length == 1 && args[0].equalsIgnoreCase("load")) {
             eRamManager.loadUp(p);
             return true;
-        }else if(args.length == 2 && args[0].equalsIgnoreCase("do") && args[1] != null){
+        } else if (args.length == 2 && args[0].equalsIgnoreCase("do") && args[1] != null) {
             eRamManager.doIt(p.getDisplayName(), args[1]);
+            return true;
+        } else if (args.length == 1 && args[0].equalsIgnoreCase("list")) {
+            Set<String> homeSet = aaa.get(p.getDisplayName()).keySet();
+            String[] homeString = homeSet.toArray(new String[0]);
+            Arrays.sort(homeString);
+            String str = String.join(", ", homeString);
+            p.sendMessage(Translate.chat(str));
             return true;
         } else {
             p.sendMessage("Something messed up!");
