@@ -4,6 +4,7 @@ import World16.CustomConfigs.CustomConfigManager;
 import World16.Events.PlayerInteractEvent;
 import World16.Main.Main;
 import World16.Storage.OldMySQL;
+import World16.TabComplete.ERamTab;
 import World16.Utils.*;
 import World16.test.ERamManager;
 import org.bukkit.Bukkit;
@@ -42,6 +43,7 @@ public class eram implements CommandExecutor {
         eRamManager = new ERamManager(this.customConfigManager);
 
         this.plugin.getCommand("eram").setExecutor(this);
+        this.plugin.getCommand("eram").setTabCompleter(new ERamTab());
     }
 
     private ERamManager eRamManager;
