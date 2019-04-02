@@ -13,7 +13,6 @@ import World16.Events.PlayerInteractEvent;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
-import World16.Objects.RawLocationObject;
 import World16.test.ERamManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -45,8 +44,9 @@ public class API {
     Map<String, LocationObject> backm = back.backm;
     Map<Player, Player> tpam = tpa.tpam;
     Map<String, List<String>> tabCompleteMap = Main.tabCompleteMap;
-    Map<String, Map<String, RawLocationObject>> eRamManager = ERamManager.stringRawLocationObjectHashMap;
+    Map<String, Map<String, List<Location>>> eRamManager = ERamManager.stringRawLocationObjectHashMap;
     Map<String, Location> latestClickedBlocked = PlayerInteractEvent.latestClickedBlocked;
+    Map<String, Map<String, String>> tagsMap = Tag.tagsMap;
     //...
 
     // Lists
@@ -64,7 +64,7 @@ public class API {
 
     //Finals
     public static final Integer VERSION = 230;
-    public static final String DATE_OF_VERSION = "3/27/2019";
+    public static final String DATE_OF_VERSION = "4/2/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
@@ -208,12 +208,15 @@ public class API {
 
         latestClickedBlocked.remove(p.getDisplayName());
 
+        tagsMap.remove(p.getDisplayName());
+
         if (this.isDebug()) {
             ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM", p);
             ClearHashMapMessage("World16.Commands.back.backm", p);
             ClearHashMapMessage("World16.Commands.tp.tpa.tpam", p);
             ClearHashMapMessage("World16.test.ERamManager.stringRawLocationObjectHashMap", p);
             ClearHashMapMessage("World16.Events.PlayerInteractEvent.latestClickedBlocked", p);
+            ClearHashMapMessage("World16.Utils.Tag.tagsMap", p);
         }
     }
 
@@ -228,12 +231,15 @@ public class API {
 
         latestClickedBlocked.clear();
 
+        tagsMap.clear();
+
         if (this.isDebug()) {
             ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM");
             ClearHashMapMessage("World16.Commands.back.backm");
             ClearHashMapMessage("World16.Commands.tp.tpa.tpam");
             ClearHashMapMessage("World16.test.ERamManager.stringRawLocationObjectHashMap");
             ClearHashMapMessage("World16.Events.PlayerInteractEvent.latestClickedBlocked");
+            ClearHashMapMessage("World16.Utils.Tag.tagsMap");
         }
     }
 
