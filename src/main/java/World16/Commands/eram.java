@@ -55,6 +55,11 @@ public class eram implements CommandExecutor {
             } else if (args.length == 3 && args[0].equalsIgnoreCase("undo") && args[1] != null && args[2] != null) {
                 eRamManager.undoIt(args[1], args[2]);
                 return true;
+            } else if (args.length == 3 && args[0].equalsIgnoreCase("deletetag")) {
+                String playerName = args[1];
+                String tagName = args[2].toLowerCase();
+                Tag.removeTag(playerName, tagName);
+                return true;
             } else if (args.length == 7 && args[0].equalsIgnoreCase("copy")) {
                 //copy
                 String playerName = args[1];
