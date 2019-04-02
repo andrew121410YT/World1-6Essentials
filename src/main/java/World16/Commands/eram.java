@@ -8,6 +8,8 @@ import World16.Utils.*;
 import World16.test.ERamManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -62,6 +64,11 @@ public class eram implements CommandExecutor {
                 if (saveName.startsWith("@")) {
                     String tagWithoutA = saveName.replace("@", "");
                     saveName = Tag.getTag(playerName, tagWithoutA);
+                }
+
+                Block block = this.plugin.getServer().getWorld("world").getBlockAt(api.asIntOrDefault(x, 1), api.asIntOrDefault(y, 1), api.asIntOrDefault(z, 1));
+                if (block.getType() != Material.REDSTONE_BLOCK) {
+                    return true;
                 }
 
                 aaa.computeIfAbsent(playerName, k -> new HashMap<>());
