@@ -44,8 +44,8 @@ public class ERamTab implements TabCompleter {
         }
         Player player = (Player) sender;
 
-        if (cmd.getName().equalsIgnoreCase("key")) {
-            List<String> list = getContains(args[0], tabCompleteMap.get("key"));
+        if (cmd.getName().equalsIgnoreCase("eram")) {
+            List<String> list = getContains(args[0], tabCompleteMap.get("eram"));
             return list;
         }
         return null;
