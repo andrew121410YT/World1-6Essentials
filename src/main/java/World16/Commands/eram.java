@@ -52,6 +52,9 @@ public class eram implements CommandExecutor {
             if (args.length == 3 && args[0].equalsIgnoreCase("do") && args[1] != null && args[2] != null) {
                 eRamManager.doIt(args[1], args[2]);
                 return true;
+            } else if (args.length == 3 && args[0].equalsIgnoreCase("undo") && args[1] != null && args[2] != null) {
+                eRamManager.undoIt(args[1], args[2]);
+                return true;
             } else if (args.length == 7 && args[0].equalsIgnoreCase("copy")) {
                 //copy
                 String playerName = args[1];
@@ -111,6 +114,9 @@ public class eram implements CommandExecutor {
             return true;
         } else if (args.length == 2 && args[0].equalsIgnoreCase("do") && args[1] != null) {
             eRamManager.doIt(p.getDisplayName(), args[1]);
+            return true;
+        } else if (args.length == 2 && args[0].equalsIgnoreCase("undo") && args[1] != null) {
+            eRamManager.undoIt(p.getDisplayName(), args[1]);
             return true;
         } else if (args.length == 1 && args[0].equalsIgnoreCase("list")) {
             if (aaa.get(p.getDisplayName()) == null) {

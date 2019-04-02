@@ -67,4 +67,12 @@ public class ERamManager {
             location.getBlock().setType(Material.REDSTONE_BLOCK);
         }
     }
+
+    public void undoIt(String keyName, String saveName) {
+        List<Location> rawLocationObject = stringRawLocationObjectHashMap.get(keyName).get(saveName);
+
+        for (Location location : rawLocationObject) {
+            location.getBlock().setType(Material.AIR);
+        }
+    }
 }
