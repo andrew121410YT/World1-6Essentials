@@ -50,14 +50,34 @@ public class eram implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) {
             if (args.length == 3 && args[0].equalsIgnoreCase("do") && args[1] != null && args[2] != null) {
-                eRamManager.doIt(args[1], args[2]);
+                String playerName = args[1];
+                String tag = args[2];
+
+                if (tag.startsWith("@")) {
+                    String tagWithoutA = tag.replace("@", "");
+                    tag = Tag.getTag(playerName, tagWithoutA);
+                }
+                eRamManager.doIt(playerName, tag);
                 return true;
             } else if (args.length == 3 && args[0].equalsIgnoreCase("undo") && args[1] != null && args[2] != null) {
-                eRamManager.undoIt(args[1], args[2]);
+                String playerName = args[1];
+                String tag = args[2];
+
+                if (tag.startsWith("@")) {
+                    String tagWithoutA = tag.replace("@", "");
+                    tag = Tag.getTag(playerName, tagWithoutA);
+                }
+                eRamManager.undoIt(playerName, tag);
                 return true;
             } else if (args.length == 3 && args[0].equalsIgnoreCase("deletetag")) {
                 String playerName = args[1];
                 String tagName = args[2].toLowerCase();
+
+                if (tagName.startsWith("@")) {
+                    String tagWithoutA = tagName.replace("@", "");
+                    tagName = Tag.getTag(playerName, tagWithoutA);
+                }
+
                 Tag.removeTag(playerName, tagName);
                 return true;
             } else if (args.length == 4 && args[0].equalsIgnoreCase("addtag")) {
