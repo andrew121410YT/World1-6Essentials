@@ -71,6 +71,15 @@ public class eram implements CommandExecutor {
                     return true;
                 }
 
+                if (saveName == null) {
+                    Player player = Bukkit.getPlayerExact(args[1]);
+                    if (player != null && player.isOnline()) {
+                        player.sendMessage(Translate.chat("Hey can you check your command blcoks for eram because the saveName == null"));
+                        return true;
+                    }
+                    return true;
+                }
+
                 aaa.computeIfAbsent(playerName, k -> new HashMap<>());
                 aaa.get(playerName).computeIfAbsent(saveName, k -> new ArrayList<>());
 
