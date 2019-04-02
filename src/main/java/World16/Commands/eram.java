@@ -86,6 +86,13 @@ public class eram implements CommandExecutor {
                 String string = args[3].toLowerCase();
                 Tag.addTag(playerName, tagName, string);
                 return true;
+            } else if (args.length == 4 && args[0].equalsIgnoreCase("delete")) {
+                String playerName = args[1];
+                UUID uuid = UUID.fromString(args[2]);
+                String tagName = args[3].toLowerCase();
+
+                eRamManager.delete(playerName, uuid, tagName);
+                return true;
             } else if (args.length == 7 && args[0].equalsIgnoreCase("copy")) {
                 //copy
                 String playerName = args[1];
@@ -123,6 +130,11 @@ public class eram implements CommandExecutor {
             sender.sendMessage("Only Players Can Use This Command.");
             return true;
         }
+
+
+        //PLAYER COMMANDS
+
+
         Player p = (Player) sender;
         if (!p.hasPermission("world16.eram")) {
             api.PermissionErrorMessage(p);
