@@ -145,6 +145,11 @@ public class eram implements CommandExecutor {
             Tag.addTag(p.getDisplayName(), tagName, string);
             p.sendMessage(Translate.chat("&6Added tag -> " + tagName + " " + string));
             return true;
+        } else if (args.length == 2 && args[0].equalsIgnoreCase("deletetag")) {
+            String tagName = args[1].toLowerCase();
+            Tag.removeTag(p.getDisplayName(), tagName);
+            p.sendMessage(Translate.chat("&cRemoved tag -> " + tagName));
+            return true;
         } else {
             p.sendMessage("Something messed up!");
             return true;
