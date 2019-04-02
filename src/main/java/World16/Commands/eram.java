@@ -10,6 +10,7 @@ import World16.Utils.CustomYmlManager;
 import World16.Utils.KeyAPI;
 import World16.Utils.Translate;
 import World16.test.ERamManager;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
@@ -17,10 +18,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class eram implements CommandExecutor {
 
@@ -55,6 +53,22 @@ public class eram implements CommandExecutor {
             if (args.length == 3 && args[0].equalsIgnoreCase("do") && args[1] != null && args[2] != null) {
                 eRamManager.doIt(args[1], args[2]);
                 return true;
+            }else if(args.length == 8 && args[0].equalsIgnoreCase("copy")){
+                //copy
+                String playerName = args[1];
+                UUID uuid = UUID.fromString(args[2]);
+                String saveName = args[3];
+                String letter = args[4];
+                String x = args[5];
+                String y = args[6];
+                String z = args[7];
+
+                aaa.computeIfAbsent(playerName, k -> new HashMap<>());
+                if (aaa.get(playerName).get(saveName) == null) {
+                    aaa.get(playerName).put(saveName, new RawLocationObject());
+                }
+                aaa.get(playerName).get(saveName).set(letter, new Location(Bukkit.getWorld("world"), Double.valueOf(x), Double.valueOf(y), Double.valueOf(z)));
+                eRamManager.saveThingy(playerName, uuid, saveName);
             }
             sender.sendMessage("Only Players Can Use This Command.");
             return true;
