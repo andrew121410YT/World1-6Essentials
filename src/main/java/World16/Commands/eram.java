@@ -60,6 +60,12 @@ public class eram implements CommandExecutor {
                 String tagName = args[2].toLowerCase();
                 Tag.removeTag(playerName, tagName);
                 return true;
+            } else if (args.length == 4 && args[0].equalsIgnoreCase("addtag")) {
+                String playerName = args[1];
+                String tagName = args[2].toLowerCase();
+                String string = args[3].toLowerCase();
+                Tag.addTag(playerName, tagName, string);
+                return true;
             } else if (args.length == 7 && args[0].equalsIgnoreCase("copy")) {
                 //copy
                 String playerName = args[1];
