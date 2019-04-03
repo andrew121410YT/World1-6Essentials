@@ -3,9 +3,10 @@ package World16.Commands;
 import World16.CustomConfigs.CustomConfigManager;
 import World16.Events.PlayerInteractEvent;
 import World16.Main.Main;
-import World16.Storage.OldMySQL;
 import World16.TabComplete.ERamTab;
-import World16.Utils.*;
+import World16.Utils.API;
+import World16.Utils.Tag;
+import World16.Utils.Translate;
 import World16.test.ERamManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -23,11 +24,10 @@ public class eram implements CommandExecutor {
 
     private Main plugin;
 
-    OldMySQL mysql;
-    KeyAPI keyapi = new KeyAPI();
     API api = new API();
 
-    private CustomYmlManager shitYml = null;
+    private ERamManager eRamManager;
+
     private CustomConfigManager customConfigManager;
 
     //Maps
@@ -36,18 +36,14 @@ public class eram implements CommandExecutor {
     //...
 
     public eram(CustomConfigManager getCustomYml, Main getPlugin) {
-        this.shitYml = getCustomYml.getShitYml();
         this.customConfigManager = getCustomYml;
         this.plugin = getPlugin;
-        this.mysql = new OldMySQL();
 
         eRamManager = new ERamManager(this.customConfigManager);
 
         this.plugin.getCommand("eram").setExecutor(this);
         this.plugin.getCommand("eram").setTabCompleter(new ERamTab());
     }
-
-    private ERamManager eRamManager;
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -56,6 +52,7 @@ public class eram implements CommandExecutor {
             if (!(sender instanceof BlockCommandSender)) {
                 return true;
             }
+
             BlockCommandSender cmdblock = (BlockCommandSender) sender;
             Block commandblock = cmdblock.getBlock();
 
