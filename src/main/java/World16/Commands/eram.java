@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -51,6 +52,13 @@ public class eram implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) {
+
+            if (!(sender instanceof BlockCommandSender)) {
+                return true;
+            }
+            BlockCommandSender cmdblock = (BlockCommandSender) sender;
+            Block commandblock = cmdblock.getBlock();
+
             if (args.length == 3 && args[0].equalsIgnoreCase("do") && args[1] != null && args[2] != null) {
                 String playerName = args[1];
                 String tag = args[2];
@@ -108,6 +116,29 @@ public class eram implements CommandExecutor {
                     String tagWithoutA = saveName.replace("@", "");
                     saveName = Tag.getTag(playerName, tagWithoutA);
                 }
+
+                //Relative cords
+                if (x.startsWith("~")) {
+                    String newX = x.replace("~", "");
+                    int xAsInt = api.asIntOrDefault(newX, 0);
+                    int xDone = commandblock.getX() + xAsInt;
+                    x = String.valueOf(xDone);
+                }
+
+                if (y.startsWith("~")) {
+                    String newY = y.replace("~", "");
+                    int yAsInt = api.asIntOrDefault(newY, 0);
+                    int yDone = commandblock.getY() + yAsInt;
+                    y = String.valueOf(yDone);
+                }
+
+                if (z.startsWith("~")) {
+                    String newZ = z.replace("~", "");
+                    int zAsInt = api.asIntOrDefault(newZ, 0);
+                    int zDone = commandblock.getZ() + zAsInt;
+                    z = String.valueOf(zDone);
+                }
+                //...
 
                 Block block = this.plugin.getServer().getWorld("world").getBlockAt(api.asIntOrDefault(x, 1), api.asIntOrDefault(y, 1), api.asIntOrDefault(z, 1));
                 if (block.getType() != Material.REDSTONE_BLOCK) {
