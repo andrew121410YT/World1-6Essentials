@@ -63,6 +63,10 @@ public class ERamManager {
     public void doIt(String keyName, String saveName) {
         List<Location> rawLocationObject = stringRawLocationObjectHashMap.get(keyName).get(saveName);
 
+        if (rawLocationObject == null) {
+            return;
+        }
+
         for (Location location : rawLocationObject) {
             location.getBlock().setType(Material.REDSTONE_BLOCK);
         }
@@ -70,6 +74,10 @@ public class ERamManager {
 
     public void undoIt(String keyName, String saveName) {
         List<Location> rawLocationObject = stringRawLocationObjectHashMap.get(keyName).get(saveName);
+
+        if (rawLocationObject == null) {
+            return;
+        }
 
         for (Location location : rawLocationObject) {
             location.getBlock().setType(Material.AIR);
