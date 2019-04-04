@@ -6,7 +6,6 @@ import World16.Commands.fly;
 import World16.Commands.god;
 import World16.Commands.tp.tpa;
 import World16.CustomConfigs.CustomConfigManager;
-import World16.CustomExceptions.CustomYmlManagerInstanceException;
 import World16.Events.AsyncPlayerChatEvent;
 import World16.Events.OnJoinEvent;
 import World16.Events.PlayerInteractEvent;
@@ -14,9 +13,7 @@ import World16.Main.Main;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
 import World16.test.ERamManager;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -63,8 +60,8 @@ public class API {
     private ViaAPI viaapi;
 
     //Finals
-    public static final Integer VERSION = 230;
-    public static final String DATE_OF_VERSION = "4/2/2019";
+    public static final Integer VERSION = 255;
+    public static final String DATE_OF_VERSION = "4/4/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
@@ -381,73 +378,21 @@ public class API {
                 + uuid.substring(16, 20) + "-" + uuid.substring(20, 32);
     }
 
-    private String locationname;
-    private String Path;
-    private CustomYmlManager configinstance2;
-
-    private String locationname2;
-    private String Path2;
-    private CustomYmlManager configinstance3;
-
-    public Location getLocationFromFile(CustomYmlManager configinstance, String Path, String nameoflocation) {
-        this.configinstance2 = configinstance;
-        this.Path = Path;
-        this.locationname = nameoflocation.toLowerCase();
-
-        if (configinstance == null && this.configinstance != null) {
-            this.configinstance2 = this.configinstance;
+    public Location getLocationFromFile(CustomYmlManager configinstance, String path) {
+        if (configinstance == null || path == null) {
+            return null;
         }
-        if (this.configinstance2 != null) {
-            double x = this.configinstance2.getConfig().getInt(this.Path + "." + this.locationname + ".Data.X");
-            double y = this.configinstance2.getConfig().getInt(this.Path + "." + this.locationname + ".Data.Y");
-            double z = this.configinstance2.getConfig().getInt(this.Path + "." + this.locationname + ".Data.Z");
-            float yaw = Float.parseFloat(this.configinstance2.getConfig().getString(this.Path + "." + this.locationname + ".Data.Yaw"));
-            float pitch = Float.parseFloat(this.configinstance2.getConfig()
-                    .getString(this.Path + "." + this.locationname + ".Data.Pitch"));
-            World world = Bukkit
-                    .getWorld(
-                            this.configinstance2.getConfig().getString(this.Path + "." + this.locationname + ".Data.World"));
 
-            return new Location(world, x, y, z, yaw, pitch);
-        } else {
-            try {
-                throw new CustomYmlManagerInstanceException(Translate.chat(EMERGENCY_TAG + " In World16.Utils.API this.configinstance2 == null"));
-            } catch (CustomYmlManagerInstanceException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
+        return (Location) configinstance.getConfig().get(path);
     }
 
-    public void setLocationToFile(CustomYmlManager configinstance, String path, String nameoflocation, Player p, double x, double y, double z, double yaw, double pitch,
-                                  String worldname) {
-        this.locationname2 = nameoflocation.toLowerCase();
-        this.Path2 = path;
-        this.configinstance3 = configinstance;
-
-        if (configinstance == null && this.configinstance != null) {
-            this.configinstance3 = this.configinstance;
+    public void setLocationToFile(CustomYmlManager configinstance, String path, Location location) {
+        if (configinstance == null || path == null || location == null) {
+            return;
         }
 
-        if (this.configinstance3 != null) {
-            this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.X", x);
-            this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Y", y);
-            this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Z", z);
-            this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Yaw", yaw);
-            this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.Pitch", pitch);
-            this.configinstance3.getConfig().set(this.Path2 + "." + this.locationname2 + ".Data.World", worldname);
-            this.configinstance3.getConfig()
-                    .set(this.Path2 + "." + this.locationname2 + ".Player.Data.NAME", p.getDisplayName());
-            this.configinstance3.getConfig()
-                    .set(this.Path2 + "." + this.locationname2 + ".Player.Data.UUID", p.getUniqueId().toString());
-            this.configinstance3.saveConfig();
-        } else {
-            try {
-                throw new CustomYmlManagerInstanceException(Translate.chat(EMERGENCY_TAG + " In World16.Utils.API this.configinstance3 == null"));
-            } catch (CustomYmlManagerInstanceException e) {
-                e.printStackTrace();
-            }
-        }
+        configinstance.getConfig().set(path, location);
+        configinstance.saveConfigSilent();
     }
 
     public boolean isInteger(String input) {

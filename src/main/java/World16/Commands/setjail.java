@@ -31,18 +31,13 @@ public class setjail implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
-        double x = p.getLocation().getX();
-        double y = p.getLocation().getY();
-        double z = p.getLocation().getZ();
-        float yaw = p.getLocation().getYaw();
-        float pitch = p.getLocation().getPitch();
-        String worldName = p.getWorld().getName();
 
         if (!p.hasPermission("world16.setjail")) {
             api.PermissionErrorMessage(p);
             return true;
         }
-        this.api.setLocationToFile(null, "Jail", "default", p, x, y, z, yaw, pitch, worldName);
+
+        this.api.setLocationToFile(null, "Jail.default", p.getLocation());
         p.sendMessage(Translate.chat("&6The jail has been set."));
         return true;
     }

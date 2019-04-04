@@ -33,12 +33,13 @@ public class jail implements CommandExecutor {
         }
         Player p = (Player) sender;
 
-        Location jail = api.getLocationFromFile(null, "Jail", "default");
+        Location jail = api.getLocationFromFile(this.shitYml, "Jail.default");
 
         if (!p.hasPermission("world16.jail")) {
             api.PermissionErrorMessage(p);
             return true;
         }
+
         p.teleport(jail);
         p.sendMessage(Translate.chat("&6Teleporting..."));
         return true;
