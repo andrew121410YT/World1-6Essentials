@@ -65,7 +65,6 @@ public class ERamInsideInventory implements ICustomInventory {
         Map<String, List<Location>> emapIN = eramMap.get(player.getDisplayName());
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase("Back")) {
-            player.closeInventory();
             player.openInventory(this.customInventoryManager.geteRamListMenu().GUI(player));
         }
 
