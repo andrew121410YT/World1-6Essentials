@@ -18,6 +18,7 @@ public class CustomConfigManager {
         this.shitYml.saveConfig();
         this.shitYml.reloadConfig();
         //...
+
         //eram.yml
         this.eRamYml = new CustomYmlManager();
         this.eRamYml.setup("eram.yml");

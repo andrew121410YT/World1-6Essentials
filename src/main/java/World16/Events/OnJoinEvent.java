@@ -6,7 +6,6 @@ import World16.Commands.back;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
-import World16.Objects.UserObject;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
 import World16.Utils.Translate;
@@ -67,7 +66,7 @@ public class OnJoinEvent implements Listener {
                             + " Please make sure too put in the mysql details in the config.yml."));
         }
         backM.remove(p.getDisplayName()); //<-- just incase
-        backM.put(p.getDisplayName(), new UserObject());
+        backM.put(p.getDisplayName(), new LocationObject());
 
         adminListPlayer.forEach((k) -> {
             p.hidePlayer(k);

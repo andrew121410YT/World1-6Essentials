@@ -3,7 +3,6 @@ package World16.Events;
 import World16.Commands.back;
 import World16.Main.Main;
 import World16.Objects.LocationObject;
-import World16.Objects.UserObject;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

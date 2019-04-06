@@ -23,7 +23,7 @@ public class PlayerInteractEvent implements Listener {
     }
 
     @EventHandler
-    public void eventdamage(org.bukkit.event.player.PlayerInteractEvent event) {
+    public void playeract(org.bukkit.event.player.PlayerInteractEvent event) {
         Player p = event.getPlayer();
 
         Action action = event.getAction();
