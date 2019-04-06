@@ -1,6 +1,7 @@
 package World16.Commands;
 
 import World16.CustomConfigs.CustomConfigManager;
+import World16.CustomInventorys.CustomInventoryManager;
 import World16.Events.PlayerInteractEvent;
 import World16.Main.Main;
 import World16.TabComplete.ERamTab;
@@ -29,15 +30,17 @@ public class eram implements CommandExecutor {
     private ERamManager eRamManager;
 
     private CustomConfigManager customConfigManager;
+    private CustomInventoryManager customInventoryManager;
 
     //Maps
     Map<String, Map<String, List<Location>>> aaa = ERamManager.stringRawLocationObjectHashMap;
     Map<String, Location> latestClickedBlocked = PlayerInteractEvent.latestClickedBlocked;
     //...
 
-    public eram(CustomConfigManager getCustomYml, Main getPlugin) {
+    public eram(CustomConfigManager getCustomYml, Main getPlugin, CustomInventoryManager customInventoryManager) {
         this.customConfigManager = getCustomYml;
         this.plugin = getPlugin;
+        this.customInventoryManager = customInventoryManager;
 
         eRamManager = new ERamManager(this.customConfigManager);
 
@@ -222,6 +225,9 @@ public class eram implements CommandExecutor {
             String tagName = args[1].toLowerCase();
             Tag.removeTag(p.getDisplayName(), tagName);
             p.sendMessage(Translate.chat("&cRemoved tag -> " + tagName));
+            return true;
+        } else if (args.length == 1 && args[0].equalsIgnoreCase("gui")) {
+            p.openInventory(this.customInventoryManager.geteRamListMenu().GUI(p));
             return true;
         } else {
             p.sendMessage("Something messed up!");

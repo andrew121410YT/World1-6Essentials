@@ -7,8 +7,6 @@ import World16.Commands.tp.tpdeny;
 import World16.CustomConfigs.CustomConfigManager;
 import World16.CustomInventorys.CustomInventoryManager;
 import World16.Events.*;
-import World16.Objects.KeyObject;
-import World16.Objects.LocationObject;
 import World16.Utils.API;
 import World16.Utils.Metrics;
 import World16.Utils.Translate;
@@ -28,31 +26,22 @@ public class Main extends JavaPlugin {
 
     private static Main plugin;
 
-    //Configs
+    //Managers
     private CustomConfigManager customconfig;
+    private CustomInventoryManager customInventoryManager;
 
     private API api;
-
-    //Lists
-    List<String> Afk = afk.Afk;
-    List<String> Fly = fly.Fly;
-    List<String> GodM = god.godm;
-    List<String> adminList = AsyncPlayerChatEvent.adminList;
-    List<Player> adminListPLayer = AsyncPlayerChatEvent.adminListPlayer;
-    //...
 
     //Maps
     public static Map<String, List<String>> tabCompleteMap = new HashMap<>();
 
-    Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    Map<String, LocationObject> backm = back.backm;
-    Map<Player, Player> tpam = tpa.tpam;
-    //...
     PluginManager pm = Bukkit.getPluginManager();
 
     public void onEnable() {
         plugin = this;
-        regCustomConfigManager();
+        api = new API();
+
+        regCustomManagers();
         regFileConfigGEN();
         regAPIS();
         regEvents();
@@ -63,21 +52,7 @@ public class Main extends JavaPlugin {
     }
 
     public void onDisable() {
-        this.clear();
         getLogger().info("[World1-6Essentials] is now disabled.");
-    }
-
-    public void clear() {
-        Afk.clear();
-        Fly.clear();
-        GodM.clear();
-        adminList.clear();
-        adminListPLayer.clear();
-
-        keyDataM.clear();
-        backm.clear();
-        tpam.clear();
-        tabCompleteMap.clear();
     }
 
     private void regCommands() {
@@ -116,7 +91,7 @@ public class Main extends JavaPlugin {
         new tpdeny(this.customconfig, this);
 
         new test1(customconfig, this);
-        new eram(this.customconfig, this);
+        new eram(this.customconfig, this, this.customInventoryManager);
     }
 
     private void regEvents() {
@@ -131,7 +106,7 @@ public class Main extends JavaPlugin {
         new OnBedEnterEvent(this);
         new OnJoinTitleEvent(this);
         //...
-        new InventoryClickEvent(this);
+        new InventoryClickEvent(this, this.customInventoryManager);
         new AsyncPlayerChatEvent(this);
         new PlayerInteractEvent(this);
         new CustomInventoryManager().registerAllCustomInventorys();
@@ -143,20 +118,23 @@ public class Main extends JavaPlugin {
         this.reloadConfig();
     }
 
-    private void regCustomConfigManager() {
+    private void regCustomManagers() {
         this.customconfig = new CustomConfigManager();
         customconfig.registerAllCustomConfigs();
+
+        this.customInventoryManager = new CustomInventoryManager();
+        this.customInventoryManager.registerAllCustomInventorys();
     }
 
     public void checkForPlugins() {
 
     }
 
-    public void regAPIS() {
+    private void regAPIS() {
         api = new API();
     }
 
-    public void regbstats() {
+    private void regbstats() {
         Metrics metrics = new Metrics(this);
     }
 
@@ -165,10 +143,8 @@ public class Main extends JavaPlugin {
             Player p = (Player) sender;
 
             if (cmd.getName().equalsIgnoreCase("World1-6Essentials")) {
-                if (args.length >= 0) {
-                    p.sendMessage(Translate.chat("&6Made By Andrew121410 My -> Discord: Andrew121410#2035"));
-                    return true;
-                }
+                p.sendMessage(Translate.chat("&6Made By Andrew121410 My -> Discord: Andrew121410#2035"));
+                return true;
             }
         }
         return true;
@@ -182,4 +158,7 @@ public class Main extends JavaPlugin {
         return this.api;
     }
 
+    public CustomInventoryManager getCustomInventoryManager() {
+        return customInventoryManager;
+    }
 }

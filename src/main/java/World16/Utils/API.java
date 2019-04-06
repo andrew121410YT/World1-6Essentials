@@ -61,7 +61,7 @@ public class API {
 
     //Finals
     public static final Integer VERSION = 255;
-    public static final String DATE_OF_VERSION = "4/4/2019";
+    public static final String DATE_OF_VERSION = "4/5/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
@@ -79,21 +79,25 @@ public class API {
 
     // MAIN
     public API() {
-        regPluginViaVersion();
+        regPlugins();
     }
 
     @Deprecated
     public API(CustomYmlManager configInstance) {
         this.configinstance = configInstance;
 
-        regPluginViaVersion();
+        regPlugins();
     }
 
     public API(CustomConfigManager configManager) {
-        regPluginViaVersion();
+        regPlugins();
     }
 
     // END MAIN
+
+    private void regPlugins() {
+        regPluginViaVersion();
+    }
 
     private void regPluginViaVersion() {
         if (isClass("us.myles.ViaVersion.api.ViaAPI")) {

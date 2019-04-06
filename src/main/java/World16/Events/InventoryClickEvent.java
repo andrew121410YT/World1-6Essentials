@@ -13,8 +13,11 @@ public class InventoryClickEvent implements Listener {
 
     private Main plugin;
 
-    public InventoryClickEvent(Main plugin) {
+    private CustomInventoryManager customInventoryManager;
+
+    public InventoryClickEvent(Main plugin, CustomInventoryManager customInventoryManager) {
         this.plugin = plugin;
+        this.customInventoryManager = customInventoryManager;
 
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
     }
@@ -24,9 +27,14 @@ public class InventoryClickEvent implements Listener {
         String inv_name = event.getInventory().getTitle();
         final InventoryHolder holder = event.getInventory().getHolder();
 
-        if (inv_name.equals(CustomInventoryManager.getTestMenu().getInventoryName()) && (event.getCurrentItem() != null) && (!event.getCurrentItem().getType().equals(Material.AIR)) && (event.getClickedInventory() != null) && (holder instanceof ICustomInventory)) {
+        if (inv_name.equals(this.customInventoryManager.getTestMenu().getInventoryName()) && (event.getCurrentItem() != null) && (!event.getCurrentItem().getType().equals(Material.AIR)) && (event.getClickedInventory() != null) && (holder instanceof ICustomInventory)) {
             event.setCancelled(true);
-            CustomInventoryManager.getTestMenu().clicked((Player) event.getWhoClicked(), event.getSlot(), event.getCurrentItem(), event.getInventory());
+            this.customInventoryManager.getTestMenu().clicked((Player) event.getWhoClicked(), event.getSlot(), event.getCurrentItem(), event.getInventory());
+        }
+
+        if (inv_name.equals(this.customInventoryManager.geteRamListMenu().getInventoryName()) && (event.getCurrentItem() != null) && (!event.getCurrentItem().getType().equals(Material.AIR)) && (event.getClickedInventory() != null) && (holder instanceof ICustomInventory)) {
+            event.setCancelled(true);
+            this.customInventoryManager.geteRamListMenu().clicked((Player) event.getWhoClicked(), event.getSlot(), event.getCurrentItem(), event.getInventory());
         }
     }
 }

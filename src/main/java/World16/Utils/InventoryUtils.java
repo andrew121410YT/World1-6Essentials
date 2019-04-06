@@ -118,4 +118,16 @@ public class InventoryUtils {
         return item;
     }
 
+    public static int getNextInvFreeSpot(Inventory inventory) {
+
+        //THIS IS THE OLD WAY THE NEW WAY IS https://hub.spigotmc.org/javadocs/spigot/org/bukkit/inventory/Inventory.html#firstEmpty--
+
+        int i = 1;
+        for (ItemStack is : inventory.getContents()) {
+            if (is == null)
+                continue;
+            i++;
+        }
+        return i;
+    }
 }
