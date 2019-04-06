@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -61,7 +62,7 @@ public class ERamListInventory implements ICustomInventory {
         return inv;
     }
 
-    public void clicked(Player player, int slot, ItemStack clicked, Inventory inv) {
+    public void clicked(Player player, ClickType clickType, int slot, ItemStack clicked, Inventory inv) {
         Map<String, List<Location>> emapIN = eramMap.get(player.getDisplayName());
 
         if (emapIN.containsKey(clicked.getItemMeta().getDisplayName())) {

@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -60,12 +61,29 @@ public class ERamInsideInventory implements ICustomInventory {
         return this.inv;
     }
 
-    public void clicked(Player player, int slot, ItemStack clicked, Inventory inv) {
+    public void clicked(Player player, ClickType clickType, int slot, ItemStack clicked, Inventory inv) {
         Map<String, List<Location>> emapIN = eramMap.get(player.getDisplayName());
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase("Back")) {
             player.closeInventory();
             player.openInventory(this.customInventoryManager.geteRamListMenu().GUI(player));
+        }
+
+        if (clicked.getItemMeta().getDisplayName().contains("X:") && clickType.isLeftClick()) {
+            String clickName = clicked.getItemMeta().getDisplayName();
+            String[] args = clickName.split(" ");
+
+            for (int index = 0; index < args.length; index++) {
+                args[index] = args[index].replace("X:", "");
+                args[index] = args[index].replace("Y:", "");
+                args[index] = args[index].replace("Z:", "");
+            }
+
+            Double x = Double.valueOf(args[0]);
+            Double y = Double.valueOf(args[1]);
+            Double z = Double.valueOf(args[2]);
+
+            player.teleport(new Location(player.getWorld(), x, y, z));
         }
     }
 

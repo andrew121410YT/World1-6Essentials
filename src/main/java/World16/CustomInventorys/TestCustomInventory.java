@@ -6,6 +6,7 @@ import World16.Utils.Translate;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -30,7 +31,7 @@ public class TestCustomInventory implements ICustomInventory {
         return inv;
     }
 
-    public void clicked(Player player, int slot, ItemStack clicked, Inventory inv) {
+    public void clicked(Player player, ClickType clickType, int slot, ItemStack clicked, Inventory inv) {
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Translate.chat("Test101"))) {
             player.sendMessage(Translate.chat("it worked."));
         }
