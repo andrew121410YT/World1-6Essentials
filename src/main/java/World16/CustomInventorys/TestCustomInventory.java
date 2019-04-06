@@ -12,11 +12,16 @@ import org.bukkit.inventory.ItemStack;
 
 public class TestCustomInventory implements ICustomInventory {
 
-
     private Inventory inv;
 
     private String inventory_name;
     private int inv_rows = 4 * 9;
+
+    private CustomInventoryManager customInventoryManager;
+
+    public TestCustomInventory(CustomInventoryManager customInventoryManager) {
+        this.customInventoryManager = customInventoryManager;
+    }
 
     public void createCustomInv() {
         inventory_name = Translate.chat("Test GUI");

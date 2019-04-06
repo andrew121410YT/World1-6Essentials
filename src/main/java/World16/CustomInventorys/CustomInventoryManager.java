@@ -15,7 +15,7 @@ public class CustomInventoryManager {
 
     public void registerAllCustomInventorys() {
         //Test
-        testMenu = new TestCustomInventory();
+        testMenu = new TestCustomInventory(this);
         testMenu.createCustomInv();
 
         //Eram List

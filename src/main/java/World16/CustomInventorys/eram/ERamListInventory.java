@@ -67,7 +67,6 @@ public class ERamListInventory implements ICustomInventory {
 
         if (emapIN.containsKey(clicked.getItemMeta().getDisplayName())) {
             player.playSound(player.getLocation(), Sound.BLOCK_PISTON_CONTRACT, 10.0f, 1.0f);
-            player.closeInventory();
             player.openInventory(this.customInventoryManager.geteRamInsideInventory().GUI(player, slot, clicked, inv));
         }
     }
