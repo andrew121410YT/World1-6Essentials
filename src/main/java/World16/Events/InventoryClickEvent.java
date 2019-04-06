@@ -27,8 +27,6 @@ public class InventoryClickEvent implements Listener {
         if (inv_name.equals(CustomInventoryManager.getTestMenu().getInventoryName()) && (event.getCurrentItem() != null) && (!event.getCurrentItem().getType().equals(Material.AIR)) && (event.getClickedInventory() != null) && (holder instanceof ICustomInventory)) {
             event.setCancelled(true);
             CustomInventoryManager.getTestMenu().clicked((Player) event.getWhoClicked(), event.getSlot(), event.getCurrentItem(), event.getInventory());
-        } else {
-            return;
         }
     }
 }
