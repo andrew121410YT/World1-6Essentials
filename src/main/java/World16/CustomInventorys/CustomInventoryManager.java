@@ -1,11 +1,13 @@
 package World16.CustomInventorys;
 
+import World16.CustomInventorys.eram.ERamInsideInventory;
 import World16.CustomInventorys.eram.ERamListInventory;
 
 public class CustomInventoryManager {
 
     private TestCustomInventory testMenu = null;
     private ERamListInventory eRamListMenu = null;
+    private ERamInsideInventory eRamInsideInventory = null;
 
     public CustomInventoryManager() {
 
@@ -16,9 +18,12 @@ public class CustomInventoryManager {
         testMenu = new TestCustomInventory();
         testMenu.createCustomInv();
 
-        //Eram
-        eRamListMenu = new ERamListInventory();
+        //Eram List
+        eRamListMenu = new ERamListInventory(this);
         eRamListMenu.createCustomInv();
+
+        eRamInsideInventory = new ERamInsideInventory(this);
+        eRamInsideInventory.createCustomInv();
     }
 
     public TestCustomInventory getTestMenu() {
@@ -27,5 +32,9 @@ public class CustomInventoryManager {
 
     public ERamListInventory geteRamListMenu() {
         return eRamListMenu;
+    }
+
+    public ERamInsideInventory geteRamInsideInventory() {
+        return eRamInsideInventory;
     }
 }

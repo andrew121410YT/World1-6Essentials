@@ -1,5 +1,6 @@
 package World16.CustomInventorys.eram;
 
+import World16.CustomInventorys.CustomInventoryManager;
 import World16.Utils.ICustomInventory;
 import World16.Utils.InventoryUtils;
 import World16.Utils.Translate;
@@ -12,8 +13,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ERamListInventory implements ICustomInventory {
 
@@ -26,6 +29,12 @@ public class ERamListInventory implements ICustomInventory {
     private String inventory_name;
     private int inv_rows = 4 * 9;
 
+    private CustomInventoryManager customInventoryManager;
+
+    public ERamListInventory(CustomInventoryManager customInventoryManager) {
+        this.customInventoryManager = customInventoryManager;
+    }
+
     public void createCustomInv() {
         inventory_name = Translate.chat("ERam List GUI");
 
@@ -35,16 +44,19 @@ public class ERamListInventory implements ICustomInventory {
     public Inventory GUI(Player player) {
         inv.clear();
 
-//        InventoryUtils.createItem(inv, Material.REDSTONE, 1, 1, "Test101", "Test Lore");
-
         Map<String, List<Location>> emapIN = eramMap.get(player.getDisplayName());
 
-        for (Map.Entry<String, List<Location>> entry : emapIN.entrySet()) {
-            String k = entry.getKey();
-            List<Location> v = entry.getValue();
+        List<String> bigdaddy;
 
+        Set<String> keySet = emapIN.keySet();
+        String[] papa2 = keySet.toArray(new String[0]);
+        Arrays.sort(papa2);
+        bigdaddy = Arrays.asList(papa2);
+
+        bigdaddy.forEach((k) -> {
+            List<Location> v = emapIN.get(k);
             InventoryUtils.createItem(inv, Material.GREEN_SHULKER_BOX, v.size(), inv.firstEmpty() + 1, k, "Click me to open up");
-        }
+        });
 
         return inv;
     }
@@ -54,6 +66,8 @@ public class ERamListInventory implements ICustomInventory {
 
         if (emapIN.containsKey(clicked.getItemMeta().getDisplayName())) {
             player.playSound(player.getLocation(), Sound.BLOCK_PISTON_CONTRACT, 10.0f, 1.0f);
+            player.closeInventory();
+            player.openInventory(this.customInventoryManager.geteRamInsideInventory().GUI(player, slot, clicked, inv));
         }
     }
 
