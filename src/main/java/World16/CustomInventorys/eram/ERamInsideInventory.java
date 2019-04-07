@@ -59,6 +59,11 @@ public class ERamInsideInventory implements ICustomInventory {
 
         List<String> locationListToStrings = this.locationListToStrings(emapIN.get(clicked.getItemMeta().getDisplayName()));
 
+        if (locationListToStrings.size() > 45) {
+            locationListToStrings = locationListToStrings.subList(locationListToStrings.size() - 45, locationListToStrings.size());
+            player.sendMessage(Translate.chat("&c[GUI] -> New ArrayList Size ->" + locationListToStrings.size()));
+        }
+
         for (String locationListToString : locationListToStrings) {
             InventoryUtils.createItem(this.inv, Material.REDSTONE_BLOCK, 1, this.inv.firstEmpty() + 1, locationListToString, "Left Click me to tp", "Right click to place a block");
         }
