@@ -50,6 +50,11 @@ public class ERamListInventory implements ICustomInventory {
     }
 
     public Inventory GUI(Player player) {
+        if (eramMap.get(player.getDisplayName()) == null) {
+            player.sendMessage(Translate.chat("&c[GUI] -> Your HashMap is null so that means you have NOTHING!"));
+            return inv;
+        }
+
         inv.clear();
 
         Map<String, List<Location>> emapIN = eramMap.get(player.getDisplayName());
