@@ -15,10 +15,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ERamListInventory implements ICustomInventory {
 
@@ -51,6 +48,7 @@ public class ERamListInventory implements ICustomInventory {
 
     public Inventory GUI(Player player) {
         if (eramMap.get(player.getDisplayName()) == null) {
+            eramMap.computeIfAbsent(player.getDisplayName(), k -> new HashMap<>());
             player.sendMessage(Translate.chat("&c[GUI] -> Your HashMap is null so that means you have NOTHING!"));
             return inv;
         }
