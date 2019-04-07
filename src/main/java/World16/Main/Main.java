@@ -121,7 +121,7 @@ public class Main extends JavaPlugin {
         this.customconfig = new CustomConfigManager();
         customconfig.registerAllCustomConfigs();
 
-        this.customInventoryManager = new CustomInventoryManager();
+        this.customInventoryManager = new CustomInventoryManager(this);
         this.customInventoryManager.registerAllCustomInventorys();
     }
 

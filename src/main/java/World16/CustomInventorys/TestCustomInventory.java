@@ -1,5 +1,6 @@
 package World16.CustomInventorys;
 
+import World16.Main.Main;
 import World16.Utils.ICustomInventory;
 import World16.Utils.InventoryUtils;
 import World16.Utils.Translate;
@@ -12,6 +13,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class TestCustomInventory implements ICustomInventory {
 
+    private Main plugin;
+
     private Inventory inv;
 
     private String inventory_name;
@@ -19,8 +22,9 @@ public class TestCustomInventory implements ICustomInventory {
 
     private CustomInventoryManager customInventoryManager;
 
-    public TestCustomInventory(CustomInventoryManager customInventoryManager) {
+    public TestCustomInventory(CustomInventoryManager customInventoryManager, Main getPlugin) {
         this.customInventoryManager = customInventoryManager;
+        this.plugin = getPlugin;
     }
 
     public void createCustomInv() {

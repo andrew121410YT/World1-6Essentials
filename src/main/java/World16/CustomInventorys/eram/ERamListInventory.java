@@ -22,7 +22,7 @@ import java.util.Set;
 
 public class ERamListInventory implements ICustomInventory {
 
-    private Main plugin = Main.getPlugin();
+    private Main plugin;
 
     //Maps
     Map<String, Map<String, List<Location>>> eramMap = ERamManager.stringRawLocationObjectHashMap;
@@ -36,8 +36,9 @@ public class ERamListInventory implements ICustomInventory {
     private CustomInventoryManager customInventoryManager;
     private ERamManager eRamManager;
 
-    public ERamListInventory(CustomInventoryManager customInventoryManager) {
+    public ERamListInventory(CustomInventoryManager customInventoryManager, Main getPlugin) {
         this.customInventoryManager = customInventoryManager;
+        this.plugin = getPlugin;
 
         eRamManager = new ERamManager(this.plugin.getCustomConfigManager());
     }

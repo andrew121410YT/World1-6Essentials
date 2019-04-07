@@ -1,6 +1,7 @@
 package World16.CustomInventorys.eram;
 
 import World16.CustomInventorys.CustomInventoryManager;
+import World16.Main.Main;
 import World16.Utils.ICustomInventory;
 import World16.Utils.InventoryUtils;
 import World16.Utils.Translate;
@@ -21,6 +22,8 @@ import java.util.Map;
 
 public class ERamInsideInventory implements ICustomInventory {
 
+    private Main plugin;
+
     //Maps
     Map<String, Map<String, List<Location>>> eramMap = ERamManager.stringRawLocationObjectHashMap;
     //...
@@ -32,8 +35,10 @@ public class ERamInsideInventory implements ICustomInventory {
 
     private CustomInventoryManager customInventoryManager;
 
-    public ERamInsideInventory(CustomInventoryManager customInventoryManager) {
+    public ERamInsideInventory(CustomInventoryManager customInventoryManager, Main getPlugin) {
         this.customInventoryManager = customInventoryManager;
+
+        this.plugin = getPlugin;
     }
 
     public void createCustomInv() {

@@ -2,6 +2,7 @@ package World16.CustomInventorys;
 
 import World16.CustomInventorys.eram.ERamInsideInventory;
 import World16.CustomInventorys.eram.ERamListInventory;
+import World16.Main.Main;
 
 public class CustomInventoryManager {
 
@@ -9,19 +10,22 @@ public class CustomInventoryManager {
     private ERamListInventory eRamListMenu = null;
     private ERamInsideInventory eRamInsideInventory = null;
 
-    public CustomInventoryManager() {
+    private Main plugin;
+
+    public CustomInventoryManager(Main getPlugin) {
+        this.plugin = getPlugin;
     }
 
     public void registerAllCustomInventorys() {
         //Test
-        testMenu = new TestCustomInventory(this);
+        testMenu = new TestCustomInventory(this, this.plugin);
         testMenu.createCustomInv();
 
         //Eram List
-        eRamListMenu = new ERamListInventory(this);
+        eRamListMenu = new ERamListInventory(this, this.plugin);
         eRamListMenu.createCustomInv();
 
-        eRamInsideInventory = new ERamInsideInventory(this);
+        eRamInsideInventory = new ERamInsideInventory(this, this.plugin);
         eRamInsideInventory.createCustomInv();
     }
 
