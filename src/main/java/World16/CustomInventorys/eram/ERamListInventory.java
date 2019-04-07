@@ -1,6 +1,7 @@
 package World16.CustomInventorys.eram;
 
 import World16.CustomInventorys.CustomInventoryManager;
+import World16.Main.Main;
 import World16.Utils.ICustomInventory;
 import World16.Utils.InventoryUtils;
 import World16.Utils.Translate;
@@ -21,6 +22,8 @@ import java.util.Set;
 
 public class ERamListInventory implements ICustomInventory {
 
+    private Main plugin = Main.getPlugin();
+
     //Maps
     Map<String, Map<String, List<Location>>> eramMap = ERamManager.stringRawLocationObjectHashMap;
     //...
@@ -31,9 +34,12 @@ public class ERamListInventory implements ICustomInventory {
     private int inv_rows = 4 * 9;
 
     private CustomInventoryManager customInventoryManager;
+    private ERamManager eRamManager;
 
     public ERamListInventory(CustomInventoryManager customInventoryManager) {
         this.customInventoryManager = customInventoryManager;
+
+        eRamManager = new ERamManager(this.plugin.getCustomConfigManager());
     }
 
     public void createCustomInv() {
@@ -56,7 +62,7 @@ public class ERamListInventory implements ICustomInventory {
 
         bigdaddy.forEach((k) -> {
             List<Location> v = emapIN.get(k);
-            InventoryUtils.createItem(inv, Material.GREEN_SHULKER_BOX, v.size(), inv.firstEmpty() + 1, k, "Click me to open up");
+            InventoryUtils.createItem(inv, Material.GREEN_SHULKER_BOX, v.size(), inv.firstEmpty() + 1, k, "Click me to open up", "Shift Left Click to delete me!");
         });
 
         return inv;
@@ -65,9 +71,17 @@ public class ERamListInventory implements ICustomInventory {
     public void clicked(Player player, ClickType clickType, int slot, ItemStack clicked, Inventory inv) {
         Map<String, List<Location>> emapIN = eramMap.get(player.getDisplayName());
 
-        if (emapIN.containsKey(clicked.getItemMeta().getDisplayName())) {
+        if (emapIN.containsKey(clicked.getItemMeta().getDisplayName()) && clickType.isLeftClick()) {
             player.playSound(player.getLocation(), Sound.BLOCK_PISTON_CONTRACT, 10.0f, 1.0f);
+            player.closeInventory();
             player.openInventory(this.customInventoryManager.geteRamInsideInventory().GUI(player, slot, clicked, inv));
+        }
+
+        if (emapIN.containsKey(clicked.getItemMeta().getDisplayName()) && clickType.isShiftClick()) {
+            eRamManager.delete(player.getDisplayName(), player.getUniqueId(), clicked.getItemMeta().getDisplayName());
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_PLING, 10.0f, 1.0f);
+            player.closeInventory();
+            player.openInventory(this.GUI(player));
         }
     }
 

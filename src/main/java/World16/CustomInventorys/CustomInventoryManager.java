@@ -10,7 +10,6 @@ public class CustomInventoryManager {
     private ERamInsideInventory eRamInsideInventory = null;
 
     public CustomInventoryManager() {
-
     }
 
     public void registerAllCustomInventorys() {
@@ -37,4 +36,6 @@ public class CustomInventoryManager {
     public ERamInsideInventory geteRamInsideInventory() {
         return eRamInsideInventory;
     }
+
+    //RANDOM
 }

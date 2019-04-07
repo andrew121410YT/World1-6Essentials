@@ -109,7 +109,6 @@ public class Main extends JavaPlugin {
         new InventoryClickEvent(this, this.customInventoryManager);
         new AsyncPlayerChatEvent(this);
         new PlayerInteractEvent(this);
-        new CustomInventoryManager().registerAllCustomInventorys();
     }
 
     private void regFileConfigGEN() {
@@ -160,5 +159,9 @@ public class Main extends JavaPlugin {
 
     public CustomInventoryManager getCustomInventoryManager() {
         return customInventoryManager;
+    }
+
+    public CustomConfigManager getCustomConfigManager() {
+        return customconfig;
     }
 }

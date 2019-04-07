@@ -8,6 +8,7 @@ import World16.test.ERamManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
@@ -51,10 +52,10 @@ public class ERamInsideInventory implements ICustomInventory {
 
         Map<String, List<Location>> emapIN = eramMap.get(player.getDisplayName());
 
-        List<String> locationListToStrings = this.LocationListToStrings(emapIN.get(clicked.getItemMeta().getDisplayName()));
+        List<String> locationListToStrings = this.locationListToStrings(emapIN.get(clicked.getItemMeta().getDisplayName()));
 
         for (String locationListToString : locationListToStrings) {
-            InventoryUtils.createItem(this.inv, Material.REDSTONE_BLOCK, 1, this.inv.firstEmpty() + 1, locationListToString, "Click me to tp");
+            InventoryUtils.createItem(this.inv, Material.REDSTONE_BLOCK, 1, this.inv.firstEmpty() + 1, locationListToString, "Left Click me to tp", "Right click to place a block");
         }
         InventoryUtils.createItem(this.inv, Material.ARROW, 1, 37, "Back", "Back");
 
@@ -72,17 +73,20 @@ public class ERamInsideInventory implements ICustomInventory {
             String clickName = clicked.getItemMeta().getDisplayName();
             String[] args = clickName.split(" ");
 
-            for (int index = 0; index < args.length; index++) {
-                args[index] = args[index].replace("X:", "");
-                args[index] = args[index].replace("Y:", "");
-                args[index] = args[index].replace("Z:", "");
-            }
+            Location location = this.stringArrayToLocation(player.getWorld(), args);
 
-            Double x = Double.valueOf(args[0]);
-            Double y = Double.valueOf(args[1]);
-            Double z = Double.valueOf(args[2]);
+            player.teleport(location);
+        }
 
-            player.teleport(new Location(player.getWorld(), x, y, z));
+        if (clicked.getItemMeta().getDisplayName().contains("X:") && clickType.isRightClick()) {
+            String clickName = clicked.getItemMeta().getDisplayName();
+            String[] args = clickName.split(" ");
+
+            Location location = this.stringArrayToLocation(player.getWorld(), args);
+
+            location.getBlock().setType(Material.REDSTONE_BLOCK);
+
+            player.sendMessage("Redstone has been set there!");
         }
     }
 
@@ -101,7 +105,7 @@ public class ERamInsideInventory implements ICustomInventory {
         return inv;
     }
 
-    public List<String> LocationListToStrings(List<Location> locationList) {
+    public List<String> locationListToStrings(List<Location> locationList) {
 
         List<String> newList = new ArrayList<>();
 
@@ -115,5 +119,20 @@ public class ERamInsideInventory implements ICustomInventory {
         Collections.sort(newList);
 
         return newList;
+    }
+
+    public Location stringArrayToLocation(World world, String[] args) {
+
+        for (int index = 0; index < args.length; index++) {
+            args[index] = args[index].replace("X:", "");
+            args[index] = args[index].replace("Y:", "");
+            args[index] = args[index].replace("Z:", "");
+        }
+
+        Double x = Double.valueOf(args[0]);
+        Double y = Double.valueOf(args[1]);
+        Double z = Double.valueOf(args[2]);
+
+        return new Location(world, x, y, z);
     }
 }
