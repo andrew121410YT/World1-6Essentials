@@ -33,6 +33,7 @@ public class ERamTab implements TabCompleter {
             tabCompleteMap.get("eram").add("delete");
             tabCompleteMap.get("eram").add("addtag");
             tabCompleteMap.get("eram").add("deletetag");
+            tabCompleteMap.get("eram").add("gui");
 //            tabCompleteMap.get("eram").add("");
         }
     }
