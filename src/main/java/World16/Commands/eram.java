@@ -226,9 +226,6 @@ public class eram implements CommandExecutor {
             Tag.removeTag(p.getDisplayName(), tagName);
             p.sendMessage(Translate.chat("&cRemoved tag -> " + tagName));
             return true;
-        } else if (args.length == 1 && args[0].equalsIgnoreCase("gui")) {
-            p.openInventory(this.customInventoryManager.geteRamListMenu().GUI(p));
-            return true;
         } else {
             p.sendMessage("Something messed up!");
             return true;
