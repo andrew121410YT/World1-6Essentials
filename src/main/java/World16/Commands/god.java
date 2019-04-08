@@ -2,13 +2,13 @@ package World16.Commands;
 
 import World16.Main.Main;
 import World16.Utils.API;
+import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class god implements CommandExecutor {
@@ -17,7 +17,7 @@ public class god implements CommandExecutor {
     private Main plugin;
 
     //Lists
-    public static List<String> godm = new ArrayList<>();
+    List<String> godm = SetListMap.godmList;
     //...
 
     public god(Main plugin) {

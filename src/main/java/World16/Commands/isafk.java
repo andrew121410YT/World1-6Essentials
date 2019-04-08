@@ -4,6 +4,7 @@ import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManager;
+import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,7 +19,7 @@ public class isafk implements CommandExecutor {
     //Maps
     //...
     //Lists
-    List<String> Afk1 = afk.Afk;
+    List<String> Afk1 = SetListMap.afkList;
     //...
     private Main plugin;
     private CustomYmlManager shitYml = null;

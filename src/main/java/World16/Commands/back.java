@@ -4,6 +4,7 @@ import World16.Main.Main;
 import World16.Objects.LocationObject;
 import World16.TabComplete.BackTab;
 import World16.Utils.API;
+import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -13,7 +14,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class back implements CommandExecutor {
@@ -22,7 +22,7 @@ public class back implements CommandExecutor {
     private Main plugin;
 
     //Maps
-    public static Map<String, LocationObject> backm = new HashMap<>();
+    Map<String, LocationObject> backm = SetListMap.backM;
     //...
 
     public back(Main getPlugin) {

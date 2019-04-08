@@ -6,13 +6,13 @@ import World16.Main.Main;
 import World16.Storage.OldMySQL;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManager;
+import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class tpa implements CommandExecutor {
@@ -22,8 +22,9 @@ public class tpa implements CommandExecutor {
     private API api;
     private OldMySQL mysql;
 
-    //HASHMAPS
-    public static Map<Player, Player> tpam = new LinkedHashMap<>();
+    //Maps
+    Map<Player, Player> tpam = SetListMap.tpaM;
+    //...
 
     private CustomYmlManager shitYml = null;
 

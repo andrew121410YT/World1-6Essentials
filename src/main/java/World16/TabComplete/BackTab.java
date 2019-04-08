@@ -1,6 +1,7 @@
 package World16.TabComplete;
 
 import World16.Main.Main;
+import World16.Utils.SetListMap;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -15,7 +16,7 @@ public class BackTab implements TabCompleter {
     Main plugin = Main.getPlugin();
 
     //Maps
-    Map<String, List<String>> tabCompleteMap = Main.tabCompleteMap;
+    Map<String, List<String>> tabCompleteMap = SetListMap.tabCompleteMap;
     //...
 
     //Lists

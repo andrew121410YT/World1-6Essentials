@@ -1,7 +1,7 @@
 package World16.Events;
 
-import World16.Commands.god;
 import World16.Main.Main;
+import World16.Utils.SetListMap;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +14,7 @@ public class PlayerDamageEvent implements Listener {
 
     private static Main plugin;
 
-    List<String> godm = god.godm;
+    List<String> godm = SetListMap.godmList;
 
     public PlayerDamageEvent(Main getPlugin) {
         plugin = getPlugin;

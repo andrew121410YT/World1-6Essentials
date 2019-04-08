@@ -31,15 +31,5 @@ public class InventoryClickEvent implements Listener {
             event.setCancelled(true);
             this.customInventoryManager.getTestMenu().clicked((Player) event.getWhoClicked(), event.getClick(), event.getSlot(), event.getCurrentItem(), event.getInventory());
         }
-
-        if (inv_name.equals(this.customInventoryManager.geteRamListMenu().getInventoryName()) && (event.getCurrentItem() != null) && (!event.getCurrentItem().getType().equals(Material.AIR)) && (event.getClickedInventory() != null) && (holder instanceof ICustomInventory)) {
-            event.setCancelled(true);
-            this.customInventoryManager.geteRamListMenu().clicked((Player) event.getWhoClicked(), event.getClick(), event.getSlot(), event.getCurrentItem(), event.getInventory());
-        }
-
-        if (inv_name.equals(this.customInventoryManager.geteRamInsideInventory().getInventoryName()) && (event.getCurrentItem() != null) && (!event.getCurrentItem().getType().equals(Material.AIR)) && (event.getClickedInventory() != null) && (holder instanceof ICustomInventory)) {
-            event.setCancelled(true);
-            this.customInventoryManager.geteRamInsideInventory().clicked((Player) event.getWhoClicked(), event.getClick(), event.getSlot(), event.getCurrentItem(), event.getInventory());
-        }
     }
 }

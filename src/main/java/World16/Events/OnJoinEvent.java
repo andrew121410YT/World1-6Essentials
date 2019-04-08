@@ -2,12 +2,12 @@ package World16.Events;
 
 import CCUtils.Storage.ISQL;
 import CCUtils.Storage.SQLite;
-import World16.Commands.back;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
+import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -16,7 +16,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,12 +24,12 @@ public class OnJoinEvent implements Listener {
     private static Main plugin;
 
     //Maps
-    public static Map<String, KeyObject> keyDataM = new HashMap<>();
-    Map<String, LocationObject> backM = back.backm;
+    Map<String, KeyObject> keyDataM = SetListMap.keyDataM;
+    Map<String, LocationObject> backM = SetListMap.backM;
     //...
 
     //Lists
-    List<Player> adminListPlayer = AsyncPlayerChatEvent.adminListPlayer;
+    List<Player> adminListPlayer = SetListMap.adminListPlayer;
     //...
 
     private ISQL mysql;

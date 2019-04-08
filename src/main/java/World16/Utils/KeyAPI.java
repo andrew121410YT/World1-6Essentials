@@ -1,7 +1,6 @@
 package World16.Utils;
 
 import CCUtils.Storage.ISQL;
-import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
 import org.bukkit.Material;
@@ -30,10 +29,10 @@ public class KeyAPI {
     private static Plugin plugin = Main.getPlugin();
 
     //Maps
-    Map<String, KeyObject> keyDatam = OnJoinEvent.keyDataM;
+    Map<String, KeyObject> keyDatam = SetListMap.keyDataM;
     //...
 
-    public KeyAPI(){
+    public KeyAPI() {
     }
 
     public KeyAPI(ISQL isql) {

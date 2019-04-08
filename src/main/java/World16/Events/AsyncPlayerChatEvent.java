@@ -2,6 +2,7 @@ package World16.Events;
 
 import World16.Main.Main;
 import World16.Utils.API;
+import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -9,7 +10,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,11 +19,8 @@ public class AsyncPlayerChatEvent implements Listener {
     private API api;
 
     //Lists
-    public static List<String> adminList = new ArrayList<>();
-    //...
-
-    //Maps
-    public static List<Player> adminListPlayer = new ArrayList<>();
+    List<String> adminList = SetListMap.adminList;
+    List<Player> adminListPlayer = SetListMap.adminListPlayer;
     //...
 
     public AsyncPlayerChatEvent(Main getPlugin) {

@@ -4,6 +4,7 @@ import World16.CustomEvents.handlers.AfkEventHandler;
 import World16.CustomEvents.handlers.UnAfkEventHandler;
 import World16.Main.Main;
 import World16.Utils.API;
+import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -12,7 +13,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class afk implements Listener, CommandExecutor {
@@ -20,7 +20,7 @@ public class afk implements Listener, CommandExecutor {
     //Maps
     //...
     //Lists
-    public static List<String> Afk = new ArrayList<>();
+    List<String> Afk = SetListMap.afkList;
     //....
 
     public Main plugin;

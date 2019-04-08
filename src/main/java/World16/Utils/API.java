@@ -1,18 +1,9 @@
 package World16.Utils;
 
-import World16.Commands.afk;
-import World16.Commands.back;
-import World16.Commands.fly;
-import World16.Commands.god;
-import World16.Commands.tp.tpa;
 import World16.CustomConfigs.CustomConfigManager;
-import World16.Events.AsyncPlayerChatEvent;
-import World16.Events.OnJoinEvent;
-import World16.Events.PlayerInteractEvent;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
-import World16.test.ERamManager;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
@@ -37,21 +28,21 @@ import java.util.Map;
 public class API {
 
     // Maps
-    Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    Map<String, LocationObject> backm = back.backm;
-    Map<Player, Player> tpam = tpa.tpam;
-    Map<String, List<String>> tabCompleteMap = Main.tabCompleteMap;
-    Map<String, Map<String, List<Location>>> eRamManager = ERamManager.stringRawLocationObjectHashMap;
-    Map<String, Location> latestClickedBlocked = PlayerInteractEvent.latestClickedBlocked;
+    Map<String, KeyObject> keyDataM = SetListMap.keyDataM;
+    Map<String, LocationObject> backm = SetListMap.backM;
+    Map<Player, Player> tpam = SetListMap.tpaM;
+    Map<String, List<String>> tabCompleteMap = SetListMap.tabCompleteMap;
+    Map<String, Map<String, List<Location>>> eRamManager = SetListMap.eRamRaw;
+    Map<String, Location> latestClickedBlocked = SetListMap.latestClickedBlocked;
     Map<String, Map<String, String>> tagsMap = Tag.tagsMap;
     //...
 
     // Lists
-    List<String> Afk1 = afk.Afk;
-    List<String> Fly1 = fly.Fly;
-    List<String> GodM = god.godm;
-    List<String> adminList = AsyncPlayerChatEvent.adminList;
-    List<Player> adminListPLayer = AsyncPlayerChatEvent.adminListPlayer;
+    List<String> Afk1 = SetListMap.afkList;
+    List<String> Fly1 = SetListMap.flyList;
+    List<String> GodM = SetListMap.godmList;
+    List<String> adminList = SetListMap.adminList;
+    List<Player> adminListPLayer = SetListMap.adminListPlayer;
     //...
 
     private static Main plugin = Main.getPlugin();
@@ -162,30 +153,6 @@ public class API {
 
     public boolean isDebug() {
         return plugin.getConfig().getString("debug").equalsIgnoreCase("true");
-    }
-
-    public List<String> getAfkList() {
-        return afk.Afk;
-    }
-
-    public List<String> getFlyList() {
-        return fly.Fly;
-    }
-
-    public List<String> getGodList() {
-        return god.godm;
-    }
-
-    public Map<String, KeyObject> getKeyDataMap() {
-        return OnJoinEvent.keyDataM;
-    }
-
-    public Map<String, LocationObject> getBackMap() {
-        return back.backm;
-    }
-
-    public Map<Player, Player> getTpaMap() {
-        return tpa.tpam;
     }
 
     public void clearListAndMaps(Player p) {

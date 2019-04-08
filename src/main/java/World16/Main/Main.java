@@ -33,7 +33,6 @@ public class Main extends JavaPlugin {
     private API api;
 
     //Maps
-    public static Map<String, List<String>> tabCompleteMap = new HashMap<>();
 
     PluginManager pm = Bukkit.getPluginManager();
 

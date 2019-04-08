@@ -1,13 +1,12 @@
 package World16.Commands;
 
-import World16.Commands.tp.tpa;
-import World16.Events.OnJoinEvent;
 import World16.Main.Main;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
 import World16.Storage.OldMySQL;
 import World16.TabComplete.DebugTab;
 import World16.Utils.API;
+import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -24,9 +23,9 @@ import java.util.Map;
 public class debug implements CommandExecutor {
 
     //Maps
-    Map<String, KeyObject> keyDataM = OnJoinEvent.keyDataM;
-    Map<String, LocationObject> backm = back.backm;
-    Map<Player, Player> tpam = tpa.tpam;
+    Map<String, KeyObject> keyDataM = SetListMap.keyDataM;
+    Map<String, LocationObject> backm = SetListMap.backM;
+    Map<Player, Player> tpam = SetListMap.tpaM;
     //...
 
     //Lists

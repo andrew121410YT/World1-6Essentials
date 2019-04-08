@@ -1,20 +1,22 @@
 package World16.Events;
 
 import World16.Main.Main;
+import World16.Utils.SetListMap;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class PlayerInteractEvent implements Listener {
 
-    private Main plugin;
+    //Maps
+    Map<String, Location> latestClickedBlocked = SetListMap.latestClickedBlocked;
+    //...
 
-    public static Map<String, Location> latestClickedBlocked = new HashMap<>();
+    private Main plugin;
 
     public PlayerInteractEvent(Main getPlugin) {
         plugin = getPlugin;

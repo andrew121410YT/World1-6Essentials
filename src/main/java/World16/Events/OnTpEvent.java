@@ -1,8 +1,8 @@
 package World16.Events;
 
-import World16.Commands.back;
 import World16.Main.Main;
 import World16.Objects.LocationObject;
+import World16.Utils.SetListMap;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,7 +14,7 @@ import java.util.Map;
 public class OnTpEvent implements Listener {
 
     private static Main plugin;
-    Map<String, LocationObject> backm = back.backm;
+    Map<String, LocationObject> backm = SetListMap.backM;
 
     public OnTpEvent(Main getPlugin) {
         plugin = getPlugin;

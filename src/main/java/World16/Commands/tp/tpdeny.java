@@ -5,6 +5,7 @@ import World16.Main.Main;
 import World16.Storage.OldMySQL;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManager;
+import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,8 +21,9 @@ public class tpdeny implements CommandExecutor {
     API api = new API();
     OldMySQL mysql = new OldMySQL();
 
-    //HASHMAPS
-    private static Map<Player, Player> tpam = tpa.tpam;
+    //Maps
+    Map<Player, Player> tpam = SetListMap.tpaM;
+    //...
 
     private CustomYmlManager shitYml = null;
 
