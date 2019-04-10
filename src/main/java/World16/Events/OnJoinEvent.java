@@ -64,6 +64,7 @@ public class OnJoinEvent implements Listener {
                     .sendMessage(Translate.chat(API.USELESS_TAG
                             + " Please make sure too put in the mysql details in the config.yml."));
         }
+
         backM.remove(p.getDisplayName()); //<-- just incase
         backM.put(p.getDisplayName(), new LocationObject());
 

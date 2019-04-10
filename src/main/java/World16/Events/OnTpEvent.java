@@ -13,7 +13,8 @@ import java.util.Map;
 
 public class OnTpEvent implements Listener {
 
-    private static Main plugin;
+    private Main plugin;
+
     Map<String, LocationObject> backm = SetListMap.backM;
 
     public OnTpEvent(Main getPlugin) {

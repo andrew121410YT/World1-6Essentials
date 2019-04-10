@@ -54,6 +54,7 @@ public class back implements CommandExecutor {
             return true;
         }
         if (args.length >= 1) {
+            backm.computeIfAbsent(p.getDisplayName(), k -> new LocationObject());
 
             //DEATH
             if (args[0].equalsIgnoreCase("death")) {
