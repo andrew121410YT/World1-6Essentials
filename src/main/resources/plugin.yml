@@ -34,6 +34,7 @@ commands:
   god:
   emsg:
   eram:
+  waitdo:
 
   gmc:
     aliases:
@@ -179,4 +180,7 @@ permissions:
     default: op
   world16.eram:
     description: Allows to do eram
+    default: op
+  world16.waitdo:
+    description: Allows to do waitdo
     default: op

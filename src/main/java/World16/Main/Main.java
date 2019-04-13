@@ -18,10 +18,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class Main extends JavaPlugin {
 
     private static Main plugin;
@@ -91,6 +87,7 @@ public class Main extends JavaPlugin {
 
         new test1(customconfig, this);
         new eram(this.customconfig, this, this.customInventoryManager);
+        new waitdo(this.customconfig, this);
     }
 
     private void regEvents() {

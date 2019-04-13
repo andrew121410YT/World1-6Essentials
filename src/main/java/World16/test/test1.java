@@ -44,7 +44,7 @@ public class test1 implements CommandExecutor {
         }
         if (args.length == 0) {
             //SOMETHING HERE
-//            CountdownTimer timer = new CountdownTimer(this.plugin, 20, () -> p.sendMessage(Translate.chat("Starting")), () -> p.sendMessage(Translate.chat("END")), (t) -> p.sendMessage(Translate.chat("Timer:" + t.getSecondsLeft())));
+//            CountdownTimer timer = new CountdownTimer(this.plugin, sec, () -> p.sendMessage(Translate.chat("Starting")), () -> p.sendMessage(Translate.chat("END")), (t) -> p.sendMessage(Translate.chat("Timer:" + t.getSecondsLeft())));
 //            timer.scheduleTimer();
             return true;
         } else if (args.length >= 1) {

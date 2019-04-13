@@ -402,6 +402,15 @@ public class API {
         }
     }
 
+    public boolean asBooleanOrDefault(String boolean1, boolean default1) {
+        try {
+            Boolean.parseBoolean(boolean1);
+            return Boolean.valueOf(boolean1);
+        } catch (Exception e) {
+            return default1;
+        }
+    }
+
     public void PermissionErrorMessage(Player p) {
         p.sendMessage(
                 Translate.chat(PREFIX + " &cYou Do Not Have Permission To Use This Command."));
