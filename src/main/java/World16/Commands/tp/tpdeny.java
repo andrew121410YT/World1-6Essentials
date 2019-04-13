@@ -2,9 +2,7 @@ package World16.Commands.tp;
 
 import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
-import World16.Storage.OldMySQL;
 import World16.Utils.API;
-import World16.Utils.CustomYmlManager;
 import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
@@ -19,16 +17,15 @@ public class tpdeny implements CommandExecutor {
     private Main plugin;
 
     API api = new API();
-    OldMySQL mysql = new OldMySQL();
 
     //Maps
     Map<Player, Player> tpam = SetListMap.tpaM;
     //...
 
-    private CustomYmlManager shitYml = null;
+    private CustomConfigManager customConfigManager;
 
     public tpdeny(CustomConfigManager getCustomYml, Main getPlugin) {
-        this.shitYml = getCustomYml.getShitYml();
+        this.customConfigManager = getCustomYml;
         this.plugin = getPlugin;
 
         this.plugin.getCommand("tpdeny").setExecutor(this);

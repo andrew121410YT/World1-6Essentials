@@ -2,9 +2,7 @@ package World16.Commands.tp;
 
 import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
-import World16.Storage.OldMySQL;
 import World16.Utils.API;
-import World16.Utils.CustomYmlManager;
 import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
@@ -19,18 +17,17 @@ public class tpaccept implements CommandExecutor {
     private Main plugin;
 
     private API api;
-    private OldMySQL mysql;
 
-    //HASHMAPS
+    //Maps
     Map<Player, Player> tpam = SetListMap.tpaM;
+    //...
 
-    private CustomYmlManager shitYml = null;
+    private CustomConfigManager customYmlManager;
 
     public tpaccept(CustomConfigManager getCustomYml, Main getPlugin) {
-        this.shitYml = getCustomYml.getShitYml();
+        this.customYmlManager = getCustomYml;
         this.plugin = getPlugin;
         this.api = new API();
-        this.mysql = new OldMySQL();
 
         this.plugin.getCommand("tpaccept").setExecutor(this);
     }
@@ -52,7 +49,10 @@ public class tpaccept implements CommandExecutor {
                 tpam.get(p).sendMessage(Translate
                         .chat("[&eTPA&r] &a" + p.getDisplayName() + " has accepted your tpa request."));
                 tpam.remove(p);
+            } else {
+                p.sendMessage(Translate.chat("&e[TPA]&r &cLooks like you don't have any tpa request."));
             }
+            return true;
         }
         return true;
     }

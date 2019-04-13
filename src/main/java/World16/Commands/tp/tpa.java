@@ -3,9 +3,7 @@ package World16.Commands.tp;
 import World16.CustomConfigs.CustomConfigManager;
 import World16.CustomEvents.handlers.TpaEventHandler;
 import World16.Main.Main;
-import World16.Storage.OldMySQL;
 import World16.Utils.API;
-import World16.Utils.CustomYmlManager;
 import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
@@ -20,19 +18,17 @@ public class tpa implements CommandExecutor {
     private Main plugin;
 
     private API api;
-    private OldMySQL mysql;
 
     //Maps
     Map<Player, Player> tpam = SetListMap.tpaM;
     //...
 
-    private CustomYmlManager shitYml = null;
+    private CustomConfigManager customConfigManager;
 
     public tpa(CustomConfigManager getCustomYml, Main getPlugin) {
-        this.shitYml = getCustomYml.getShitYml();
+        this.customConfigManager = getCustomYml;
         this.plugin = getPlugin;
         this.api = new API();
-        this.mysql = new OldMySQL();
 
         this.plugin.getCommand("tpa").setExecutor(this);
     }
@@ -50,9 +46,9 @@ public class tpa implements CommandExecutor {
         }
         if (args.length == 0) {
             p.sendMessage(Translate.chat("[&eTPA&r] &cUsage: /tpa <Player>"));
-        } else if (args.length >= 1) {
+        } else {
             Player target = plugin.getServer().getPlayerExact(args[0]); //Get the player
-            if (args.length >= 1 && target != null && target.isOnline()) {
+            if (target != null && target.isOnline()) {
                 tpam.put(target, p);
                 new TpaEventHandler(p.getDisplayName(), target.getDisplayName()); //RUNS TPA EVENT
                 p.sendMessage(
@@ -61,19 +57,16 @@ public class tpa implements CommandExecutor {
             } else {
                 p.sendMessage("&4Looks like that player is offline.");
             }
-        } else {
-            p.sendMessage(Translate.chat("&4Something messed up"));
             return true;
         }
         return true;
     }
 
-    public void sendTpaRequestMessage(Player p, Player target) {
+    private void sendTpaRequestMessage(Player p, Player target) {
         if (p != null && target != null) {
             target.sendMessage(
                     Translate.chat("[&eTPA&r] &a" + p.getDisplayName() + " has sent a tpa request too you."));
             target.sendMessage(Translate.chat("&c/tpaccept &aOR&r &c/tpdeny"));
-        } else {
         }
     }
 
