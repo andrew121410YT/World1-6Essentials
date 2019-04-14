@@ -33,6 +33,7 @@ public class AsyncPlayerChatEvent implements Listener {
 
         adminList.add("andrew121410");
         adminList.add("Andrzej_Przybyla");
+        adminList.add("AlphaGibbon43");
     }
 
     @EventHandler
@@ -153,10 +154,11 @@ public class AsyncPlayerChatEvent implements Listener {
             for (Player player : adminListPlayer) {
                 p.sendMessage("This player is hidden -> " + player.getDisplayName());
             }
-            if (args[0].equalsIgnoreCase(":okbye")) {
-                event.setCancelled(true);
-                Bukkit.broadcastMessage(Translate.chat(API.PREFIX + " &5Bye Bye, " + p.getDisplayName()));
-            }
+        }
+
+        if (args[0].equalsIgnoreCase(":okbye")) {
+            event.setCancelled(true);
+            Bukkit.broadcastMessage(Translate.chat(API.PREFIX + " &5Bye Bye, " + p.getDisplayName()));
         }
     }
 }
