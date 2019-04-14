@@ -4,6 +4,7 @@ import World16.Main.Main;
 import World16.Utils.API;
 import World16.Utils.SetListMap;
 import World16.Utils.Translate;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -151,6 +152,10 @@ public class AsyncPlayerChatEvent implements Listener {
             event.setCancelled(true);
             for (Player player : adminListPlayer) {
                 p.sendMessage("This player is hidden -> " + player.getDisplayName());
+            }
+            if (args[0].equalsIgnoreCase(":okbye")) {
+                event.setCancelled(true);
+                Bukkit.broadcastMessage(Translate.chat(API.PREFIX + " &5Bye Bye, " + p.getDisplayName()));
             }
         }
     }
