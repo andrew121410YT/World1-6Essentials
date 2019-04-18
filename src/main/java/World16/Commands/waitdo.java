@@ -3,6 +3,7 @@ package World16.Commands;
 import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
 import World16.Utils.API;
+import World16.Utils.CommandBlockUtils;
 import World16.Utils.CountdownTimer;
 import org.bukkit.block.Block;
 import org.bukkit.command.BlockCommandSender;
@@ -11,11 +12,16 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class waitdo implements CommandExecutor {
 
     private Main plugin;
 
     private API api;
+
+    private CommandBlockUtils commandBlockUtils;
 
     private CustomConfigManager customConfigManager;
 
@@ -23,6 +29,7 @@ public class waitdo implements CommandExecutor {
         this.customConfigManager = getCustomYml;
         this.plugin = getPlugin;
         this.api = new API(this.customConfigManager);
+        this.commandBlockUtils = new CommandBlockUtils(this.plugin);
 
         this.plugin.getCommand("waitdo").setExecutor(this);
     }
@@ -38,12 +45,17 @@ public class waitdo implements CommandExecutor {
             BlockCommandSender cmdblock = (BlockCommandSender) sender;
             Block commandblock = cmdblock.getBlock();
 
-            if (args.length == 5) {
+            if (args.length >= 4) {
                 int sec = api.asIntOrDefault(args[0], 1);
                 String[] doStart = args[1].split(":");
                 String[] doEnd = args[2].split(":");
                 String[] doEverySec = args[3].split(":");
-                boolean debug = api.asBooleanOrDefault(args[4], false);
+                //arg[4] is debug
+                boolean debug = false;
+
+                if (args.length >= 5 && args[4] != null) {
+                    debug = api.asBooleanOrDefault(args[4], false);
+                }
 
                 String doStartString = String.join(" ", doStart);
                 String doEndString = String.join(" ", doEnd);
@@ -55,6 +67,16 @@ public class waitdo implements CommandExecutor {
 
                 CountdownTimer timer = new CountdownTimer(this.plugin, sec, () -> this.plugin.getServer().dispatchCommand(sender, doStartString), () -> this.plugin.getServer().dispatchCommand(sender, doEndString), (t) -> this.plugin.getServer().dispatchCommand(sender, doEverySecString));
                 timer.scheduleTimer();
+
+                if (args.length >= 6) {
+                    List<String[]> stringList = new ArrayList<>();
+                    for (int i = 5; i < args.length; i++) {
+                        stringList.add(args[i].split(":"));
+                    }
+                    this.commandBlockUtils.runCommands(sender, stringList);
+                    stringList.clear();
+                    return true;
+                }
                 return true;
             }
             return true;
