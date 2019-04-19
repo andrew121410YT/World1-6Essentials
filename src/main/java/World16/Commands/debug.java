@@ -237,9 +237,7 @@ public class debug implements CommandExecutor {
                             p.sendMessage(Translate
                                     .chat("UUID: " + uuidtarget + " FOR " + target.getDisplayName()));
 
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (ParseException e) {
+                        } catch (IOException | ParseException e) {
                             e.printStackTrace();
                         }
                     } else if (args.length >= 3 && args[1] != null && args[2] != null && args[2]
@@ -248,9 +246,7 @@ public class debug implements CommandExecutor {
                             String uuidtarget2 = api.getUUIDFromMojangAPI(args[1]);
                             p.sendMessage(
                                     Translate.chat("UUID: " + uuidtarget2 + " FOR " + args[1]));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (ParseException e) {
+                        } catch (IOException | ParseException e) {
                             e.printStackTrace();
                         }
                     }

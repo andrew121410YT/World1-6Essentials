@@ -88,6 +88,8 @@ public class Main extends JavaPlugin {
         new test1(customconfig, this);
         new eram(this.customconfig, this, this.customInventoryManager);
         new waitdo(this.customconfig, this);
+        new runCommands(this.customconfig, this);
+        new wformat(this.customconfig, this);
     }
 
     private void regEvents() {

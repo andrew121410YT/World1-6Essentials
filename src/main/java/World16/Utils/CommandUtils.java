@@ -5,11 +5,11 @@ import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
-public class CommandBlockUtils {
+public class CommandUtils {
 
     private Main plugin;
 
-    public CommandBlockUtils(Main getPlugin) {
+    public CommandUtils(Main getPlugin) {
         this.plugin = getPlugin;
     }
 

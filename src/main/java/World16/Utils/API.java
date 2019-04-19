@@ -51,6 +51,7 @@ public class API {
     private ViaAPI viaapi;
 
     //Finals
+    public static final String CUSTOM_COMMAND_FORMAT = "`";
     public static final Integer VERSION = 255;
     public static final String DATE_OF_VERSION = "4/18/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";

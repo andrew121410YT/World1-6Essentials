@@ -3,7 +3,7 @@ package World16.Commands;
 import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
 import World16.Utils.API;
-import World16.Utils.CommandBlockUtils;
+import World16.Utils.CommandUtils;
 import World16.Utils.CountdownTimer;
 import org.bukkit.block.Block;
 import org.bukkit.command.BlockCommandSender;
@@ -21,7 +21,7 @@ public class waitdo implements CommandExecutor {
 
     private API api;
 
-    private CommandBlockUtils commandBlockUtils;
+    private CommandUtils commandUtils;
 
     private CustomConfigManager customConfigManager;
 
@@ -29,7 +29,7 @@ public class waitdo implements CommandExecutor {
         this.customConfigManager = getCustomYml;
         this.plugin = getPlugin;
         this.api = new API(this.customConfigManager);
-        this.commandBlockUtils = new CommandBlockUtils(this.plugin);
+        this.commandUtils = new CommandUtils(this.plugin);
 
         this.plugin.getCommand("waitdo").setExecutor(this);
     }
@@ -47,9 +47,9 @@ public class waitdo implements CommandExecutor {
 
             if (args.length >= 4) {
                 int sec = api.asIntOrDefault(args[0], 1);
-                String[] doStart = args[1].split(":");
-                String[] doEnd = args[2].split(":");
-                String[] doEverySec = args[3].split(":");
+                String[] doStart = args[1].split(API.CUSTOM_COMMAND_FORMAT);
+                String[] doEnd = args[2].split(API.CUSTOM_COMMAND_FORMAT);
+                String[] doEverySec = args[3].split(API.CUSTOM_COMMAND_FORMAT);
                 //arg[4] is debug
                 boolean debug = false;
 
@@ -71,9 +71,9 @@ public class waitdo implements CommandExecutor {
                 if (args.length >= 6) {
                     List<String[]> stringList = new ArrayList<>();
                     for (int i = 5; i < args.length; i++) {
-                        stringList.add(args[i].split(":"));
+                        stringList.add(args[i].split(API.CUSTOM_COMMAND_FORMAT));
                     }
-                    this.commandBlockUtils.runCommands(sender, stringList);
+                    this.commandUtils.runCommands(sender, stringList);
                     stringList.clear();
                     return true;
                 }
