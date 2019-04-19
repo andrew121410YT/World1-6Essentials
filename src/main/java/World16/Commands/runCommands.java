@@ -12,7 +12,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class runCommands implements CommandExecutor {
 
@@ -45,11 +47,8 @@ public class runCommands implements CommandExecutor {
             Block commandblock = cmdblock.getBlock();
 
             if (args.length >= 1) {
-                List<String[]> stringList = new ArrayList<>();
-                for (int i = 0; i < args.length; i++) {
-                    stringList.add(args[i].split(API.CUSTOM_COMMAND_FORMAT));
-                }
-                this.commandUtils.runCommands(commandblock, sender, stringList);
+                List<String[]> stringList = Arrays.stream(args).map(str -> str.split(API.CUSTOM_COMMAND_FORMAT)).collect(Collectors.toList());
+                this.commandUtils.runCommands(true, commandblock, sender, stringList);
                 stringList.clear();
                 return true;
             }
