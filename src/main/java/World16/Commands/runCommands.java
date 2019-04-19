@@ -11,7 +11,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,10 +62,7 @@ public class runCommands implements CommandExecutor {
         }
 
         if (args.length >= 1) {
-            List<String[]> stringList = new ArrayList<>();
-            for (String arg : args) {
-                stringList.add(arg.split(API.CUSTOM_COMMAND_FORMAT));
-            }
+            List<String[]> stringList = Arrays.stream(args).map(str -> str.split(API.CUSTOM_COMMAND_FORMAT)).collect(Collectors.toList());
             this.commandUtils.runCommands(sender, stringList);
             stringList.clear();
             return true;

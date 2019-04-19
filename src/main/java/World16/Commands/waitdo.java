@@ -73,7 +73,7 @@ public class waitdo implements CommandExecutor {
                     for (int i = 5; i < args.length; i++) {
                         stringList.add(args[i].split(API.CUSTOM_COMMAND_FORMAT));
                     }
-                    this.commandUtils.runCommands(sender, stringList);
+                    this.commandUtils.runCommands(true, commandblock, sender, stringList);
                     stringList.clear();
                     return true;
                 }
