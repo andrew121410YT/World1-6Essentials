@@ -4,9 +4,12 @@ import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
 import World16.Utils.API;
 import World16.Utils.CommandUtils;
+import org.bukkit.block.Block;
+import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,14 +35,38 @@ public class runCommands implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+
+            if (!(sender instanceof BlockCommandSender)) {
+                return true;
+            }
+
+            BlockCommandSender cmdblock = (BlockCommandSender) sender;
+            Block commandblock = cmdblock.getBlock();
+
+            if (args.length >= 1) {
+                List<String[]> stringList = new ArrayList<>();
+                for (int i = 0; i < args.length; i++) {
+                    stringList.add(args[i].split(API.CUSTOM_COMMAND_FORMAT));
+                }
+                this.commandUtils.runCommands(commandblock, sender, stringList);
+                stringList.clear();
+                return true;
+            }
+            return true;
+        }
+
+        Player p = (Player) sender;
+
         if (!sender.hasPermission("world16.runcommands")) {
             sender.sendMessage("You don't have permission to do this command.");
             return true;
         }
+
         if (args.length >= 1) {
             List<String[]> stringList = new ArrayList<>();
-            for (int i = 0; i < args.length; i++) {
-                stringList.add(args[i].split(API.CUSTOM_COMMAND_FORMAT));
+            for (String arg : args) {
+                stringList.add(arg.split(API.CUSTOM_COMMAND_FORMAT));
             }
             this.commandUtils.runCommands(sender, stringList);
             stringList.clear();

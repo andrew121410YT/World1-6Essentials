@@ -70,9 +70,9 @@ public class wformat implements CommandExecutor {
         if (args.length == 0) {
             p.sendMessage("Wtf? what you mean?");
             return true;
-        } else if (args.length >= 1) {
+        } else {
             if (args[0].equalsIgnoreCase("cmd")) {
-                if (args[1] == null) {
+                if (args.length < 2) {
                     p.sendMessage(Translate.chat("&cUsage: /wformat cmd <String>"));
                     return true;
                 }
@@ -84,6 +84,5 @@ public class wformat implements CommandExecutor {
             }
             return true;
         }
-        return true;
     }
 }
