@@ -154,34 +154,16 @@ public class wformat implements CommandExecutor {
                 String[] commandRaw = Arrays.copyOfRange(args, 1, args.length);
 
                 String str1 = Arrays.toString(commandRaw);
-                str1 = str1.substring(1, str1.length() - 1).replaceAll("`", " ");
-                commandRaw = str1.split(" ");
-
-                int z = 0;
+                str1 = str1.substring(1, str1.length() - 1);
+                commandRaw = str1.split(API.CUSTOM_COMMAND_FORMAT);
 
                 for (int i = 0; i < commandRaw.length; i++) {
                     if (commandRaw[i].contains("~")) {
-                        switch (z) {
-                            case 0:
-                                commandRaw[i] = commandRaw[i].replace("X", "");
-                                z++;
-                                break;
-                            case 1:
-                                commandRaw[i] = commandRaw[i].replace("Y", "");
-                                z++;
-                                break;
-                            case 2:
-                                commandRaw[i] = commandRaw[i].replace("Z", "");
-                                z++;
-                                break;
-                            default:
-                                z = 1;
-                                commandRaw[i] = commandRaw[i].replace("X", "");
-                                break;
-                        }
-                        p.sendMessage(Translate.chat("&cDebug -> " + commandRaw[i] + " =Z= " + z));
+                        String letter = commandRaw[i].substring(0, 1);
+                        commandRaw[i] = commandRaw[i].replace(letter, "");
                     }
                 }
+
                 String command = String.join(" ", commandRaw);
 
                 BaseComponent[] components = new ComponentBuilder("[UNCMD] Now Click Me").event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, command)).create();
