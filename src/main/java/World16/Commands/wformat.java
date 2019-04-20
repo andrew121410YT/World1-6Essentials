@@ -143,7 +143,48 @@ public class wformat implements CommandExecutor {
 
                 String command = String.join(API.CUSTOM_COMMAND_FORMAT, commandRaw);
 
-                BaseComponent[] components = new ComponentBuilder("Now Click Me").event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, command)).create();
+                BaseComponent[] components = new ComponentBuilder("[CMD] Now Click Me").event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, command)).create();
+                p.spigot().sendMessage(components);
+                return true;
+            } else if (args[0].equalsIgnoreCase("uncmd")) {
+                if (args.length < 2) {
+                    p.sendMessage(Translate.chat("&cUsage: /wformat uncmd <String>"));
+                    return true;
+                }
+                String[] commandRaw = Arrays.copyOfRange(args, 1, args.length);
+
+                String str1 = Arrays.toString(commandRaw);
+                str1 = str1.substring(1, str1.length() - 1).replaceAll("`", " ");
+                commandRaw = str1.split(" ");
+
+                int z = 0;
+
+                for (int i = 0; i < commandRaw.length; i++) {
+                    if (commandRaw[i].contains("~")) {
+                        switch (z) {
+                            case 0:
+                                commandRaw[i] = commandRaw[i].replace("X", "");
+                                z++;
+                                break;
+                            case 1:
+                                commandRaw[i] = commandRaw[i].replace("Y", "");
+                                z++;
+                                break;
+                            case 2:
+                                commandRaw[i] = commandRaw[i].replace("Z", "");
+                                z++;
+                                break;
+                            default:
+                                z = 1;
+                                commandRaw[i] = commandRaw[i].replace("X", "");
+                                break;
+                        }
+                        p.sendMessage(Translate.chat("&cDebug -> " + commandRaw[i] + " =Z= " + z));
+                    }
+                }
+                String command = String.join(" ", commandRaw);
+
+                BaseComponent[] components = new ComponentBuilder("[UNCMD] Now Click Me").event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, command)).create();
                 p.spigot().sendMessage(components);
                 return true;
             }
