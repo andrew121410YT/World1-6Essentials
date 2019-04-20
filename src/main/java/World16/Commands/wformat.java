@@ -76,8 +76,38 @@ public class wformat implements CommandExecutor {
                     p.sendMessage(Translate.chat("&cUsage: /wformat cmd <String>"));
                     return true;
                 }
-                String command = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+
+                String[] commandRaw = Arrays.copyOfRange(args, 1, args.length);
+                int z = 0;
+
+                for (int i = 0; i < commandRaw.length; i++) {
+                    if (commandRaw[i].contains("~")) {
+                        commandRaw[i] = commandRaw[i].replace("~", "");
+                        switch (z) {
+                            case 0:
+                                commandRaw[i] = "X~" + commandRaw[i];
+                                z++;
+                                break;
+                            case 1:
+                                commandRaw[i] = "Y~" + commandRaw[i];
+                                z++;
+                                break;
+                            case 2:
+                                commandRaw[i] = "Z~" + commandRaw[i];
+                                z++;
+                                break;
+                            default:
+                                z = 1;
+                                commandRaw[i] = "X~" + commandRaw[i];
+                                break;
+                        }
+                        p.sendMessage(Translate.chat("&cDebug -> " + commandRaw[i] + " =Z= " + z));
+                    }
+                }
+
+                String command = String.join(" ", commandRaw);
                 String commandFormat = command.replace(" ", API.CUSTOM_COMMAND_FORMAT);
+
                 BaseComponent[] components = new ComponentBuilder("Now Click Me").event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, commandFormat)).create();
                 p.spigot().sendMessage(components);
                 return true;
