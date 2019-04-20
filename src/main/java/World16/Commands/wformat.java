@@ -86,6 +86,28 @@ public class wformat implements CommandExecutor {
                     String command = String.join(API.CUSTOM_COMMAND_FORMAT, commandRaw);
                     sender.sendMessage(command);
                     return true;
+                } else if (args[0].equalsIgnoreCase("uncmd")) {
+                    if (args.length < 2) {
+                        sender.sendMessage(Translate.chat("&cUsage: /wformat uncmd <String>"));
+                        return true;
+                    }
+                    String[] commandRaw = Arrays.copyOfRange(args, 1, args.length);
+
+                    String str1 = Arrays.toString(commandRaw);
+                    str1 = str1.substring(1, str1.length() - 1);
+                    commandRaw = str1.split(API.CUSTOM_COMMAND_FORMAT);
+
+                    for (int i = 0; i < commandRaw.length; i++) {
+                        if (commandRaw[i].contains("~")) {
+                            String letter = commandRaw[i].substring(0, 1);
+                            commandRaw[i] = commandRaw[i].replace(letter, "");
+                        }
+                    }
+
+                    String command = String.join(" ", commandRaw);
+
+                    sender.sendMessage(command);
+                    return true;
                 }
                 return true;
             }
