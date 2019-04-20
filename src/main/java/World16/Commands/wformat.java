@@ -53,6 +53,10 @@ public class wformat implements CommandExecutor {
                     }
                     String[] commandRaw = Arrays.copyOfRange(args, 1, args.length);
 
+                    if (commandRaw[0].contains("/")) {
+                        commandRaw[0] = commandRaw[0].replace("/", "");
+                    }
+
                     int z = 0;
 
                     for (int i = 0; i < commandRaw.length; i++) {
@@ -105,6 +109,11 @@ public class wformat implements CommandExecutor {
                 }
 
                 String[] commandRaw = Arrays.copyOfRange(args, 1, args.length);
+
+                if (commandRaw[0].contains("/")) {
+                    commandRaw[0] = commandRaw[0].replace("/", "");
+                }
+
                 int z = 0;
 
                 for (int i = 0; i < commandRaw.length; i++) {
