@@ -35,6 +35,7 @@ public class API {
     Map<String, Map<String, List<Location>>> eRamManager = SetListMap.eRamRaw;
     Map<String, Location> latestClickedBlocked = SetListMap.latestClickedBlocked;
     Map<String, Map<String, String>> tagsMap = Tag.tagsMap;
+    Map<Player, Location[]> sessions = SetListMap.sessions;
     //...
 
     // Lists
@@ -179,6 +180,8 @@ public class API {
 
         tagsMap.remove(p.getDisplayName());
 
+        sessions.remove(p);
+
         if (this.isDebug()) {
             ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM", p);
             ClearHashMapMessage("World16.Commands.back.backm", p);
@@ -201,6 +204,8 @@ public class API {
         latestClickedBlocked.clear();
 
         tagsMap.clear();
+
+        sessions.clear();
 
         if (this.isDebug()) {
             ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM");

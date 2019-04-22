@@ -21,4 +21,6 @@ public class SetListMap {
     public static List<String> godmList = new ArrayList<>();
     public static List<String> adminList = new ArrayList<>();
     public static List<Player> adminListPlayer = new ArrayList<>();
+
+    public static Map<Player, Location[]> sessions = new HashMap<>();
 }
