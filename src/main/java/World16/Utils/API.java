@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * The Bass API for World1-6Ess
@@ -54,7 +55,7 @@ public class API {
     //Finals
     public static final String CUSTOM_COMMAND_FORMAT = "`";
     public static final Integer VERSION = 255;
-    public static final String DATE_OF_VERSION = "4/20/2019";
+    public static final String DATE_OF_VERSION = "4/24/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
@@ -347,12 +348,19 @@ public class API {
         return viaapi.getPlayerVersion(p);
     }
 
-    public String getUUIDFromMojangAPI(String playername) throws IOException, ParseException {
-        URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + playername);
-        String uuid = (String) ((JSONObject) new JSONParser()
-                .parse(new InputStreamReader(url.openStream()))).get("id");
-        return uuid.substring(0, 8) + "-" + uuid.substring(8, 12) + "-" + uuid.substring(12, 16) + "-"
-                + uuid.substring(16, 20) + "-" + uuid.substring(20, 32);
+    public UUID getUUIDFromMojangAPI(String playername) {
+        URL url;
+        UUID uuid1 = null;
+        try {
+            url = new URL("https://api.mojang.com/users/profiles/minecraft/" + playername);
+            String uuid = (String) ((JSONObject) new JSONParser()
+                    .parse(new InputStreamReader(url.openStream()))).get("id");
+            uuid1 = UUID.fromString(uuid.substring(0, 8) + "-" + uuid.substring(8, 12) + "-" + uuid.substring(12, 16) + "-"
+                    + uuid.substring(16, 20) + "-" + uuid.substring(20, 32));
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        return uuid1;
     }
 
     public Location getLocationFromFile(CustomYmlManager configinstance, String path) {
