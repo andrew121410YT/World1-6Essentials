@@ -56,7 +56,7 @@ public class API {
     //Finals
     public static final String CUSTOM_COMMAND_FORMAT = "`";
     public static final Integer VERSION = 255;
-    public static final String DATE_OF_VERSION = "4/24/2019";
+    public static final String DATE_OF_VERSION = "4/28/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
@@ -183,15 +183,6 @@ public class API {
         tagsMap.remove(p.getDisplayName());
 
         sessions.remove(p);
-
-        if (this.isDebug()) {
-            ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM", p);
-            ClearHashMapMessage("World16.Commands.back.backm", p);
-            ClearHashMapMessage("World16.Commands.tp.tpa.tpam", p);
-            ClearHashMapMessage("World16.test.ERamManager.stringRawLocationObjectHashMap", p);
-            ClearHashMapMessage("World16.Events.PlayerInteractEvent.latestClickedBlocked", p);
-            ClearHashMapMessage("World16.Utils.Tag.tagsMap", p);
-        }
     }
 
     public void clearAllMaps() {
@@ -208,15 +199,6 @@ public class API {
         tagsMap.clear();
 
         sessions.clear();
-
-        if (this.isDebug()) {
-            ClearHashMapMessage("World16.Events.OnJoinEvent.keyDataM");
-            ClearHashMapMessage("World16.Commands.back.backm");
-            ClearHashMapMessage("World16.Commands.tp.tpa.tpam");
-            ClearHashMapMessage("World16.test.ERamManager.stringRawLocationObjectHashMap");
-            ClearHashMapMessage("World16.Events.PlayerInteractEvent.latestClickedBlocked");
-            ClearHashMapMessage("World16.Utils.Tag.tagsMap");
-        }
     }
 
     public void clearAllLists(Player p) {
@@ -227,13 +209,6 @@ public class API {
         GodM.remove(p.getDisplayName());
 
         adminListPLayer.remove(p);
-
-        if (this.isDebug()) {
-            ClearArrayListMessage("World16.Commands.afk.Afk", p);
-            ClearArrayListMessage("World16.Commands.fly.Fly", p);
-            ClearArrayListMessage("World16.Commands.god.godm", p);
-            ClearArrayListMessage("World16.Events.AsyncPlayerChatEvent.adminListPlayer", p);
-        }
     }
 
     public void clearAllLists() {
@@ -244,13 +219,6 @@ public class API {
         GodM.clear();
 
         adminListPLayer.clear();
-
-        if (this.isDebug()) {
-            ClearArrayListMessage("World16.Commands.afk.Afk");
-            ClearArrayListMessage("World16.Commands.fly.Fly");
-            ClearArrayListMessage("World16.Commands.god.godm");
-            ClearArrayListMessage("World16.Events.AsyncPlayerChatEvent.adminListPlayer");
-        }
     }
 
     public String FormatTime(LocalDateTime time) {
@@ -266,15 +234,10 @@ public class API {
 
     public String getServerVersion() {
         String version = plugin.getServer().getVersion();
-        if (version.contains("1.13") || version.contains("1.13.1") || version.contains("1.13.2")) {
-            return "1.13";
-        }
-        if (version.contains("1.12") || version.contains("1.12.1") || version.contains("1.12.2")) {
-            return "1.12";
-        }
-        if (version.contains("1.11") || version.contains("1.11.1") || version.contains("1.11.2")) {
-            return "1.11";
-        }
+        if (version.contains("1.14") || version.contains("1.14.1") || version.contains("1.14.2")) return "1.14";
+        if (version.contains("1.13") || version.contains("1.13.1") || version.contains("1.13.2")) return "1.13";
+        if (version.contains("1.12") || version.contains("1.12.1") || version.contains("1.12.2")) return "1.12";
+        if (version.contains("1.11") || version.contains("1.11.1") || version.contains("1.11.2")) return "1.11";
         return TOO_DAMN_OLD;
     }
 
