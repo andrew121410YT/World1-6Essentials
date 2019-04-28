@@ -37,6 +37,7 @@ public class API {
     Map<String, Location> latestClickedBlocked = SetListMap.latestClickedBlocked;
     Map<String, Map<String, String>> tagsMap = Tag.tagsMap;
     Map<Player, Location[]> sessions = SetListMap.sessions;
+    Map<String, UUID> uuidCache = SetListMap.uuidCache;
     //...
 
     // Lists
@@ -349,6 +350,10 @@ public class API {
     }
 
     public UUID getUUIDFromMojangAPI(String playername) {
+        if (uuidCache.get(playername) != null) {
+            return uuidCache.get(playername);
+        }
+
         URL url;
         UUID uuid1 = null;
         try {
@@ -360,6 +365,7 @@ public class API {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
+        uuidCache.put(playername, uuid1);
         return uuid1;
     }
 
@@ -430,23 +436,23 @@ public class API {
                 Translate.chat(PREFIX + " &cYou Do Not Have Permission To Use This Command."));
     }
 
-    public void ClearHashMapMessage(String place) {
+    private void ClearHashMapMessage(String place) {
         plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS_TAG
                 + " Class: World16.Utils.API has cleared the HashMap of " + place + " For EVERY PLAYER"));
     }
 
-    public void ClearHashMapMessage(String place, Player p) {
+    private void ClearHashMapMessage(String place, Player p) {
         plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS_TAG
                 + " Class: World16.Utils.API has cleared the HashMap of " + place + " For Player: " + p
                 .getDisplayName()));
     }
 
-    public void ClearArrayListMessage(String place) {
+    private void ClearArrayListMessage(String place) {
         plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS_TAG
                 + " Class: World16.Utils.API has cleared the ArrayList of " + place + " For EVERY PLAYER"));
     }
 
-    public void ClearArrayListMessage(String place, Player p) {
+    private void ClearArrayListMessage(String place, Player p) {
         plugin.getServer().getConsoleSender().sendMessage(Translate.chat(USELESS_TAG
                 + " Class: World16.Utils.API has cleared the ArrayList of " + place + " For Player: " + p
                 .getDisplayName()));

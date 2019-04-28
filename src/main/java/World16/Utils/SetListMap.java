@@ -23,4 +23,5 @@ public class SetListMap {
     public static List<Player> adminListPlayer = new ArrayList<>();
 
     public static Map<Player, Location[]> sessions = new HashMap<>();
+    public static Map<String, UUID> uuidCache = new HashMap<>();
 }
