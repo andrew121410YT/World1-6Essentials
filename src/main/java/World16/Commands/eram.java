@@ -103,7 +103,7 @@ public class eram implements CommandExecutor {
 
                 eRamManager.delete(playerName, uuid, tagName);
                 return true;
-            } else if (args.length == 7 && args[0].equalsIgnoreCase("copy")) {
+            } else if (args.length == 6 && args[0].equalsIgnoreCase("copy")) {
                 //copy
                 String playerName = args[1];
                 UUID uuid = api.getUUIDFromMojangAPI(playerName);
