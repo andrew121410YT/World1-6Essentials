@@ -29,7 +29,6 @@ public class DebugTab implements TabCompleter {
         if (tabCompleteMap.get("debug1-6").isEmpty()) {
             tabCompleteMap.get("debug1-6").add("op");
             tabCompleteMap.get("debug1-6").add("defaultstuff");
-            tabCompleteMap.get("debug1-6").add("checkmaps");
             tabCompleteMap.get("debug1-6").add("clearalllists");
             tabCompleteMap.get("debug1-6").add("clearallmaps");
             tabCompleteMap.get("debug1-6").add("clearalllistswithname");

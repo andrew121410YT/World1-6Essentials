@@ -14,11 +14,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
-import org.json.simple.parser.ParseException;
 
-import java.io.IOException;
-import java.util.Collections;
 import java.util.Map;
+import java.util.UUID;
 
 public class debug implements CommandExecutor {
 
@@ -59,7 +57,6 @@ public class debug implements CommandExecutor {
             }
             p.sendMessage(Translate.chat("/debug1-6 op"));
             p.sendMessage(Translate.chat("/debug1-6 defaultstuff"));
-            p.sendMessage(Translate.chat("/debug1-6 checkmaps"));
             p.sendMessage(Translate.chat("/debug1-6 clearalllists")); //1
             p.sendMessage(Translate.chat("/debug1-6 clearallmaps")); //2
             p.sendMessage(Translate.chat("/debug1-6 clearalllistswithname"));
@@ -106,44 +103,6 @@ public class debug implements CommandExecutor {
                 this.plugin.reloadConfig();
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
-
-                //CHECK MAPS
-            } else if (args.length >= 1 && (args[0].equalsIgnoreCase("checkmaps"))) {
-                if (!p.hasPermission("world16.debug.checkmaps")) { // Permission
-                    api.PermissionErrorMessage(p);
-                    return true;
-                }
-                if (args.length == 1) {
-                    p.sendMessage(Translate.chat(
-                            "[&3/debug1-6 checkmaps &5@checkmine&r] &9<-- Show's what is stored in the HashMap of you."));
-                    p.sendMessage(Translate.chat(
-                            "[&3/debug1-6 checkmaps &c@all&r] &9<-- Show's everything in the Maps"));
-                    p.sendMessage(Translate.chat("[&3/debug-1-6 checkmaps &c@AllWithDepth] &9<-- Show's Everything but you can see what's in the classes."));
-                    return true;
-                } else if (args.length >= 2) {
-                    if (args[1].equalsIgnoreCase("@all")) {
-                        p.sendMessage(String.valueOf(Collections.singletonList(keyDataM)));
-                        p.sendMessage(String.valueOf(Collections.singletonList(backm)));
-                        p.sendMessage(String.valueOf(Collections.singletonList(tpam)));
-                        return true;
-                    } else if (args[1].equalsIgnoreCase("@checkmine")) {
-                        p.sendMessage(Translate.chat("&4This is no longer working."));
-                        return true;
-                    } else if (args[1].equalsIgnoreCase("@AllWithDepth")) {
-                        p.sendMessage(Translate.chat(String.valueOf(Collections.singletonList(tpam))));
-                        p.sendMessage(Translate.chat("&b{SPACE}"));
-                        backm.forEach((k, v) -> {
-                            p.sendMessage(Translate.chat(v.toString()));
-                            p.sendMessage(Translate.chat("&b{SPACE}"));
-                        });
-                        keyDataM.forEach((k, v) -> {
-                            p.sendMessage(Translate.chat(v.toString()));
-                            p.sendMessage(Translate.chat("&b{SPACE}"));
-                        });
-                        return true;
-                    }
-                }
-
                 //CLEAR ALL LISTS
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearalllists"))) {
                 if (!p.hasPermission("world16.debug.clearalllists")) { // Permission
@@ -232,23 +191,15 @@ public class debug implements CommandExecutor {
                             api.PermissionErrorMessage(p);
                             return true;
                         }
-                        try {
-                            String uuidtarget = api.getUUIDFromMojangAPI(target.getDisplayName());
-                            p.sendMessage(Translate
-                                    .chat("UUID: " + uuidtarget + " FOR " + target.getDisplayName()));
+                        UUID uuidtarget = api.getUUIDFromMojangAPI(target.getDisplayName());
+                        p.sendMessage(Translate
+                                .chat("UUID: " + uuidtarget + " FOR " + target.getDisplayName()));
 
-                        } catch (IOException | ParseException e) {
-                            e.printStackTrace();
-                        }
                     } else if (args.length >= 3 && args[1] != null && args[2] != null && args[2]
                             .equalsIgnoreCase("@offline")) {
-                        try {
-                            String uuidtarget2 = api.getUUIDFromMojangAPI(args[1]);
-                            p.sendMessage(
-                                    Translate.chat("UUID: " + uuidtarget2 + " FOR " + args[1]));
-                        } catch (IOException | ParseException e) {
-                            e.printStackTrace();
-                        }
+                        UUID uuidtarget2 = api.getUUIDFromMojangAPI(args[1]);
+                        p.sendMessage(
+                                Translate.chat("UUID: " + uuidtarget2 + " FOR " + args[1]));
                     }
                 }
                 //DEBUG MESSAGES
