@@ -98,19 +98,19 @@ public class eram implements CommandExecutor {
                 return true;
             } else if (args.length == 4 && args[0].equalsIgnoreCase("delete")) {
                 String playerName = args[1];
-                UUID uuid = UUID.fromString(args[2]);
-                String tagName = args[3].toLowerCase();
+                UUID uuid = api.getUUIDFromMojangAPI(playerName);
+                String tagName = args[2].toLowerCase();
 
                 eRamManager.delete(playerName, uuid, tagName);
                 return true;
             } else if (args.length == 7 && args[0].equalsIgnoreCase("copy")) {
                 //copy
                 String playerName = args[1];
-                UUID uuid = UUID.fromString(args[2]);
-                String saveName = args[3];
-                String x = args[4];
-                String y = args[5];
-                String z = args[6];
+                UUID uuid = api.getUUIDFromMojangAPI(playerName);
+                String saveName = args[2];
+                String x = args[3];
+                String y = args[4];
+                String z = args[5];
 
                 if (saveName.startsWith("@")) {
                     String tagWithoutA = saveName.replace("@", "");
