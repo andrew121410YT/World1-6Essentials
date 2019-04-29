@@ -24,6 +24,7 @@ public class debug implements CommandExecutor {
     Map<String, KeyObject> keyDataM = SetListMap.keyDataM;
     Map<String, LocationObject> backm = SetListMap.backM;
     Map<Player, Player> tpam = SetListMap.tpaM;
+    Map<String, UUID> uuidCache = SetListMap.uuidCache;
     //...
 
     //Lists
@@ -66,6 +67,7 @@ public class debug implements CommandExecutor {
             p.sendMessage(Translate.chat("/debug1-6 checkuuid"));
             p.sendMessage(Translate.chat("/debug1-6 debugmessages"));
             p.sendMessage(Translate.chat("/debug1-6 finddefaultspawn"));
+            p.sendMessage(Translate.chat("/debug1-6 uuidcache"));
             p.sendMessage(Translate.chat("/debug1-6 sql"));
             //p.sendMessage(World16.Translate.chat("/debug1-6 "));
             return true;
@@ -228,6 +230,14 @@ public class debug implements CommandExecutor {
                     return true;
                 }
                 p.teleport(this.plugin.getServer().getWorld(p.getWorld().getName()).getSpawnLocation());
+                return true;
+
+            } else if (args.length == 1 && args[0].equalsIgnoreCase("uuidcache")) {
+                if (!p.hasPermission("world16.debug.uuidcache")) {
+                    api.PermissionErrorMessage(p);
+                    return true;
+                }
+                uuidCache.forEach((key, value) -> p.sendMessage(Translate.chat("[UUIDCache] Player: " + key + " UUID: " + value)));
                 return true;
 
                 //SQL

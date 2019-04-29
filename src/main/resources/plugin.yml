@@ -106,7 +106,6 @@ permissions:
       world16.debug: true
       world16.debug.op: true
       world16.debug.defaultstuff: true
-      world16.debug.checkmaps: true
       world16.debug.clearalllists: true
       world16.debug.clearallmaps: true
       world16.debug.clearalllistswithname: true
@@ -118,6 +117,7 @@ permissions:
       world16.debig.checkuuid.other: true
       world16.debug.debugmessages: true
       world16.debug.finddefaultspawn: true
+      world16.debug.uuidcache: true
       world16.debug.sql: true
 
 
