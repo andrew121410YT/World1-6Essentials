@@ -32,8 +32,7 @@ public class AsyncPlayerChatEvent implements Listener {
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
 
         adminList.add("andrew121410");
-        adminList.add("Andrzej_Przybyla");
-//        adminList.add("AlphaGibbon43");
+        adminList.add("AlphaGibbon43");
     }
 
     @EventHandler
