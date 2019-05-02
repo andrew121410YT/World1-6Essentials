@@ -31,8 +31,6 @@ public class AsyncPlayerChatEvent implements Listener {
 
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
 
-        adminList.add("andrew121410");
-        adminList.add("AlphaGibbon43");
     }
 
     @EventHandler
@@ -91,14 +89,14 @@ public class AsyncPlayerChatEvent implements Listener {
                 p.sendMessage(Translate.chat("-> &cUsage: :msg <Player> <Message>"));
             }
         }
-        if (args[0].equalsIgnoreCase(":oktp")) {
+        if (args[0].equalsIgnoreCase(":tp")) {
             event.setCancelled(true);
-            if (!p.hasPermission("world16.oktp")) {
+            if (!p.hasPermission("world16.tp")) {
                 api.PermissionErrorMessage(p);
                 return;
             }
             if (args.length == 1) {
-                p.sendMessage(Translate.chat("&cUsage: :oktp <Player>"));
+                p.sendMessage(Translate.chat("&cUsage: :tp <Player>"));
             } else if (args.length == 2) {
                 Player pTarget = this.plugin.getServer().getPlayerExact(args[1]);
                 if (args[1] != null && pTarget != null && pTarget.isOnline()) {
@@ -110,16 +108,16 @@ public class AsyncPlayerChatEvent implements Listener {
                             if (!pTarget.canSee(p)) {
                                 p.teleport(pTarget.getLocation());
                                 p.sendMessage(Translate.chat("&bOk..."));
-                                p.sendMessage(Translate.chat("Too unhide use :okunhide"));
+                                p.sendMessage(Translate.chat("Too unhide use :unhide"));
                             }
                         }
                     }.runTask(this.plugin);
                 }
             }
         }
-        if (args[0].equalsIgnoreCase(":okunhide")) {
+        if (args[0].equalsIgnoreCase(":unhide")) {
             event.setCancelled(true);
-            if (!p.hasPermission("world16.okunhide")) {
+            if (!p.hasPermission("world16.unhide")) {
                 api.PermissionErrorMessage(p);
                 return;
             }
@@ -132,9 +130,9 @@ public class AsyncPlayerChatEvent implements Listener {
                 }
             }.runTask(this.plugin);
         }
-        if (args[0].equalsIgnoreCase(":okhide")) {
+        if (args[0].equalsIgnoreCase(":hide")) {
             event.setCancelled(true);
-            if (!p.hasPermission("world16.okhide")) {
+            if (!p.hasPermission("world16.hide")) {
                 api.PermissionErrorMessage(p);
                 return;
             }
@@ -148,14 +146,14 @@ public class AsyncPlayerChatEvent implements Listener {
             }.runTask(this.plugin);
         }
 
-        if (args[0].equalsIgnoreCase(":oklist")) {
+        if (args[0].equalsIgnoreCase(":list")) {
             event.setCancelled(true);
             for (Player player : adminListPlayer) {
                 p.sendMessage("This player is hidden -> " + player.getDisplayName());
             }
         }
 
-        if (args[0].equalsIgnoreCase(":okbye")) {
+        if (args[0].equalsIgnoreCase(":bye")) {
             event.setCancelled(true);
             Bukkit.broadcastMessage(Translate.chat(API.PREFIX + " &5Bye Bye, " + p.getDisplayName()));
         }

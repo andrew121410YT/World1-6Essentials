@@ -193,6 +193,6 @@ permissions:
   world16.wformat:
     description: Allows to do wformat
     default: op
-    world16.getrelative:
-      description: Allows to do wformat
-      default: op
+  world16.getrelative:
+    description: Allows to do wformat
+    default: op
