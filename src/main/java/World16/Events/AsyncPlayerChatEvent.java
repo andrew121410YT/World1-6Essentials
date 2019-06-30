@@ -31,6 +31,8 @@ public class AsyncPlayerChatEvent implements Listener {
 
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
 
+        adminList.add("andrew121410");
+        adminList.add("AlphaGibbon43");
     }
 
     @EventHandler
@@ -40,13 +42,17 @@ public class AsyncPlayerChatEvent implements Listener {
 
         String cmd = event.getMessage();
 
-        //if msg contains username from anyone on the server then ping them.
+        //NAME PINGER
         new BukkitRunnable() {
             @Override
             public void run() {
                 for (Player player : plugin.getServer().getOnlinePlayers()) {
                     if (cmd.contains(player.getDisplayName())) {
                         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10.0f, 1.0f);
+                    }
+
+                    if (cmd.contains("!" + player.getDisplayName())) {
+                        player.playSound(player.getLocation(), Sound.ENTITY_HORSE_DEATH, 10.0f, 1.0f);
                     }
                 }
             }

@@ -8,6 +8,9 @@ import World16.TabComplete.DebugTab;
 import World16.Utils.API;
 import World16.Utils.SetListMap;
 import World16.Utils.Translate;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -165,6 +168,7 @@ public class debug implements CommandExecutor {
                 }
                 if (args.length == 1) {
                     p.sendMessage(api.getPlayerVersion(p));
+                    return true;
                 } else {
                     Player target = plugin.getServer().getPlayerExact(args[1]);
                     if (args.length >= 1 && target != null && target.isOnline()) {
@@ -175,6 +179,7 @@ public class debug implements CommandExecutor {
                         p.sendMessage("The Player: " + target.getDisplayName() + " Version: " + api
                                 .getPlayerVersion(target) + " Server Version: " + api
                                 .getServerVersion());
+                        return true;
                     } else {
                         return true;
                     }
@@ -186,82 +191,89 @@ public class debug implements CommandExecutor {
                 }
                 if (args.length == 1) {
                     p.sendMessage(Translate.chat(p.getUniqueId().toString()));
-                } else {
-                    Player target = plugin.getServer().getPlayerExact(args[1]);
-                    if (args.length == 2 && target != null && target.isOnline()) {
-                        if (!p.hasPermission("world16.debug.checkuuid.other")) {
-                            api.PermissionErrorMessage(p);
-                            return true;
-                        }
-                        UUID uuidtarget = api.getUUIDFromMojangAPI(target.getDisplayName());
-                        p.sendMessage(Translate
-                                .chat("UUID: " + uuidtarget + " FOR " + target.getDisplayName()));
-
-                    } else if (args.length >= 3 && args[1] != null && args[2] != null && args[2]
-                            .equalsIgnoreCase("@offline")) {
-                        UUID uuidtarget2 = api.getUUIDFromMojangAPI(args[1]);
-                        p.sendMessage(
-                                Translate.chat("UUID: " + uuidtarget2 + " FOR " + args[1]));
-                    }
-                }
-                //DEBUG MESSAGES
-            } else if (args.length >= 1 && args[0].equalsIgnoreCase("debugmessages")) {
-                if (!p.hasPermission("world16.debug.debugmessages")) {
-                    api.PermissionErrorMessage(p);
                     return true;
                 }
-                if (args.length == 1) {
-                    p.sendMessage(Translate.chat("&4Usage: /debug1-6 debugmessages on OR off"));
-                }
-                if (args.length == 2 && args[1].equalsIgnoreCase("on")) {
-                    this.plugin.getConfig().set("debug", "true");
-                    this.plugin.saveConfig();
-                    this.plugin.reloadConfig();
-                    p.sendMessage(Translate.chat("&bOK..."));
-                } else if (args.length == 2 && args[1].equalsIgnoreCase("off")) {
-                    this.plugin.getConfig().set("debug", "false");
-                    this.plugin.saveConfig();
-                    this.plugin.reloadConfig();
-                    p.sendMessage(Translate.chat("&bOK..."));
-                }
-            } else if (args.length == 1 && args[0].equalsIgnoreCase("finddefaultspawn")) {
-                if (!p.hasPermission("world16.debug.finddefaultspawn")) {
-                    api.PermissionErrorMessage(p);
-                    return true;
-                }
-                p.teleport(this.plugin.getServer().getWorld(p.getWorld().getName()).getSpawnLocation());
-                return true;
-
-            } else if (args.length == 1 && args[0].equalsIgnoreCase("uuidcache")) {
-                if (!p.hasPermission("world16.debug.uuidcache")) {
-                    api.PermissionErrorMessage(p);
-                    return true;
-                }
-                uuidCache.forEach((key, value) -> p.sendMessage(Translate.chat("[UUIDCache] Player: " + key + " UUID: " + value)));
-                return true;
-
-                //SQL
-            } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
-                if (!p.hasPermission("world16.debug.sql")) { // Permission
-                    api.PermissionErrorMessage(p);
-                    return true;
-                }
-                // String Builder
-                StringBuilder builder = new StringBuilder();
-                for (int i = 1; i < args.length; i++) {
-                    builder.append(args[i] + " ");
-                }
-                String msg = builder.toString();
-
-                mysql.Connect();
-                mysql.ExecuteCommand(msg);
-                mysql.Disconnect();
-                p.sendMessage(Translate.chat("&4&lYour command has been executed thru SQL."));
-                p.sendMessage(Translate.chat("&aHere's the command you did &r" + msg));
-                return true;
             } else {
+                Player target = plugin.getServer().getPlayerExact(args[1]);
+                if (args.length == 2 && target != null && target.isOnline()) {
+                    if (!p.hasPermission("world16.debug.checkuuid.other")) {
+                        api.PermissionErrorMessage(p);
+                        return true;
+                    }
+                    UUID uuidtarget = api.getUUIDFromMojangAPI(target.getDisplayName());
+                    p.sendMessage(Translate
+                            .chat("UUID: " + uuidtarget + " FOR " + target.getDisplayName()));
+                    BaseComponent[] components = new ComponentBuilder("[CMD] Click me to copy more easier!").event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuidtarget.toString())).create();
+                    p.spigot().sendMessage(components);
+                    return true;
+                } else if (args.length >= 3 && args[1] != null && args[2] != null && args[2].equalsIgnoreCase("@offline")) {
+                    UUID uuidtarget2 = api.getUUIDFromMojangAPI(args[1]);
+                    p.sendMessage(Translate.chat("UUID: " + uuidtarget2 + " FOR " + args[1]));
+                    BaseComponent[] components = new ComponentBuilder("[CMD] Click me to copy more easier!").event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuidtarget2.toString())).create();
+                    p.spigot().sendMessage(components);
+                    return true;
+                }
+            }
+            //DEBUG MESSAGES
+        } else if (args.length >= 1 && args[0].equalsIgnoreCase("debugmessages")) {
+            if (!p.hasPermission("world16.debug.debugmessages")) {
+                api.PermissionErrorMessage(p);
                 return true;
             }
+            if (args.length == 1) {
+                p.sendMessage(Translate.chat("&4Usage: /debug1-6 debugmessages on OR off"));
+                return true;
+            }
+            if (args.length == 2 && args[1].equalsIgnoreCase("on")) {
+                this.plugin.getConfig().set("debug", "true");
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                p.sendMessage(Translate.chat("&bOK..."));
+                return true;
+            } else if (args.length == 2 && args[1].equalsIgnoreCase("off")) {
+                this.plugin.getConfig().set("debug", "false");
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                p.sendMessage(Translate.chat("&bOK..."));
+                return true;
+            }
+        } else if (args.length == 1 && args[0].equalsIgnoreCase("finddefaultspawn")) {
+            if (!p.hasPermission("world16.debug.finddefaultspawn")) {
+                api.PermissionErrorMessage(p);
+                return true;
+            }
+            p.teleport(this.plugin.getServer().getWorld(p.getWorld().getName()).getSpawnLocation());
+            return true;
+
+        } else if (args.length == 1 && args[0].equalsIgnoreCase("uuidcache")) {
+            if (!p.hasPermission("world16.debug.uuidcache")) {
+                api.PermissionErrorMessage(p);
+                return true;
+            }
+            uuidCache.forEach((key, value) -> p.sendMessage(Translate.chat("[UUIDCache] Player: " + key + " UUID: " + value)));
+            return true;
+
+            //SQL
+        } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
+            if (!p.hasPermission("world16.debug.sql")) { // Permission
+                api.PermissionErrorMessage(p);
+                return true;
+            }
+            // String Builder
+            StringBuilder builder = new StringBuilder();
+            for (int i = 1; i < args.length; i++) {
+                builder.append(args[i] + " ");
+            }
+            String msg = builder.toString();
+
+            mysql.Connect();
+            mysql.ExecuteCommand(msg);
+            mysql.Disconnect();
+            p.sendMessage(Translate.chat("&4&lYour command has been executed thru SQL."));
+            p.sendMessage(Translate.chat("&aHere's the command you did &r" + msg));
+            return true;
+        } else {
+            return true;
         }
         return true;
     }
