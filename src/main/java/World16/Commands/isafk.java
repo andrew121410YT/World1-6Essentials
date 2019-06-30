@@ -15,7 +15,7 @@ import java.util.List;
 
 public class isafk implements CommandExecutor {
 
-    API api = new API();
+    private API api;
     //Maps
     //...
     //Lists
@@ -27,15 +27,16 @@ public class isafk implements CommandExecutor {
     public isafk(CustomConfigManager getCustomYml, Main getPlugin) {
         this.shitYml = getCustomYml.getShitYml();
         this.plugin = getPlugin;
+        this.api = new API();
         this.plugin.getCommand("isafk").setExecutor(this);
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-//        if (!(sender instanceof Player)) {
-//            sender.sendMessage("Only Players Can Use This Command.");
-//            return true;
-//        }
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Only Players Can Use This Command.");
+            return true;
+        }
         Player p = (Player) sender;
 
         if (!p.hasPermission("world16.isafk")) {
@@ -43,27 +44,19 @@ public class isafk implements CommandExecutor {
             return true;
         }
         if (args.length == 0) {
-            p.sendMessage(Translate.chat("&9To use do:"));
+            p.sendMessage(Translate.chat("&6To use /isafk:"));
             p.sendMessage(Translate.chat("[&3/isafk check &6<PlayerName>&r]"));
             p.sendMessage(Translate.chat("[&3/isafk &4@all&r] &5<--&r &9show's everyone that is afk."));
-        } else {
-            if (args.length >= 1) {
-                if (args[0].equalsIgnoreCase("check") && args[1] != null) {
-                    Player playerFromArg = this.plugin.getServer().getPlayerExact(args[1]);
-                    if (api.isAfk(playerFromArg)) {
-                        p.sendMessage(
-                                Translate.chat("&aThe Player: " + playerFromArg.getDisplayName() + " is afk"));
-                    } else {
-                        p.sendMessage(
-                                Translate.chat("&cThe Player: " + playerFromArg.getDisplayName() + " is not afk!"));
-                    }
-                } else {
-                    if (args[0].equalsIgnoreCase("@all")) {
-                        for (String t1 : Afk1) {
-                            p.sendMessage(Translate.chat("Here: " + t1));
-                        }
-                    }
-                }
+            return true;
+        } else if (args[0].equalsIgnoreCase("check") && args[1] != null) {
+            Player playerFromArg = this.plugin.getServer().getPlayerExact(args[1]);
+            if (playerFromArg == null) return true;
+            if (api.isAfk(playerFromArg)) {
+                p.sendMessage(Translate.chat("&aThe Player: " + playerFromArg.getDisplayName() + " is afk"));
+                return true;
+            } else {
+                p.sendMessage(Translate.chat("&cThe Player: " + playerFromArg.getDisplayName() + " is not afk!"));
+                return true;
             }
         }
         return true;

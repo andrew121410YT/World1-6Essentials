@@ -11,11 +11,10 @@ import org.bukkit.event.player.PlayerBedEnterEvent;
 
 public class OnBedEnterEvent implements Listener {
 
-    private static Main plugin;
+    private Main plugin;
 
     public OnBedEnterEvent(Main plugin) {
         this.plugin = plugin;
-
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
     }
 
@@ -23,7 +22,7 @@ public class OnBedEnterEvent implements Listener {
     public void onPlayerBedEnter(PlayerBedEnterEvent e) {
         Player p = e.getPlayer();
 
-        p.getLocation().getWorld().setTime(1000);
+        p.getLocation().getWorld().setTime(0);
         Bukkit.broadcastMessage(Translate.chat("[&9World1-6&r]&6 Waky Waky Eggs And Baky&r."));
     }
 }
