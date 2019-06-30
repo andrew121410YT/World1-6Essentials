@@ -18,7 +18,7 @@ public class setjail implements CommandExecutor {
 
     public setjail(CustomConfigManager getCustomYml, Main getPlugin) {
         this.shitYml = getCustomYml.getShitYml();
-        this.api = new API(this.shitYml);
+        this.api = new API();
 
         this.plugin = getPlugin;
         this.plugin.getCommand("setjail").setExecutor(this);
@@ -37,7 +37,7 @@ public class setjail implements CommandExecutor {
             return true;
         }
 
-        this.api.setLocationToFile(null, "Jail.default", p.getLocation());
+        this.api.setLocationToFile(this.shitYml, "Jail.default", p.getLocation());
         p.sendMessage(Translate.chat("&6The jail has been set."));
         return true;
     }
