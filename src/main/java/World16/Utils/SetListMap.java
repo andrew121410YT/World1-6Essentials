@@ -13,7 +13,7 @@ public class SetListMap {
     // 1 TO ONLY CLEAR WHEN THE SERVER SHUTS DOWN
 
     public static Map<String, KeyObject> keyDataM = new HashMap<>(); //0
-    public static Map<String, LocationObject> backM = new HashMap<>(); //0
+    public static Map<UUID, LocationObject> backM = new HashMap<>(); //0
     public static Map<Player, Player> tpaM = new LinkedHashMap<>(); //0
     public static Map<String, List<String>> tabCompleteMap = new HashMap<>(); //1
     public static Map<String, Map<String, List<Location>>> eRamRaw = new HashMap<>(); //0

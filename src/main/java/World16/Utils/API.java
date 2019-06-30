@@ -30,7 +30,7 @@ public class API {
 
     // Maps
     Map<String, KeyObject> keyDataM = SetListMap.keyDataM;
-    Map<String, LocationObject> backm = SetListMap.backM;
+    Map<UUID, LocationObject> backm = SetListMap.backM;
     Map<Player, Player> tpam = SetListMap.tpaM;
     Map<String, List<String>> tabCompleteMap = SetListMap.tabCompleteMap;
     Map<String, Map<String, List<Location>>> eRamManager = SetListMap.eRamRaw;
@@ -172,7 +172,7 @@ public class API {
     public void clearAllMaps(Player p) {
         keyDataM.remove(p.getDisplayName());
 
-        backm.remove(p.getDisplayName());
+        backm.remove(p.getUniqueId());
 
         tpam.remove(p);
 

@@ -1,8 +1,6 @@
 package World16.Commands;
 
 import World16.Main.Main;
-import World16.Objects.KeyObject;
-import World16.Objects.LocationObject;
 import World16.Storage.OldMySQL;
 import World16.TabComplete.DebugTab;
 import World16.Utils.API;
@@ -24,9 +22,6 @@ import java.util.UUID;
 public class debug implements CommandExecutor {
 
     //Maps
-    Map<String, KeyObject> keyDataM = SetListMap.keyDataM;
-    Map<String, LocationObject> backm = SetListMap.backM;
-    Map<Player, Player> tpam = SetListMap.tpaM;
     Map<String, UUID> uuidCache = SetListMap.uuidCache;
     //...
 
@@ -53,7 +48,9 @@ public class debug implements CommandExecutor {
             sender.sendMessage("Only Players Can Use This Command.");
             return true;
         }
+
         Player p = (Player) sender;
+
         if (args.length == 0) {
             if (!p.hasPermission("world16.debug")) { // Permission
                 api.PermissionErrorMessage(p);

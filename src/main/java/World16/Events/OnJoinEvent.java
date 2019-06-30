@@ -18,6 +18,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class OnJoinEvent implements Listener {
 
@@ -25,7 +26,7 @@ public class OnJoinEvent implements Listener {
 
     //Maps
     Map<String, KeyObject> keyDataM = SetListMap.keyDataM;
-    Map<String, LocationObject> backM = SetListMap.backM;
+    Map<UUID, LocationObject> backM = SetListMap.backM;
     //...
 
     //Lists
@@ -65,8 +66,8 @@ public class OnJoinEvent implements Listener {
                             + " Please make sure too put in the mysql details in the config.yml."));
         }
 
-        backM.remove(p.getDisplayName()); //<-- just incase
-        backM.put(p.getDisplayName(), new LocationObject());
+        backM.remove(p.getUniqueId()); //-> Just In Case.
+        backM.put(p.getUniqueId(), new LocationObject());
 
         adminListPlayer.forEach((k) -> {
             p.hidePlayer(k);

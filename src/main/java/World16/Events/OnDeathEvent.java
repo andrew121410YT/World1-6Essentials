@@ -9,13 +9,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 import java.util.Map;
+import java.util.UUID;
 
 public class OnDeathEvent implements Listener {
 
     private static Main plugin;
 
     //Maps
-    Map<String, LocationObject> backm = SetListMap.backM;
+    Map<UUID, LocationObject> backm = SetListMap.backM;
     //...
 
     public OnDeathEvent(Main getPlugin) {
@@ -28,8 +29,8 @@ public class OnDeathEvent implements Listener {
     public void OnDeath(PlayerDeathEvent event) {
         Player p = event.getEntity();
 
-        if (backm.get(p.getDisplayName()) == null) return;
-
-        backm.get(p.getDisplayName()).setLocation("death", 1, p.getLocation());
+        if (backm.get(p.getUniqueId()) != null) {
+            backm.get(p.getUniqueId()).setLocation("death", 1, p.getLocation());
+        }
     }
 }

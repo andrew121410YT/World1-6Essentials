@@ -19,7 +19,7 @@ public class jail implements CommandExecutor {
 
     public jail(CustomConfigManager getCustomYml, Main getPlugin) {
         this.shitYml = getCustomYml.getShitYml();
-        this.api = new API(this.shitYml);
+        this.api = new API();
 
         this.plugin = getPlugin;
         this.plugin.getCommand("jail").setExecutor(this);

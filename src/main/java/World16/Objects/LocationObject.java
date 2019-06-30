@@ -2,7 +2,6 @@ package World16.Objects;
 
 import World16.Main.Main;
 import org.bukkit.Location;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class LocationObject {
 
@@ -122,40 +121,34 @@ public class LocationObject {
     }
 
     public void setLocation(String locationName, Integer locationID, Location location) {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-
-                switch (locationID) {
-                    case 0:
-                        locationName1 = locationName;
-                        location1 = location;
-                        break;
-                    case 1:
-                        locationName1 = locationName;
-                        location1 = location;
-                        break;
-                    case 2:
-                        locationName2 = locationName;
-                        location2 = location;
-                        break;
-                    case 3:
-                        locationName3 = locationName;
-                        location3 = location;
-                        break;
-                    case 4:
-                        locationName4 = locationName;
-                        location4 = location;
-                        break;
-                    case 5:
-                        locationName5 = locationName;
-                        location5 = location;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }.runTaskAsynchronously(this.plugin);
+        switch (locationID) {
+            case 0:
+                locationName1 = locationName;
+                location1 = location;
+                break;
+            case 1:
+                locationName1 = locationName;
+                location1 = location;
+                break;
+            case 2:
+                locationName2 = locationName;
+                location2 = location;
+                break;
+            case 3:
+                locationName3 = locationName;
+                location3 = location;
+                break;
+            case 4:
+                locationName4 = locationName;
+                location4 = location;
+                break;
+            case 5:
+                locationName5 = locationName;
+                location5 = location;
+                break;
+            default:
+                break;
+        }
     }
 //...
 

@@ -10,12 +10,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
 import java.util.Map;
+import java.util.UUID;
 
 public class OnTpEvent implements Listener {
 
     private Main plugin;
 
-    Map<String, LocationObject> backm = SetListMap.backM;
+    Map<UUID, LocationObject> backm = SetListMap.backM;
 
     public OnTpEvent(Main getPlugin) {
         plugin = getPlugin;
@@ -30,12 +31,9 @@ public class OnTpEvent implements Listener {
         Location to = event.getTo();
         Location from = event.getFrom();
 
-        // only save location if teleporting more than 5 blocks
-        if (backm.get(p.getDisplayName()) != null && !to.getWorld().equals(from.getWorld()) || to.distanceSquared(from) > 25) {
-
-            backm.computeIfAbsent(p.getDisplayName(), k -> new LocationObject());
-
-            backm.get(p.getDisplayName()).setLocation("tp", 2, from);
+        // Only save location if teleporting more than 5 blocks.
+        if (backm.get(p.getUniqueId()) != null && !to.getWorld().equals(from.getWorld()) || to.distanceSquared(from) > 25) {
+            backm.get(p.getUniqueId()).setLocation("tp", 2, from);
         }
     }
 }

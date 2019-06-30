@@ -31,7 +31,7 @@ public class day implements CommandExecutor {
             api.PermissionErrorMessage(p);
             return true;
         }
-        p.getLocation().getWorld().setTime(1000);
+        p.getLocation().getWorld().setTime(500);
         p.sendMessage(Translate.chat("&6The time was set to &eday&r."));
         return true;
     }
