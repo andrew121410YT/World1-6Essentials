@@ -37,7 +37,6 @@ commands:
   waitdo:
   runcommands:
   wformat:
-  getRelative:
 
   gmc:
     aliases:
@@ -191,8 +190,5 @@ permissions:
     description: Allows to do runcommands
     default: op
   world16.wformat:
-    description: Allows to do wformat
-    default: op
-  world16.getrelative:
     description: Allows to do wformat
     default: op

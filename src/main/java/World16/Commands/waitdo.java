@@ -5,6 +5,7 @@ import World16.Main.Main;
 import World16.Utils.API;
 import World16.Utils.CommandUtils;
 import World16.Utils.CountdownTimer;
+import World16.Utils.Translate;
 import org.bukkit.block.Block;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
@@ -87,7 +88,8 @@ public class waitdo implements CommandExecutor {
             api.PermissionErrorMessage(p);
             return true;
         }
-        p.sendMessage("Only command blocks right now!");
+        p.sendMessage(Translate.chat("&4&lOnly command blocks right now!"));
+        p.sendMessage(Translate.chat("Usage: /waitdo <SEC> <StartCommandINWFormat> <EndCommandINWFORMAT> <DoEverySecINWFORMAT> <DEBUG?>"));
         return true;
     }
 }

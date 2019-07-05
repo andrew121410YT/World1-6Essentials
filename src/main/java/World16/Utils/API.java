@@ -36,7 +36,6 @@ public class API {
     Map<String, Map<String, List<Location>>> eRamManager = SetListMap.eRamRaw;
     Map<String, Location> latestClickedBlocked = SetListMap.latestClickedBlocked;
     Map<String, Map<String, String>> tagsMap = Tag.tagsMap;
-    Map<Player, Location[]> sessions = SetListMap.sessions;
     Map<String, UUID> uuidCache = SetListMap.uuidCache;
     //...
 
@@ -56,7 +55,7 @@ public class API {
     //Finals
     public static final String CUSTOM_COMMAND_FORMAT = "`";
     public static final Integer VERSION = 255;
-    public static final String DATE_OF_VERSION = "6/29/2019";
+    public static final String DATE_OF_VERSION = "7/5/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
@@ -181,8 +180,6 @@ public class API {
         latestClickedBlocked.remove(p.getDisplayName());
 
         tagsMap.remove(p.getDisplayName());
-
-        sessions.remove(p);
     }
 
     public void clearAllMaps() {
@@ -197,8 +194,6 @@ public class API {
         latestClickedBlocked.clear();
 
         tagsMap.clear();
-
-        sessions.clear();
     }
 
     public void clearAllLists(Player p) {

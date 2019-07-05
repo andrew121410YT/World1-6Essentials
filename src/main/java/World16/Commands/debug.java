@@ -181,7 +181,7 @@ public class debug implements CommandExecutor {
                         return true;
                     }
                 }
-            } else if (args.length >= 1 && (args[0].equalsIgnoreCase("checkuuid"))) {
+            } else if (args[0].equalsIgnoreCase("checkuuid")) {
                 if (!p.hasPermission("world16.debug.checkuuid")) {
                     api.PermissionErrorMessage(p);
                     return true;
