@@ -48,6 +48,10 @@ public class xyzdxdydz implements CommandExecutor {
             String dy = args[4];
             String dz = args[5];
 
+            if (dx.contains("~")) dx = dx.replace("~", "");
+            if (dy.contains("~")) dy = dy.replace("~", "");
+            if (dz.contains("~")) dz = dz.replace("~", "");
+
             String done = "[x=" + x + ",y=" + y + ",z=" + z + ",dx=" + dx + ",dy=" + dy + ",dz=" + dz + "]";
             p.sendMessage(Translate.chat(done));
             BaseComponent[] components = new ComponentBuilder("[CMD] Click me to copy more easier!").event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, done)).create();
