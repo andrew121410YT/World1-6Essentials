@@ -90,6 +90,7 @@ public class Main extends JavaPlugin {
         new waitdo(this.customconfig, this);
         new runCommands(this.customconfig, this);
         new wformat(this.customconfig, this);
+        new xyzdxdydz(this.customconfig, this);
     }
 
     private void regEvents() {

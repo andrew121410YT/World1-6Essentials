@@ -37,6 +37,7 @@ commands:
   waitdo:
   runcommands:
   wformat:
+  xyzdxdydz:
 
   gmc:
     aliases:
@@ -191,4 +192,7 @@ permissions:
     default: op
   world16.wformat:
     description: Allows to do wformat
+    default: op
+  world16.xyzdxdydz:
+    description: Allows to do xyzdxdydz
     default: op
