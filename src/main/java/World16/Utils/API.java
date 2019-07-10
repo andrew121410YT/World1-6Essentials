@@ -55,7 +55,7 @@ public class API {
     //Finals
     public static final String CUSTOM_COMMAND_FORMAT = "`";
     public static final Integer VERSION = 255;
-    public static final String DATE_OF_VERSION = "7/9/2019";
+    public static final String DATE_OF_VERSION = "7/10/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";

@@ -157,6 +157,8 @@ permissions:
   world16.jail:
     description: Allows to do jail
     default: true
+    children:
+      world16.jail.delete:
   world16.key:
     description: Allows to do key
     default: true

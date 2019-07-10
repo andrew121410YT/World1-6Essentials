@@ -26,4 +26,5 @@ public class SetListMap {
     public static List<Player> adminListPlayer = new ArrayList<>(); //0
 
     public static Map<String, UUID> uuidCache = new HashMap<>(); //1
+    public static Map<String, Location> jails = new HashMap<>(); //1
 }

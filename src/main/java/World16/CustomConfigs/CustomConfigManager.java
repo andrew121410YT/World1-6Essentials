@@ -6,6 +6,7 @@ public class CustomConfigManager {
 
     private CustomYmlManager shitYml;
     private CustomYmlManager eRamYml;
+    private CustomYmlManager jailsYml;
 
     public CustomConfigManager() {
 
@@ -26,6 +27,13 @@ public class CustomConfigManager {
         this.eRamYml.reloadConfig();
         //...
 
+        //jails.yml
+        this.jailsYml = new CustomYmlManager();
+        this.jailsYml.setup("jails.yml");
+        this.jailsYml.saveConfig();
+        this.jailsYml.reloadConfig();
+        //...
+
     }
 
     public CustomYmlManager getShitYml() {
@@ -34,5 +42,9 @@ public class CustomConfigManager {
 
     public CustomYmlManager getERamYML() {
         return eRamYml;
+    }
+
+    public CustomYmlManager getJailsYml() {
+        return jailsYml;
     }
 }

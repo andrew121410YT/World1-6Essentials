@@ -26,6 +26,7 @@ public class ERamManager {
             player.sendMessage("NO NO LOADUP!");
             return;
         }
+
         stringRawLocationObjectHashMap.computeIfAbsent(player.getDisplayName(), k -> new HashMap<>());
 
         //Name of the save is [data]!!!

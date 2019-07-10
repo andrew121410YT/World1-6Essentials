@@ -8,6 +8,7 @@ import World16.CustomConfigs.CustomConfigManager;
 import World16.CustomInventorys.CustomInventoryManager;
 import World16.Events.*;
 import World16.Utils.API;
+import World16.Utils.JailManager;
 import World16.Utils.Metrics;
 import World16.Utils.Translate;
 import World16.test.test1;
@@ -25,6 +26,7 @@ public class Main extends JavaPlugin {
     //Managers
     private CustomConfigManager customconfig;
     private CustomInventoryManager customInventoryManager;
+    private JailManager jailManager;
 
     private API api;
 
@@ -70,9 +72,9 @@ public class Main extends JavaPlugin {
         new sign(this);
         new key(this); //KEY COMMAND
         new colors(this);
-        new setjail(this.customconfig, this);
+        new setjail(this.customconfig, this, this.jailManager);
         new setspawn(this.customconfig, this);
-        new jail(this.customconfig, this);
+        new jail(this.customconfig, this, this.jailManager);
         new afk(this);
         new flyspeed(this.customconfig, this);
         new isafk(this.customconfig, this);
@@ -122,6 +124,9 @@ public class Main extends JavaPlugin {
 
         this.customInventoryManager = new CustomInventoryManager(this);
         this.customInventoryManager.registerAllCustomInventorys();
+
+        this.jailManager = new JailManager(this.customconfig, this);
+        this.jailManager.getAllJailsFromConfig();
     }
 
     public void checkForPlugins() {
