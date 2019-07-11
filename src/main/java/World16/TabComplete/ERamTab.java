@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class ERamTab implements TabCompleter {
 
-    Main plugin = Main.getPlugin();
+    private Main plugin;
 
     //Maps
     Map<String, List<String>> tabCompleteMap = SetListMap.tabCompleteMap;
@@ -22,7 +22,9 @@ public class ERamTab implements TabCompleter {
     //Lists
     //...
 
-    public ERamTab() {
+    public ERamTab(Main plugin) {
+        this.plugin = plugin;
+
         tabCompleteMap.computeIfAbsent("eram", k -> new ArrayList<>());
 
         if (tabCompleteMap.get("eram").isEmpty()) {

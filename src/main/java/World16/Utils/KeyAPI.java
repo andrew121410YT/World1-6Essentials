@@ -7,7 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.PreparedStatement;
@@ -26,16 +25,18 @@ import java.util.stream.IntStream;
  */
 public class KeyAPI {
 
-    private static Plugin plugin = Main.getPlugin();
+    private Main plugin;
 
     //Maps
     Map<String, KeyObject> keyDatam = SetListMap.keyDataM;
     //...
 
-    public KeyAPI() {
+    public KeyAPI(Main plugin) {
+        this.plugin = plugin;
     }
 
-    public KeyAPI(ISQL isql) {
+    public KeyAPI(Main plugin, ISQL isql) {
+        this.plugin = plugin;
         isql.Connect();
         isql.ExecuteCommand("CREATE TABLE IF NOT EXISTS `KeyData` (" +
                 "`KeyDataID` INT," +

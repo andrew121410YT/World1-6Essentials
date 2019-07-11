@@ -30,7 +30,7 @@ public class back implements CommandExecutor {
         this.plugin = getPlugin;
         this.api = new API();
         this.plugin.getCommand("back").setExecutor(this);
-        this.plugin.getCommand("back").setTabCompleter(new BackTab());
+        this.plugin.getCommand("back").setTabCompleter(new BackTab(this.plugin));
     }
 
     /**

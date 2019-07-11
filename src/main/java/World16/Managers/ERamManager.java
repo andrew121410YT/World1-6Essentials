@@ -1,7 +1,5 @@
-package World16.test;
+package World16.Managers;
 
-import World16.CustomConfigs.CustomConfigManager;
-import World16.Utils.CustomYmlManager;
 import World16.Utils.SetListMap;
 import org.bukkit.Location;
 import org.bukkit.Material;

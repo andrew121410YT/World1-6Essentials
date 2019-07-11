@@ -1,10 +1,10 @@
 package World16.Commands;
 
-import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
+import World16.Managers.CustomConfigManager;
+import World16.Managers.JailManager;
 import World16.TabComplete.JailTab;
 import World16.Utils.API;
-import World16.Utils.JailManager;
 import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Location;
@@ -33,7 +33,7 @@ public class jail implements CommandExecutor {
         this.jailManager = jailManager;
 
         this.plugin.getCommand("jail").setExecutor(this);
-        this.plugin.getCommand("jail").setTabCompleter(new JailTab());
+        this.plugin.getCommand("jail").setTabCompleter(new JailTab(this.plugin));
     }
 
     @Override

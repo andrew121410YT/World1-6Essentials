@@ -4,11 +4,11 @@ import World16.Commands.*;
 import World16.Commands.tp.tpa;
 import World16.Commands.tp.tpaccept;
 import World16.Commands.tp.tpdeny;
-import World16.CustomConfigs.CustomConfigManager;
 import World16.CustomInventorys.CustomInventoryManager;
 import World16.Events.*;
+import World16.Managers.CustomConfigManager;
+import World16.Managers.JailManager;
 import World16.Utils.API;
-import World16.Utils.JailManager;
 import World16.Utils.Metrics;
 import World16.Utils.Translate;
 import World16.test.test1;
@@ -30,9 +30,7 @@ public class Main extends JavaPlugin {
 
     private API api;
 
-    //Maps
-
-    PluginManager pm = Bukkit.getPluginManager();
+    private PluginManager pm = Bukkit.getPluginManager();
 
     public void onEnable() {
         plugin = this;
@@ -40,7 +38,6 @@ public class Main extends JavaPlugin {
 
         regCustomManagers();
         regFileConfigGEN();
-        regAPIS();
         regEvents();
         regCommands();
         regbstats();
@@ -119,7 +116,7 @@ public class Main extends JavaPlugin {
     }
 
     private void regCustomManagers() {
-        this.customconfig = new CustomConfigManager();
+        this.customconfig = new CustomConfigManager(this);
         customconfig.registerAllCustomConfigs();
 
         this.customInventoryManager = new CustomInventoryManager(this);
@@ -131,10 +128,6 @@ public class Main extends JavaPlugin {
 
     public void checkForPlugins() {
 
-    }
-
-    private void regAPIS() {
-        api = new API();
     }
 
     private void regbstats() {

@@ -50,13 +50,13 @@ public class afk implements Listener, CommandExecutor {
                 Bukkit.broadcastMessage(
                         Translate.chat("&8<&4&lAFK&r&8>&r " + p.getDisplayName() + " &chas GONE afk."));
                 Afk.add(p.getDisplayName());
-                new AfkEventHandler(p.getDisplayName()); //CALLS THE EVENT.
+                new AfkEventHandler(this.plugin, p.getDisplayName()); //CALLS THE EVENT.
                 return true;
             } else if (Afk.contains(p.getDisplayName())) {
                 Bukkit.broadcastMessage(
                         Translate.chat("&8<&4&lAFK&r&8>&r " + p.getDisplayName() + " &2is now back from afk."));
                 Afk.remove(p.getDisplayName());
-                new UnAfkEventHandler(p.getDisplayName());
+                new UnAfkEventHandler(this.plugin, p.getDisplayName());
                 return true;
             }
         }

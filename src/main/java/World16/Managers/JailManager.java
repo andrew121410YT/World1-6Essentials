@@ -1,7 +1,8 @@
-package World16.Utils;
+package World16.Managers;
 
-import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
+import World16.Utils.SetListMap;
+import World16.Utils.Translate;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 

@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class DebugTab implements TabCompleter {
 
-    Main plugin = Main.getPlugin();
+    private Main plugin;
 
     //Maps
     Map<String, List<String>> tabCompleteMap = SetListMap.tabCompleteMap;
@@ -23,7 +23,9 @@ public class DebugTab implements TabCompleter {
     //Lists
     //...
 
-    public DebugTab() {
+    public DebugTab(Main plugin) {
+        this.plugin = plugin;
+
         tabCompleteMap.computeIfAbsent("debug1-6", k -> new ArrayList<>());
 
         if (tabCompleteMap.get("debug1-6").isEmpty()) {

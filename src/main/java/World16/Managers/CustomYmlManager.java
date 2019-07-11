@@ -1,6 +1,8 @@
-package World16.Utils;
+package World16.Managers;
 
 import World16.Main.Main;
+import World16.Utils.API;
+import World16.Utils.Translate;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -10,7 +12,7 @@ import java.io.IOException;
 
 public class CustomYmlManager {
 
-    private Main plugin = Main.getPlugin();
+    private Main plugin;
 
     // Files & File Configs Here.
     private FileConfiguration configcfg;
@@ -19,6 +21,10 @@ public class CustomYmlManager {
     //Strings
     private String nameoffile;
     //...
+
+    public CustomYmlManager(Main plugin) {
+        this.plugin = plugin;
+    }
 
     // --------------------------------------------------------------------------------------------------------
     public void setup(String nameoffile) {

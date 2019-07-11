@@ -13,7 +13,7 @@ import org.bukkit.event.HandlerList;
 public class TpaCustomEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
-    private static Main plugin = Main.getPlugin();
+    private Main plugin;
 
     String p;
     String target;
@@ -29,7 +29,8 @@ public class TpaCustomEvent extends Event {
 
     //CODE STARTS HERE
 
-    public TpaCustomEvent(String p, String target) {
+    public TpaCustomEvent(Main plugin, String p, String target) {
+        this.plugin = plugin;
         this.p = p;
         this.target = target;
     }

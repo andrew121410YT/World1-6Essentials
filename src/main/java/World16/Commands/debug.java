@@ -39,7 +39,7 @@ public class debug implements CommandExecutor {
         this.mysql = new OldMySQL();
 
         this.plugin.getCommand("debug1-6").setExecutor(this);
-        this.plugin.getCommand("debug1-6").setTabCompleter(new DebugTab());
+        this.plugin.getCommand("debug1-6").setTabCompleter(new DebugTab(this.plugin));
     }
 
     @Override

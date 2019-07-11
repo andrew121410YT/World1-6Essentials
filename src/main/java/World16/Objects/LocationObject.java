@@ -1,11 +1,8 @@
 package World16.Objects;
 
-import World16.Main.Main;
 import org.bukkit.Location;
 
 public class LocationObject {
-
-    private Main plugin = Main.getPlugin();
 
     private String playerName = "null";
 

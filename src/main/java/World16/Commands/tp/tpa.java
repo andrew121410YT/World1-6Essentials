@@ -1,6 +1,6 @@
 package World16.Commands.tp;
 
-import World16.CustomConfigs.CustomConfigManager;
+import World16.Managers.CustomConfigManager;
 import World16.CustomEvents.handlers.TpaEventHandler;
 import World16.Main.Main;
 import World16.Utils.API;
@@ -50,7 +50,7 @@ public class tpa implements CommandExecutor {
             Player target = plugin.getServer().getPlayerExact(args[0]); //Get the player
             if (target != null && target.isOnline()) {
                 tpam.put(target, p);
-                new TpaEventHandler(p.getDisplayName(), target.getDisplayName()); //RUNS TPA EVENT
+                new TpaEventHandler(this.plugin, p.getDisplayName(), target.getDisplayName()); //RUNS TPA EVENT
                 p.sendMessage(
                         Translate.chat("[&eTPA&r] &9Sent tpa request too " + target.getDisplayName()));
                 sendTpaRequestMessage(p, target);

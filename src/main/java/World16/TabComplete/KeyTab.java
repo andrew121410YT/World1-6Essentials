@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class KeyTab implements TabCompleter {
 
-    Main plugin = Main.getPlugin();
+    private Main plugin;
 
     //Maps
     Map<String, List<String>> tabCompleteMap = SetListMap.tabCompleteMap;
@@ -22,7 +22,9 @@ public class KeyTab implements TabCompleter {
     //Lists
     //...
 
-    public KeyTab() {
+    public KeyTab(Main plugin) {
+        this.plugin = plugin;
+
         tabCompleteMap.computeIfAbsent("key", k -> new ArrayList<>());
 
         if (tabCompleteMap.get("key").isEmpty()) {

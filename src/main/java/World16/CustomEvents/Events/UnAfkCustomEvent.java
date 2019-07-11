@@ -13,7 +13,7 @@ import org.bukkit.event.HandlerList;
 public class UnAfkCustomEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
-    private static Main plugin = Main.getPlugin();
+    private Main plugin;
 
     String p;
 
@@ -28,7 +28,8 @@ public class UnAfkCustomEvent extends Event {
 
 //CODE STARTS HERE
 
-    public UnAfkCustomEvent(String p) {
+    public UnAfkCustomEvent(Main plugin, String p) {
+        this.plugin = plugin;
         this.p = p;
     }
 

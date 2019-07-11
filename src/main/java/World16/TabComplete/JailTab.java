@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class JailTab implements TabCompleter {
 
-    Main plugin = Main.getPlugin();
+    private Main plugin;
 
     //Maps
     Map<String, List<String>> tabCompleteMap = SetListMap.tabCompleteMap;
@@ -22,7 +22,9 @@ public class JailTab implements TabCompleter {
     //Lists
     //...
 
-    public JailTab() {
+    public JailTab(Main plugin) {
+        this.plugin = plugin;
+
         tabCompleteMap.computeIfAbsent("jail", k -> new ArrayList<>());
 
         if (tabCompleteMap.get("jail").isEmpty()) {

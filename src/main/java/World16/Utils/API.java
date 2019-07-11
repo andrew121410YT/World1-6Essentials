@@ -1,7 +1,8 @@
 package World16.Utils;
 
-import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
+import World16.Managers.CustomConfigManager;
+import World16.Managers.CustomYmlManager;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
 import org.bukkit.Location;
@@ -47,7 +48,7 @@ public class API {
     List<Player> adminListPLayer = SetListMap.adminListPlayer;
     //...
 
-    private static Main plugin = Main.getPlugin();
+    private Main plugin;
     private CustomYmlManager configinstance = null;
 
     private ViaAPI viaapi;

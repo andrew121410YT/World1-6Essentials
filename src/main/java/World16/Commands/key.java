@@ -36,10 +36,10 @@ public class key implements CommandExecutor {
         this.api = new API();
         this.mysql = new SQLite(this.plugin.getDataFolder(), "keys");
 
-        this.keyapi = new KeyAPI(this.mysql);
+        this.keyapi = new KeyAPI(this.plugin, this.mysql);
 
         this.plugin.getCommand("key").setExecutor(this);
-        this.plugin.getCommand("key").setTabCompleter(new KeyTab());
+        this.plugin.getCommand("key").setTabCompleter(new KeyTab(this.plugin));
     }
 
     @SuppressWarnings("unused")

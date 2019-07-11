@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class BackTab implements TabCompleter {
 
-    Main plugin = Main.getPlugin();
+    private Main plugin;
 
     //Maps
     Map<String, List<String>> tabCompleteMap = SetListMap.tabCompleteMap;
@@ -22,7 +22,9 @@ public class BackTab implements TabCompleter {
     //Lists
     //...
 
-    public BackTab() {
+    public BackTab(Main plugin) {
+        this.plugin = plugin;
+
         tabCompleteMap.computeIfAbsent("back", k -> new ArrayList<>());
 
         if (tabCompleteMap.get("back").isEmpty()) {
