@@ -71,16 +71,19 @@ public class API {
     // MAIN
     public API(Main plugin) {
         this.plugin = plugin;
+        setMySQL();
     }
 
     @Deprecated
     public API(Main plugin, CustomYmlManager configInstance) {
         this.plugin = plugin;
         this.configinstance = configInstance;
+        setMySQL();
     }
 
     public API(Main plugin, CustomConfigManager configManager) {
         this.plugin = plugin;
+        setMySQL();
     }
 
     // END MAIN
