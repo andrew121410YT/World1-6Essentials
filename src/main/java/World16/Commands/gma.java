@@ -16,7 +16,7 @@ public class gma implements CommandExecutor {
 
     public gma(Main plugin) {
         this.plugin = plugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
         plugin.getCommand("gma").setExecutor(this);
     }
 

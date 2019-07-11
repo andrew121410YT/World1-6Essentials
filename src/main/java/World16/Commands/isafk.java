@@ -27,7 +27,7 @@ public class isafk implements CommandExecutor {
     public isafk(CustomConfigManager getCustomYml, Main getPlugin) {
         this.shitYml = getCustomYml.getShitYml();
         this.plugin = getPlugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
         this.plugin.getCommand("isafk").setExecutor(this);
     }
 

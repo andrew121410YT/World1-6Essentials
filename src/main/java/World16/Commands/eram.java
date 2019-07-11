@@ -40,7 +40,7 @@ public class eram implements CommandExecutor {
     public eram(CustomConfigManager getCustomYml, Main getPlugin, CustomInventoryManager customInventoryManager) {
         this.customConfigManager = getCustomYml;
         this.plugin = getPlugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
         this.customInventoryManager = customInventoryManager;
 
         eRamManager = new ERamManager(this.customConfigManager);

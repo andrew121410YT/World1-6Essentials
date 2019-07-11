@@ -14,7 +14,7 @@ public class CommandUtils {
 
     public CommandUtils(Main getPlugin) {
         this.plugin = getPlugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
     }
 
     public void runCommands(CommandSender commandSender, List<String[]> args) {

@@ -34,13 +34,14 @@ public class OnPlayerJoinEvent implements Listener {
     //...
 
     private ISQL mysql;
-    private API api = new API();
+    private API api;
     private KeyAPI keyapi;
 
     public OnPlayerJoinEvent(Main getPlugin) {
-        plugin = getPlugin;
+        this.plugin = getPlugin;
+        this.api = new API(this.plugin);
         this.mysql = new SQLite(plugin.getDataFolder(), "keys");
-        this.keyapi = new KeyAPI(this.mysql);
+        this.keyapi = new KeyAPI(this.plugin, this.mysql);
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 

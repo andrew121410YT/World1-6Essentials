@@ -16,7 +16,7 @@ public class heal implements CommandExecutor {
 
     public heal(Main plugin) {
         this.plugin = plugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
         plugin.getCommand("heal").setExecutor(this);
     }
 

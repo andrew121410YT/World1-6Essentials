@@ -22,8 +22,7 @@ public class msg implements CommandExecutor {
     public msg(CustomConfigManager getCustomYml, Main getPlugin) {
         this.shitYml = getCustomYml.getShitYml();
         this.plugin = getPlugin;
-        this.api = new API();
-
+        this.api = new API(this.plugin);
         this.plugin.getCommand("emsg").setExecutor(this);
     }
 

@@ -26,7 +26,7 @@ public class tpdeny implements CommandExecutor {
     public tpdeny(CustomConfigManager getCustomYml, Main getPlugin) {
         this.customConfigManager = getCustomYml;
         this.plugin = getPlugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
 
         this.plugin.getCommand("tpdeny").setExecutor(this);
     }

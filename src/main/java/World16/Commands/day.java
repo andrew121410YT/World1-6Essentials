@@ -15,7 +15,7 @@ public class day implements CommandExecutor {
 
     public day(Main getPlugin) {
         this.plugin = getPlugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
         this.plugin.getCommand("day").setExecutor(this);
     }
 

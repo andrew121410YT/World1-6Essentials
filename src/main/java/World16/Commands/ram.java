@@ -15,7 +15,7 @@ public class ram implements CommandExecutor {
 
     public ram(Main plugin) {
         this.plugin = plugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
         plugin.getCommand("ram").setExecutor(this);
     }
 

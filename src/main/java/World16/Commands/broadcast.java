@@ -21,8 +21,7 @@ public class broadcast implements CommandExecutor {
     public broadcast(CustomConfigManager getCustomYml, Main getPlugin) {
         this.shitYml = getCustomYml.getShitYml();
         this.plugin = getPlugin;
-        this.api = new API();
-
+        this.api = new API(this.plugin);
         this.plugin.getCommand("broadcast").setExecutor(this);
     }
 

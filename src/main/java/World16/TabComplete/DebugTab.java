@@ -36,7 +36,6 @@ public class DebugTab implements TabCompleter {
             tabCompleteMap.get("debug1-6").add("clearalllistswithname");
             tabCompleteMap.get("debug1-6").add("clearallmapswithname");
             tabCompleteMap.get("debug1-6").add("date");
-            tabCompleteMap.get("debug1-6").add("playerversion");
             tabCompleteMap.get("debug1-6").add("checkuuid");
             tabCompleteMap.get("debug1-6").add("debugmessages");
             tabCompleteMap.get("debug1-6").add("finddefaultspawn");

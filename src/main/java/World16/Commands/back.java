@@ -28,7 +28,7 @@ public class back implements CommandExecutor {
 
     public back(Main getPlugin) {
         this.plugin = getPlugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
         this.plugin.getCommand("back").setExecutor(this);
         this.plugin.getCommand("back").setTabCompleter(new BackTab(this.plugin));
     }

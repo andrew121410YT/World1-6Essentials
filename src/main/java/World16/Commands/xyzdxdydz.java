@@ -20,6 +20,7 @@ public class xyzdxdydz implements CommandExecutor {
 
     public xyzdxdydz(CustomConfigManager getCustomYml, Main getPlugin) {
         this.plugin = getPlugin;
+        this.api = new API(this.plugin);
 
         this.plugin.getCommand("xyzdxdydz").setExecutor(this);
     }

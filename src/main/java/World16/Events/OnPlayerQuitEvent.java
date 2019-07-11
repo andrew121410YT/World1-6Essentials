@@ -16,7 +16,7 @@ public class OnPlayerQuitEvent implements Listener {
 
     public OnPlayerQuitEvent(Main getPlugin) {
         this.plugin = getPlugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
 
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }

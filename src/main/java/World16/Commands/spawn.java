@@ -21,7 +21,7 @@ public class spawn implements CommandExecutor {
     public spawn(CustomConfigManager getShitConfig, Main getPlugin) {
         this.shitYml = getShitConfig.getShitYml();
         this.plugin = getPlugin;
-        this.api = new API(this.shitYml);
+        this.api = new API(this.plugin, this.shitYml);
         this.plugin.getCommand("spawn").setExecutor(this);
     }
 

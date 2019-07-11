@@ -16,7 +16,7 @@ public class gmc implements CommandExecutor {
 
     public gmc(Main plugin) {
         this.plugin = plugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
         plugin.getCommand("gmc").setExecutor(this);
     }
 

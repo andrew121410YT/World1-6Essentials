@@ -15,7 +15,7 @@ public class feed implements CommandExecutor {
 
     public feed(Main plugin) {
         this.plugin = plugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
         plugin.getCommand("feed").setExecutor(this);
     }
 

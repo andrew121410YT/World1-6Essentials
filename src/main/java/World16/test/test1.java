@@ -18,6 +18,7 @@ public class test1 implements CommandExecutor {
     public test1(CustomConfigManager getCustomYml, Main getPlugin) {
         this.plugin = getPlugin;
         this.customConfigManager = getCustomYml;
+        this.api = new API(this.plugin);
         this.plugin.getCommand("testee1").setExecutor(this);
     }
 

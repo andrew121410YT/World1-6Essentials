@@ -27,7 +27,7 @@ public class OnAsyncPlayerChatEvent implements Listener {
     public OnAsyncPlayerChatEvent(Main getPlugin) {
         this.plugin = getPlugin;
 
-        this.api = new API();
+        this.api = new API(this.plugin);
 
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
 

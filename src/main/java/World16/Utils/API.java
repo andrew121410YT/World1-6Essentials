@@ -55,12 +55,12 @@ public class API {
 
     //Finals
     public static final String CUSTOM_COMMAND_FORMAT = "`";
-    public static final Integer VERSION = 255;
-    public static final String DATE_OF_VERSION = "7/10/2019";
+    public static final Integer VERSION = 314;
+    public static final String DATE_OF_VERSION = "7/11/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
     public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
-    public static final String TOO_DAMN_OLD = "Your mc version is too damn old 1.11 up too 1.13.2 please.";
+    public static final String TOO_DAMN_OLD = "Your mc version is too damn old 1.11 up too 1.13.3 please.";
     public static final String SOMETHING_WENT_WRONG = "Something went wrong.";
     //...
 
@@ -73,18 +73,21 @@ public class API {
     // END MYSQL
 
     // MAIN
-    public API() {
+    public API(Main plugin) {
+        this.plugin = plugin;
         regPlugins();
     }
 
     @Deprecated
-    public API(CustomYmlManager configInstance) {
+    public API(Main plugin, CustomYmlManager configInstance) {
+        this.plugin = plugin;
         this.configinstance = configInstance;
 
         regPlugins();
     }
 
-    public API(CustomConfigManager configManager) {
+    public API(Main plugin, CustomConfigManager configManager) {
+        this.plugin = plugin;
         regPlugins();
     }
 
@@ -235,77 +238,6 @@ public class API {
         if (version.contains("1.12") || version.contains("1.12.1") || version.contains("1.12.2")) return "1.12";
         if (version.contains("1.11") || version.contains("1.11.1") || version.contains("1.11.2")) return "1.11";
         return TOO_DAMN_OLD;
-    }
-
-    public String getTheSumPlayerVersion(Player p) {
-        if (viaapi == null) {
-            return SOMETHING_WENT_WRONG;
-        }
-        switch (viaapi.getPlayerVersion(p)) {
-            case 404:
-            case 401:
-            case 393:
-                return "1.13";
-            case 340:
-            case 338:
-            case 335:
-                return "1.12";
-            case 316:
-            case 315:
-                return "1.11";
-            case 210:
-                return "1.10";
-            case 110:
-            case 109:
-            case 108:
-            case 107:
-            case 106:
-            case 105:
-            case 104:
-            case 103:
-                return "1.9";
-            case 47:
-                return "1.8";
-            default:
-                return TOO_DAMN_OLD;
-        }
-    }
-
-    public String getPlayerVersion(Player p) {
-        switch (viaapi.getPlayerVersion(p)) {
-            case 404:
-                return "1.13.2";
-            case 401:
-                return "1.13.1";
-            case 393:
-                return "1.13";
-            case 340:
-                return "1.12.2";
-            case 338:
-                return "1.12.1";
-            case 335:
-                return "1.12";
-            case 316:
-                return "1.11.1 & 1.11.2";
-            case 315:
-                return "1.11";
-            case 270:
-                return "1.10 & 1.10.1 1.10.2";
-            case 110:
-                return "1.9.3 & 1.9.4";
-            case 109:
-                return "1.9.2";
-            case 108:
-                return "1.9.1";
-            case 107:
-                return "1.9";
-            default:
-                return TOO_DAMN_OLD;
-        }
-    }
-
-    public int getPlayerProtocolVersion(Player p) {
-        return viaapi.getPlayerVersion(p);
     }
 
     public UUID getUUIDFromMojangAPI(String playername) {

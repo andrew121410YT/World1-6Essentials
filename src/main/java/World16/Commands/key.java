@@ -33,7 +33,7 @@ public class key implements CommandExecutor {
     public key(Main getPlugin) {
         this.plugin = getPlugin;
 
-        this.api = new API();
+        this.api = new API(this.plugin);
         this.mysql = new SQLite(this.plugin.getDataFolder(), "keys");
 
         this.keyapi = new KeyAPI(this.plugin, this.mysql);

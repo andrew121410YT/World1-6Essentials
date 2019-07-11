@@ -16,7 +16,7 @@ public class gms implements CommandExecutor {
 
     public gms(Main plugin) {
         this.plugin = plugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
         plugin.getCommand("gms").setExecutor(this);
     }
 

@@ -24,7 +24,7 @@ public class fly implements CommandExecutor {
 
     public fly(Main plugin) {
         this.plugin = plugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
         plugin.getCommand("fly").setExecutor(this);
     }
 

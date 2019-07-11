@@ -28,7 +28,8 @@ public class afk implements Listener, CommandExecutor {
 
     public afk(Main getPlugin) {
         this.plugin = getPlugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
+
         this.plugin.getCommand("afk").setExecutor(this);
     }
 

@@ -17,9 +17,9 @@ public class setjail implements CommandExecutor {
     private JailManager jailManager;
 
     public setjail(CustomConfigManager getCustomYml, Main getPlugin, JailManager jailManager) {
-        this.api = new API();
-        this.jailManager = jailManager;
         this.plugin = getPlugin;
+        this.jailManager = jailManager;
+        this.api = new API(this.plugin);
         this.plugin.getCommand("setjail").setExecutor(this);
     }
 
@@ -39,7 +39,7 @@ public class setjail implements CommandExecutor {
         if (args.length == 0) {
             p.sendMessage(Translate.chat("&2[SetJail]&r&c Usage: /setjail <JailName>"));
             return true;
-        }else if (args.length == 1 && args[0] != null){
+        } else if (args.length == 1 && args[0] != null) {
             jailManager.set(args[0].toLowerCase(), p.getLocation());
             p.sendMessage(Translate.chat("&2[SetJail]&r&6 The Jail has been set."));
             return true;

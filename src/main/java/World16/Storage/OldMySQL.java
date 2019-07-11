@@ -14,9 +14,10 @@ public class OldMySQL implements ISQL {
     private String Port;
     private Connection connection;
 
-    API api = new API();
+    private API api;
 
-    public OldMySQL() {
+    public OldMySQL(API api) {
+        this.api = api;
         this.Host = api.getMysql_HOST();
         this.Database = api.getMysql_DATABASE();
         this.Username = api.getMysql_USER();

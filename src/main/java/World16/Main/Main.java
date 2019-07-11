@@ -34,7 +34,7 @@ public class Main extends JavaPlugin {
 
     public void onEnable() {
         plugin = this;
-        api = new API();
+        api = new API(plugin);
 
         regCustomManagers();
         regFileConfigGEN();

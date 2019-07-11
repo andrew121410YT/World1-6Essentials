@@ -22,7 +22,7 @@ public class god implements CommandExecutor {
 
     public god(Main plugin) {
         this.plugin = plugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
         plugin.getCommand("god").setExecutor(this);
     }
 

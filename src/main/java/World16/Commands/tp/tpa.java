@@ -28,7 +28,7 @@ public class tpa implements CommandExecutor {
     public tpa(CustomConfigManager getCustomYml, Main getPlugin) {
         this.customConfigManager = getCustomYml;
         this.plugin = getPlugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
 
         this.plugin.getCommand("tpa").setExecutor(this);
     }

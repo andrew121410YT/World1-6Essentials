@@ -16,7 +16,7 @@ public class gmsp implements CommandExecutor {
 
     public gmsp(Main plugin) {
         this.plugin = plugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
         plugin.getCommand("gmsp").setExecutor(this);
     }
 

@@ -17,7 +17,7 @@ public class bed implements CommandExecutor {
 
     public bed(Main getPlugin) {
         this.plugin = getPlugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
         this.plugin.getCommand("bed").setExecutor(this);
     }
 

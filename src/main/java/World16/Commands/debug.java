@@ -35,8 +35,8 @@ public class debug implements CommandExecutor {
 
     public debug(Main getPlugin) {
         this.plugin = getPlugin;
-        this.api = new API();
-        this.mysql = new OldMySQL();
+        this.api = new API(this.plugin);
+        this.mysql = new OldMySQL(this.api);
 
         this.plugin.getCommand("debug1-6").setExecutor(this);
         this.plugin.getCommand("debug1-6").setTabCompleter(new DebugTab(this.plugin));
@@ -156,31 +156,6 @@ public class debug implements CommandExecutor {
                 String date = api.Time();
                 p.sendMessage(Translate.chat("Time/Data:-> " + date));
                 return true;
-
-                //PLAYER VERSION
-            } else if (args.length >= 1 && (args[0].equalsIgnoreCase("playerversion"))) {
-                if (!p.hasPermission("world16.debug.playerversion")) {
-                    api.PermissionErrorMessage(p);
-                    return true;
-                }
-                if (args.length == 1) {
-                    p.sendMessage(api.getPlayerVersion(p));
-                    return true;
-                } else {
-                    Player target = plugin.getServer().getPlayerExact(args[1]);
-                    if (args.length >= 1 && target != null && target.isOnline()) {
-                        if (!p.hasPermission("world16.debug.playerversion.other")) {
-                            api.PermissionErrorMessage(p);
-                            return true;
-                        }
-                        p.sendMessage("The Player: " + target.getDisplayName() + " Version: " + api
-                                .getPlayerVersion(target) + " Server Version: " + api
-                                .getServerVersion());
-                        return true;
-                    } else {
-                        return true;
-                    }
-                }
             } else if (args[0].equalsIgnoreCase("checkuuid")) {
                 if (!p.hasPermission("world16.debug.checkuuid")) {
                     api.PermissionErrorMessage(p);
