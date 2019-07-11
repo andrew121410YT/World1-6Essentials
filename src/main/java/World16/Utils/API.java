@@ -10,8 +10,6 @@ import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import us.myles.ViaVersion.api.Via;
-import us.myles.ViaVersion.api.ViaAPI;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -51,8 +49,6 @@ public class API {
     private Main plugin;
     private CustomYmlManager configinstance = null;
 
-    private ViaAPI viaapi;
-
     //Finals
     public static final String CUSTOM_COMMAND_FORMAT = "`";
     public static final Integer VERSION = 314;
@@ -75,33 +71,20 @@ public class API {
     // MAIN
     public API(Main plugin) {
         this.plugin = plugin;
-        regPlugins();
     }
 
     @Deprecated
     public API(Main plugin, CustomYmlManager configInstance) {
         this.plugin = plugin;
         this.configinstance = configInstance;
-
-        regPlugins();
     }
 
     public API(Main plugin, CustomConfigManager configManager) {
         this.plugin = plugin;
-        regPlugins();
     }
 
     // END MAIN
 
-    private void regPlugins() {
-        regPluginViaVersion();
-    }
-
-    private void regPluginViaVersion() {
-        if (isClass("us.myles.ViaVersion.api.ViaAPI")) {
-            viaapi = Via.getAPI();
-        }
-    }
     // START OF MYSQL
 
     public String getMysql_HOST() {
