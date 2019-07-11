@@ -10,11 +10,12 @@ import org.bukkit.entity.Player;
 
 public class night implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     public night(Main plugin) {
         this.plugin = plugin;
+        this.api = new API();
         plugin.getCommand("night").setExecutor(this);
     }
 

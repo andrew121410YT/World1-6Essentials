@@ -10,11 +10,12 @@ import org.bukkit.entity.Player;
 
 public class ram implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     public ram(Main plugin) {
         this.plugin = plugin;
+        this.api = new API();
         plugin.getCommand("ram").setExecutor(this);
     }
 

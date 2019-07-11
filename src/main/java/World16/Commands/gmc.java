@@ -11,11 +11,12 @@ import org.bukkit.entity.Player;
 
 public class gmc implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     public gmc(Main plugin) {
         this.plugin = plugin;
+        this.api = new API();
         plugin.getCommand("gmc").setExecutor(this);
     }
 

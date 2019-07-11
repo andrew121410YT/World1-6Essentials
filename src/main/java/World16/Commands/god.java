@@ -13,8 +13,8 @@ import java.util.List;
 
 public class god implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     //Lists
     List<String> godm = SetListMap.godmList;
@@ -22,6 +22,7 @@ public class god implements CommandExecutor {
 
     public god(Main plugin) {
         this.plugin = plugin;
+        this.api = new API();
         plugin.getCommand("god").setExecutor(this);
     }
 

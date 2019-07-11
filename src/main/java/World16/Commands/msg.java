@@ -2,10 +2,8 @@ package World16.Commands;
 
 import World16.CustomConfigs.CustomConfigManager;
 import World16.Main.Main;
-import World16.Storage.OldMySQL;
 import World16.Utils.API;
 import World16.Utils.CustomYmlManager;
-import World16.Utils.KeyAPI;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,17 +15,14 @@ import java.util.Arrays;
 public class msg implements CommandExecutor {
 
     private Main plugin;
-
-    private OldMySQL mysql;
-    private KeyAPI keyapi = new KeyAPI();
-    private API api = new API();
+    private API api;
 
     private CustomYmlManager shitYml = null;
 
     public msg(CustomConfigManager getCustomYml, Main getPlugin) {
         this.shitYml = getCustomYml.getShitYml();
         this.plugin = getPlugin;
-        this.mysql = new OldMySQL();
+        this.api = new API();
 
         this.plugin.getCommand("emsg").setExecutor(this);
     }

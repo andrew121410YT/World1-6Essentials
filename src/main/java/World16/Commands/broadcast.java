@@ -14,13 +14,14 @@ public class broadcast implements CommandExecutor {
 
     private Main plugin;
 
-    API api = new API();
+    private API api;
 
     private CustomYmlManager shitYml = null;
 
     public broadcast(CustomConfigManager getCustomYml, Main getPlugin) {
         this.shitYml = getCustomYml.getShitYml();
         this.plugin = getPlugin;
+        this.api = new API();
 
         this.plugin.getCommand("broadcast").setExecutor(this);
     }

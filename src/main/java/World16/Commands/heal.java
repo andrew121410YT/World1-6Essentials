@@ -11,11 +11,12 @@ import org.bukkit.potion.PotionEffect;
 
 public class heal implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     public heal(Main plugin) {
         this.plugin = plugin;
+        this.api = new API();
         plugin.getCommand("heal").setExecutor(this);
     }
 

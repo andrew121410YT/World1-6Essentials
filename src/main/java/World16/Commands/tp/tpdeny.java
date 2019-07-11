@@ -15,8 +15,7 @@ import java.util.Map;
 public class tpdeny implements CommandExecutor {
 
     private Main plugin;
-
-    API api = new API();
+    private API api;
 
     //Maps
     Map<Player, Player> tpam = SetListMap.tpaM;
@@ -27,6 +26,7 @@ public class tpdeny implements CommandExecutor {
     public tpdeny(CustomConfigManager getCustomYml, Main getPlugin) {
         this.customConfigManager = getCustomYml;
         this.plugin = getPlugin;
+        this.api = new API();
 
         this.plugin.getCommand("tpdeny").setExecutor(this);
     }

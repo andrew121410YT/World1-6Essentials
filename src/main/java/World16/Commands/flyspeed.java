@@ -13,8 +13,8 @@ import org.bukkit.entity.Player;
 
 public class flyspeed implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     // NEW ONE
     private CustomYmlManager shitYml = null;
@@ -22,6 +22,7 @@ public class flyspeed implements CommandExecutor {
     public flyspeed(CustomConfigManager getConfigInstance, Main plugin) {
         this.shitYml = getConfigInstance.getShitYml();
         this.plugin = plugin;
+        this.api = new API();
         plugin.getCommand("fs").setExecutor(this);
     }
 

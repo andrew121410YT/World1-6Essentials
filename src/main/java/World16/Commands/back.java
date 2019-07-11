@@ -19,8 +19,8 @@ import java.util.UUID;
 
 public class back implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     //Maps
     Map<UUID, LocationObject> backm = SetListMap.backM;
@@ -28,6 +28,7 @@ public class back implements CommandExecutor {
 
     public back(Main getPlugin) {
         this.plugin = getPlugin;
+        this.api = new API();
         this.plugin.getCommand("back").setExecutor(this);
         this.plugin.getCommand("back").setTabCompleter(new BackTab());
     }

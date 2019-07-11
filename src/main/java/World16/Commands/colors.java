@@ -10,11 +10,12 @@ import org.bukkit.entity.Player;
 
 public class colors implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     public colors(Main getPlugin) {
         this.plugin = getPlugin;
+        this.api = new API();
         this.plugin.getCommand("colors").setExecutor(this);
     }
 

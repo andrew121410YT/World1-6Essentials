@@ -23,11 +23,12 @@ public class afk implements Listener, CommandExecutor {
     List<String> Afk = SetListMap.afkList;
     //....
 
-    public Main plugin;
-    API api = new API();
+    private Main plugin;
+    private API api;
 
     public afk(Main getPlugin) {
         this.plugin = getPlugin;
+        this.api = new API();
         this.plugin.getCommand("afk").setExecutor(this);
     }
 

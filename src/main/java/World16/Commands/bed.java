@@ -12,11 +12,12 @@ import org.bukkit.inventory.ItemStack;
 
 public class bed implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     public bed(Main getPlugin) {
         this.plugin = getPlugin;
+        this.api = new API();
         this.plugin.getCommand("bed").setExecutor(this);
     }
 

@@ -12,11 +12,12 @@ import org.bukkit.inventory.ItemStack;
 
 public class sign implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     public sign(Main plugin) {
         this.plugin = plugin;
+        this.api = new API();
         plugin.getCommand("sign").setExecutor(this);
     }
 

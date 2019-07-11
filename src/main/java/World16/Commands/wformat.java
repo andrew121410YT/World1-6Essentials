@@ -19,14 +19,14 @@ import java.util.Arrays;
 public class wformat implements CommandExecutor {
 
     private Main plugin;
-
-    API api = new API();
+    private API api;
 
     private CustomConfigManager customConfigManager;
 
     public wformat(CustomConfigManager getCustomYml, Main getPlugin) {
         this.customConfigManager = getCustomYml;
         this.plugin = getPlugin;
+        this.api = new API();
 
         this.plugin.getCommand("wformat").setExecutor(this);
     }

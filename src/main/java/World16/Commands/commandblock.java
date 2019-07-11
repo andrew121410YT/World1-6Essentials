@@ -13,11 +13,12 @@ import org.bukkit.inventory.ItemStack;
 
 public class commandblock implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     public commandblock(Main getPlugin) {
         this.plugin = getPlugin;
+        this.api = new API();
         this.plugin.getCommand("commandblock").setExecutor(this);
     }
 
