@@ -27,10 +27,10 @@ public class API {
 
     // Maps
     Map<String, UUID> uuidCache = SetListMap.uuidCache;
+    Map<UUID, Location> afkMap = SetListMap.afkMap;
     //...
 
     // Lists
-    List<String> Afk1 = SetListMap.afkList;
     List<String> Fly1 = SetListMap.flyList;
     List<String> GodM = SetListMap.godmList;
     //...
@@ -130,7 +130,7 @@ public class API {
     // END OF MYSQL
 
     public boolean isAfk(Player p) {
-        return Afk1.contains(p.getDisplayName());
+        return afkMap.get(p.getUniqueId()) != null;
     }
 
     public boolean isFlying(Player p) {

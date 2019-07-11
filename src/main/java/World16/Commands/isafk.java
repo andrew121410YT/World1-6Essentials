@@ -2,32 +2,31 @@ package World16.Commands;
 
 import World16.Main.Main;
 import World16.Managers.CustomConfigManager;
-import World16.Managers.CustomYmlManager;
 import World16.Utils.API;
 import World16.Utils.SetListMap;
 import World16.Utils.Translate;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class isafk implements CommandExecutor {
 
-    private API api;
     //Maps
+    Map<UUID, Location> afkMap = SetListMap.afkMap;
     //...
-    //Lists
-    List<String> Afk1 = SetListMap.afkList;
-    //...
+
     private Main plugin;
-    private CustomYmlManager shitYml = null;
+    private API api;
 
     public isafk(CustomConfigManager getCustomYml, Main getPlugin) {
-        this.shitYml = getCustomYml.getShitYml();
         this.plugin = getPlugin;
         this.api = new API(this.plugin);
+
         this.plugin.getCommand("isafk").setExecutor(this);
     }
 
@@ -43,14 +42,19 @@ public class isafk implements CommandExecutor {
             api.PermissionErrorMessage(p);
             return true;
         }
+
         if (args.length == 0) {
-            p.sendMessage(Translate.chat("&6To use /isafk:"));
-            p.sendMessage(Translate.chat("[&3/isafk check &6<PlayerName>&r]"));
-            p.sendMessage(Translate.chat("[&3/isafk &4@all&r] &5<--&r &9show's everyone that is afk."));
+            p.sendMessage(Translate.chat("&e-----&9[AfkChecker]&r&e-----&r"));
+            p.sendMessage(Translate.chat("&6/isafk check <User> &9[Check's if user is AFK or not.]"));
             return true;
-        } else if (args[0].equalsIgnoreCase("check") && args[1] != null) {
+        } else if (args.length == 2 && args[0].equalsIgnoreCase("check")) {
             Player playerFromArg = this.plugin.getServer().getPlayerExact(args[1]);
-            if (playerFromArg == null) return true;
+
+            if (playerFromArg == null) {
+                p.sendMessage(Translate.chat("&9[AfkChecker]&r&c I don't think that's a player."));
+                return true;
+            }
+
             if (api.isAfk(playerFromArg)) {
                 p.sendMessage(Translate.chat("&aThe Player: " + playerFromArg.getDisplayName() + " is afk"));
                 return true;

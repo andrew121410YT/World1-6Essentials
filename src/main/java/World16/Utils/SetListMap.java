@@ -18,12 +18,12 @@ public class SetListMap {
     public static Map<String, Map<String, List<Location>>> eRamRaw = new HashMap<>(); //0
     public static Map<String, Location> latestClickedBlocked = new HashMap<>(); //0
     static Map<String, Map<String, String>> tagsMap = new HashMap<>(); //0
+    public static Map<UUID, Location> afkMap = new HashMap<>(); //0
 
     public static Map<String, UUID> uuidCache = new HashMap<>(); //1
     public static Map<String, Location> jails = new HashMap<>(); //1
     public static Map<String, List<String>> tabCompleteMap = new HashMap<>(); //1
 
-    public static List<String> afkList = new ArrayList<>(); //0
     public static List<String> flyList = new ArrayList<>(); //0
     public static List<String> godmList = new ArrayList<>(); //0
     public static List<Player> adminListPlayer = new ArrayList<>(); //0
@@ -54,25 +54,24 @@ public class SetListMap {
         latestClickedBlocked.remove(p.getDisplayName());
 
         tagsMap.remove(p.getDisplayName());
+
+        afkMap.remove(p.getUniqueId());
     }
 
     public static void clearAllMaps() {
         keyDataM.clear();
-
         backM.clear();
-
         tpaM.clear();
-
         eRamRaw.clear();
-
         latestClickedBlocked.clear();
-
         tagsMap.clear();
+        afkMap.clear();
+        uuidCache.clear();
+        jails.clear();
+        tabCompleteMap.clear();
     }
 
     public static void clearAllLists(Player p) {
-        afkList.remove(p.getDisplayName());
-
         flyList.remove(p.getDisplayName());
 
         godmList.remove(p.getDisplayName());
@@ -81,8 +80,6 @@ public class SetListMap {
     }
 
     public static void clearAllLists() {
-        afkList.clear();
-
         flyList.clear();
 
         godmList.clear();

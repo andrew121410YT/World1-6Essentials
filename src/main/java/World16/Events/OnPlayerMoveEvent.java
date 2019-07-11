@@ -4,17 +4,20 @@ import World16.Main.Main;
 import World16.Utils.API;
 import World16.Utils.SetListMap;
 import World16.Utils.Translate;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class OnPlayerMoveEvent implements Listener {
 
     //Lists
-    List<String> afkList = SetListMap.afkList;
+    Map<UUID, Location> afkMap = SetListMap.afkMap;
     //...
 
     private Main plugin;
@@ -22,25 +25,40 @@ public class OnPlayerMoveEvent implements Listener {
 
     public OnPlayerMoveEvent(Main plugin) {
         this.plugin = plugin;
+        this.api = new API(this.plugin);
 
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
+
+        afkChecker();
     }
 
     @EventHandler
     public void onMoveM(PlayerMoveEvent event) {
         Player p = event.getPlayer();
+    }
 
-        if (!event.getFrom().equals(event.getTo())) {
-            String color = "&7";
+    private void afkChecker() {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Map.Entry<UUID, Location> entry : afkMap.entrySet()) {
+                    UUID k = entry.getKey();
+                    Location v = entry.getValue();
+                    Player p = plugin.getServer().getPlayer(k);
+                    String color = "&7";
 
-            //Checks if player is op if so then change the color to red.
-            if (p.isOp()) {
-                color = "&4";
+                    //Checks if player is op if so then change the color to red.
+                    if (p.isOp()) {
+                        color = "&4";
+                    }
+
+                    //Only if the player moves more then 3 blocks.
+                    if (p.getLocation().distanceSquared(v) > 9) {
+                        afkMap.remove(k);
+                        plugin.getServer().broadcastMessage(Translate.chat("&7*" + color + " " + p.getDisplayName() + "&r&7 is no longer AFK."));
+                    }
+                }
             }
-            if (afkList.contains(p.getDisplayName())) {
-                afkList.remove(p.getDisplayName());
-                this.plugin.getServer().broadcastMessage(Translate.chat("&7*" + color + " " + p.getDisplayName() + "&r&7 is no longer AFK."));
-            }
-        }
+        }.runTaskTimer(this.plugin, 40L, 40L);
     }
 }

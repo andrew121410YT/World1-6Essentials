@@ -7,17 +7,19 @@ import World16.Utils.API;
 import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class afk implements CommandExecutor {
 
     //Lists
-    List<String> Afk = SetListMap.afkList;
+    Map<UUID, Location> afkMap = SetListMap.afkMap;
     //....
 
     private Main plugin;
@@ -51,14 +53,14 @@ public class afk implements CommandExecutor {
             color = "&4";
         }
 
-        if (!Afk.contains(p.getDisplayName())) {
+        if (afkMap.get(p.getUniqueId()) == null) {
             Bukkit.broadcastMessage(Translate.chat("&7* " + color + p.getDisplayName() + "&r&7" + " is now AFK."));
-            Afk.add(p.getDisplayName());
+            afkMap.put(p.getUniqueId(), p.getLocation());
             new AfkEventHandler(this.plugin, p.getDisplayName()); //CALLS THE EVENT.
             return true;
-        } else if (Afk.contains(p.getDisplayName())) {
+        } else if (afkMap.get(p.getUniqueId()) != null) {
             Bukkit.broadcastMessage(Translate.chat("&7*" + color + " " + p.getDisplayName() + "&r&7 is no longer AFK."));
-            Afk.remove(p.getDisplayName());
+            afkMap.remove(p.getUniqueId());
             new UnAfkEventHandler(this.plugin, p.getDisplayName());
             return true;
         }
