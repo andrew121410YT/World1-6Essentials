@@ -12,14 +12,14 @@ import java.util.List;
 
 public class OnPlayerDamageEvent implements Listener {
 
-    private static Main plugin;
+    private Main plugin;
 
     List<String> godm = SetListMap.godmList;
 
     public OnPlayerDamageEvent(Main getPlugin) {
-        plugin = getPlugin;
+        this.plugin = getPlugin;
 
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
     }
 
     @EventHandler
@@ -31,8 +31,6 @@ public class OnPlayerDamageEvent implements Listener {
 
         if (godm.contains(p.getDisplayName())) {
             event.setCancelled(true);
-        } else {
-            return;
         }
     }
 
@@ -45,8 +43,6 @@ public class OnPlayerDamageEvent implements Listener {
 
         if (godm.contains(p.getDisplayName())) {
             event.setCancelled(true);
-        } else {
-            return;
         }
     }
 }

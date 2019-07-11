@@ -22,7 +22,7 @@ import java.util.UUID;
 
 public class OnPlayerJoinEvent implements Listener {
 
-    private static Main plugin;
+    private Main plugin;
 
     //Maps
     Map<String, KeyObject> keyDataM = SetListMap.keyDataM;

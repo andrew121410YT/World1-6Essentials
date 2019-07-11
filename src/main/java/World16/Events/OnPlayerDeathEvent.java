@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class OnPlayerDeathEvent implements Listener {
 
-    private static Main plugin;
+    private Main plugin;
 
     //Maps
     Map<UUID, LocationObject> backm = SetListMap.backM;
@@ -29,7 +29,9 @@ public class OnPlayerDeathEvent implements Listener {
     public void OnDeath(PlayerDeathEvent event) {
         Player p = event.getEntity();
 
-        if (backm.get(p.getUniqueId()) != null) {
+        if (backm.get(p.getUniqueId()) == null) {
+            backm.put(p.getUniqueId(), new LocationObject());
+        } else {
             backm.get(p.getUniqueId()).setLocation("death", 1, p.getLocation());
         }
     }

@@ -21,7 +21,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-    private static Main plugin;
+    private Main plugin;
 
     //Managers
     private CustomConfigManager customconfig;
@@ -153,7 +153,7 @@ public class Main extends JavaPlugin {
         return true;
     }
 
-    public static Main getPlugin() {
+    public Main getPlugin() {
         return plugin;
     }
 

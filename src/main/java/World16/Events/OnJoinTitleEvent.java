@@ -10,15 +10,16 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class OnJoinTitleEvent implements Listener {
 
-    private static Main plugin;
+    private Main plugin;
+    private FileConfiguration file;
 
     public OnJoinTitleEvent(Main plugin) {
-        OnJoinTitleEvent.plugin = plugin;
+        this.plugin = plugin;
+        this.file = this.plugin.getConfig();
 
-        OnJoinTitleEvent.plugin.getServer().getPluginManager().registerEvents(this, OnJoinTitleEvent.plugin);
+        this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
     }
 
-    FileConfiguration file = Main.getPlugin().getConfig();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {

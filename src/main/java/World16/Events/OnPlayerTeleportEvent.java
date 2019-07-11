@@ -33,12 +33,12 @@ public class OnPlayerTeleportEvent implements Listener {
 
         if (backm.get(p.getUniqueId()) == null) {
             backm.put(p.getUniqueId(), new LocationObject());
-            return;
+        } else {
+            // Only save location if teleporting more than 5 blocks.
+            if (!to.getWorld().equals(from.getWorld()) || to.distanceSquared(from) > 25) {
+                backm.get(p.getUniqueId()).setLocation("tp", 2, from);
+            }
         }
 
-        // Only save location if teleporting more than 5 blocks.
-        if (!to.getWorld().equals(from.getWorld()) || to.distanceSquared(from) > 25) {
-            backm.get(p.getUniqueId()).setLocation("tp", 2, from);
-        }
     }
 }
