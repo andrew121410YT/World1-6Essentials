@@ -61,11 +61,11 @@ public class API {
     //...
 
     // FOR MYSQL
-    private String mysql_HOST = plugin.getConfig().getString("MysqlHOST");
-    private String mysql_DATABASE = plugin.getConfig().getString("MysqlDATABASE");
-    private String mysql_USER = plugin.getConfig().getString("MysqlUSER");
-    private String mysql_PASSWORD = plugin.getConfig().getString("MysqlPASSWORD");
-    private String mysql_PORT = plugin.getConfig().getString("MysqlPORT");
+    private String mysql_HOST;
+    private String mysql_DATABASE;
+    private String mysql_USER;
+    private String mysql_PASSWORD;
+    private String mysql_PORT;
     // END MYSQL
 
     // MAIN
@@ -85,6 +85,13 @@ public class API {
 
     // END MAIN
 
+    public void setMySQL() {
+        mysql_HOST = plugin.getConfig().getString("MysqlHOST");
+        mysql_DATABASE = plugin.getConfig().getString("MysqlDATABASE");
+        mysql_USER = plugin.getConfig().getString("MysqlUSER");
+        mysql_PASSWORD = plugin.getConfig().getString("MysqlPASSWORD");
+        mysql_PORT = plugin.getConfig().getString("MysqlPORT");
+    }
     // START OF MYSQL
 
     public String getMysql_HOST() {
