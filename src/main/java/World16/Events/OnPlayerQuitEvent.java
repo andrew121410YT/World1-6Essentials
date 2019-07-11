@@ -11,13 +11,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-public class OnLeaveEvent implements Listener {
+public class OnPlayerQuitEvent implements Listener {
     private static Main plugin;
     KeyAPI keyAPI = new KeyAPI();
     API api = new API();
     OldMySQL mySQL = new OldMySQL();
 
-    public OnLeaveEvent(Main getPlugin) {
+    public OnPlayerQuitEvent(Main getPlugin) {
         plugin = getPlugin;
 
         plugin.getServer().getPluginManager().registerEvents(this, plugin);

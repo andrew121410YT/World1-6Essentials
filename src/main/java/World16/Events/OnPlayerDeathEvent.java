@@ -11,7 +11,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import java.util.Map;
 import java.util.UUID;
 
-public class OnDeathEvent implements Listener {
+public class OnPlayerDeathEvent implements Listener {
 
     private static Main plugin;
 
@@ -19,7 +19,7 @@ public class OnDeathEvent implements Listener {
     Map<UUID, LocationObject> backm = SetListMap.backM;
     //...
 
-    public OnDeathEvent(Main getPlugin) {
+    public OnPlayerDeathEvent(Main getPlugin) {
         plugin = getPlugin;
 
         plugin.getServer().getPluginManager().registerEvents(this, plugin);

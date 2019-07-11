@@ -14,7 +14,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Arrays;
 import java.util.List;
 
-public class AsyncPlayerChatEvent implements Listener {
+public class OnAsyncPlayerChatEvent implements Listener {
 
     private Main plugin;
     private API api;
@@ -24,7 +24,7 @@ public class AsyncPlayerChatEvent implements Listener {
     List<Player> adminListPlayer = SetListMap.adminListPlayer;
     //...
 
-    public AsyncPlayerChatEvent(Main getPlugin) {
+    public OnAsyncPlayerChatEvent(Main getPlugin) {
         this.plugin = getPlugin;
 
         this.api = new API();

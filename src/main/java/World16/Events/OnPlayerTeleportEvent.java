@@ -12,13 +12,13 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import java.util.Map;
 import java.util.UUID;
 
-public class OnTpEvent implements Listener {
+public class OnPlayerTeleportEvent implements Listener {
 
     private Main plugin;
 
     Map<UUID, LocationObject> backm = SetListMap.backM;
 
-    public OnTpEvent(Main getPlugin) {
+    public OnPlayerTeleportEvent(Main getPlugin) {
         plugin = getPlugin;
 
         plugin.getServer().getPluginManager().registerEvents(this, plugin);

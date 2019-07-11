@@ -97,19 +97,19 @@ public class Main extends JavaPlugin {
 
     private void regEvents() {
         //Bukkit.getServer().getPluginManager().registerEvents(this, this);
-        new OnJoinEvent(this);
-        new OnLeaveEvent(this);
+        new OnPlayerJoinEvent(this);
+        new OnPlayerQuitEvent(this);
         //...
-        new OnDeathEvent(this);
-        new PlayerDamageEvent(this);
-        new OnTpEvent(this);
+        new OnPlayerDeathEvent(this);
+        new OnPlayerDamageEvent(this);
+        new OnPlayerTeleportEvent(this);
         //...
-        new OnBedEnterEvent(this);
+        new OnPlayerBedEnterEvent(this);
         new OnJoinTitleEvent(this);
         //...
-        new InventoryClickEvent(this, this.customInventoryManager);
-        new AsyncPlayerChatEvent(this);
-        new PlayerInteractEvent(this);
+        new OnInventoryClickEvent(this, this.customInventoryManager);
+        new OnAsyncPlayerChatEvent(this);
+        new OnPlayerInteractEvent(this);
     }
 
     private void regFileConfigGEN() {

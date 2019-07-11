@@ -10,7 +10,7 @@ import org.bukkit.event.block.Action;
 
 import java.util.Map;
 
-public class PlayerInteractEvent implements Listener {
+public class OnPlayerInteractEvent implements Listener {
 
     //Maps
     Map<String, Location> latestClickedBlocked = SetListMap.latestClickedBlocked;
@@ -18,7 +18,7 @@ public class PlayerInteractEvent implements Listener {
 
     private Main plugin;
 
-    public PlayerInteractEvent(Main getPlugin) {
+    public OnPlayerInteractEvent(Main getPlugin) {
         plugin = getPlugin;
 
         plugin.getServer().getPluginManager().registerEvents(this, plugin);

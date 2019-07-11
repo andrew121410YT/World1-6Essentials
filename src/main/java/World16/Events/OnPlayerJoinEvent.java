@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class OnJoinEvent implements Listener {
+public class OnPlayerJoinEvent implements Listener {
 
     private static Main plugin;
 
@@ -37,7 +37,7 @@ public class OnJoinEvent implements Listener {
     private API api = new API();
     private KeyAPI keyapi;
 
-    public OnJoinEvent(Main getPlugin) {
+    public OnPlayerJoinEvent(Main getPlugin) {
         plugin = getPlugin;
         this.mysql = new SQLite(plugin.getDataFolder(), "keys");
         this.keyapi = new KeyAPI(this.mysql);

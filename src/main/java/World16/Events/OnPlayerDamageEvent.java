@@ -10,13 +10,13 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.util.List;
 
-public class PlayerDamageEvent implements Listener {
+public class OnPlayerDamageEvent implements Listener {
 
     private static Main plugin;
 
     List<String> godm = SetListMap.godmList;
 
-    public PlayerDamageEvent(Main getPlugin) {
+    public OnPlayerDamageEvent(Main getPlugin) {
         plugin = getPlugin;
 
         plugin.getServer().getPluginManager().registerEvents(this, plugin);

@@ -9,11 +9,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 
-public class OnBedEnterEvent implements Listener {
+public class OnPlayerBedEnterEvent implements Listener {
 
     private Main plugin;
 
-    public OnBedEnterEvent(Main plugin) {
+    public OnPlayerBedEnterEvent(Main plugin) {
         this.plugin = plugin;
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
     }

@@ -9,13 +9,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.InventoryHolder;
 
-public class InventoryClickEvent implements Listener {
+public class OnInventoryClickEvent implements Listener {
 
     private Main plugin;
 
     private CustomInventoryManager customInventoryManager;
 
-    public InventoryClickEvent(Main plugin, CustomInventoryManager customInventoryManager) {
+    public OnInventoryClickEvent(Main plugin, CustomInventoryManager customInventoryManager) {
         this.plugin = plugin;
         this.customInventoryManager = customInventoryManager;
 
