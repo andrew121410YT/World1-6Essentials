@@ -22,7 +22,7 @@ public class flyspeed implements CommandExecutor {
     public flyspeed(CustomConfigManager getConfigInstance, Main plugin) {
         this.shitYml = getConfigInstance.getShitYml();
         this.plugin = plugin;
-        this.api = new API();
+        this.api = new API(this.plugin);
         plugin.getCommand("fs").setExecutor(this);
     }
 
