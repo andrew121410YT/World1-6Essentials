@@ -38,6 +38,7 @@ commands:
   runcommands:
   wformat:
   xyzdxdydz:
+  workbench:
 
   gmc:
     aliases:
@@ -198,3 +199,6 @@ permissions:
   world16.xyzdxdydz:
     description: Allows to do xyzdxdydz
     default: op
+  world16.workbench:
+    description: Allows to do workbench
+    default: true

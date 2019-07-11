@@ -90,6 +90,7 @@ public class Main extends JavaPlugin {
         new runCommands(this.customconfig, this);
         new wformat(this.customconfig, this);
         new xyzdxdydz(this.customconfig, this);
+        new workbench(this.customconfig, this);
     }
 
     private void regEvents() {
