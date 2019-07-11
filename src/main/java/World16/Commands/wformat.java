@@ -1,7 +1,7 @@
 package World16.Commands;
 
-import World16.Managers.CustomConfigManager;
 import World16.Main.Main;
+import World16.Managers.CustomConfigManager;
 import World16.Utils.API;
 import World16.Utils.Translate;
 import net.md_5.bungee.api.chat.BaseComponent;

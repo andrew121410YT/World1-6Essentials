@@ -1,7 +1,7 @@
 package World16.Commands.tp;
 
-import World16.Managers.CustomConfigManager;
 import World16.Main.Main;
+import World16.Managers.CustomConfigManager;
 import World16.Utils.API;
 import World16.Utils.SetListMap;
 import World16.Utils.Translate;
