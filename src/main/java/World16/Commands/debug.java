@@ -111,7 +111,7 @@ public class debug implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                api.clearAllLists();
+                SetListMap.clearAllLists();
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
 
@@ -121,7 +121,7 @@ public class debug implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                api.clearAllMaps();
+                SetListMap.clearAllMaps();
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
 
@@ -132,7 +132,7 @@ public class debug implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                api.clearAllLists(p);
+                SetListMap.clearAllLists(p);
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
 
@@ -143,7 +143,7 @@ public class debug implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                api.clearAllMaps(p);
+                SetListMap.clearAllMaps(p);
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
 

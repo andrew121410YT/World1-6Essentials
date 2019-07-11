@@ -35,6 +35,7 @@ public class eram implements CommandExecutor {
     //Maps
     Map<String, Map<String, List<Location>>> aaa = SetListMap.eRamRaw;
     Map<String, Location> latestClickedBlocked = SetListMap.latestClickedBlocked;
+
     //...
 
     public eram(CustomConfigManager getCustomYml, Main getPlugin, CustomInventoryManager customInventoryManager) {

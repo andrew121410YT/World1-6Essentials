@@ -3,8 +3,6 @@ package World16.Utils;
 import World16.Main.Main;
 import World16.Managers.CustomConfigManager;
 import World16.Managers.CustomYmlManager;
-import World16.Objects.KeyObject;
-import World16.Objects.LocationObject;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
@@ -28,13 +26,6 @@ import java.util.UUID;
 public class API {
 
     // Maps
-    Map<String, KeyObject> keyDataM = SetListMap.keyDataM;
-    Map<UUID, LocationObject> backm = SetListMap.backM;
-    Map<Player, Player> tpam = SetListMap.tpaM;
-    Map<String, List<String>> tabCompleteMap = SetListMap.tabCompleteMap;
-    Map<String, Map<String, List<Location>>> eRamManager = SetListMap.eRamRaw;
-    Map<String, Location> latestClickedBlocked = SetListMap.latestClickedBlocked;
-    Map<String, Map<String, String>> tagsMap = Tag.tagsMap;
     Map<String, UUID> uuidCache = SetListMap.uuidCache;
     //...
 
@@ -42,8 +33,6 @@ public class API {
     List<String> Afk1 = SetListMap.afkList;
     List<String> Fly1 = SetListMap.flyList;
     List<String> GodM = SetListMap.godmList;
-    List<String> adminList = SetListMap.adminList;
-    List<Player> adminListPLayer = SetListMap.adminListPlayer;
     //...
 
     private Main plugin;
@@ -88,6 +77,8 @@ public class API {
 
     // END MAIN
 
+    // START OF MYSQL
+
     public void setMySQL() {
         mysql_HOST = plugin.getConfig().getString("MysqlHOST");
         mysql_DATABASE = plugin.getConfig().getString("MysqlDATABASE");
@@ -95,7 +86,6 @@ public class API {
         mysql_PASSWORD = plugin.getConfig().getString("MysqlPASSWORD");
         mysql_PORT = plugin.getConfig().getString("MysqlPORT");
     }
-    // START OF MYSQL
 
     public String getMysql_HOST() {
         if (this.mysql_HOST != null) {
@@ -155,63 +145,6 @@ public class API {
         return plugin.getConfig().getString("debug").equalsIgnoreCase("true");
     }
 
-    public void clearListAndMaps(Player p) {
-        clearAllMaps(p);
-        clearAllLists(p);
-    }
-
-    public void clearListAndMaps() {
-        clearAllMaps();
-        clearAllLists();
-    }
-
-    public void clearAllMaps(Player p) {
-        keyDataM.remove(p.getDisplayName());
-
-        backm.remove(p.getUniqueId());
-
-        tpam.remove(p);
-
-        eRamManager.remove(p.getDisplayName());
-
-        latestClickedBlocked.remove(p.getDisplayName());
-
-        tagsMap.remove(p.getDisplayName());
-    }
-
-    public void clearAllMaps() {
-        keyDataM.clear();
-
-        backm.clear();
-
-        tpam.clear();
-
-        eRamManager.clear();
-
-        latestClickedBlocked.clear();
-
-        tagsMap.clear();
-    }
-
-    public void clearAllLists(Player p) {
-        Afk1.remove(p.getDisplayName());
-
-        Fly1.remove(p.getDisplayName());
-
-        GodM.remove(p.getDisplayName());
-
-        adminListPLayer.remove(p);
-    }
-
-    public void clearAllLists() {
-        Afk1.clear();
-
-        Fly1.clear();
-
-        GodM.clear();
-
-        adminListPLayer.clear();
-    }
 
     public String FormatTime(LocalDateTime time) {
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
@@ -226,7 +159,8 @@ public class API {
 
     public String getServerVersion() {
         String version = plugin.getServer().getVersion();
-        if (version.contains("1.14") || version.contains("1.14.1") || version.contains("1.14.2")) return "1.14";
+        if (version.contains("1.14") || version.contains("1.14.1") || version.contains("1.14.2") || version.contains("1.14.3") || version.contains("1.14.4"))
+            return "1.14";
         if (version.contains("1.13") || version.contains("1.13.1") || version.contains("1.13.2")) return "1.13";
         if (version.contains("1.12") || version.contains("1.12.1") || version.contains("1.12.2")) return "1.12";
         if (version.contains("1.11") || version.contains("1.11.1") || version.contains("1.11.2")) return "1.11";

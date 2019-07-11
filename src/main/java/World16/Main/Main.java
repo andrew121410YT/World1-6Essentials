@@ -10,6 +10,7 @@ import World16.Managers.CustomConfigManager;
 import World16.Managers.JailManager;
 import World16.Utils.API;
 import World16.Utils.Metrics;
+import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import World16.test.test1;
 import org.bukkit.Bukkit;
@@ -46,6 +47,7 @@ public class Main extends JavaPlugin {
     }
 
     public void onDisable() {
+        SetListMap.clearSetListMap();
         getLogger().info("[World1-6Essentials] is now disabled.");
     }
 
@@ -108,6 +110,7 @@ public class Main extends JavaPlugin {
         new OnInventoryClickEvent(this, this.customInventoryManager);
         new OnAsyncPlayerChatEvent(this);
         new OnPlayerInteractEvent(this);
+        new OnPlayerMoveEvent(this);
     }
 
     private void regFileConfigGEN() {

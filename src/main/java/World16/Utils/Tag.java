@@ -6,7 +6,7 @@ import java.util.Map;
 public class Tag {
 
     //Maps
-    public static Map<String, Map<String, String>> tagsMap = new HashMap<>();
+    static Map<String, Map<String, String>> tagsMap = SetListMap.tagsMap;
     //...
     //Lists
     //...
