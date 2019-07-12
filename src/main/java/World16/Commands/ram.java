@@ -33,9 +33,9 @@ public class ram implements CommandExecutor {
             return true;
         }
 
-        p.sendMessage(Translate.chat("&6Maximum memory: " + (Runtime.getRuntime().maxMemory() / 1024 / 1024)));
-        p.sendMessage(Translate.chat("&6Allocated memory: " + (Runtime.getRuntime().totalMemory() / 1024 / 1024)));
-        p.sendMessage(Translate.chat("&6Free memory: " + (Runtime.getRuntime().freeMemory() / 1024 / 1024)));
+        p.sendMessage(Translate.chat("&6Maximum memory: &c" + (Runtime.getRuntime().maxMemory() / 1024 / 1024) + " MB."));
+        p.sendMessage(Translate.chat("&6Allocated memory: &c" + (Runtime.getRuntime().totalMemory() / 1024 / 1024) + " MB."));
+        p.sendMessage(Translate.chat("&6Free memory: &c" + (Runtime.getRuntime().freeMemory() / 1024 / 1024) + " MB."));
         return true;
     }
 }
