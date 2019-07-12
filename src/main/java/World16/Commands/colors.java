@@ -32,6 +32,7 @@ public class colors implements CommandExecutor {
             api.PermissionErrorMessage(p);
             return true;
         }
+
         p.sendMessage("Dark Red &4 " + Translate.chat("&4EXAMPLE"));
         p.sendMessage("Red &c " + Translate.chat("&cEXAMPLE"));
         p.sendMessage("Gold &6 " + Translate.chat("&6EXAMPLE"));

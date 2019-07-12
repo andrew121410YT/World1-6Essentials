@@ -28,15 +28,15 @@ public class key implements CommandExecutor {
 
     private API api;
     private KeyAPI keyapi;
-    private SQLite mysql;
+    private SQLite isql;
 
     public key(Main getPlugin) {
         this.plugin = getPlugin;
 
         this.api = new API(this.plugin);
-        this.mysql = new SQLite(this.plugin.getDataFolder(), "keys");
+        this.isql = new SQLite(this.plugin.getDataFolder(), "keys");
 
-        this.keyapi = new KeyAPI(this.plugin, this.mysql);
+        this.keyapi = new KeyAPI(this.plugin, this.isql);
 
         this.plugin.getCommand("key").setExecutor(this);
         this.plugin.getCommand("key").setTabCompleter(new KeyTab(this.plugin));
@@ -89,8 +89,8 @@ public class key implements CommandExecutor {
 
                     if (keyDataM.get(p.getDisplayName()) != null) {
                         keyDataM.get(p.getDisplayName()).setKey(keyID, setDataDone);
-                        keyapi.SetKeyAndDeleteOldKey(mysql, keyID, p, setDataDone); //<-- MySql
-                        p.sendMessage(Translate.chat("&6Your key has been set and stored in the mysql database."));
+                        keyapi.SetKeyAndDeleteOldKey(isql, keyID, p, setDataDone); //<-- MySql
+                        p.sendMessage(Translate.chat("&6Your key has been set and stored in the isql database."));
                         return true;
                     } else {
                         p.kickPlayer("Please rejoin the server something went wrong.");
@@ -129,12 +129,12 @@ public class key implements CommandExecutor {
                     return true;
                 } else if (args.length == 2 && !args[1].equalsIgnoreCase("@everything")) {
                     Integer keyID = Integer.valueOf(args[1]);
-                    keyapi.ReplaceKey(mysql, keyID, p, "null");
+                    keyapi.ReplaceKey(isql, keyID, p, "null");
                     keyDataM.remove(p.getDisplayName());
                     p.sendMessage(Translate.chat("&4The lore has been reseted."));
                     return true;
                 } else if (args.length == 2 && args[1].equalsIgnoreCase("@everything")) {
-                    keyapi.ResetEverythingFromPlayerMySQL(mysql, p);
+                    keyapi.ResetEverythingFromPlayerMySQL(isql, p);
                     keyDataM.remove(p.getDisplayName());
                     p.sendMessage(Translate.chat("&bOK..."));
                     return true;

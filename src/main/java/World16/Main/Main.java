@@ -1,6 +1,10 @@
 package World16.Main;
 
 import World16.Commands.*;
+import World16.Commands.home.delhome;
+import World16.Commands.home.home;
+import World16.Commands.home.homelist;
+import World16.Commands.home.sethome;
 import World16.Commands.tp.tpa;
 import World16.Commands.tp.tpaccept;
 import World16.Commands.tp.tpdeny;
@@ -93,6 +97,12 @@ public class Main extends JavaPlugin {
         new wformat(this.customconfig, this);
         new xyzdxdydz(this.customconfig, this);
         new workbench(this.customconfig, this);
+
+        //Homes
+        new delhome(this.plugin);
+        new home(this.plugin);
+        new homelist(this.plugin);
+        new sethome(this.plugin);
     }
 
     private void regEvents() {

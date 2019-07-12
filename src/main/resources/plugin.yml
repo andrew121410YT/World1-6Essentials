@@ -39,6 +39,12 @@ commands:
   wformat:
   xyzdxdydz:
   workbench:
+  delhome:
+  home:
+  homelist:
+    aliases:
+      - homes
+  sethome:
 
   gmc:
     aliases:
@@ -202,3 +208,8 @@ permissions:
   world16.workbench:
     description: Allows to do workbench
     default: true
+  world16.home:
+    description: Allows to do home commands
+    default: true
+    children:
+      world16.home.op: true

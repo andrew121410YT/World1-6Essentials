@@ -19,6 +19,7 @@ public class SetListMap {
     public static Map<String, Location> latestClickedBlocked = new HashMap<>(); //0
     static Map<String, Map<String, String>> tagsMap = new HashMap<>(); //0
     public static Map<UUID, Location> afkMap = new HashMap<>(); //0
+    public static Map<UUID, Map<String, Location>> homesMap = new HashMap<>(); //0
 
     public static Map<String, UUID> uuidCache = new HashMap<>(); //1
     public static Map<String, Location> jails = new HashMap<>(); //1
@@ -56,6 +57,8 @@ public class SetListMap {
         tagsMap.remove(p.getDisplayName());
 
         afkMap.remove(p.getUniqueId());
+
+        homesMap.remove(p.getUniqueId());
     }
 
     public static void clearAllMaps() {
@@ -69,6 +72,7 @@ public class SetListMap {
         uuidCache.clear();
         jails.clear();
         tabCompleteMap.clear();
+        homesMap.clear();
     }
 
     public static void clearAllLists(Player p) {
