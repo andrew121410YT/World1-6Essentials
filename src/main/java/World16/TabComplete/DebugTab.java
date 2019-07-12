@@ -40,7 +40,6 @@ public class DebugTab implements TabCompleter {
             tabCompleteMap.get("debug1-6").add("debugmessages");
             tabCompleteMap.get("debug1-6").add("finddefaultspawn");
             tabCompleteMap.get("debug1-6").add("uuidcache");
-            tabCompleteMap.get("debug1-6").add("sql");
 //            tabCompleteMap.get("debug").add("");
         }
     }

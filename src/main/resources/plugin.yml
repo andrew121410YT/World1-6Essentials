@@ -118,14 +118,11 @@ permissions:
       world16.debug.clearalllistswithname: true
       world16.debug.clearallmapswithname: true
       world16.debug.date: true
-      world16.debug.playerversion: true
-      world16.debug.playerversion.other: true
       world16.debug.checkuuid: true
       world16.debig.checkuuid.other: true
       world16.debug.debugmessages: true
       world16.debug.finddefaultspawn: true
       world16.debug.uuidcache: true
-      world16.debug.sql: true
 
 
   world16.echest:

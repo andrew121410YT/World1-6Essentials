@@ -1,7 +1,6 @@
 package World16.Commands;
 
 import World16.Main.Main;
-import World16.Storage.OldMySQL;
 import World16.TabComplete.DebugTab;
 import World16.Utils.API;
 import World16.Utils.SetListMap;
@@ -29,14 +28,12 @@ public class debug implements CommandExecutor {
     //...
 
     private API api;
-    private OldMySQL mysql;
 
     private Main plugin;
 
     public debug(Main getPlugin) {
         this.plugin = getPlugin;
         this.api = new API(this.plugin);
-        this.mysql = new OldMySQL(this.api);
 
         this.plugin.getCommand("debug1-6").setExecutor(this);
         this.plugin.getCommand("debug1-6").setTabCompleter(new DebugTab(this.plugin));
@@ -63,12 +60,10 @@ public class debug implements CommandExecutor {
             p.sendMessage(Translate.chat("/debug1-6 clearalllistswithname"));
             p.sendMessage(Translate.chat("/debug1-6 clearallmapswithname")); //2
             p.sendMessage(Translate.chat("/debug1-6 date"));
-            p.sendMessage(Translate.chat("/debug1-6 playerversion"));
             p.sendMessage(Translate.chat("/debug1-6 checkuuid"));
             p.sendMessage(Translate.chat("/debug1-6 debugmessages"));
             p.sendMessage(Translate.chat("/debug1-6 finddefaultspawn"));
             p.sendMessage(Translate.chat("/debug1-6 uuidcache"));
-            p.sendMessage(Translate.chat("/debug1-6 sql"));
             //p.sendMessage(World16.Translate.chat("/debug1-6 "));
             return true;
         } else if (args.length >= 1) {
@@ -223,28 +218,6 @@ public class debug implements CommandExecutor {
                 return true;
             }
             uuidCache.forEach((key, value) -> p.sendMessage(Translate.chat("[UUIDCache] Player: " + key + " UUID: " + value)));
-            return true;
-
-            //SQL
-        } else if (args.length >= 2 && (args[0].equalsIgnoreCase("sql"))) {
-            if (!p.hasPermission("world16.debug.sql")) { // Permission
-                api.PermissionErrorMessage(p);
-                return true;
-            }
-            // String Builder
-            StringBuilder builder = new StringBuilder();
-            for (int i = 1; i < args.length; i++) {
-                builder.append(args[i] + " ");
-            }
-            String msg = builder.toString();
-
-            mysql.Connect();
-            mysql.ExecuteCommand(msg);
-            mysql.Disconnect();
-            p.sendMessage(Translate.chat("&4&lYour command has been executed thru SQL."));
-            p.sendMessage(Translate.chat("&aHere's the command you did &r" + msg));
-            return true;
-        } else {
             return true;
         }
         return true;
