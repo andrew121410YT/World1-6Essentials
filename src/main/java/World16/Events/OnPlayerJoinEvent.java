@@ -77,12 +77,12 @@ public class OnPlayerJoinEvent implements Listener {
             plugin.getServer().getConsoleSender().sendMessage(Translate.chat(API.USELESS_TAG + " Please make sure too put in the isqlKeys details in the config.yml."));
 
         if (backM.get(p.getUniqueId()) != null) {
-            this.plugin.getServer().broadcastMessage(Translate.chat(API.EMERGENCY_TAG + " " + "&cSETLISTMAP UNLOADER BACK ISN'T WORKING: CLASS: " + this.getClass()));
+            this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(API.EMERGENCY_TAG + " " + "&cSETLISTMAP UNLOADER BACK ISN'T WORKING: CLASS: " + this.getClass()));
             backM.remove(p.getUniqueId());
         } else backM.put(p.getUniqueId(), new LocationObject());
 
         if (homesMap.get(p.getUniqueId()) != null) {
-            this.plugin.getServer().broadcastMessage(Translate.chat(API.EMERGENCY_TAG + " " + "&cSETLISTMAP UNLOADER HOMES ISN'T WORKING: CLASS: " + this.getClass()));
+            this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(API.EMERGENCY_TAG + " " + "&cSETLISTMAP UNLOADER HOMES ISN'T WORKING: CLASS: " + this.getClass()));
             homesMap.remove(p.getUniqueId());
         } else this.homeManager.getAllHomesFromISQL(this.isqlHomes, p);
 
