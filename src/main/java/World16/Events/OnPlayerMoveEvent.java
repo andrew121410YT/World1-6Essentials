@@ -38,6 +38,8 @@ public class OnPlayerMoveEvent implements Listener {
     }
 
     private void afkChecker() {
+
+        //Checks if the player moves.
         new BukkitRunnable() {
             @Override
             public void run() {

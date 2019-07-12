@@ -145,7 +145,6 @@ public class API {
         return plugin.getConfig().getString("debug").equalsIgnoreCase("true");
     }
 
-
     public String FormatTime(LocalDateTime time) {
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
         return time.format(myFormatObj);
