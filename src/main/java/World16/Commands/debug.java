@@ -66,8 +66,7 @@ public class debug implements CommandExecutor {
             p.sendMessage(Translate.chat("/debug1-6 uuidcache"));
             //p.sendMessage(World16.Translate.chat("/debug1-6 "));
             return true;
-        } else if (args.length >= 1) {
-
+        } else {
             //OP
             if (args[0].equalsIgnoreCase("op")) {
                 if (!p.hasPermission("world16.debug.op")) { // Permission
@@ -180,46 +179,9 @@ public class debug implements CommandExecutor {
                     p.spigot().sendMessage(components);
                     return true;
                 }
-            }
-            //DEBUG MESSAGES
-        } else if (args.length >= 1 && args[0].equalsIgnoreCase("debugmessages")) {
-            if (!p.hasPermission("world16.debug.debugmessages")) {
-                api.PermissionErrorMessage(p);
                 return true;
             }
-            if (args.length == 1) {
-                p.sendMessage(Translate.chat("&4Usage: /debug1-6 debugmessages on OR off"));
-                return true;
-            }
-            if (args.length == 2 && args[1].equalsIgnoreCase("on")) {
-                this.plugin.getConfig().set("debug", "true");
-                this.plugin.saveConfig();
-                this.plugin.reloadConfig();
-                p.sendMessage(Translate.chat("&bOK..."));
-                return true;
-            } else if (args.length == 2 && args[1].equalsIgnoreCase("off")) {
-                this.plugin.getConfig().set("debug", "false");
-                this.plugin.saveConfig();
-                this.plugin.reloadConfig();
-                p.sendMessage(Translate.chat("&bOK..."));
-                return true;
-            }
-        } else if (args.length == 1 && args[0].equalsIgnoreCase("finddefaultspawn")) {
-            if (!p.hasPermission("world16.debug.finddefaultspawn")) {
-                api.PermissionErrorMessage(p);
-                return true;
-            }
-            p.teleport(this.plugin.getServer().getWorld(p.getWorld().getName()).getSpawnLocation());
-            return true;
-
-        } else if (args.length == 1 && args[0].equalsIgnoreCase("uuidcache")) {
-            if (!p.hasPermission("world16.debug.uuidcache")) {
-                api.PermissionErrorMessage(p);
-                return true;
-            }
-            uuidCache.forEach((key, value) -> p.sendMessage(Translate.chat("[UUIDCache] Player: " + key + " UUID: " + value)));
             return true;
         }
-        return true;
     }
 }

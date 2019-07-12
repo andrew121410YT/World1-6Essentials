@@ -208,5 +208,6 @@ permissions:
   world16.home:
     description: Allows to do home commands
     default: true
-    children:
-      world16.home.op: true
+  world16.home.op:
+    description: Allows to do op home commands
+    default: true
