@@ -69,33 +69,33 @@ public class HomeManager {
         }
     }
 
-    public Location getHomeFromMap(Player player, String HomeName) {
+    public Location getHome(Player player, String HomeName) {
         this.fixMaps(player.getUniqueId(), true);
 
         return rawHomesMap.get(player.getUniqueId()).get(HomeName);
     }
 
-    public Location getHomeFromMap(UUID uuid, String HomeName) {
+    public Location getHome(UUID uuid, String HomeName) {
         this.fixMaps(uuid, true);
 
         return rawHomesMap.get(uuid).get(HomeName);
     }
 
-    public void removeHome(ISQL isql, Player player, String HomeName) {
+    public void deleteHome(ISQL isql, Player player, String HomeName) {
         this.fixMaps(player.getUniqueId(), true);
 
         rawHomesMap.get(player.getUniqueId()).remove(HomeName.toLowerCase());
 
-        removeHomeForISQL(isql, player, HomeName);
+        deleteHomeFromISQL(isql, player, HomeName);
     }
 
-    public void removeHomeForISQL(ISQL isql, Player player, String HomeName) {
+    private void deleteHomeFromISQL(ISQL isql, Player player, String HomeName) {
         isql.Connect();
         isql.ExecuteCommand("DELETE FROM Homes WHERE UUID='" + player.getUniqueId() + "' AND HomeName='" + HomeName.toLowerCase() + "'");
         isql.Disconnect();
     }
 
-    public void removeAllHomesFromISQL(ISQL isql, Player player) {
+    public void deleteAllHomesFromISQL(ISQL isql, Player player) {
         isql.Connect();
         isql.ExecuteCommand("DELETE FROM Homes WHERE UUID='" + player.getUniqueId() + "'");
         isql.Disconnect();

@@ -51,12 +51,12 @@ public class delhome implements CommandExecutor {
             defaultHomeName = args[0].toLowerCase();
 
             if (defaultHomeName.equalsIgnoreCase("@allHomes")) {
-                homeManager.removeAllHomesFromISQL(isql, p);
+                homeManager.deleteAllHomesFromISQL(isql, p);
                 return true;
             }
         }
 
-        homeManager.removeHome(isql, p, defaultHomeName);
+        homeManager.deleteHome(isql, p, defaultHomeName);
         p.sendMessage(Translate.chat("&9[Homes] &cHome deleted."));
         return true;
     }

@@ -74,7 +74,7 @@ public class home implements CommandExecutor {
             }
         }
 
-        Location home = homeManager.getHomeFromMap(p, defaultHomeName);
+        Location home = homeManager.getHome(p, defaultHomeName);
 
         if (home != null) {
             p.teleport(home);
