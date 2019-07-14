@@ -2,32 +2,33 @@ package World16.Commands.tp;
 
 import World16.CustomEvents.handlers.TpaEventHandler;
 import World16.Main.Main;
-import World16.MysqlAPI.MySQL;
-import World16.Translate.Translate;
+import World16.Managers.CustomConfigManager;
 import World16.Utils.API;
-import World16.Utils.CustomYmlManger;
+import World16.Utils.SetListMap;
+import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class tpa implements CommandExecutor {
 
     private Main plugin;
 
-    MySQL mysql = new MySQL();
-    API api = new API();
+    private API api;
 
-    //HASHMAPS
-    public static LinkedHashMap<Player, Player> tpam = new LinkedHashMap<>();
+    //Maps
+    Map<Player, Player> tpam = SetListMap.tpaM;
+    //...
 
-    private CustomYmlManger configinstance = null;
+    private CustomConfigManager customConfigManager;
 
-    public tpa(CustomYmlManger getCustomYml, Main getPlugin) {
-        this.configinstance = getCustomYml;
+    public tpa(CustomConfigManager getCustomYml, Main getPlugin) {
+        this.customConfigManager = getCustomYml;
         this.plugin = getPlugin;
+        this.api = new API(this.plugin);
 
         this.plugin.getCommand("tpa").setExecutor(this);
     }
@@ -45,30 +46,27 @@ public class tpa implements CommandExecutor {
         }
         if (args.length == 0) {
             p.sendMessage(Translate.chat("[&eTPA&r] &cUsage: /tpa <Player>"));
-        } else if (args.length >= 1) {
+        } else {
             Player target = plugin.getServer().getPlayerExact(args[0]); //Get the player
-            if (args.length >= 1 && target != null && target.isOnline()) {
+            if (target != null && target.isOnline()) {
                 tpam.put(target, p);
-                new TpaEventHandler(p.getDisplayName(), target.getDisplayName()); //RUNS TPA EVENT
+                new TpaEventHandler(this.plugin, p.getDisplayName(), target.getDisplayName()); //RUNS TPA EVENT
                 p.sendMessage(
                         Translate.chat("[&eTPA&r] &9Sent tpa request too " + target.getDisplayName()));
                 sendTpaRequestMessage(p, target);
             } else {
                 p.sendMessage("&4Looks like that player is offline.");
             }
-        } else {
-            p.sendMessage(Translate.chat("&4Something messed up"));
             return true;
         }
         return true;
     }
 
-    public void sendTpaRequestMessage(Player p, Player target) {
+    private void sendTpaRequestMessage(Player p, Player target) {
         if (p != null && target != null) {
             target.sendMessage(
                     Translate.chat("[&eTPA&r] &a" + p.getDisplayName() + " has sent a tpa request too you."));
             target.sendMessage(Translate.chat("&c/tpaccept &aOR&r &c/tpdeny"));
-        } else {
         }
     }
 

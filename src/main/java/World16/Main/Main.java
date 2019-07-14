@@ -1,76 +1,61 @@
 package World16.Main;
 
 import World16.Commands.*;
+import World16.Commands.home.delhome;
+import World16.Commands.home.home;
+import World16.Commands.home.homelist;
+import World16.Commands.home.sethome;
 import World16.Commands.tp.tpa;
 import World16.Commands.tp.tpaccept;
 import World16.Commands.tp.tpdeny;
+import World16.CustomInventorys.CustomInventoryManager;
 import World16.Events.*;
-import World16.KeyCommands.Key;
-import World16.KeyCommands.MutiKeys;
-import World16.Translate.Translate;
+import World16.Managers.CustomConfigManager;
+import World16.Managers.JailManager;
 import World16.Utils.API;
-import World16.Utils.CustomYmlManger;
 import World16.Utils.Metrics;
-import World16.test.test;
+import World16.Utils.SetListMap;
+import World16.Utils.Translate;
 import World16.test.test1;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+public class Main extends JavaPlugin {
 
-public class Main extends JavaPlugin {//implements Listener {
+    private Main plugin;
 
-    private static Main plugin;
-    private CustomYmlManger customyml;
+    //Managers
+    private CustomConfigManager customconfig;
+    private CustomInventoryManager customInventoryManager;
+    private JailManager jailManager;
+
     private API api;
 
-    //ARRAY LIST AND HASH MAPS
-    ArrayList<String> Afk = afk.Afk;
-    ArrayList<String> Fly = fly.Fly;
-    ArrayList<String> GodM = god.godm;
-    HashMap<String, String> keyDataM = OnJoinEvent.keyDataM;
-    LinkedHashMap<String, Location> backm = back.backm;
-    LinkedHashMap<Player, Player> tpam = tpa.tpam;
-    //END
-    // GOT THE MYSQL API AT https://www.spigotmc.org/resources/simple-easy-mysql-api.36447/
-    // GOT THE TITLE API AT https://www.spigotmc.org/resources/titleapi-1-8-1-13.1325/
-    // FROM https://www.spigotmc.org/resources/api-pluginupdater-with-website.5578/
-    PluginManager pm = Bukkit.getPluginManager();
+    private PluginManager pm = Bukkit.getPluginManager();
 
     public void onEnable() {
         plugin = this;
-        regCustomYmlConfigGEN();
+        api = new API(plugin);
+
+        regCustomManagers();
         regFileConfigGEN();
-        regAPIS();
         regEvents();
         regCommands();
         regbstats();
+
         getLogger().info("[World1-6Essentials] is now loaded!");
     }
 
     public void onDisable() {
-        this.clear();
+        SetListMap.clearSetListMap();
         getLogger().info("[World1-6Essentials] is now disabled.");
     }
 
-    public void clear() {
-        Afk.clear();
-        Fly.clear();
-        GodM.clear();
-
-        keyDataM.clear();
-        backm.clear();
-        tpam.clear();
-    }
-
-    public void regCommands() {
+    private void regCommands() {
         new gmc(this);
         new gms(this);
         new gmsp(this);
@@ -81,71 +66,85 @@ public class Main extends JavaPlugin {//implements Listener {
         new feed(this);
         new heal(this);
         new fly(this);
-        new debug(customyml, this);
+        new debug(this);
         new commandblock(this);
         new bed(this);
         new ram(this);
-        new spawn(customyml, this);
+        new spawn(this.customconfig, this);
         new echest(this);
         new sign(this);
-        new Key(this); //KEY COMMAND
-        new MutiKeys(this); //MKEY COMMAND
+        new key(this); //KEY COMMAND
         new colors(this);
-        new setjail(customyml, this);
-        new setspawn(customyml, this);
-        new jail(customyml, this);
+        new setjail(this.customconfig, this, this.jailManager);
+        new setspawn(this.customconfig, this);
+        new jail(this.customconfig, this, this.jailManager);
         new afk(this);
-        new flyspeed(customyml, this);
-        new isafk(customyml, this);
+        new flyspeed(this.customconfig, this);
+        new isafk(this.customconfig, this);
         new back(this);
-        new broadcast(customyml, this);
+        new broadcast(this.customconfig, this);
         new god(this);
+        new msg(customconfig, this);
 
-        new tpa(customyml, this);
-        new tpaccept(customyml, this);
-        new tpdeny(customyml, this);
+        new tpa(this.customconfig, this);
+        new tpaccept(this.customconfig, this);
+        new tpdeny(this.customconfig, this);
 
-        new test(customyml, this);
-        new test1(customyml, this);
+        new test1(customconfig, this);
+        new eram(this.customconfig, this, this.customInventoryManager);
+        new waitdo(this.customconfig, this);
+        new runCommands(this.customconfig, this);
+        new wformat(this.customconfig, this);
+        new xyzdxdydz(this.customconfig, this);
+        new workbench(this.customconfig, this);
+
+        //Homes
+        new delhome(this.plugin);
+        new home(this.plugin);
+        new homelist(this.plugin);
+        new sethome(this.plugin);
     }
 
-    public void regEvents() {
+    private void regEvents() {
         //Bukkit.getServer().getPluginManager().registerEvents(this, this);
-        new OnJoinEvent(this);
-        new OnLeaveEvent(this);
+        new OnPlayerJoinEvent(this);
+        new OnPlayerQuitEvent(this);
         //...
-        new OnDeathEvent(this);
-        new PlayerDamageEvent(this);
-        new OnTpEvent(this);
+        new OnPlayerDeathEvent(this);
+        new OnPlayerDamageEvent(this);
+        new OnPlayerTeleportEvent(this);
         //...
-        new OnBedEnterEvent(this);
+        new OnPlayerBedEnterEvent(this);
         new OnJoinTitleEvent(this);
+        //...
+        new OnInventoryClickEvent(this, this.customInventoryManager);
+        new OnAsyncPlayerChatEvent(this);
+        new OnPlayerInteractEvent(this);
+        new OnPlayerMoveEvent(this);
     }
 
-    public void regFileConfigGEN() {
+    private void regFileConfigGEN() {
         this.getConfig().options().copyDefaults(true);
         this.saveConfig();
         this.reloadConfig();
     }
 
-    public void regCustomYmlConfigGEN() {
-        customyml = new CustomYmlManger();
-        // Shit.yml
-        customyml.setupshit();
-        customyml.saveshit();
-        customyml.reloadshit();
-        // END OF Shit.yml
+    private void regCustomManagers() {
+        this.customconfig = new CustomConfigManager(this);
+        customconfig.registerAllCustomConfigs();
+
+        this.customInventoryManager = new CustomInventoryManager(this);
+        this.customInventoryManager.registerAllCustomInventorys();
+
+        this.jailManager = new JailManager(this.customconfig, this);
+        this.jailManager.getAllJailsFromConfig();
     }
 
     public void checkForPlugins() {
 
     }
 
-    public void regAPIS() {
-        api = new API();
-    }
-
-    public void regbstats() {
+    private void regbstats() {
         Metrics metrics = new Metrics(this);
     }
 
@@ -154,21 +153,26 @@ public class Main extends JavaPlugin {//implements Listener {
             Player p = (Player) sender;
 
             if (cmd.getName().equalsIgnoreCase("World1-6Essentials")) {
-                if (args.length >= 0) {
-                    p.sendMessage(Translate.chat("&6Made By Andrew121410 My -> Discord: Andrew121410#2035"));
-                    return true;
-                }
+                p.sendMessage(Translate.chat("&6Made By Andrew121410 My -> Discord: Andrew121410#2035"));
+                return true;
             }
         }
         return true;
     }
 
-    public static Main getPlugin() {
+    public Main getPlugin() {
         return plugin;
     }
 
     public API getApi() {
-        return api;
+        return this.api;
     }
 
+    public CustomInventoryManager getCustomInventoryManager() {
+        return customInventoryManager;
+    }
+
+    public CustomConfigManager getCustomConfigManager() {
+        return customconfig;
+    }
 }

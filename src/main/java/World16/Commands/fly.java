@@ -1,23 +1,30 @@
 package World16.Commands;
 
 import World16.Main.Main;
-import World16.Translate.Translate;
 import World16.Utils.API;
+import World16.Utils.SetListMap;
+import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class fly implements CommandExecutor {
 
-    public static ArrayList<String> Fly = new ArrayList<>();
-    API api = new API();
+    //Maps
+    //...
+    //Lists
+    List<String> Fly = SetListMap.flyList;
+    //....
+
     private Main plugin;
+    private API api;
 
     public fly(Main plugin) {
         this.plugin = plugin;
+        this.api = new API(this.plugin);
         plugin.getCommand("fly").setExecutor(this);
     }
 

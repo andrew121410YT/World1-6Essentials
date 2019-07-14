@@ -18,14 +18,12 @@ commands:
   setspawn:
   sign:
   key:
-  mkey:
   colors:
   setjail:
   jail:
   afk:
   fs:
   isafk:
-  testee:
   testee1:
   food:
   back:
@@ -34,6 +32,19 @@ commands:
   tpdeny:
   broadcast:
   god:
+  emsg:
+  eram:
+  waitdo:
+  runcommands:
+  wformat:
+  xyzdxdydz:
+  workbench:
+  delhome:
+  home:
+  homelist:
+    aliases:
+      - homes
+  sethome:
 
   gmc:
     aliases:
@@ -47,3 +58,156 @@ commands:
   gma:
     aliases:
       - gm2
+
+permissions:
+  world16.tpa:
+    description: Allows to do tpa
+    default: true
+  world16.tpaccept:
+    description: Allows to do tpaccept
+    default: true
+  world16.tpdeny:
+    description: Allows to do tp deny
+    default: true
+  world16.afk:
+    description: Allows to do afk
+    default: true
+  world16.back:
+    description: Allows to do back
+    default: true
+
+  world16.back.all:
+    description: Allows to do every back command
+    default: true
+    children:
+      world16.back: true
+      world16.back.death: true
+      world16.back.tp: true
+      world16.back.set: true
+      world16.back.goto: true
+
+
+  world16.bed:
+    description: Allows to do bed
+    default: op
+  world16.broadcast:
+    description: Allows to do broadcast
+    default: op
+  world16.colors:
+    description: Allows to do colors
+    default: true
+  world16.commandblock:
+    description: Allows to do commandblock
+    default: op
+  world16.day:
+    description: Allows to do day
+    default: op
+  world16.debug:
+    description: Allows to do debug
+    default: op
+
+  world16.debug.all:
+    description: Allows to do debug
+    default: op
+    children:
+      world16.debug: true
+      world16.debug.op: true
+      world16.debug.defaultstuff: true
+      world16.debug.clearalllists: true
+      world16.debug.clearallmaps: true
+      world16.debug.clearalllistswithname: true
+      world16.debug.clearallmapswithname: true
+      world16.debug.date: true
+      world16.debug.checkuuid: true
+      world16.debig.checkuuid.other: true
+      world16.debug.debugmessages: true
+      world16.debug.finddefaultspawn: true
+      world16.debug.uuidcache: true
+
+
+  world16.echest:
+    description: Allows to do echest
+    default: op
+  world16.feed:
+    description: Allows to do feed
+    default: op
+  world16.fly:
+    description: Allows to do tpa
+    default: op
+  world16.fs:
+    description: Allows to do flight speed
+    default: op
+  world16.gma:
+    description: Allows to do gma
+    default: op
+  world16.gmc:
+    description: Allows to do gmc
+    default: op
+  world16.gms:
+    description: Allows to do gms
+    default: op
+  world16.gmsp:
+    description: Allows to do gmsp
+    default: op
+  world16.god:
+    description: Allows to do god
+    default: op
+  world16.heal:
+    description: Allows to do heal
+    default: op
+  world16.isafk:
+    description: Allows to do isafk
+    default: true
+  world16.jail:
+    description: Allows to do jail
+    default: true
+    children:
+      world16.jail.delete: true
+  world16.key:
+    description: Allows to do key
+    default: true
+  world16.night:
+    description: Allows to do night
+    default: op
+  world16.ram:
+    description: Allows to do ram
+    default: op
+  world16.setjail:
+    description: Allows to do setjail
+    default: op
+  world16.setspawn:
+    description: Allows to do setspawn
+    default: op
+  world16.sign:
+    description: Allows to do sign
+    default: op
+  world16.spawn:
+    description: Allows to do spawn
+    default: true
+  world16.msg:
+    description: Allows to do msg
+    default: op
+  world16.eram:
+    description: Allows to do eram
+    default: op
+  world16.waitdo:
+    description: Allows to do waitdo
+    default: op
+  world16.runcommands:
+    description: Allows to do runcommands
+    default: op
+  world16.wformat:
+    description: Allows to do wformat
+    default: op
+  world16.xyzdxdydz:
+    description: Allows to do xyzdxdydz
+    default: op
+  world16.workbench:
+    description: Allows to do workbench
+    default: true
+  world16.home:
+    description: Allows to do home commands
+    default: true
+  world16.home.op:
+    description: Allows to do op home commands
+    default: true

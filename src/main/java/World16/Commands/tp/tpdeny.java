@@ -1,32 +1,32 @@
 package World16.Commands.tp;
 
 import World16.Main.Main;
-import World16.MysqlAPI.MySQL;
-import World16.Translate.Translate;
+import World16.Managers.CustomConfigManager;
 import World16.Utils.API;
-import World16.Utils.CustomYmlManger;
+import World16.Utils.SetListMap;
+import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class tpdeny implements CommandExecutor {
 
     private Main plugin;
+    private API api;
 
-    MySQL mysql = new MySQL();
-    API api = new API();
+    //Maps
+    Map<Player, Player> tpam = SetListMap.tpaM;
+    //...
 
-    //HASHMAPS
-    private static LinkedHashMap<Player, Player> tpam = tpa.tpam;
+    private CustomConfigManager customConfigManager;
 
-    private CustomYmlManger configinstance = null;
-
-    public tpdeny(CustomYmlManger getCustomYml, Main getPlugin) {
-        this.configinstance = getCustomYml;
+    public tpdeny(CustomConfigManager getCustomYml, Main getPlugin) {
+        this.customConfigManager = getCustomYml;
         this.plugin = getPlugin;
+        this.api = new API(this.plugin);
 
         this.plugin.getCommand("tpdeny").setExecutor(this);
     }

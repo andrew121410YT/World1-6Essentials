@@ -1,9 +1,10 @@
 package World16.Commands;
 
 import World16.Main.Main;
-import World16.Translate.Translate;
+import World16.Managers.CustomConfigManager;
+import World16.Managers.CustomYmlManager;
 import World16.Utils.API;
-import World16.Utils.CustomYmlManger;
+import World16.Utils.Translate;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,12 +16,12 @@ public class spawn implements CommandExecutor {
     private Main plugin;
     private API api;
 
-    private CustomYmlManger configinstance = null;
+    private CustomYmlManager shitYml = null;
 
-    public spawn(CustomYmlManger getCustomYml, Main getPlugin) {
-        this.configinstance = getCustomYml;
+    public spawn(CustomConfigManager getShitConfig, Main getPlugin) {
+        this.shitYml = getShitConfig.getShitYml();
         this.plugin = getPlugin;
-        this.api = new API(this.configinstance);
+        this.api = new API(this.plugin, this.shitYml);
         this.plugin.getCommand("spawn").setExecutor(this);
     }
 
@@ -33,7 +34,7 @@ public class spawn implements CommandExecutor {
 
         Player p = (Player) sender;
 
-        Location spawn = this.api.GetSpawn("default");
+        Location spawn = this.api.getLocationFromFile(this.shitYml, "Spawn.default");
 
         if (!p.hasPermission("world16.spawn")) {
             api.PermissionErrorMessage(p);

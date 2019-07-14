@@ -2,7 +2,7 @@ package World16.Commands;
 
 import World16.Main.Main;
 import World16.Utils.API;
-import org.bukkit.ChatColor;
+import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,11 +10,12 @@ import org.bukkit.entity.Player;
 
 public class ram implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     public ram(Main plugin) {
         this.plugin = plugin;
+        this.api = new API(this.plugin);
         plugin.getCommand("ram").setExecutor(this);
     }
 
@@ -31,12 +32,10 @@ public class ram implements CommandExecutor {
             api.PermissionErrorMessage(p);
             return true;
         }
-        // RAM START
-        Runtime runtime = Runtime.getRuntime();
-        sender.sendMessage(ChatColor.GREEN + "[Used / Total / Free]  " + ChatColor.BLUE
-                + (runtime.totalMemory() - runtime.freeMemory()) / 1048576L + " MB / "
-                + runtime.totalMemory() / 1048576L + " MB / " + runtime.freeMemory() / 1048576L + " MB");
-        // RAM FINISH
+
+        p.sendMessage(Translate.chat("&6Maximum memory: &c" + (Runtime.getRuntime().maxMemory() / 1024 / 1024) + " MB."));
+        p.sendMessage(Translate.chat("&6Allocated memory: &c" + (Runtime.getRuntime().totalMemory() / 1024 / 1024) + " MB."));
+        p.sendMessage(Translate.chat("&6Free memory: &c" + (Runtime.getRuntime().freeMemory() / 1024 / 1024) + " MB."));
         return true;
     }
 }

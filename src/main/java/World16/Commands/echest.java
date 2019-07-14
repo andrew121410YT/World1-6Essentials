@@ -10,11 +10,12 @@ import org.bukkit.entity.Player;
 
 public class echest implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     public echest(Main plugin) {
         this.plugin = plugin;
+        this.api = new API(this.plugin);
         plugin.getCommand("echest").setExecutor(this);
     }
 

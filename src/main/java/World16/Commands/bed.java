@@ -2,21 +2,22 @@ package World16.Commands;
 
 import World16.Main.Main;
 import World16.Utils.API;
+import World16.Utils.InventoryUtils;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class bed implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     public bed(Main getPlugin) {
         this.plugin = getPlugin;
+        this.api = new API(this.plugin);
         this.plugin.getCommand("bed").setExecutor(this);
     }
 
@@ -33,9 +34,11 @@ public class bed implements CommandExecutor {
             api.PermissionErrorMessage(p);
             return true;
         }
-        ItemStack item1 = new ItemStack(Material.BED, 1);
-        item1.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
-        p.getInventory().addItem(item1);
+//        ItemStack item1 = new ItemStack(Material.BED, 1);
+//        item1.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
+//        p.getInventory().addItem(item1);
+        ItemStack item = InventoryUtils.createItem(Material.BED, 1, "Bed", "Bed");
+        p.getInventory().addItem(item);
         return true;
     }
 }

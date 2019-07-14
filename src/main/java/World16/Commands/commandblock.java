@@ -2,6 +2,7 @@ package World16.Commands;
 
 import World16.Main.Main;
 import World16.Utils.API;
+import World16.Utils.InventoryUtils;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,11 +13,12 @@ import org.bukkit.inventory.ItemStack;
 
 public class commandblock implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     public commandblock(Main getPlugin) {
         this.plugin = getPlugin;
+        this.api = new API(this.plugin);
         this.plugin.getCommand("commandblock").setExecutor(this);
     }
 
@@ -33,9 +35,9 @@ public class commandblock implements CommandExecutor {
             api.PermissionErrorMessage(p);
             return true;
         }
-        ItemStack item1 = new ItemStack(Material.COMMAND, 1);
-        item1.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
-        p.getInventory().addItem(item1);
+        ItemStack item = InventoryUtils.createItem(Material.COMMAND, 1, "&cCommand Block", "New Fresh Command Block");
+        item.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
+        p.getInventory().addItem(item);
         return true;
     }
 }

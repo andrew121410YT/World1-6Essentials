@@ -1,8 +1,8 @@
 package World16.Commands;
 
 import World16.Main.Main;
-import World16.Translate.Translate;
 import World16.Utils.API;
+import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,11 +10,12 @@ import org.bukkit.entity.Player;
 
 public class colors implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     public colors(Main getPlugin) {
         this.plugin = getPlugin;
+        this.api = new API(this.plugin);
         this.plugin.getCommand("colors").setExecutor(this);
     }
 
@@ -31,6 +32,7 @@ public class colors implements CommandExecutor {
             api.PermissionErrorMessage(p);
             return true;
         }
+
         p.sendMessage("Dark Red &4 " + Translate.chat("&4EXAMPLE"));
         p.sendMessage("Red &c " + Translate.chat("&cEXAMPLE"));
         p.sendMessage("Gold &6 " + Translate.chat("&6EXAMPLE"));

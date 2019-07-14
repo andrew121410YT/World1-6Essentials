@@ -1,8 +1,8 @@
 package World16.Commands;
 
 import World16.Main.Main;
-import World16.Translate.Translate;
 import World16.Utils.API;
+import World16.Utils.Translate;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,11 +11,12 @@ import org.bukkit.entity.Player;
 
 public class gms implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     public gms(Main plugin) {
         this.plugin = plugin;
+        this.api = new API(this.plugin);
         plugin.getCommand("gms").setExecutor(this);
     }
 

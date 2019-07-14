@@ -5,10 +5,8 @@ import World16.Main.Main;
 
 public class TpaEventHandler {
 
-    private static Main plugin = Main.getPlugin();
-
-    public TpaEventHandler(String p, String target) {
-        TpaCustomEvent event = new TpaCustomEvent(p, target);
+    public TpaEventHandler(Main plugin, String p, String target) {
+        TpaCustomEvent event = new TpaCustomEvent(plugin, p, target);
 
         plugin.getServer().getPluginManager().callEvent(event);
     }

@@ -1,9 +1,10 @@
 package World16.Commands;
 
 import World16.Main.Main;
-import World16.Translate.Translate;
+import World16.Managers.CustomConfigManager;
+import World16.Managers.CustomYmlManager;
 import World16.Utils.API;
-import World16.Utils.CustomYmlManger;
+import World16.Utils.Translate;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,15 +13,16 @@ import org.bukkit.entity.Player;
 
 public class flyspeed implements CommandExecutor {
 
-    API api = new API();
     private Main plugin;
+    private API api;
 
     // NEW ONE
-    private CustomYmlManger configinstance = null;
+    private CustomYmlManager shitYml = null;
 
-    public flyspeed(CustomYmlManger getConfigInstance, Main plugin) {
-        this.configinstance = getConfigInstance;
+    public flyspeed(CustomConfigManager getConfigInstance, Main plugin) {
+        this.shitYml = getConfigInstance.getShitYml();
         this.plugin = plugin;
+        this.api = new API(this.plugin);
         plugin.getCommand("fs").setExecutor(this);
     }
 

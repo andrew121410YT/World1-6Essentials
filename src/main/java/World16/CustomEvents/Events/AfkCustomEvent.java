@@ -5,10 +5,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
+/**
+ * Everytime someone goes AFK this event will be run]
+ *
+ * @author Andrew121410
+ */
 public class AfkCustomEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
-    private static Main plugin = Main.getPlugin();
+    private Main plugin;
 
     String p;
 
@@ -23,18 +28,34 @@ public class AfkCustomEvent extends Event {
 
     //CODE STARTS HERE
 
-    public AfkCustomEvent(String p) {
+    public AfkCustomEvent(Main plugin, String p) {
+        this.plugin = plugin;
         this.p = p;
     }
 
+    /**
+     * Get's the player name that did /afk
+     *
+     * @return The name of player
+     */
     public String getPlayerName() {
         return this.p;
     }
 
+    /**
+     * Get's the Player Object
+     *
+     * @return The Player Object
+     */
     public Player getPlayer() {
         return plugin.getServer().getPlayerExact(p);
     }
 
+    /**
+     * Get's the plugin
+     *
+     * @return Returns the plugin
+     */
     public Main getPlugin() {
         return plugin;
     }
