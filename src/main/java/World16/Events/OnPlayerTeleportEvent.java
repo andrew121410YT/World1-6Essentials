@@ -2,7 +2,6 @@ package World16.Events;
 
 import World16.Main.Main;
 import World16.Objects.LocationObject;
-import World16.Utils.SetListMap;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,10 +15,12 @@ public class OnPlayerTeleportEvent implements Listener {
 
     private Main plugin;
 
-    Map<UUID, LocationObject> backm = SetListMap.backM;
+    private Map<UUID, LocationObject> backm;
 
     public OnPlayerTeleportEvent(Main getPlugin) {
         plugin = getPlugin;
+
+        this.backm = this.plugin.getSetListMap().getBackM();
 
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }

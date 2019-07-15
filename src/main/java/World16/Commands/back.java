@@ -4,7 +4,6 @@ import World16.Main.Main;
 import World16.Objects.LocationObject;
 import World16.TabComplete.BackTab;
 import World16.Utils.API;
-import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -23,12 +22,13 @@ public class back implements CommandExecutor {
     private API api;
 
     //Maps
-    Map<UUID, LocationObject> backm = SetListMap.backM;
+    private Map<UUID, LocationObject> backm;
     //...
 
     public back(Main getPlugin) {
         this.plugin = getPlugin;
         this.api = new API(this.plugin);
+        this.backm = this.plugin.getSetListMap().getBackM();
         this.plugin.getCommand("back").setExecutor(this);
         this.plugin.getCommand("back").setTabCompleter(new BackTab(this.plugin));
     }

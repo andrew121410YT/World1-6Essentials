@@ -1,6 +1,6 @@
 package World16.TabComplete;
 
-import World16.Utils.SetListMap;
+import World16.Main.Main;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -12,11 +12,15 @@ import java.util.*;
 public class HomeListTab implements TabCompleter {
 
     //Lists
-    Map<UUID, Map<String, Location>> rawHomesMap = SetListMap.homesMap;
+    private Map<UUID, Map<String, Location>> rawHomesMap;
     //...
 
-    public HomeListTab() {
+    private Main plugin;
 
+    public HomeListTab(Main plugin) {
+        this.plugin = plugin;
+
+        this.rawHomesMap = this.plugin.getSetListMap().getHomesMap();
     }
 
     @Override

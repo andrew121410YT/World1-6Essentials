@@ -3,7 +3,6 @@ package World16.Commands;
 import World16.Main.Main;
 import World16.Managers.CustomConfigManager;
 import World16.Utils.API;
-import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -17,7 +16,7 @@ import java.util.UUID;
 public class isafk implements CommandExecutor {
 
     //Maps
-    Map<UUID, Location> afkMap = SetListMap.afkMap;
+    private Map<UUID, Location> afkMap;
     //...
 
     private Main plugin;
@@ -26,6 +25,8 @@ public class isafk implements CommandExecutor {
     public isafk(CustomConfigManager getCustomYml, Main getPlugin) {
         this.plugin = getPlugin;
         this.api = new API(this.plugin);
+
+        this.afkMap = this.plugin.getSetListMap().getAfkMap();
 
         this.plugin.getCommand("isafk").setExecutor(this);
     }

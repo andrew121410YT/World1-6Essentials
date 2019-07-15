@@ -8,7 +8,6 @@ import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
-import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -27,13 +26,13 @@ public class OnPlayerJoinEvent implements Listener {
     private Main plugin;
 
     //Maps
-    Map<String, KeyObject> keyDataM = SetListMap.keyDataM;
-    Map<UUID, LocationObject> backM = SetListMap.backM;
-    Map<UUID, Map<String, Location>> homesMap = SetListMap.homesMap;
+    private Map<String, KeyObject> keyDataM;
+    private Map<UUID, LocationObject> backM;
+    private Map<UUID, Map<String, Location>> homesMap;
     //...
 
     //Lists
-    List<Player> adminListPlayer = SetListMap.adminListPlayer;
+    private List<Player> adminListPlayer;
     //...
 
     private ISQL isqlKeys;
@@ -47,13 +46,18 @@ public class OnPlayerJoinEvent implements Listener {
         this.plugin = getPlugin;
         this.api = new API(this.plugin);
 
+        this.keyDataM = this.plugin.getSetListMap().getKeyDataM();
+        this.backM = this.plugin.getSetListMap().getBackM();
+        this.homesMap = this.plugin.getSetListMap().getHomesMap();
+        this.adminListPlayer = this.plugin.getSetListMap().getAdminListPlayer();
+
         //ISQL
         this.isqlKeys = new SQLite(plugin.getDataFolder(), "keys");
         this.isqlHomes = new SQLite(this.plugin.getDataFolder(), "Homes");
         //...
 
         this.keyapi = new KeyAPI(this.plugin, this.isqlKeys);
-        this.homeManager = new HomeManager(this.isqlHomes);
+        this.homeManager = new HomeManager(this.plugin, this.isqlHomes);
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -73,18 +77,23 @@ public class OnPlayerJoinEvent implements Listener {
             keyDataM.remove(p.getDisplayName()); //<-- just incase
             keyDataM.put(p.getDisplayName(), new KeyObject(p.getDisplayName(), 1, "null"));
             keyapi.getAllKeysFromMysqlTooRam(p.getDisplayName(), isqlKeys);
-        } else
+        } else {
             plugin.getServer().getConsoleSender().sendMessage(Translate.chat(API.USELESS_TAG + " Please make sure too put in the isqlKeys details in the config.yml."));
+        }
 
         if (backM.get(p.getUniqueId()) != null) {
-            this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(API.EMERGENCY_TAG + " " + "&cSETLISTMAP UNLOADER BACK ISN'T WORKING: CLASS: " + this.getClass()));
+            this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(API.EMERGENCY_TAG + " " + "&cMAP UNLOADER BACK ISN'T WORKING: CLASS: " + this.getClass()));
             backM.remove(p.getUniqueId());
-        } else backM.put(p.getUniqueId(), new LocationObject());
+        } else {
+            backM.put(p.getUniqueId(), new LocationObject());
+        }
 
         if (homesMap.get(p.getUniqueId()) != null) {
-            this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(API.EMERGENCY_TAG + " " + "&cSETLISTMAP UNLOADER HOMES ISN'T WORKING: CLASS: " + this.getClass()));
+            this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(API.EMERGENCY_TAG + " " + "&cMAP UNLOADER HOMES ISN'T WORKING: CLASS: " + this.getClass()));
             homesMap.remove(p.getUniqueId());
-        } else this.homeManager.getAllHomesFromISQL(this.isqlHomes, p);
+        } else {
+            this.homeManager.getAllHomesFromISQL(this.isqlHomes, p);
+        }
 
         adminListPlayer.forEach((k) -> {
             p.hidePlayer(k);

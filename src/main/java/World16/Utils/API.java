@@ -26,13 +26,13 @@ import java.util.UUID;
 public class API {
 
     // Maps
-    Map<String, UUID> uuidCache = SetListMap.uuidCache;
-    Map<UUID, Location> afkMap = SetListMap.afkMap;
+    private Map<String, UUID> uuidCache;
+    private Map<UUID, Location> afkMap;
     //...
 
     // Lists
-    List<String> Fly1 = SetListMap.flyList;
-    List<String> GodM = SetListMap.godmList;
+    private List<String> Fly1;
+    private List<String> GodM;
     //...
 
     private Main plugin;
@@ -60,6 +60,7 @@ public class API {
     // MAIN
     public API(Main plugin) {
         this.plugin = plugin;
+        doSetListMap();
         setMySQL();
     }
 
@@ -67,15 +68,24 @@ public class API {
     public API(Main plugin, CustomYmlManager configInstance) {
         this.plugin = plugin;
         this.configinstance = configInstance;
+        doSetListMap();
         setMySQL();
     }
 
     public API(Main plugin, CustomConfigManager configManager) {
         this.plugin = plugin;
+        doSetListMap();
         setMySQL();
     }
 
     // END MAIN
+
+    private void doSetListMap() {
+        this.uuidCache = this.plugin.getSetListMap().getUuidCache();
+        this.afkMap = this.plugin.getSetListMap().getAfkMap();
+        this.Fly1 = this.plugin.getSetListMap().getFlyList();
+        this.GodM = this.plugin.getSetListMap().getAdminList();
+    }
 
     // START OF MYSQL
 

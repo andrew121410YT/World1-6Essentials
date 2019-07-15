@@ -6,34 +6,38 @@ import java.util.Map;
 public class Tag {
 
     //Maps
-    static Map<String, Map<String, String>> tagsMap = SetListMap.tagsMap;
+    private Map<String, Map<String, String>> tagsMap;
     //...
     //Lists
     //...
 
-    public static void addTag(String key, String tag, String string) {
+    public Tag(SetListMap setListMap) {
+        this.tagsMap = setListMap.getTagsMap();
+    }
+
+    public void addTag(String key, String tag, String string) {
         tagsMap.computeIfAbsent(key, k -> new HashMap<>());
 
         tagsMap.get(key).put(tag, string);
     }
 
-    public static String getTag(String key, String tag) {
+    public String getTag(String key, String tag) {
         tagsMap.computeIfAbsent(key, k -> new HashMap<>());
 
         return tagsMap.get(key).get(tag);
     }
 
-    public static void removeTag(String key, String tag) {
+    public void removeTag(String key, String tag) {
         tagsMap.computeIfAbsent(key, k -> new HashMap<>());
 
         tagsMap.get(key).remove(tag);
     }
 
-    public static void removeEverything(String key) {
+    public void removeEverything(String key) {
         tagsMap.remove(key);
     }
 
-    public static void removeEverything() {
+    public void removeEverything() {
         tagsMap.clear();
     }
 }

@@ -21,19 +21,23 @@ import java.util.UUID;
 public class debug implements CommandExecutor {
 
     //Maps
-    Map<String, UUID> uuidCache = SetListMap.uuidCache;
+    private Map<String, UUID> uuidCache;
     //...
 
     //Lists
     //...
 
     private API api;
+    private SetListMap setListMap;
 
     private Main plugin;
 
     public debug(Main getPlugin) {
         this.plugin = getPlugin;
         this.api = new API(this.plugin);
+
+        this.setListMap = this.plugin.getSetListMap();
+        this.uuidCache = this.plugin.getSetListMap().getUuidCache();
 
         this.plugin.getCommand("debug1-6").setExecutor(this);
         this.plugin.getCommand("debug1-6").setTabCompleter(new DebugTab(this.plugin));
@@ -105,7 +109,7 @@ public class debug implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                SetListMap.clearAllLists();
+                setListMap.clearAllLists();
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
 
@@ -115,7 +119,7 @@ public class debug implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                SetListMap.clearAllMaps();
+                setListMap.clearAllMaps(p);
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
 
@@ -126,7 +130,7 @@ public class debug implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                SetListMap.clearAllLists(p);
+                setListMap.clearAllLists(p);
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
 
@@ -137,7 +141,7 @@ public class debug implements CommandExecutor {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
-                SetListMap.clearAllMaps(p);
+                setListMap.clearAllMaps(p);
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
 
