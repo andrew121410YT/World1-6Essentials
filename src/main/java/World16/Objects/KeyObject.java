@@ -2,27 +2,27 @@ package World16.Objects;
 
 public class KeyObject {
 
-    String playerName = "null";
+    private String playerName = "null";
 
-    String keyName1 = "null";
-    Integer keyID1 = 0;
-    String key1 = "null";
+    private String keyName1 = "null";
+    private Integer keyID1 = 0;
+    private String key1 = "null";
 
-    String keyName2 = "null";
-    Integer keyID2 = 0;
-    String key2 = "null";
+    private String keyName2 = "null";
+    private Integer keyID2 = 0;
+    private String key2 = "null";
 
-    String keyName3 = "null";
-    Integer keyID3 = 0;
-    String key3 = "null";
+    private String keyName3 = "null";
+    private Integer keyID3 = 0;
+    private String key3 = "null";
 
-    String keyName4 = "null";
-    Integer keyID4 = 0;
-    String key4 = "null";
+    private String keyName4 = "null";
+    private Integer keyID4 = 0;
+    private String key4 = "null";
 
-    String keyName5 = "null";
-    Integer keyID5 = 0;
-    String key5 = "null";
+    private String keyName5 = "null";
+    private Integer keyID5 = 0;
+    private String key5 = "null";
 
     public KeyObject() {
     }

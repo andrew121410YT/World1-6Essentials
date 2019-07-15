@@ -4,10 +4,10 @@ import CCUtils.Storage.ISQL;
 import CCUtils.Storage.SQLite;
 import World16.Main.Main;
 import World16.Managers.HomeManager;
+import World16.Managers.KeyManager;
 import World16.Objects.KeyObject;
 import World16.Objects.LocationObject;
 import World16.Utils.API;
-import World16.Utils.KeyAPI;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -39,25 +39,27 @@ public class OnPlayerJoinEvent implements Listener {
     private ISQL isqlHomes;
 
     private API api;
-    private KeyAPI keyapi;
+    private KeyManager keyapi;
     private HomeManager homeManager;
 
     public OnPlayerJoinEvent(Main getPlugin) {
         this.plugin = getPlugin;
-        this.api = new API(this.plugin);
 
         this.keyDataM = this.plugin.getSetListMap().getKeyDataM();
         this.backM = this.plugin.getSetListMap().getBackM();
         this.homesMap = this.plugin.getSetListMap().getHomesMap();
         this.adminListPlayer = this.plugin.getSetListMap().getAdminListPlayer();
 
+        this.api = new API(this.plugin);
+
         //ISQL
         this.isqlKeys = new SQLite(plugin.getDataFolder(), "keys");
         this.isqlHomes = new SQLite(this.plugin.getDataFolder(), "Homes");
         //...
 
-        this.keyapi = new KeyAPI(this.plugin, this.isqlKeys);
+        this.keyapi = new KeyManager(this.plugin, this.isqlKeys);
         this.homeManager = new HomeManager(this.plugin, this.isqlHomes);
+
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -76,14 +78,16 @@ public class OnPlayerJoinEvent implements Listener {
         if (!api.getMysql_HOST().equals("null")) {
             keyDataM.remove(p.getDisplayName()); //<-- just incase
             keyDataM.put(p.getDisplayName(), new KeyObject(p.getDisplayName(), 1, "null"));
-            keyapi.getAllKeysFromMysqlTooRam(p.getDisplayName(), isqlKeys);
+            keyapi.getAllKeysISQL(p.getDisplayName(), isqlKeys);
         } else {
             plugin.getServer().getConsoleSender().sendMessage(Translate.chat(API.USELESS_TAG + " Please make sure too put in the isqlKeys details in the config.yml."));
         }
 
+        //Just a safety thing put in place if Bukkit doesn't want to work correctly.
         if (backM.get(p.getUniqueId()) != null) {
             this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(API.EMERGENCY_TAG + " " + "&cMAP UNLOADER BACK ISN'T WORKING: CLASS: " + this.getClass()));
             backM.remove(p.getUniqueId());
+            backM.put(p.getUniqueId(), new LocationObject());
         } else {
             backM.put(p.getUniqueId(), new LocationObject());
         }
@@ -91,6 +95,7 @@ public class OnPlayerJoinEvent implements Listener {
         if (homesMap.get(p.getUniqueId()) != null) {
             this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(API.EMERGENCY_TAG + " " + "&cMAP UNLOADER HOMES ISN'T WORKING: CLASS: " + this.getClass()));
             homesMap.remove(p.getUniqueId());
+            this.homeManager.getAllHomesFromISQL(this.isqlHomes, p);
         } else {
             this.homeManager.getAllHomesFromISQL(this.isqlHomes, p);
         }
