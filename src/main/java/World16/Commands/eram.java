@@ -1,6 +1,5 @@
 package World16.Commands;
 
-import World16.CustomInventorys.CustomInventoryManager;
 import World16.Main.Main;
 import World16.Managers.CustomConfigManager;
 import World16.Managers.ERamManager;
@@ -29,7 +28,6 @@ public class eram implements CommandExecutor {
     private ERamManager eRamManager;
 
     private CustomConfigManager customConfigManager;
-    private CustomInventoryManager customInventoryManager;
 
     private Tag tagClass;
 
@@ -39,11 +37,10 @@ public class eram implements CommandExecutor {
 
     //...
 
-    public eram(CustomConfigManager getCustomYml, Main getPlugin, CustomInventoryManager customInventoryManager) {
+    public eram(CustomConfigManager getCustomYml, Main getPlugin) {
         this.customConfigManager = getCustomYml;
         this.plugin = getPlugin;
         this.api = new API(this.plugin);
-        this.customInventoryManager = customInventoryManager;
 
         eRamManager = new ERamManager(this.plugin, this.customConfigManager);
         this.tagClass = new Tag(this.plugin.getSetListMap());

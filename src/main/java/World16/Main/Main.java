@@ -8,7 +8,6 @@ import World16.Commands.home.sethome;
 import World16.Commands.tp.tpa;
 import World16.Commands.tp.tpaccept;
 import World16.Commands.tp.tpdeny;
-import World16.CustomInventorys.CustomInventoryManager;
 import World16.Events.*;
 import World16.Managers.CustomConfigManager;
 import World16.Managers.JailManager;
@@ -34,7 +33,6 @@ public class Main extends JavaPlugin {
 
     //Managers
     private CustomConfigManager customConfigManager;
-    private CustomInventoryManager customInventoryManager;
     private JailManager jailManager;
 
     private API api;
@@ -96,7 +94,7 @@ public class Main extends JavaPlugin {
         new tpdeny(this.customConfigManager, this);
 
         new test1(customConfigManager, this);
-        new eram(this.customConfigManager, this, this.customInventoryManager);
+        new eram(this.customConfigManager, this);
         new waitdo(this.customConfigManager, this);
         new runCommands(this.customConfigManager, this);
         new wformat(this.customConfigManager, this);
@@ -122,7 +120,6 @@ public class Main extends JavaPlugin {
         new OnPlayerBedEnterEvent(this);
         new OnJoinTitleEvent(this);
         //...
-        new OnInventoryClickEvent(this, this.customInventoryManager);
         new OnAsyncPlayerChatEvent(this);
         new OnPlayerInteractEvent(this);
         new OnPlayerMoveEvent(this);
@@ -137,9 +134,6 @@ public class Main extends JavaPlugin {
     private void regCustomManagers() {
         this.customConfigManager = new CustomConfigManager(this);
         customConfigManager.registerAllCustomConfigs();
-
-        this.customInventoryManager = new CustomInventoryManager(this);
-        this.customInventoryManager.registerAllCustomInventorys();
 
         this.jailManager = new JailManager(this.customConfigManager, this);
         this.jailManager.getAllJailsFromConfig();
@@ -177,10 +171,6 @@ public class Main extends JavaPlugin {
 
     public CustomConfigManager getCustomConfigManager() {
         return customConfigManager;
-    }
-
-    public CustomInventoryManager getCustomInventoryManager() {
-        return customInventoryManager;
     }
 
     public JailManager getJailManager() {
