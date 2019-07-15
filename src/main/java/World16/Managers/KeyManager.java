@@ -81,7 +81,7 @@ public class KeyManager {
      * @param p         Player
      * @param keyDataID key ID
      */
-    public void giveKey(Player p, Integer keyDataID) { //GETS THE 1 KEY FROM THE MEMORY.
+    public void giveKey(Player p, int keyDataID) { //GETS THE 1 KEY FROM THE MEMORY.
         Material material = Material.TRIPWIRE_HOOK;
         int amount = 1;
         String name = "key";

@@ -26,8 +26,8 @@ public class jail implements CommandExecutor {
     private Main plugin;
     private JailManager jailManager;
 
-    public jail(CustomConfigManager getCustomYml, Main getPlugin, JailManager jailManager) {
-        this.plugin = getPlugin;
+    public jail(Main plugin, CustomConfigManager customConfigManager, JailManager jailManager) {
+        this.plugin = plugin;
         this.api = new API(this.plugin);
         this.jailManager = jailManager;
 

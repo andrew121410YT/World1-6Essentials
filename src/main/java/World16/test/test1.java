@@ -15,9 +15,10 @@ public class test1 implements CommandExecutor {
 
     private CustomConfigManager customConfigManager;
 
-    public test1(CustomConfigManager getCustomYml, Main getPlugin) {
-        this.plugin = getPlugin;
-        this.customConfigManager = getCustomYml;
+    public test1(Main plugin, CustomConfigManager customConfigManager) {
+        this.plugin = plugin;
+
+        this.customConfigManager = customConfigManager;
         this.api = new API(this.plugin);
 
         this.plugin.getCommand("testee1").setExecutor(this);
@@ -29,19 +30,18 @@ public class test1 implements CommandExecutor {
             sender.sendMessage("Only Players Can Use This Command.");
             return true;
         }
+
         Player p = (Player) sender;
         if (!p.hasPermission("world16.testee1")) {
             api.PermissionErrorMessage(p);
             return true;
         }
-        if (args.length == 0) {
 
-            return true;
-        } else if (args.length >= 1) {
-            //SOMETHING HERE
+        if (args.length == 0) {
+            //Something here.
             return true;
         } else {
-            p.sendMessage("Something messed up!");
+            //SOMETHING HERE
             return true;
         }
     }

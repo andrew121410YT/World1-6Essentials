@@ -2,7 +2,6 @@ package World16.Commands;
 
 import World16.Main.Main;
 import World16.Managers.CustomConfigManager;
-import World16.Managers.CustomYmlManager;
 import World16.Utils.API;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
@@ -16,11 +15,8 @@ public class broadcast implements CommandExecutor {
 
     private API api;
 
-    private CustomYmlManager shitYml = null;
-
-    public broadcast(CustomConfigManager getCustomYml, Main getPlugin) {
-        this.shitYml = getCustomYml.getShitYml();
-        this.plugin = getPlugin;
+    public broadcast(Main plugin, CustomConfigManager customConfigManager) {
+        this.plugin = plugin;
         this.api = new API(this.plugin);
         this.plugin.getCommand("broadcast").setExecutor(this);
     }

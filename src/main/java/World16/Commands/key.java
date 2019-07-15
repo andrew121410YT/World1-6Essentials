@@ -89,10 +89,8 @@ public class key implements CommandExecutor {
                         keyapi.SetKeyAndDeleteOldKey(isql, keyID, p, setDataDone); //<-- MySql
                         p.sendMessage(Translate.chat("&6Your key has been set and stored in the isql database."));
                         return true;
-                    } else {
-                        p.kickPlayer("Please rejoin the server something went wrong.");
-                        return true;
                     }
+                    return true;
                 } else {
                     p.sendMessage(Translate.chat("&cUsage: /key set <KeyID> <Lore>"));
                     return true;
@@ -107,7 +105,7 @@ public class key implements CommandExecutor {
                 if (args.length == 1) {
                     p.sendMessage(Translate.chat("&cUsage: /key give <KeyID>"));
                 } else {
-                    Integer keyID = Integer.valueOf(args[1]);
+                    int keyID = Integer.valueOf(args[1]);
                     if (keyID <= 5) {
                         keyapi.giveKey(p, keyID);
                         return true;

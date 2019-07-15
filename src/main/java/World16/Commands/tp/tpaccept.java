@@ -23,9 +23,9 @@ public class tpaccept implements CommandExecutor {
 
     private CustomConfigManager customYmlManager;
 
-    public tpaccept(CustomConfigManager getCustomYml, Main getPlugin) {
-        this.customYmlManager = getCustomYml;
-        this.plugin = getPlugin;
+    public tpaccept(Main plugin, CustomConfigManager customConfigManager) {
+        this.plugin = plugin;
+        this.customYmlManager = customConfigManager;
         this.api = new API(this.plugin);
 
         this.tpam = this.plugin.getSetListMap().getTpaM();

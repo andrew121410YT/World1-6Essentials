@@ -2,7 +2,6 @@ package World16.Commands;
 
 import World16.Main.Main;
 import World16.Managers.CustomConfigManager;
-import World16.Managers.CustomYmlManager;
 import World16.Utils.API;
 import World16.Utils.Translate;
 import org.bukkit.ChatColor;
@@ -16,11 +15,7 @@ public class flyspeed implements CommandExecutor {
     private Main plugin;
     private API api;
 
-    // NEW ONE
-    private CustomYmlManager shitYml = null;
-
-    public flyspeed(CustomConfigManager getConfigInstance, Main plugin) {
-        this.shitYml = getConfigInstance.getShitYml();
+    public flyspeed(Main plugin, CustomConfigManager customConfigManager) {
         this.plugin = plugin;
         this.api = new API(this.plugin);
         plugin.getCommand("fs").setExecutor(this);

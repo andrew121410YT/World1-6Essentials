@@ -22,8 +22,8 @@ public class isafk implements CommandExecutor {
     private Main plugin;
     private API api;
 
-    public isafk(CustomConfigManager getCustomYml, Main getPlugin) {
-        this.plugin = getPlugin;
+    public isafk(Main plugin, CustomConfigManager customConfigManager) {
+        this.plugin = plugin;
         this.api = new API(this.plugin);
 
         this.afkMap = this.plugin.getSetListMap().getAfkMap();

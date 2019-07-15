@@ -22,9 +22,9 @@ public class tpdeny implements CommandExecutor {
 
     private CustomConfigManager customConfigManager;
 
-    public tpdeny(CustomConfigManager getCustomYml, Main getPlugin) {
-        this.customConfigManager = getCustomYml;
-        this.plugin = getPlugin;
+    public tpdeny(Main plugin, CustomConfigManager customConfigManager) {
+        this.plugin = plugin;
+        this.customConfigManager = customConfigManager;
         this.api = new API(this.plugin);
 
         this.tpam = this.plugin.getSetListMap().getTpaM();

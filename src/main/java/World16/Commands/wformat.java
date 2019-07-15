@@ -23,9 +23,9 @@ public class wformat implements CommandExecutor {
 
     private CustomConfigManager customConfigManager;
 
-    public wformat(CustomConfigManager getCustomYml, Main getPlugin) {
-        this.customConfigManager = getCustomYml;
-        this.plugin = getPlugin;
+    public wformat(Main plugin, CustomConfigManager customConfigManager) {
+        this.plugin = plugin;
+        this.customConfigManager = customConfigManager;
         this.api = new API(this.plugin);
 
         this.plugin.getCommand("wformat").setExecutor(this);

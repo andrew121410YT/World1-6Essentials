@@ -24,9 +24,9 @@ public class tpa implements CommandExecutor {
 
     private CustomConfigManager customConfigManager;
 
-    public tpa(CustomConfigManager getCustomYml, Main getPlugin) {
-        this.customConfigManager = getCustomYml;
-        this.plugin = getPlugin;
+    public tpa(Main plugin, CustomConfigManager customConfigManager) {
+        this.plugin = plugin;
+        this.customConfigManager = customConfigManager;
         this.api = new API(this.plugin);
 
         this.tpam = this.plugin.getSetListMap().getTpaM();

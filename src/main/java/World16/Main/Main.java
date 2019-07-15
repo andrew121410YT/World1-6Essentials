@@ -73,33 +73,33 @@ public class Main extends JavaPlugin {
         new commandblock(this);
         new bed(this);
         new ram(this);
-        new spawn(this.customConfigManager, this);
+        new spawn(this, this.customConfigManager);
         new echest(this);
         new sign(this);
         new key(this); //KEY COMMAND
         new colors(this);
-        new setjail(this.customConfigManager, this, this.jailManager);
-        new setspawn(this.customConfigManager, this);
-        new jail(this.customConfigManager, this, this.jailManager);
+        new setjail(this, this.customConfigManager, this.jailManager);
+        new setspawn(this, this.customConfigManager);
+        new jail(this, this.customConfigManager, this.jailManager);
         new afk(this);
-        new flyspeed(this.customConfigManager, this);
-        new isafk(this.customConfigManager, this);
+        new flyspeed(this, this.customConfigManager);
+        new isafk(this, this.customConfigManager);
         new back(this);
-        new broadcast(this.customConfigManager, this);
+        new broadcast(this, this.customConfigManager);
         new god(this);
-        new msg(customConfigManager, this);
+        new msg(this, this.customConfigManager);
 
-        new tpa(this.customConfigManager, this);
-        new tpaccept(this.customConfigManager, this);
-        new tpdeny(this.customConfigManager, this);
+        new tpa(this, this.customConfigManager);
+        new tpaccept(this, this.customConfigManager);
+        new tpdeny(this, this.customConfigManager);
 
-        new test1(customConfigManager, this);
-        new eram(this.customConfigManager, this);
-        new waitdo(this.customConfigManager, this);
-        new runCommands(this.customConfigManager, this);
-        new wformat(this.customConfigManager, this);
-        new xyzdxdydz(this.customConfigManager, this);
-        new workbench(this.customConfigManager, this);
+        new test1(this, this.customConfigManager);
+        new eram(this, this.customConfigManager);
+        new waitdo(this, this.customConfigManager);
+        new runCommands(this, this.customConfigManager);
+        new wformat(this, this.customConfigManager);
+        new xyzdxdydz(this);
+        new workbench(this, this.customConfigManager);
 
         //Homes
         new delhome(this.plugin);
