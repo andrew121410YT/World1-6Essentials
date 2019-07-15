@@ -1,7 +1,7 @@
 package World16.Managers;
 
 import CCUtils.Storage.ISQL;
-import World16.Utils.SetListMap;
+import World16.Main.Main;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -14,16 +14,16 @@ import java.util.*;
 
 public class HomeManager {
 
-    Map<UUID, Map<String, Location>> rawHomesMap = SetListMap.homesMap;
+    private Map<UUID, Map<String, Location>> rawHomesMap;
 
+    private Main plugin;
     private ISQL isql;
 
-    @Deprecated
-    public HomeManager() {
-    }
-
-    public HomeManager(ISQL isql) {
+    public HomeManager(Main plugin, ISQL isql) {
+        this.plugin = plugin;
         this.isql = isql;
+
+        this.rawHomesMap = this.plugin.getSetListMap().getHomesMap();
 
         isql.Connect();
         isql.ExecuteCommand("CREATE TABLE IF NOT EXISTS `Homes` (" +

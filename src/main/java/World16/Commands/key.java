@@ -6,7 +6,6 @@ import World16.Objects.KeyObject;
 import World16.TabComplete.KeyTab;
 import World16.Utils.API;
 import World16.Utils.KeyAPI;
-import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,7 +17,7 @@ import java.util.Map;
 public class key implements CommandExecutor {
 
     //Maps
-    Map<String, KeyObject> keyDataM = SetListMap.keyDataM;
+    private Map<String, KeyObject> keyDataM;
     //...
 
     //Lists
@@ -32,6 +31,8 @@ public class key implements CommandExecutor {
 
     public key(Main getPlugin) {
         this.plugin = getPlugin;
+
+        this.keyDataM = this.plugin.getSetListMap().getKeyDataM();
 
         this.api = new API(this.plugin);
         this.isql = new SQLite(this.plugin.getDataFolder(), "keys");

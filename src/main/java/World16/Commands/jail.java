@@ -5,7 +5,6 @@ import World16.Managers.CustomConfigManager;
 import World16.Managers.JailManager;
 import World16.TabComplete.JailTab;
 import World16.Utils.API;
-import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -20,7 +19,7 @@ import java.util.Set;
 public class jail implements CommandExecutor {
 
     //Maps
-    Map<String, Location> jailsMap = SetListMap.jails;
+    private Map<String, Location> jailsMap;
     //...
 
     private API api;
@@ -31,6 +30,8 @@ public class jail implements CommandExecutor {
         this.plugin = getPlugin;
         this.api = new API(this.plugin);
         this.jailManager = jailManager;
+
+        this.jailsMap = this.plugin.getSetListMap().getJails();
 
         this.plugin.getCommand("jail").setExecutor(this);
         this.plugin.getCommand("jail").setTabCompleter(new JailTab(this.plugin));

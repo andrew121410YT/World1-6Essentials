@@ -17,7 +17,7 @@ public class DebugTab implements TabCompleter {
     private Main plugin;
 
     //Maps
-    Map<String, List<String>> tabCompleteMap = SetListMap.tabCompleteMap;
+    private Map<String, List<String>> tabCompleteMap;
     //...
 
     //Lists
@@ -25,6 +25,7 @@ public class DebugTab implements TabCompleter {
 
     public DebugTab(Main plugin) {
         this.plugin = plugin;
+        this.tabCompleteMap = this.plugin.getSetListMap().getTabCompleteMap();
 
         tabCompleteMap.computeIfAbsent("debug1-6", k -> new ArrayList<>());
 

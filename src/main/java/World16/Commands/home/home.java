@@ -6,7 +6,6 @@ import World16.Main.Main;
 import World16.Managers.HomeManager;
 import World16.TabComplete.HomeListTab;
 import World16.Utils.API;
-import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -20,7 +19,7 @@ import java.util.UUID;
 
 public class home implements CommandExecutor {
 
-    Map<UUID, Map<String, Location>> rawHomesMap = SetListMap.homesMap;
+    private Map<UUID, Map<String, Location>> rawHomesMap;
 
     private Main plugin;
 
@@ -32,11 +31,13 @@ public class home implements CommandExecutor {
         this.plugin = plugin;
         this.api = new API(this.plugin);
 
+        this.rawHomesMap = this.plugin.getSetListMap().getHomesMap();
+
         this.sqLite = new SQLite(this.plugin.getDataFolder(), "Homes");
-        this.homeManager = new HomeManager(this.sqLite);
+        this.homeManager = new HomeManager(this.plugin, this.sqLite);
 
         this.plugin.getCommand("home").setExecutor(this);
-        this.plugin.getCommand("home").setTabCompleter(new HomeListTab());
+        this.plugin.getCommand("home").setTabCompleter(new HomeListTab(this.plugin));
     }
 
 

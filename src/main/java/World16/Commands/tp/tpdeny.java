@@ -3,7 +3,6 @@ package World16.Commands.tp;
 import World16.Main.Main;
 import World16.Managers.CustomConfigManager;
 import World16.Utils.API;
-import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,7 +17,7 @@ public class tpdeny implements CommandExecutor {
     private API api;
 
     //Maps
-    Map<Player, Player> tpam = SetListMap.tpaM;
+    private Map<Player, Player> tpam;
     //...
 
     private CustomConfigManager customConfigManager;
@@ -27,6 +26,8 @@ public class tpdeny implements CommandExecutor {
         this.customConfigManager = getCustomYml;
         this.plugin = getPlugin;
         this.api = new API(this.plugin);
+
+        this.tpam = this.plugin.getSetListMap().getTpaM();
 
         this.plugin.getCommand("tpdeny").setExecutor(this);
     }

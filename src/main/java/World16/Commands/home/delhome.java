@@ -25,10 +25,10 @@ public class delhome implements CommandExecutor {
         this.api = new API(this.plugin);
 
         this.isql = new SQLite(this.plugin.getDataFolder(), "Homes");
-        this.homeManager = new HomeManager(isql);
+        this.homeManager = new HomeManager(this.plugin, isql);
 
         this.plugin.getCommand("delhome").setExecutor(this);
-        this.plugin.getCommand("delhome").setTabCompleter(new HomeListTab());
+        this.plugin.getCommand("delhome").setTabCompleter(new HomeListTab(this.plugin));
     }
 
     @Override

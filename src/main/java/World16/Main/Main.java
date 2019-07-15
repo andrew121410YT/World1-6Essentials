@@ -28,8 +28,12 @@ public class Main extends JavaPlugin {
 
     private Main plugin;
 
+    //Maps
+    private SetListMap setListMap;
+    //...
+
     //Managers
-    private CustomConfigManager customconfig;
+    private CustomConfigManager customConfigManager;
     private CustomInventoryManager customInventoryManager;
     private JailManager jailManager;
 
@@ -38,8 +42,9 @@ public class Main extends JavaPlugin {
     private PluginManager pm = Bukkit.getPluginManager();
 
     public void onEnable() {
-        plugin = this;
-        api = new API(plugin);
+        this.plugin = this;
+        this.setListMap = new SetListMap();
+        this.api = new API(plugin);
 
         regCustomManagers();
         regFileConfigGEN();
@@ -51,7 +56,7 @@ public class Main extends JavaPlugin {
     }
 
     public void onDisable() {
-        SetListMap.clearSetListMap();
+        this.setListMap.clearSetListMap();
         getLogger().info("[World1-6Essentials] is now disabled.");
     }
 
@@ -70,33 +75,33 @@ public class Main extends JavaPlugin {
         new commandblock(this);
         new bed(this);
         new ram(this);
-        new spawn(this.customconfig, this);
+        new spawn(this.customConfigManager, this);
         new echest(this);
         new sign(this);
         new key(this); //KEY COMMAND
         new colors(this);
-        new setjail(this.customconfig, this, this.jailManager);
-        new setspawn(this.customconfig, this);
-        new jail(this.customconfig, this, this.jailManager);
+        new setjail(this.customConfigManager, this, this.jailManager);
+        new setspawn(this.customConfigManager, this);
+        new jail(this.customConfigManager, this, this.jailManager);
         new afk(this);
-        new flyspeed(this.customconfig, this);
-        new isafk(this.customconfig, this);
+        new flyspeed(this.customConfigManager, this);
+        new isafk(this.customConfigManager, this);
         new back(this);
-        new broadcast(this.customconfig, this);
+        new broadcast(this.customConfigManager, this);
         new god(this);
-        new msg(customconfig, this);
+        new msg(customConfigManager, this);
 
-        new tpa(this.customconfig, this);
-        new tpaccept(this.customconfig, this);
-        new tpdeny(this.customconfig, this);
+        new tpa(this.customConfigManager, this);
+        new tpaccept(this.customConfigManager, this);
+        new tpdeny(this.customConfigManager, this);
 
-        new test1(customconfig, this);
-        new eram(this.customconfig, this, this.customInventoryManager);
-        new waitdo(this.customconfig, this);
-        new runCommands(this.customconfig, this);
-        new wformat(this.customconfig, this);
-        new xyzdxdydz(this.customconfig, this);
-        new workbench(this.customconfig, this);
+        new test1(customConfigManager, this);
+        new eram(this.customConfigManager, this, this.customInventoryManager);
+        new waitdo(this.customConfigManager, this);
+        new runCommands(this.customConfigManager, this);
+        new wformat(this.customConfigManager, this);
+        new xyzdxdydz(this.customConfigManager, this);
+        new workbench(this.customConfigManager, this);
 
         //Homes
         new delhome(this.plugin);
@@ -130,13 +135,13 @@ public class Main extends JavaPlugin {
     }
 
     private void regCustomManagers() {
-        this.customconfig = new CustomConfigManager(this);
-        customconfig.registerAllCustomConfigs();
+        this.customConfigManager = new CustomConfigManager(this);
+        customConfigManager.registerAllCustomConfigs();
 
         this.customInventoryManager = new CustomInventoryManager(this);
         this.customInventoryManager.registerAllCustomInventorys();
 
-        this.jailManager = new JailManager(this.customconfig, this);
+        this.jailManager = new JailManager(this.customConfigManager, this);
         this.jailManager.getAllJailsFromConfig();
     }
 
@@ -160,19 +165,29 @@ public class Main extends JavaPlugin {
         return true;
     }
 
+    //Getters
+
     public Main getPlugin() {
         return plugin;
     }
 
-    public API getApi() {
-        return this.api;
+    public SetListMap getSetListMap() {
+        return setListMap;
+    }
+
+    public CustomConfigManager getCustomConfigManager() {
+        return customConfigManager;
     }
 
     public CustomInventoryManager getCustomInventoryManager() {
         return customInventoryManager;
     }
 
-    public CustomConfigManager getCustomConfigManager() {
-        return customconfig;
+    public JailManager getJailManager() {
+        return jailManager;
+    }
+
+    public API getApi() {
+        return api;
     }
 }

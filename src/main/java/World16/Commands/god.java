@@ -2,7 +2,6 @@ package World16.Commands;
 
 import World16.Main.Main;
 import World16.Utils.API;
-import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,12 +16,15 @@ public class god implements CommandExecutor {
     private API api;
 
     //Lists
-    List<String> godm = SetListMap.godmList;
+    private List<String> godm;
     //...
 
     public god(Main plugin) {
         this.plugin = plugin;
         this.api = new API(this.plugin);
+
+        this.godm = this.plugin.getSetListMap().getGodmList();
+
         plugin.getCommand("god").setExecutor(this);
     }
 

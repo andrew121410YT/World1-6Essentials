@@ -14,10 +14,13 @@ public class OnPlayerQuitEvent implements Listener {
 
     private Main plugin;
     private API api;
+    private SetListMap setListMap;
 
     public OnPlayerQuitEvent(Main getPlugin) {
         this.plugin = getPlugin;
         this.api = new API(this.plugin);
+
+        this.setListMap = this.plugin.getSetListMap();
 
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
@@ -27,7 +30,7 @@ public class OnPlayerQuitEvent implements Listener {
         Player p = event.getPlayer();
 
         //CLEAR Set's and List's and Map's
-        SetListMap.clearSetListMap(p);
+        setListMap.clearSetListMap(p);
 
         event.setQuitMessage("");
         Bukkit.broadcastMessage(Translate.chat(API.PREFIX + " &5Bye Bye, " + p.getDisplayName()));

@@ -28,15 +28,18 @@ public class KeyAPI {
     private Main plugin;
 
     //Maps
-    Map<String, KeyObject> keyDatam = SetListMap.keyDataM;
+    private Map<String, KeyObject> keyDatam;
     //...
 
+    @Deprecated
     public KeyAPI(Main plugin) {
         this.plugin = plugin;
+        this.keyDatam = this.plugin.getSetListMap().getKeyDataM();
     }
 
     public KeyAPI(Main plugin, ISQL isql) {
         this.plugin = plugin;
+        this.keyDatam = this.plugin.getSetListMap().getKeyDataM();
         isql.Connect();
         isql.ExecuteCommand("CREATE TABLE IF NOT EXISTS `KeyData` (" +
                 "`KeyDataID` INT," +

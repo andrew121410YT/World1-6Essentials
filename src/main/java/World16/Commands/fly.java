@@ -2,7 +2,6 @@ package World16.Commands;
 
 import World16.Main.Main;
 import World16.Utils.API;
-import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,7 +15,7 @@ public class fly implements CommandExecutor {
     //Maps
     //...
     //Lists
-    List<String> Fly = SetListMap.flyList;
+    private List<String> flyList;
     //....
 
     private Main plugin;
@@ -25,6 +24,9 @@ public class fly implements CommandExecutor {
     public fly(Main plugin) {
         this.plugin = plugin;
         this.api = new API(this.plugin);
+
+        this.flyList = this.plugin.getSetListMap().getFlyList();
+
         plugin.getCommand("fly").setExecutor(this);
     }
 
@@ -44,15 +46,15 @@ public class fly implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("fly")) {
         }
         if (args.length == 0) {
-            if (!Fly.contains(p.getDisplayName()) && (!p.isFlying())) {
+            if (!flyList.contains(p.getDisplayName()) && (!p.isFlying())) {
                 p.setAllowFlight(true);
                 p.sendMessage(Translate.chat("&6Set fly mode &cenabled&6 for " + p.getDisplayName()));
-                Fly.add(p.getDisplayName());
+                flyList.add(p.getDisplayName());
                 return true;
-            } else if (Fly.contains(p.getDisplayName())) {
+            } else if (flyList.contains(p.getDisplayName())) {
                 p.setAllowFlight(false);
                 p.sendMessage(Translate.chat("&6Set fly mode &cdisabled&6 for " + p.getDisplayName()));
-                Fly.remove(p.getDisplayName());
+                flyList.remove(p.getDisplayName());
                 return true;
             } else {
                 Player target = plugin.getServer().getPlayerExact(args[0]);
@@ -61,17 +63,17 @@ public class fly implements CommandExecutor {
                         api.PermissionErrorMessage(p);
                         return true;
                     }
-                    if (!Fly.contains(target.getDisplayName()) && (!target.isFlying())) {
+                    if (!flyList.contains(target.getDisplayName()) && (!target.isFlying())) {
                         target.setAllowFlight(true);
                         p.sendMessage(
                                 Translate.chat("&6Set fly mode &cenabled&6 for " + target.getDisplayName()));
-                        Fly.add(target.getDisplayName());
+                        flyList.add(target.getDisplayName());
                         return true;
-                    } else if (Fly.contains(target.getDisplayName())) {
+                    } else if (flyList.contains(target.getDisplayName())) {
                         target.setAllowFlight(false);
                         p.sendMessage(
                                 Translate.chat("&6Set fly mode &cdisabled&6 for " + target.getDisplayName()));
-                        Fly.remove(target.getDisplayName());
+                        flyList.remove(target.getDisplayName());
                         return true;
                     }
                 } else {
