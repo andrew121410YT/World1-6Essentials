@@ -41,22 +41,27 @@ public class BackTab implements TabCompleter {
         if (!(sender instanceof Player)) {
             return null;
         }
-        Player player = (Player) sender;
 
-        if (cmd.getName().equalsIgnoreCase("back")) {
-            List<String> list = getContains(args[0], tabCompleteMap.get("back"));
-            return list;
+        if (!cmd.getName().equalsIgnoreCase("back")) {
+            return null;
         }
+
+        if (args.length == 1) {
+            return getContains(args[0], tabCompleteMap.get("back"));
+        }
+
         return null;
     }
 
-    private List<String> getContains(String args, List<String> a) {
+    private List<String> getContains(String args, List<String> oldArrayList) {
         List<String> list = new ArrayList<>();
-        for (String mat : a) {
+
+        for (String mat : oldArrayList) {
             if (mat.contains(args.toLowerCase())) {
                 list.add(mat);
             }
         }
+
         return list;
     }
 }

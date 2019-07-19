@@ -11,6 +11,8 @@ import java.util.*;
 
 public class HomeListTab implements TabCompleter {
 
+    //This is just a reminder for myself to not copy this because it won't work with other stuff since it's custom coded.
+
     //Lists
     private Map<UUID, Map<String, Location>> rawHomesMap;
     //...
@@ -30,21 +32,25 @@ public class HomeListTab implements TabCompleter {
         }
         Player player = (Player) sender;
 
-        if (cmd.getName().equalsIgnoreCase("home") || cmd.getName().equalsIgnoreCase("delhome")) {
-            Set<String> homeSet = rawHomesMap.get(player.getUniqueId()).keySet();
-            String[] homeString = homeSet.toArray(new String[0]);
-            return getContains(args[0], Arrays.asList(homeString));
+        if (!cmd.getName().equalsIgnoreCase("home") || !cmd.getName().equalsIgnoreCase("delhome")) {
+            return null;
         }
-        return null;
+
+        Set<String> homeSet = rawHomesMap.get(player.getUniqueId()).keySet();
+        String[] homeString = homeSet.toArray(new String[0]);
+        return getContains(args[0], Arrays.asList(homeString));
     }
 
-    private List<String> getContains(String args, List<String> a) {
+
+    private List<String> getContains(String args, List<String> oldArrayList) {
         List<String> list = new ArrayList<>();
-        for (String mat : a) {
+
+        for (String mat : oldArrayList) {
             if (mat.contains(args.toLowerCase())) {
                 list.add(mat);
             }
         }
+
         return list;
     }
 }

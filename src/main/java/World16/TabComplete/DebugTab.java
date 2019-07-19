@@ -7,7 +7,6 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -30,16 +29,9 @@ public class DebugTab implements TabCompleter {
 
         if (tabCompleteMap.get("debug1-6").isEmpty()) {
             tabCompleteMap.get("debug1-6").add("op");
-            tabCompleteMap.get("debug1-6").add("defaultstuff");
-            tabCompleteMap.get("debug1-6").add("clearalllists");
-            tabCompleteMap.get("debug1-6").add("clearallmaps");
-            tabCompleteMap.get("debug1-6").add("clearalllistswithname");
-            tabCompleteMap.get("debug1-6").add("clearallmapswithname");
+            tabCompleteMap.get("debug1-6").add("default");
             tabCompleteMap.get("debug1-6").add("date");
             tabCompleteMap.get("debug1-6").add("checkuuid");
-            tabCompleteMap.get("debug1-6").add("debugmessages");
-            tabCompleteMap.get("debug1-6").add("finddefaultspawn");
-            tabCompleteMap.get("debug1-6").add("uuidcache");
 //            tabCompleteMap.get("debug").add("");
         }
     }
@@ -49,7 +41,6 @@ public class DebugTab implements TabCompleter {
         if (!(sender instanceof Player)) {
             return null;
         }
-        Player player = (Player) sender;
 
         if (!cmd.getName().equalsIgnoreCase("debug1-6")) {
             return null;
@@ -59,20 +50,18 @@ public class DebugTab implements TabCompleter {
             return getContains(args[0], tabCompleteMap.get("debug1-6"));
         }
 
-        if (args.length >= 2 && args[0].equalsIgnoreCase("checkmaps")) {
-            List<String> checkmaps = Arrays.asList("@checkmine", "@all", "@allwithdepth");
-            return getContains(args[1], checkmaps);
-        }
         return null;
     }
 
-    private List<String> getContains(String args, List<String> a) {
+    private List<String> getContains(String args, List<String> oldArrayList) {
         List<String> list = new ArrayList<>();
-        for (String mat : a) {
-            if (mat.contains(args.toLowerCase())) {
-                list.add(mat);
+
+        for (String s : oldArrayList) {
+            if (s.contains(args.toLowerCase())) {
+                list.add(s);
             }
         }
+
         return list;
     }
 }
