@@ -41,8 +41,13 @@ public class DebugTab implements TabCompleter {
         if (!(sender instanceof Player)) {
             return null;
         }
+        Player p = (Player) sender;
 
         if (!cmd.getName().equalsIgnoreCase("debug1-6")) {
+            return null;
+        }
+
+        if (!p.hasPermission("world16.debug")) {
             return null;
         }
 

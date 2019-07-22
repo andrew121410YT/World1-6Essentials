@@ -30,15 +30,23 @@ public class HomeListTab implements TabCompleter {
         if (!(sender instanceof Player)) {
             return null;
         }
-        Player player = (Player) sender;
+        Player p = (Player) sender;
 
         if (!cmd.getName().equalsIgnoreCase("home") || !cmd.getName().equalsIgnoreCase("delhome")) {
             return null;
         }
 
-        Set<String> homeSet = rawHomesMap.get(player.getUniqueId()).keySet();
-        String[] homeString = homeSet.toArray(new String[0]);
-        return getContains(args[0], Arrays.asList(homeString));
+        if (!p.hasPermission("world16.home")) {
+            return null;
+        }
+
+        if (args.length == 1) {
+            Set<String> homeSet = rawHomesMap.get(p.getUniqueId()).keySet();
+            String[] homeString = homeSet.toArray(new String[0]);
+            return getContains(args[0], Arrays.asList(homeString));
+        }
+
+        return null;
     }
 
 

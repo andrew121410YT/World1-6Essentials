@@ -41,9 +41,14 @@ public class KeyTab implements TabCompleter {
         if (!(sender instanceof Player)) {
             return null;
         }
-        Player player = (Player) sender;
+
+        Player p = (Player) sender;
 
         if (!cmd.getName().equalsIgnoreCase("key")) {
+            return null;
+        }
+
+        if (!p.hasPermission("world16.key")) {
             return null;
         }
 

@@ -42,7 +42,13 @@ public class BackTab implements TabCompleter {
             return null;
         }
 
+        Player p = (Player) sender;
+
         if (!cmd.getName().equalsIgnoreCase("back")) {
+            return null;
+        }
+
+        if (!p.hasPermission("world16.back")) {
             return null;
         }
 

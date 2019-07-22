@@ -40,9 +40,14 @@ public class JailTab implements TabCompleter {
         if (!(sender instanceof Player)) {
             return null;
         }
-        Player player = (Player) sender;
+
+        Player p = (Player) sender;
 
         if (!cmd.getName().equalsIgnoreCase("jail")) {
+            return null;
+        }
+
+        if (!p.hasPermission("world16.jail")) {
             return null;
         }
 
