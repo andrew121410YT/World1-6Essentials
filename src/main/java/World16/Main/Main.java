@@ -123,6 +123,8 @@ public class Main extends JavaPlugin {
         new OnAsyncPlayerChatEvent(this);
         new OnPlayerInteractEvent(this);
         new OnPlayerMoveEvent(this);
+
+        new OnVehicleMoveEvent(this);
     }
 
     private void regFileConfigGEN() {
