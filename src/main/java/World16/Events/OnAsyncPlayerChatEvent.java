@@ -37,6 +37,7 @@ public class OnAsyncPlayerChatEvent implements Listener {
         adminList.add("andrew121410");
         adminList.add("Robobros3");
         adminList.add("RoboBros1");
+        adminList.add("Andrzej_Przybyla");
     }
 
     @EventHandler

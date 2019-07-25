@@ -32,10 +32,6 @@ public class HomeListTab implements TabCompleter {
         }
         Player p = (Player) sender;
 
-        if (!cmd.getName().equalsIgnoreCase("home") || !cmd.getName().equalsIgnoreCase("delhome")) {
-            return null;
-        }
-
         if (!p.hasPermission("world16.home")) {
             return null;
         }
