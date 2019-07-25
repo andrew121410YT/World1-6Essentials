@@ -37,6 +37,10 @@ public class HomeListTab implements TabCompleter {
         }
 
         if (args.length == 1) {
+            if (rawHomesMap.get(p.getUniqueId()) == null) {
+                p.kickPlayer("[HomeTabComplete] You where not in the memory so NPE was caused.");
+                return null;
+            }
             Set<String> homeSet = rawHomesMap.get(p.getUniqueId()).keySet();
             String[] homeString = homeSet.toArray(new String[0]);
             return getContains(args[0], Arrays.asList(homeString));
