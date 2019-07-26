@@ -41,7 +41,7 @@ public class API {
     //Finals
     public static final String CUSTOM_COMMAND_FORMAT = "`";
     public static final Integer VERSION = 314;
-    public static final String DATE_OF_VERSION = "7/19/2019";
+    public static final String DATE_OF_VERSION = "7/25/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = PREFIX + "->[&bUSELESS&r]";
     public static final String DEBUG_TAG = PREFIX + "->[&eDEBUG&r]";
@@ -236,6 +236,15 @@ public class API {
         try {
             Long.parseLong(input);
             return Long.valueOf(input);
+        } catch (Exception e) {
+            return default1;
+        }
+    }
+
+    public Double asDoubleOrDefault(String input, double default1) {
+        try {
+            Double.parseDouble(input);
+            return Double.valueOf(input);
         } catch (Exception e) {
             return default1;
         }
