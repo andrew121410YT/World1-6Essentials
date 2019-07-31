@@ -3,10 +3,13 @@ package World16.Utils;
 import World16.Main.Main;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SimpleMath {
 
@@ -110,7 +113,21 @@ public class SimpleMath {
         return result;
     }
 
+    public Collection<Entity> getEntitiesInAABB(World world, Vector one, Vector two) {
+        Vector center = getCenter(world, one, two).toVector();
+        center.setY(one.getY());
+        Vector radiusA = one.subtract(center);
+        Vector radiusB = two.subtract(center);
+        this.plugin.getServer().broadcastMessage(Translate.chat("&6RADIUS: X: " + radiusA.getBlockX() + " Y: " + radiusB.getBlockY() + " Z: " + radiusA.getBlockZ()));
+        return world.getNearbyEntities(center.toLocation(world), radiusA.getBlockX(), radiusB.getBlockY(), radiusA.getBlockZ()).stream().filter(nearbyEntity -> isInAABBSimple(nearbyEntity.getLocation().toVector(), one, two)).collect(Collectors.toList());
+    }
+
     public boolean isInAABBSimple(Vector entity, Vector one, Vector two) {
         return entity.isInAABB(Vector.getMinimum(one, two), Vector.getMaximum(one, two));
+    }
+
+    public Location getCenter(World world, Vector one, Vector two) {
+        Vector done = one.getMidpoint(two);
+        return new Location(world, done.getX(), done.getY(), done.getZ());
     }
 }

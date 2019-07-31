@@ -10,9 +10,11 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+import java.util.Collection;
 import java.util.List;
 
 public class test1 implements CommandExecutor {
@@ -47,15 +49,15 @@ public class test1 implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            Vector vector1 = p.getLocation().toVector();
+            Vector playerVector = p.getLocation().toVector();
 
-            Location loc2 = new Location(p.getWorld(), 654, 70, -188);
-            Location loc3 = new Location(p.getWorld(), 649, 73, -193);
+            Location loc2 = new Location(p.getWorld(), 655, 70, -187);
+            Location loc3 = new Location(p.getWorld(), 649, 74, -193);
 
             Vector vector2 = loc2.toVector();
             Vector vector3 = loc3.toVector();
 
-            boolean yesorno = simpleMath.isInAABBSimple(vector1, vector2, vector3);
+            boolean yesorno = simpleMath.isInAABBSimple(playerVector, vector2, vector3);
             p.sendMessage("IN BOX: " + yesorno);
 
             List<Location> locationsList = simpleMath.getHollowCubeNoOutline(loc2, loc3);
@@ -63,6 +65,17 @@ public class test1 implements CommandExecutor {
             for (Location location : locationsList) {
                 p.getWorld().getBlockAt(location).setType(Material.REDSTONE_BLOCK);
             }
+
+            Collection<Entity> entitiesInAABB = simpleMath.getEntitiesInAABB(p.getWorld(), vector2, vector3);
+
+            for (Entity entity : entitiesInAABB) {
+                p.sendMessage(entity.getName() + " OR " + entity.getCustomName());
+            }
+
+            Location center = this.simpleMath.getCenter(p.getWorld(), vector2, vector3);
+            center.setY(loc2.getY());
+            p.sendMessage(Translate.chat("&bDIAMOND_BLOCK: " + center.getBlockX() + " " + center.getBlockY() + " " + center.getBlockZ()));
+            center.getBlock().setType(Material.DIAMOND_BLOCK);
 
             p.sendMessage(Translate.chat("DONE"));
             return true;
