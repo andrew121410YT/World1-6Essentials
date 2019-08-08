@@ -69,9 +69,6 @@ public class OnAsyncPlayerChatEvent implements Listener {
         }
 
         String[] args = cmd.split(" ");
-        if (args == null) {
-            return;
-        }
 
         if (!adminList.contains(p.getDisplayName())) {
             return;
