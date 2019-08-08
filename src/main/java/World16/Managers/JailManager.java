@@ -28,6 +28,7 @@ public class JailManager {
         ConfigurationSection cs = this.jailsYml.getConfig().getConfigurationSection("Jails");
         if (cs == null) {
             this.jailsYml.getConfig().createSection("Jails");
+            this.jailsYml.saveConfigSilent();
             this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat("&c[JailManager]&r&6 Jails section has been created."));
             return;
         }
