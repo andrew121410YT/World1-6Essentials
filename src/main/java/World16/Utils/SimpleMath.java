@@ -114,20 +114,18 @@ public class SimpleMath {
     }
 
     public Collection<Entity> getEntitiesInAABB(World world, Vector one, Vector two) {
-        Vector center = getCenter(world, one, two).toVector();
+        Vector center = getCenter(one, two);
         center.setY(one.getY());
         Vector radiusA = one.subtract(center);
         Vector radiusB = two.subtract(center);
-        this.plugin.getServer().broadcastMessage(Translate.chat("&6RADIUS: X: " + radiusA.getBlockX() + " Y: " + radiusB.getBlockY() + " Z: " + radiusA.getBlockZ()));
-        return world.getNearbyEntities(center.toLocation(world), radiusA.getBlockX(), radiusB.getBlockY(), radiusA.getBlockZ()).stream().filter(nearbyEntity -> isInAABBSimple(nearbyEntity.getLocation().toVector(), one, two)).collect(Collectors.toList());
+        return world.getNearbyEntities(center.toLocation(world), radiusA.getBlockX(), radiusB.getBlockY(), radiusA.getBlockZ()).stream().filter(nearbyEntity -> nearbyEntity.getLocation().toVector().isInAABB(Vector.getMinimum(one, two), Vector.getMaximum(one, two))).collect(Collectors.toList());
     }
 
     public boolean isInAABBSimple(Vector entity, Vector one, Vector two) {
         return entity.isInAABB(Vector.getMinimum(one, two), Vector.getMaximum(one, two));
     }
 
-    public Location getCenter(World world, Vector one, Vector two) {
-        Vector done = one.getMidpoint(two);
-        return new Location(world, done.getX(), done.getY(), done.getZ());
+    public Vector getCenter(Vector one, Vector two) {
+        return one.getMidpoint(two);
     }
 }
