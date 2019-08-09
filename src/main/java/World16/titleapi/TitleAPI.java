@@ -53,11 +53,6 @@ public class TitleAPI extends JavaPlugin implements Listener {
 
     public static void sendTitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut,
                                  String title, String subtitle) {
-        TitleSendEvent titleSendEvent = new TitleSendEvent(player, title, subtitle);
-        Bukkit.getPluginManager().callEvent(titleSendEvent);
-        if (titleSendEvent.isCancelled())
-            return;
-
         try {
             Object e;
             Object chatTitle;
@@ -144,11 +139,6 @@ public class TitleAPI extends JavaPlugin implements Listener {
             footer = "";
         }
         footer = ChatColor.translateAlternateColorCodes('&', footer);
-
-        TabTitleSendEvent tabTitleSendEvent = new TabTitleSendEvent(player, header, footer);
-        Bukkit.getPluginManager().callEvent(tabTitleSendEvent);
-        if (tabTitleSendEvent.isCancelled())
-            return;
 
         header = header.replaceAll("%player%", player.getDisplayName());
         footer = footer.replaceAll("%player%", player.getDisplayName());

@@ -54,18 +54,27 @@
     </repositories>
 
     <dependencies>
-        <!--Spigot API -->
+
+        <!--        Spigot API -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.12-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-        <!--Bukkit API -->
+
+        <!--        Bukkit API-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.bukkit</groupId>-->
+        <!--            <artifactId>bukkit</artifactId>-->
+        <!--            <version>1.12-R0.1-SNAPSHOT</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
+
         <dependency>
             <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>1.12-R0.1-SNAPSHOT</version>
+            <artifactId>craftbukkit</artifactId>
+            <version>1.12.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -80,7 +89,7 @@
         <dependency>
             <groupId>com.github.andrew121410</groupId>
             <artifactId>CCUtilsJava</artifactId>
-            <version>f4687d37ab</version>
+            <version>8778594c09</version>
             <scope>compile</scope>
         </dependency>
 
