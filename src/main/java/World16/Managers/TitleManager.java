@@ -1,4 +1,4 @@
-package World16.titleapi;
+package World16.Managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,7 +10,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 
-public class TitleAPI extends JavaPlugin implements Listener {
+public class TitleManager extends JavaPlugin implements Listener {
 
     @Deprecated
     public static void sendTitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut,
