@@ -2,11 +2,7 @@ package World16Elevators.Objects;
 
 import World16.Main.Main;
 import World16.Utils.SimpleMath;
-import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldedit.math.BlockVector3;
-import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.world.World;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
@@ -58,7 +54,12 @@ public class ElevatorObject {
         CuboidRegion cuboidRegion = new CuboidRegion(blockVector3L, blockVector3U);
 
         EditSession editSession = worldEditPlugin.getWorldEdit().getEditSessionFactory().getEditSession(world, -1);
-        cuboidRegion.get
+        BlockVector3 blockVector3 = BukkitAdapter.asBlockVector(new Location(plugin.getServer().getWorld("world"), 0, 1, 0));
+        try {
+            editSession.moveRegion(cuboidRegion, blockVector3, 1, false, null);
+        } catch (MaxChangedBlocksException e) {
+            e.printStackTrace();
+        }
     }
 
     public void armorStandSetup() {

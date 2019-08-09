@@ -2,6 +2,8 @@ name: World1-6Essentials
 version: 0.1
 author: Andrew121410
 main: World16.Main.Main
+depend: [WorldEdit]
+
 commands:
   World1-6Essentials:
   bed:
