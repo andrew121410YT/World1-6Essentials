@@ -19,12 +19,6 @@ public class SignUtils {
     }
 
     public void edit(Player player, Sign sign) {
-        for (int i = 0; i < 4; ++i)
-            // Removes all color from the sign, pretty buggy if you don't
-            sign.setLine(i, sign.getLine(i).replace("§", "&"));
-        // Updates the sign so we open it after the color replace takes effect
-        sign.update();
-
         Location loc = sign.getLocation();
         BlockPosition pos = new BlockPosition(loc.getX(), loc.getY(), loc.getZ());
         EntityPlayer nmsPlayer = ((CraftPlayer) player).getHandle();

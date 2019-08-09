@@ -1,6 +1,9 @@
 package World16.Utils;
 
 import World16.Main.Main;
+import net.minecraft.server.v1_12_R1.AxisAlignedBB;
+import net.minecraft.server.v1_12_R1.BlockPosition;
+import net.minecraft.server.v1_12_R1.MinecraftServer;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -9,7 +12,6 @@ import org.bukkit.util.Vector;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SimpleMath {
 
@@ -113,12 +115,12 @@ public class SimpleMath {
         return result;
     }
 
-    public Collection<Entity> getEntitiesInAABB(World world, Vector one, Vector two) {
-        Vector center = getCenter(one, two);
-        center.setY(one.getY());
-        Vector radiusA = one.subtract(center);
-        Vector radiusB = two.subtract(center);
-        return world.getNearbyEntities(center.toLocation(world), radiusA.getBlockX(), radiusB.getBlockY(), radiusA.getBlockZ()).stream().filter(nearbyEntity -> nearbyEntity.getLocation().toVector().isInAABB(Vector.getMinimum(one, two), Vector.getMaximum(one, two))).collect(Collectors.toList());
+    public Collection<Entity> getEntitiesInAABB(Vector one, Vector two) {
+        Collection<Entity> entitiesBukkit = new ArrayList<>();
+        for (net.minecraft.server.v1_12_R1.Entity entity : MinecraftServer.getServer().getWorld().getEntities(null, new AxisAlignedBB(new BlockPosition(one.getBlockX(), one.getBlockY(), one.getBlockZ()), new BlockPosition(two.getBlockX(), two.getBlockY(), two.getBlockZ())))) {
+            entitiesBukkit.add(entity.getBukkitEntity());
+        }
+        return entitiesBukkit;
     }
 
     public boolean isInAABBSimple(Vector entity, Vector one, Vector two) {

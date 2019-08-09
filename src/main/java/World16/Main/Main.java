@@ -11,10 +11,7 @@ import World16.Commands.tp.tpdeny;
 import World16.Events.*;
 import World16.Managers.CustomConfigManager;
 import World16.Managers.JailManager;
-import World16.Utils.API;
-import World16.Utils.Metrics;
-import World16.Utils.SetListMap;
-import World16.Utils.Translate;
+import World16.Utils.*;
 import World16.test.test1;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -27,20 +24,20 @@ public class Main extends JavaPlugin {
 
     private Main plugin;
 
-    //Maps
     private SetListMap setListMap;
-    //...
 
     //Managers
     private CustomConfigManager customConfigManager;
     private JailManager jailManager;
 
     private API api;
+    private OtherPlugins otherPlugins;
 
     private PluginManager pm = Bukkit.getPluginManager();
 
     public void onEnable() {
         this.plugin = this;
+        this.otherPlugins = new OtherPlugins(this);
         this.setListMap = new SetListMap();
         this.api = new API(plugin);
 
@@ -179,5 +176,9 @@ public class Main extends JavaPlugin {
 
     public API getApi() {
         return api;
+    }
+
+    public OtherPlugins getOtherPlugins() {
+        return otherPlugins;
     }
 }
