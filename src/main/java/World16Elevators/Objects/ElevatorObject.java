@@ -226,7 +226,7 @@ public class ElevatorObject implements ConfigurationSerializable {
             public void run() {
                 floorObject.getAtDoor().getBlock().setType(oldBlock);
             }
-        }.runTaskLater(plugin, 20L * 10);
+        }.runTaskLater(plugin, 20L * 5);
     }
 
     private void setupFloorQueue() {
@@ -252,7 +252,7 @@ public class ElevatorObject implements ConfigurationSerializable {
 
     private void floorDone() {
         isWaiting = true;
-        this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> isWaiting = false, 20 * 11);
+        this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> isWaiting = false, 20 * 6);
     }
 
     public void addFloor(FloorObject floorObject) {
