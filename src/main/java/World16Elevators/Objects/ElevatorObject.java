@@ -91,7 +91,7 @@ public class ElevatorObject implements ConfigurationSerializable {
     }
 
     public Collection<Entity> getEntities() {
-        return simpleMath.getEntitiesInAABB(locationUP.toVector(), locationDOWN.toVector());
+        return simpleMath.getEntitiesInAABB(locationDOWN.toVector(), locationUP.add(0, 1, 0).toVector());
     }
 
     public void goToFloor(int floor) {
@@ -113,7 +113,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                     if (getFloor(floor).getBoundingBox().getMidPointOnFloor().getY() == locationDOWN.getY() - 1) {
                         this.cancel();
                         openDoor(floor);
-                        floorDone(floor);
+                        floorDone();
                         isGoing = false;
                     }
                     worldEditMoveDOWN(floor, false);
@@ -133,7 +133,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                 if (getFloor(floor).getBoundingBox().isInAABB(locationDOWN.toVector().add(new org.bukkit.util.Vector(0, 1, 0)))) {
                     this.cancel();
                     openDoor(floor);
-                    floorDone(floor);
+                    floorDone();
                     isGoing = false;
                 }
                 worldEditMoveUP(floor, false);
@@ -230,11 +230,12 @@ public class ElevatorObject implements ConfigurationSerializable {
 
     private void openDoor(int floor) {
         Material oldBlock = getFloor(floor).getAtDoor().getBlock().getType();
-        getFloor(floor).getAtDoor().getBlock().setType(Material.REDSTONE_BLOCK);
+        FloorObject floorObject = getFloor(floor);
+        floorObject.getAtDoor().getBlock().setType(Material.REDSTONE_BLOCK);
         new BukkitRunnable() {
             @Override
             public void run() {
-                getFloor(floor).getAtDoor().getBlock().setType(oldBlock);
+                floorObject.getAtDoor().getBlock().setType(oldBlock);
             }
         }.runTaskLater(plugin, 20L * 10);
     }
@@ -260,7 +261,7 @@ public class ElevatorObject implements ConfigurationSerializable {
         }.runTaskTimer(plugin, 40L, 40L);
     }
 
-    private void floorDone(int floor) {
+    private void floorDone() {
         isWaiting = true;
         this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> isWaiting = false, 20 * 11);
     }

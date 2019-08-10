@@ -38,7 +38,6 @@ public class ElevatorMain {
             ConfigurationSection elevatorConfig = cs.getConfigurationSection(elevator);
             ElevatorObject elevatorObject = (ElevatorObject) elevatorConfig.get("ElevatorObject");
 
-//            String elevatorLocation = "Elevators" + "." + elevator.toLowerCase();
             ConfigurationSection elevatorFloors = elevatorConfig.getConfigurationSection("Floors");
 
             if (elevatorFloors == null) {
