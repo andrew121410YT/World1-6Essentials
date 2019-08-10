@@ -1,8 +1,8 @@
 package World16.Events;
 
 import World16.Main.Main;
-import World16.Utils.Translate;
 import World16.Managers.TitleManager;
+import World16.Utils.Translate;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

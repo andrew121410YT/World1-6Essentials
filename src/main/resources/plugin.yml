@@ -47,6 +47,7 @@ commands:
     aliases:
       - homes
   sethome:
+  elevator:
 
   gmc:
     aliases:
@@ -205,4 +206,7 @@ permissions:
     default: true
   world16.home.op:
     description: Allows to do op home commands
+    default: true
+  world16.elevator:
+    description: Allows to do workbench
     default: true

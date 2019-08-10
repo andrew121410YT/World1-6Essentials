@@ -13,14 +13,25 @@ import World16.Managers.CustomConfigManager;
 import World16.Managers.JailManager;
 import World16.Utils.*;
 import World16.test.test1;
+import World16Elevators.ElevatorMain;
+import World16Elevators.Objects.BoundingBox;
+import World16Elevators.Objects.ElevatorObject;
+import World16Elevators.Objects.FloorObject;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
+
+    static {
+        ConfigurationSerialization.registerClass(BoundingBox.class, "BoundingBox");
+        ConfigurationSerialization.registerClass(FloorObject.class, "FloorObject");
+        ConfigurationSerialization.registerClass(ElevatorObject.class, "ElevatorObject");
+    }
 
     private Main plugin;
 
@@ -29,6 +40,7 @@ public class Main extends JavaPlugin {
     //Managers
     private CustomConfigManager customConfigManager;
     private JailManager jailManager;
+    private ElevatorMain elevatorMain;
 
     private API api;
     private OtherPlugins otherPlugins;
@@ -51,6 +63,7 @@ public class Main extends JavaPlugin {
     }
 
     public void onDisable() {
+        this.getElevatorMain().saveAllElevators();
         this.setListMap.clearSetListMap();
         getLogger().info("[World1-6Essentials] is now disabled.");
     }
@@ -97,6 +110,7 @@ public class Main extends JavaPlugin {
         new wformat(this, this.customConfigManager);
         new xyzdxdydz(this);
         new workbench(this, this.customConfigManager);
+        new elevator(this, this.customConfigManager);
 
         //Homes
         new delhome(this.plugin);
@@ -134,10 +148,9 @@ public class Main extends JavaPlugin {
 
         this.jailManager = new JailManager(this.customConfigManager, this);
         this.jailManager.getAllJailsFromConfig();
-    }
 
-    public void checkForPlugins() {
-
+        this.elevatorMain = new ElevatorMain(this, this.customConfigManager);
+        this.elevatorMain.loadAllElevators();
     }
 
     private void regbstats() {
@@ -180,5 +193,9 @@ public class Main extends JavaPlugin {
 
     public OtherPlugins getOtherPlugins() {
         return otherPlugins;
+    }
+
+    public ElevatorMain getElevatorMain() {
+        return elevatorMain;
     }
 }

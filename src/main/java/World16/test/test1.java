@@ -3,8 +3,6 @@ package World16.test;
 import World16.Main.Main;
 import World16.Managers.CustomConfigManager;
 import World16.Utils.API;
-import World16Elevators.Objects.ElevatorObject;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -41,12 +39,6 @@ public class test1 implements CommandExecutor {
 
         if (args.length == 0) {
             //SOMETHING HERE
-            Location locationM = new Location(p.getWorld(), -4, 64, -1);
-            Location locationL = new Location(p.getWorld(), -2, 64, -3);
-            Location locationT = new Location(p.getWorld(), -6, 68, 1);
-            ElevatorObject elevatorObject = new ElevatorObject(plugin, "hello", 0, locationM, locationL, locationT);
-            elevatorObject.armorStandSetup();
-            elevatorObject.goToFloor(1);
             return true;
         } else {
             //SOMETHING HERE
