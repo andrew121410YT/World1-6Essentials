@@ -39,6 +39,11 @@ public class ElevatorObject implements ConfigurationSerializable {
     private SimpleMath simpleMath;
     private ArmorStand armorStand;
 
+    private Boolean isGoing;
+    private Boolean isFloorQueueGoing;
+    private Queue<Integer> floorQueue;
+    private Boolean isWaiting;
+
     public ElevatorObject(Main plugin, String world, String nameOfElevator, FloorObject mainFloor) {
         if (plugin != null) {
             this.plugin = plugin;
@@ -53,6 +58,11 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.atDoor = mainFloor.getAtDoor();
         this.locationDOWN = mainFloor.getBoundingBox().getVectorDOWN().toLocation(getBukkitWorld());
         this.locationUP = mainFloor.getBoundingBox().getVectorUP().toLocation(getBukkitWorld());
+
+        this.isGoing = false;
+        this.floorQueue = new LinkedList<>();
+        this.isFloorQueueGoing = false;
+        this.isWaiting = false;
 
         this.floorsMap.putIfAbsent(0, mainFloor);
     }
@@ -72,6 +82,11 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.locationDOWN = locationDOWN;
         this.locationUP = locationUP;
 
+        this.isGoing = false;
+        this.floorQueue = new LinkedList<>();
+        this.isFloorQueueGoing = false;
+        this.isWaiting = false;
+
         this.floorsMap.putIfAbsent(0, mainFloor);
     }
 
@@ -80,6 +95,15 @@ public class ElevatorObject implements ConfigurationSerializable {
     }
 
     public void goToFloor(int floor) {
+        if (isGoing || isWaiting) {
+            floorQueue.add(floor);
+            if (!isFloorQueueGoing) {
+                setupFloorQueue();
+            }
+            return;
+        }
+
+        isGoing = true;
 
         //Tell the elevator to go down instead of up.
         if (getFloor(floor).getBoundingBox().getVectorDOWN().getY() < locationDOWN.getY()) {
@@ -89,6 +113,8 @@ public class ElevatorObject implements ConfigurationSerializable {
                     if (getFloor(floor).getBoundingBox().getMidPointOnFloor().getY() == locationDOWN.getY() - 1) {
                         this.cancel();
                         openDoor(floor);
+                        floorDone(floor);
+                        isGoing = false;
                     }
                     worldEditMoveDOWN(floor, false);
                     //TP THEM DOWN 1
@@ -107,6 +133,8 @@ public class ElevatorObject implements ConfigurationSerializable {
                 if (getFloor(floor).getBoundingBox().isInAABB(locationDOWN.toVector().add(new org.bukkit.util.Vector(0, 1, 0)))) {
                     this.cancel();
                     openDoor(floor);
+                    floorDone(floor);
+                    isGoing = false;
                 }
                 worldEditMoveUP(floor, false);
                 //TP THEM UP 1
@@ -208,7 +236,33 @@ public class ElevatorObject implements ConfigurationSerializable {
             public void run() {
                 getFloor(floor).getAtDoor().getBlock().setType(oldBlock);
             }
-        }.runTaskLater(plugin, 200L);
+        }.runTaskLater(plugin, 20L * 10);
+    }
+
+    private void setupFloorQueue() {
+        //Don't run if it's running already
+        if (isFloorQueueGoing) {
+            return;
+        }
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (!isGoing && !isWaiting && floorQueue.peek() != null) {
+                    isFloorQueueGoing = true;
+                    goToFloor(floorQueue.peek());
+                    floorQueue.remove();
+                } else if (floorQueue.isEmpty()) {
+                    isFloorQueueGoing = false;
+                    this.cancel();
+                }
+            }
+        }.runTaskTimer(plugin, 40L, 40L);
+    }
+
+    private void floorDone(int floor) {
+        isWaiting = true;
+        this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> isWaiting = false, 20 * 11);
     }
 
     public void addFloor(FloorObject floorObject) {
