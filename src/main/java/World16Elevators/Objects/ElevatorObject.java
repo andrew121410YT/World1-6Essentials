@@ -41,6 +41,7 @@ public class ElevatorObject implements ConfigurationSerializable {
     private Boolean isFloorQueueGoing;
     private Queue<Integer> floorQueue;
     private Boolean isWaiting;
+    private Boolean isEmergencyStop;
 
     public ElevatorObject(Main plugin, String world, String nameOfElevator, FloorObject mainFloor) {
         if (plugin != null) {
@@ -61,6 +62,7 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.floorQueue = new LinkedList<>();
         this.isFloorQueueGoing = false;
         this.isWaiting = false;
+        this.isEmergencyStop = false;
 
         this.floorsMap.putIfAbsent(0, mainFloor);
     }
@@ -84,15 +86,17 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.floorQueue = new LinkedList<>();
         this.isFloorQueueGoing = false;
         this.isWaiting = false;
+        this.isEmergencyStop = false;
 
         this.floorsMap.putIfAbsent(0, mainFloor);
     }
 
     public Collection<Entity> getEntities() {
-        return simpleMath.getEntitiesInAABB(locationDOWN.toVector(), locationUP.add(0, 1, 0).toVector());
+        return simpleMath.getEntitiesInAABB(locationDOWN.toVector(), locationUP.toVector());
     }
 
     public void goToFloor(int floor) {
+        //Add to the queue if elevator is running or waiting.
         if (isGoing || isWaiting) {
             floorQueue.add(floor);
             if (!isFloorQueueGoing) {
@@ -115,6 +119,12 @@ public class ElevatorObject implements ConfigurationSerializable {
                         isGoing = false;
                         return;
                     }
+
+                    if (isEmergencyStop) {
+                        this.cancel();
+                        return;
+                    }
+
                     worldEditMoveDOWN(floor, false);
                     //TP THEM DOWN 1
                     for (Entity entity : getEntities()) {
@@ -136,6 +146,12 @@ public class ElevatorObject implements ConfigurationSerializable {
                     isGoing = false;
                     return;
                 }
+
+                if (isEmergencyStop) {
+                    this.cancel();
+                    return;
+                }
+
                 worldEditMoveUP(floor, false);
                 //TP THEM UP 1
                 for (Entity entity : getEntities()) {
@@ -195,6 +211,10 @@ public class ElevatorObject implements ConfigurationSerializable {
             this.plugin.getServer().broadcastMessage("L: X: " + locationUP.getBlockX() + " Y:" + locationUP.getBlockY() + " Z: " + locationUP.getBlockZ());
             this.plugin.getServer().broadcastMessage("Vector: X: " + vectorD.getBlockX() + " Y: " + vectorD.getBlockY() + " Z: " + vectorD.getBlockZ());
         }
+    }
+
+    public void emergencyStop() {
+        this.isEmergencyStop = true;
     }
 
     private void openDoor(int floor) {

@@ -67,7 +67,7 @@ public class elevator implements CommandExecutor {
                 }
                 String elevatorName = args[1].toLowerCase();
                 BoundingBox boundingBox = new BoundingBox(selection.getMinimumPoint().toVector(), selection.getMaximumPoint().toVector());
-                ElevatorObject elevatorObject = new ElevatorObject(plugin, p.getWorld().getName().toLowerCase(), elevatorName, new FloorObject(0, p.getLocation().subtract(0, 1, 0), boundingBox));
+                ElevatorObject elevatorObject = new ElevatorObject(plugin, p.getWorld().getName().toLowerCase(), elevatorName, new FloorObject(0, api.getBlockPlayerIsLookingAt(p).getLocation(), boundingBox));
                 elevatorObjectMap.putIfAbsent(elevatorName, elevatorObject);
                 p.sendMessage(Translate.chat("You have made an elevator!"));
                 return true;
@@ -87,7 +87,7 @@ public class elevator implements CommandExecutor {
                     return true;
                 }
                 BoundingBox boundingBox = new BoundingBox(selection.getMinimumPoint().toVector(), selection.getMaximumPoint().toVector());
-                elevatorObjectMap.get(elevatorName).addFloor(new FloorObject(floorNum, p.getLocation().subtract(0, 1, 0), boundingBox));
+                elevatorObjectMap.get(elevatorName).addFloor(new FloorObject(floorNum, api.getBlockPlayerIsLookingAt(p).getLocation(), boundingBox));
                 p.sendMessage(Translate.chat("Floor: " + floorNum + " has been added to the elevator: " + elevatorName));
                 return true;
             }
@@ -139,6 +139,19 @@ public class elevator implements CommandExecutor {
 
                 elevatorObjectMap.get(elevatorName).goToFloor(floorNum);
                 p.sendMessage(Translate.chat("Going to floor: " + floorNum + " for the elevator: " + elevatorName));
+                return true;
+            }
+
+            if (args.length == 2 && args[0].equalsIgnoreCase("stop")) {
+                String elevatorName = args[1].toLowerCase();
+
+                if (elevatorObjectMap.get(elevatorName) == null) {
+                    p.sendMessage(Translate.chat("That elevator doesn't exist."));
+                    return true;
+                }
+
+                elevatorObjectMap.get(elevatorName).emergencyStop();
+                p.sendMessage(Translate.chat("emergency stop has been activated."));
                 return true;
             }
             return true;
