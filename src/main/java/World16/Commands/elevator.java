@@ -2,6 +2,7 @@ package World16.Commands;
 
 import World16.Main.Main;
 import World16.Managers.CustomConfigManager;
+import World16.TabComplete.ElevatorTab;
 import World16.Utils.API;
 import World16.Utils.Translate;
 import World16Elevators.Objects.BoundingBox;
@@ -34,9 +35,11 @@ public class elevator implements CommandExecutor {
         this.customConfigManager = customConfigManager;
         this.api = new API(this.plugin);
 
-        this.plugin.getCommand("elevator").setExecutor(this);
         this.worldEditPlugin = this.plugin.getOtherPlugins().getWorldEditPlugin();
         this.elevatorObjectMap = this.plugin.getSetListMap().getElevatorObjectMap();
+
+        this.plugin.getCommand("elevator").setExecutor(this);
+        this.plugin.getCommand("elevator").setTabCompleter(new ElevatorTab(this.plugin));
     }
 
     @Override
@@ -128,6 +131,18 @@ public class elevator implements CommandExecutor {
 
                 elevatorObjectMap.get(elevatorName).removeFloor(floorNum);
                 p.sendMessage(Translate.chat("The floor: " + floorNum + " has been removed for the elevator: " + elevatorName));
+                return true;
+            }
+
+            if (args.length == 2 && args[0].equalsIgnoreCase("delete")) {
+                String elevatorName = args[1].toLowerCase();
+
+                if (elevatorObjectMap.get(elevatorName) == null) {
+                    p.sendMessage(Translate.chat("That elevator doesn't exist."));
+                    return true;
+                }
+                this.plugin.getElevatorMain().deleteElevator(elevatorName);
+                p.sendMessage(Translate.chat("Elevator: " + elevatorName + " has been deleted."));
                 return true;
             }
 

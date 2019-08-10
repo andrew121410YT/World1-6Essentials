@@ -86,4 +86,12 @@ public class ElevatorMain {
         this.eleYml.saveConfigSilent();
     }
 
+    public void deleteElevator(String name) {
+        if (elevatorObjectMap.get(name.toLowerCase()) != null) {
+            elevatorObjectMap.remove(name.toLowerCase());
+            ConfigurationSection elevator = this.eleYml.getConfig().getConfigurationSection("Elevators");
+            elevator.set(name.toLowerCase(), null);
+            this.eleYml.saveConfigSilent();
+        }
+    }
 }
