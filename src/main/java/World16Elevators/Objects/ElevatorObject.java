@@ -113,9 +113,10 @@ public class ElevatorObject implements ConfigurationSerializable {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    if (getFloor(floor).getBoundingBox().getMidPointOnFloor().getY() == locationDOWN.getY()) {
+                    FloorObject floorObject = getFloor(floor);
+                    if (floorObject.getBoundingBox().getMidPointOnFloor().getY() == locationDOWN.getY()) {
                         this.cancel();
-                        arrivalChime(getFloor(floor).getAtDoor());
+                        arrivalChime(floorObject.getAtDoor());
                         openDoor(floor);
                         floorDone();
                         isGoing = false;
@@ -141,9 +142,10 @@ public class ElevatorObject implements ConfigurationSerializable {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (getFloor(floor).getBoundingBox().isInAABB(locationDOWN.toVector())) {
+                FloorObject floorObject = getFloor(floor);
+                if (floorObject.getBoundingBox().isInAABB(locationDOWN.toVector())) {
                     this.cancel();
-                    arrivalChime(getFloor(floor).getAtDoor());
+                    arrivalChime(floorObject.getAtDoor());
                     openDoor(floor);
                     floorDone();
                     isGoing = false;
