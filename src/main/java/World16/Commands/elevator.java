@@ -9,6 +9,8 @@ import World16Elevators.Objects.ElevatorObject;
 import World16Elevators.Objects.FloorObject;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
+import org.bukkit.block.Block;
+import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -40,7 +42,30 @@ public class elevator implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("Only Players Can Use This Command.");
+
+            if (!(sender instanceof BlockCommandSender)) {
+                return true;
+            }
+
+            BlockCommandSender cmdblock = (BlockCommandSender) sender;
+            Block commandblock = cmdblock.getBlock();
+
+            if (args.length == 3 && args[0].equalsIgnoreCase("goto")) {
+                String elevatorName = args[1].toLowerCase();
+                int floorNum = api.asIntOrDefault(args[2], 0);
+
+                if (elevatorObjectMap.get(elevatorName) == null) {
+                    return true;
+                }
+
+                if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null) {
+                    return true;
+                }
+
+                elevatorObjectMap.get(elevatorName).goToFloor(floorNum);
+                return true;
+            }
+
             return true;
         }
 
@@ -55,6 +80,7 @@ public class elevator implements CommandExecutor {
             p.sendMessage(Translate.chat("/elevator create <ELEName>"));
             p.sendMessage(Translate.chat("/elvator addfloor <ELEName> <FloorNumber>"));
             p.sendMessage(Translate.chat("/elevator removefloor <ELEName> <FloorNumber>"));
+            p.sendMessage(Translate.chat("/elevator goto <ELEName> <FloorNumber>"));
             //SOMETHING HERE
             return true;
         } else {
