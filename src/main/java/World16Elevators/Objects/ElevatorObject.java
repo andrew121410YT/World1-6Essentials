@@ -32,6 +32,7 @@ public class ElevatorObject implements ConfigurationSerializable {
     private Location atDoor;
 
     private Map<Integer, FloorObject> floorsMap;
+    private final long ticksPerSecond = 6L;
 
     //TEMP DON'T SAVE
     private Main plugin;
@@ -134,7 +135,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                         entity.teleport(entity.getLocation().add(0, -1, 0));
                     }
                 }
-            }.runTaskTimer(plugin, 10L, 10L);
+            }.runTaskTimer(plugin, ticksPerSecond, ticksPerSecond);
             return;
         }
 
@@ -163,7 +164,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                     entity.teleport(entity.getLocation().add(0, 1, 0));
                 }
             }
-        }.runTaskTimer(plugin, 10L, 10L);
+        }.runTaskTimer(plugin, ticksPerSecond, ticksPerSecond);
     }
 
     private void worldEditMoveUP(int floor, boolean debug) {
