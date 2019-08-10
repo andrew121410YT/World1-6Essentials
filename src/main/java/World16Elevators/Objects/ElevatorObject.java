@@ -108,11 +108,12 @@ public class ElevatorObject implements ConfigurationSerializable {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    if (getFloor(floor).getBoundingBox().getMidPointOnFloor().getY() == locationDOWN.getY() - 1) {
+                    if (getFloor(floor).getBoundingBox().getMidPointOnFloor().getY() == locationDOWN.getY()) {
                         this.cancel();
                         openDoor(floor);
                         floorDone();
                         isGoing = false;
+                        return;
                     }
                     worldEditMoveDOWN(floor, false);
                     //TP THEM DOWN 1
@@ -128,11 +129,12 @@ public class ElevatorObject implements ConfigurationSerializable {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (getFloor(floor).getBoundingBox().isInAABB(locationDOWN.toVector().add(new org.bukkit.util.Vector(0, 1, 0)))) {
+                if (getFloor(floor).getBoundingBox().isInAABB(locationDOWN.toVector())) {
                     this.cancel();
                     openDoor(floor);
                     floorDone();
                     isGoing = false;
+                    return;
                 }
                 worldEditMoveUP(floor, false);
                 //TP THEM UP 1
