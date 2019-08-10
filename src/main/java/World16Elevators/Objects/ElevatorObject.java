@@ -11,6 +11,7 @@ import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.world.World;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.ArmorStand;
@@ -114,6 +115,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                 public void run() {
                     if (getFloor(floor).getBoundingBox().getMidPointOnFloor().getY() == locationDOWN.getY()) {
                         this.cancel();
+                        arrivalChime(getFloor(floor).getAtDoor());
                         openDoor(floor);
                         floorDone();
                         isGoing = false;
@@ -141,6 +143,7 @@ public class ElevatorObject implements ConfigurationSerializable {
             public void run() {
                 if (getFloor(floor).getBoundingBox().isInAABB(locationDOWN.toVector())) {
                     this.cancel();
+                    arrivalChime(getFloor(floor).getAtDoor());
                     openDoor(floor);
                     floorDone();
                     isGoing = false;
@@ -248,6 +251,14 @@ public class ElevatorObject implements ConfigurationSerializable {
                 }
             }
         }.runTaskTimer(plugin, 40L, 40L);
+    }
+
+    private void arrivalChime(Location location) {
+        getBukkitWorld().playSound(location, Sound.BLOCK_NOTE_PLING, 10F, 1.8F);
+    }
+
+    private void passingChime(Location location) {
+        getBukkitWorld().playSound(location, Sound.BLOCK_NOTE_PLING, 10F, 1.3F);
     }
 
     private void floorDone() {
