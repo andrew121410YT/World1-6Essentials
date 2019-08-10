@@ -32,7 +32,12 @@ public class ElevatorObject implements ConfigurationSerializable {
     private Location atDoor;
 
     private Map<Integer, FloorObject> floorsMap;
+
+    //Config
     private final long ticksPerSecond = 6L;
+    private final long doorHolderTicksPerSecond = 20L * 5L;
+    private final long elevatorWaiterTicksPerSecond = 20L * 6L;
+    //...
 
     //TEMP DON'T SAVE
     private Main plugin;
@@ -117,7 +122,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                     FloorObject floorObject = getFloor(floor);
                     if (floorObject.getBoundingBox().getMidPointOnFloor().getY() == locationDOWN.getY()) {
                         this.cancel();
-                        arrivalChime(floorObject.getAtDoor());
+//                        arrivalChime(floorObject.getAtDoor());
                         openDoor(floor);
                         floorDone();
                         isGoing = false;
@@ -146,7 +151,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                 FloorObject floorObject = getFloor(floor);
                 if (floorObject.getBoundingBox().isInAABB(locationDOWN.toVector())) {
                     this.cancel();
-                    arrivalChime(floorObject.getAtDoor());
+//                    arrivalChime(floorObject.getAtDoor());
                     openDoor(floor);
                     floorDone();
                     isGoing = false;
@@ -232,7 +237,12 @@ public class ElevatorObject implements ConfigurationSerializable {
             public void run() {
                 floorObject.getAtDoor().getBlock().setType(oldBlock);
             }
-        }.runTaskLater(plugin, 20L * 5);
+        }.runTaskLater(plugin, doorHolderTicksPerSecond);
+    }
+
+    private void floorDone() {
+        isWaiting = true;
+        this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> isWaiting = false, elevatorWaiterTicksPerSecond);
     }
 
     private void setupFloorQueue() {
@@ -262,11 +272,6 @@ public class ElevatorObject implements ConfigurationSerializable {
 
     private void passingChime(Location location) {
         getBukkitWorld().playSound(location, Sound.BLOCK_NOTE_PLING, 10F, 1.3F);
-    }
-
-    private void floorDone() {
-        isWaiting = true;
-        this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> isWaiting = false, 20 * 6);
     }
 
     public void addFloor(FloorObject floorObject) {
