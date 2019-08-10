@@ -9,14 +9,12 @@ import com.sk89q.worldedit.bukkit.BukkitUtil;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.world.World;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
@@ -197,37 +195,6 @@ public class ElevatorObject implements ConfigurationSerializable {
         }
     }
 
-    public void armorStandSetup() {
-        boolean found = false;
-        for (Entity entity : getEntities()) {
-            if (entity.getType() == EntityType.ARMOR_STAND) {
-                this.armorStand = (ArmorStand) entity;
-                found = true;
-            }
-        }
-
-        if (!found) {
-            Bukkit.getServer().broadcastMessage("Armor stand not found");
-        }
-
-        if (armorStand == null) {
-            Location midPoint = getFloor(0).getBoundingBox().getMidPointOnFloor().toLocation(getBukkitWorld());
-            midPoint.setY(midPoint.getBlockY() - 1);
-            midPoint.setX(midPoint.getBlockX() + 0.5D);
-            midPoint.setZ(midPoint.getBlockZ() + 0.5D);
-
-            Entity entity = midPoint.getWorld().spawnEntity(midPoint, EntityType.ARMOR_STAND);
-            this.armorStand = (ArmorStand) entity;
-        }
-
-        this.armorStand.setGravity(false);
-
-        this.armorStand.setCustomName(name);
-        this.armorStand.setCustomNameVisible(true);
-
-        this.armorStand.setVisible(true);
-    }
-
     private void openDoor(int floor) {
         Material oldBlock = getFloor(floor).getAtDoor().getBlock().getType();
         FloorObject floorObject = getFloor(floor);
@@ -245,12 +212,12 @@ public class ElevatorObject implements ConfigurationSerializable {
         if (isFloorQueueGoing) {
             return;
         }
+        isFloorQueueGoing = true;
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 if (!isGoing && !isWaiting && floorQueue.peek() != null) {
-                    isFloorQueueGoing = true;
                     goToFloor(floorQueue.peek());
                     floorQueue.remove();
                 } else if (floorQueue.isEmpty()) {
