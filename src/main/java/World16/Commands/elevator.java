@@ -17,7 +17,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.Map;
+import java.util.Queue;
 
 public class elevator implements CommandExecutor {
 
@@ -193,6 +195,40 @@ public class elevator implements CommandExecutor {
 
                 elevatorObjectMap.get(elevatorName).emergencyStop();
                 p.sendMessage(Translate.chat("emergency stop has been activated."));
+                return true;
+            }
+
+            if (args[0].equalsIgnoreCase("queue")) {
+                if (args.length == 1) {
+                    p.sendMessage(Translate.chat("Elevator queue HELP"));
+                    p.sendMessage(Translate.chat("/elevator queue list"));
+                    p.sendMessage(Translate.chat("/elevator queue clear"));
+                    return true;
+                }
+
+                if (args.length == 3 && args[1].equalsIgnoreCase("list")) {
+                    String elevatorName = args[2].toLowerCase();
+
+                    if (elevatorObjectMap.get(elevatorName) == null) {
+                        p.sendMessage(Translate.chat("That elevator doesn't exist."));
+                        return true;
+                    }
+                    Queue<Integer> floorQ = elevatorObjectMap.get(elevatorName).getFloorQueue();
+                    Integer[] integers = floorQ.toArray(new Integer[0]);
+                    p.sendMessage(Arrays.toString(integers));
+                    return true;
+                }
+                if (args.length == 3 && args[1].equalsIgnoreCase("clear")) {
+                    String elevatorName = args[2].toLowerCase();
+
+                    if (elevatorObjectMap.get(elevatorName) == null) {
+                        p.sendMessage(Translate.chat("That elevator doesn't exist."));
+                        return true;
+                    }
+                    elevatorObjectMap.get(elevatorName).getFloorQueue().clear();
+                    p.sendMessage(Translate.chat("The floor queue for the elevator: " + elevatorName + " has been cleared."));
+                    return true;
+                }
                 return true;
             }
             return true;

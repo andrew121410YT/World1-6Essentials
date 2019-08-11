@@ -74,7 +74,7 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.floorsMap.putIfAbsent(0, mainFloor);
     }
 
-    public ElevatorObject(Main plugin, String world, String nameOfElevator, FloorObject mainFloor, Integer floor, Location atDoor, Location locationDOWN, Location locationUP) {
+    public ElevatorObject(Main plugin, String world, String nameOfElevator, Integer floor, Location atDoor, Location locationDOWN, Location locationUP) {
         if (plugin != null) {
             this.plugin = plugin;
         }
@@ -94,8 +94,6 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.isFloorQueueGoing = false;
         this.isWaiting = false;
         this.isEmergencyStop = false;
-
-        this.floorsMap.putIfAbsent(0, mainFloor);
     }
 
     public Collection<Entity> getEntities() {
@@ -130,16 +128,20 @@ public class ElevatorObject implements ConfigurationSerializable {
                     }
 
                     if (isEmergencyStop) {
+                        isWaiting = false;
+                        isGoing = false;
                         isEmergencyStop = false;
                         this.cancel();
                         return;
                     }
 
                     worldEditMoveDOWN(floor, false);
+
                     //TP THEM DOWN 1
                     for (Entity entity : getEntities()) {
                         entity.teleport(entity.getLocation().add(0, -1, 0));
                     }
+
                 }
             }.runTaskTimer(plugin, ticksPerSecond, ticksPerSecond);
             return;
@@ -160,16 +162,20 @@ public class ElevatorObject implements ConfigurationSerializable {
                 }
 
                 if (isEmergencyStop) {
+                    isWaiting = false;
+                    isGoing = false;
                     isEmergencyStop = false;
                     this.cancel();
                     return;
                 }
 
                 worldEditMoveUP(floor, false);
+
                 //TP THEM UP 1
                 for (Entity entity : getEntities()) {
                     entity.teleport(entity.getLocation().add(0, 1, 0));
                 }
+
             }
         }.runTaskTimer(plugin, ticksPerSecond, ticksPerSecond);
     }
@@ -313,10 +319,6 @@ public class ElevatorObject implements ConfigurationSerializable {
         return floor;
     }
 
-    public Location getAtDoor() {
-        return atDoor;
-    }
-
     public Location getLocationDOWN() {
         return locationDOWN;
     }
@@ -329,16 +331,44 @@ public class ElevatorObject implements ConfigurationSerializable {
         return world;
     }
 
-    public SimpleMath getSimpleMath() {
-        return simpleMath;
-    }
-
-    public ArmorStand getArmorStand() {
-        return armorStand;
+    public Location getAtDoor() {
+        return atDoor;
     }
 
     public Map<Integer, FloorObject> getFloorsMap() {
         return floorsMap;
+    }
+
+    public long getTicksPerSecond() {
+        return ticksPerSecond;
+    }
+
+    public long getDoorHolderTicksPerSecond() {
+        return doorHolderTicksPerSecond;
+    }
+
+    public long getElevatorWaiterTicksPerSecond() {
+        return elevatorWaiterTicksPerSecond;
+    }
+
+    public Boolean isGoing() {
+        return isGoing;
+    }
+
+    public Boolean isFloorQueueGoing() {
+        return isFloorQueueGoing;
+    }
+
+    public Queue<Integer> getFloorQueue() {
+        return floorQueue;
+    }
+
+    public Boolean isWaiting() {
+        return isWaiting;
+    }
+
+    public Boolean isEmergencyStop() {
+        return isEmergencyStop;
     }
 
     public Main getPlugin() {
@@ -358,11 +388,10 @@ public class ElevatorObject implements ConfigurationSerializable {
         map.put("locationUP", locationUP);
         map.put("world", world);
         map.put("atDoor", atDoor);
-        map.put("BottomFLOOR", getFloor(0));
         return map;
     }
 
     public static ElevatorObject deserialize(Map<String, Object> map) {
-        return new ElevatorObject(null, (String) map.get("world"), (String) map.get("name"), (FloorObject) map.get("BottomFLOOR"), (int) map.get("floor"), (Location) map.get("atDoor"), (Location) map.get("locationDOWN"), (Location) map.get("locationUP"));
+        return new ElevatorObject(null, (String) map.get("world"), (String) map.get("name"), (int) map.get("floor"), (Location) map.get("atDoor"), (Location) map.get("locationDOWN"), (Location) map.get("locationUP"));
     }
 }

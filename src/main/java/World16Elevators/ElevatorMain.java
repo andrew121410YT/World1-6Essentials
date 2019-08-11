@@ -38,19 +38,16 @@ public class ElevatorMain {
             ConfigurationSection elevatorConfig = cs.getConfigurationSection(elevator);
             ElevatorObject elevatorObject = (ElevatorObject) elevatorConfig.get("ElevatorObject");
 
+            //Floors
             ConfigurationSection elevatorFloors = elevatorConfig.getConfigurationSection("Floors");
+            if (elevatorFloors != null) {
+                for (String floorNumber : elevatorFloors.getKeys(false)) {
+                    elevatorObject.getFloorsMap().putIfAbsent(Integer.valueOf(floorNumber), (FloorObject) elevatorFloors.get(floorNumber));
+                }
 
-            if (elevatorFloors == null) {
-                elevatorFloors = this.eleYml.getConfig().createSection("Floors");
+                //Just a hack since i don't want nothing static.
+                elevatorObject.setPlugin(this.plugin);
             }
-
-            for (String floorNumber : elevatorFloors.getKeys(false)) {
-                elevatorObject.getFloorsMap().putIfAbsent(Integer.valueOf(floorNumber), (FloorObject) elevatorFloors.get(floorNumber));
-            }
-
-            //Just a hack since i don't want nothing static.
-            elevatorObject.setPlugin(this.plugin);
-
             elevatorObjectMap.putIfAbsent(elevator, elevatorObject);
         }
     }

@@ -33,6 +33,7 @@ public class ElevatorTab implements TabCompleter {
             tabCompleteMap.get("elevator").add("removefloor");
             tabCompleteMap.get("elevator").add("goto");
             tabCompleteMap.get("elevator").add("delete");
+            tabCompleteMap.get("elevator").add("queue");
 //            tabCompleteMap.get("back").add("");
         }
     }
