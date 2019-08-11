@@ -16,6 +16,7 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
@@ -49,6 +50,7 @@ public class ElevatorObject implements ConfigurationSerializable {
     private Queue<Integer> floorQueue;
     private Boolean isWaiting;
     private Boolean isEmergencyStop;
+    private Queue<Integer> floorBuffer;
 
     public ElevatorObject(Main plugin, String world, String nameOfElevator, FloorObject mainFloor) {
         if (plugin != null) {
@@ -70,11 +72,12 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.isFloorQueueGoing = false;
         this.isWaiting = false;
         this.isEmergencyStop = false;
+        this.floorBuffer = new LinkedList<>();
 
         this.floorsMap.putIfAbsent(0, mainFloor);
     }
 
-    public ElevatorObject(Main plugin, String world, String nameOfElevator, Integer floor, Location atDoor, Location locationDOWN, Location locationUP) {
+    private ElevatorObject(Main plugin, String world, String nameOfElevator, Integer floor, Location atDoor, Location locationDOWN, Location locationUP) {
         if (plugin != null) {
             this.plugin = plugin;
         }
@@ -94,16 +97,29 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.isFloorQueueGoing = false;
         this.isWaiting = false;
         this.isEmergencyStop = false;
+        this.floorBuffer = new LinkedList<>();
     }
 
     public Collection<Entity> getEntities() {
         return simpleMath.getEntitiesInAABB(locationDOWN.toVector(), locationUP.toVector());
     }
 
-    public void goToFloor(int floor) {
+    public Collection<Player> getPlayers() {
+        List<Player> playerList = new ArrayList<>();
+        for (Entity entity : simpleMath.getEntitiesInAABB(locationDOWN.toVector(), locationUP.toVector())) {
+            if (entity instanceof Player) {
+                playerList.add((Player) entity);
+            }
+        }
+        return playerList;
+    }
+
+    public void goToFloor(int floorNum) {
+        boolean goUp;
+
         //Add to the queue if elevator is running or waiting.
         if (isGoing || isWaiting) {
-            floorQueue.add(floor);
+            floorQueue.add(floorNum);
             if (!isFloorQueueGoing) {
                 setupFloorQueue();
             }
@@ -111,22 +127,34 @@ public class ElevatorObject implements ConfigurationSerializable {
         }
 
         isGoing = true;
+        floorBuffer.clear(); //Clears the floorBuffer
+
+        //Checks if the elevator should go up or down.
+        goUp = !(getFloor(floorNum).getBoundingBox().getVectorDOWN().getY() < locationDOWN.getY());
+
+        setupFloorBuffer(floorNum, goUp);
+        Integer[] integers = floorBuffer.toArray(new Integer[0]);
+        plugin.getServer().broadcastMessage(Arrays.toString(integers));
 
         //Tell the elevator to go down instead of up.
-        if (getFloor(floor).getBoundingBox().getVectorDOWN().getY() < locationDOWN.getY()) {
+        if (!goUp) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    FloorObject floorObject = getFloor(floor);
+                    FloorObject floorObject = getFloor(floorNum);
+
+                    //Check's if at floor if so then stop the elvator.
                     if (floorObject.getBoundingBox().getMidPointOnFloor().getY() == locationDOWN.getY()) {
                         this.cancel();
+                        floor = floorNum;
 //                        arrivalChime(floorObject.getAtDoor());
-                        openDoor(floor);
+                        openDoor(floorNum);
                         floorDone();
                         isGoing = false;
                         return;
                     }
 
+//                    Stop's the elevator if emergencyStop is on.
                     if (isEmergencyStop) {
                         isWaiting = false;
                         isGoing = false;
@@ -135,7 +163,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                         return;
                     }
 
-                    worldEditMoveDOWN(floor, false);
+                    worldEditMoveDOWN(floorNum, false);
 
                     //TP THEM DOWN 1
                     for (Entity entity : getEntities()) {
@@ -151,16 +179,20 @@ public class ElevatorObject implements ConfigurationSerializable {
         new BukkitRunnable() {
             @Override
             public void run() {
-                FloorObject floorObject = getFloor(floor);
+                FloorObject floorObject = getFloor(floorNum);
+
+//                Check's if at floor if so then stop the elvator.
                 if (floorObject.getBoundingBox().isInAABB(locationDOWN.toVector())) {
                     this.cancel();
+                    floor = floorNum;
 //                    arrivalChime(floorObject.getAtDoor());
-                    openDoor(floor);
+                    openDoor(floorNum);
                     floorDone();
                     isGoing = false;
                     return;
                 }
 
+//                Stop's the elevator if emergencyStop is on.
                 if (isEmergencyStop) {
                     isWaiting = false;
                     isGoing = false;
@@ -169,7 +201,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                     return;
                 }
 
-                worldEditMoveUP(floor, false);
+                worldEditMoveUP(floorNum, false);
 
                 //TP THEM UP 1
                 for (Entity entity : getEntities()) {
@@ -251,6 +283,23 @@ public class ElevatorObject implements ConfigurationSerializable {
     private void floorDone() {
         isWaiting = true;
         this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> isWaiting = false, elevatorWaiterTicksPerSecond);
+    }
+
+    private boolean setupFloorBuffer(int floor, boolean isUp) {
+        if (isUp) {
+            for (int num = this.floor; num < floor; num++) {
+                if (num != this.floor) {
+                    floorBuffer.add(num);
+                }
+            }
+            return true;
+        }
+        for (int num = this.floor; num > floor; num--) {
+            if (num != this.floor) {
+                floorBuffer.add(num);
+            }
+        }
+        return true;
     }
 
     private void setupFloorQueue() {
