@@ -130,6 +130,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                     }
 
                     if (isEmergencyStop) {
+                        isEmergencyStop = false;
                         this.cancel();
                         return;
                     }
@@ -159,6 +160,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                 }
 
                 if (isEmergencyStop) {
+                    isEmergencyStop = false;
                     this.cancel();
                     return;
                 }
