@@ -2,6 +2,7 @@ package World16Elevators.Objects;
 
 import World16.Main.Main;
 import World16.Utils.SimpleMath;
+import World16.Utils.SmoothTeleport;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
@@ -207,8 +208,8 @@ public class ElevatorObject implements ConfigurationSerializable {
                     worldEditMoveDOWN(floorNum, false);
 
                     //TP THEM DOWN 1
-                    for (Entity entity : getEntities()) {
-                        entity.teleport(entity.getLocation().subtract(0, 1, 0));
+                    for (Player player : getPlayers()) {
+                        SmoothTeleport.teleport(player, player.getLocation().subtract(0, 1, 0));
                     }
 
                 }
@@ -243,8 +244,8 @@ public class ElevatorObject implements ConfigurationSerializable {
                 worldEditMoveUP(floorNum, false);
 
                 //TP THEM UP 1
-                for (Entity entity : getEntities()) {
-                    entity.teleport(entity.getLocation().add(0, 1, 0));
+                for (Player player : getPlayers()) {
+                    SmoothTeleport.teleport(player, player.getLocation().add(0, 1, 0));
                 }
 
             }
