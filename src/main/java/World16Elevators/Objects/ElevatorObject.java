@@ -9,6 +9,7 @@ import com.sk89q.worldedit.bukkit.BukkitUtil;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.world.World;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -19,16 +20,24 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @SerializableAs("ElevatorObject")
 public class ElevatorObject implements ConfigurationSerializable {
 
     private String elevatorName;
+    private String world;
+    //PART OF FloorObject
     private Location atDoor;
     private int elevatorFloor;
     private Location locationDOWN;
     private Location locationUP;
-    private String world;
+    //...
+
+    //Bounding BOX
+    private Location locationDownPLUS;
+    private Location locationUpPLUS;
+    //...
 
     private Map<Integer, FloorObject> floorsMap;
 
@@ -54,6 +63,7 @@ public class ElevatorObject implements ConfigurationSerializable {
         if (plugin != null) {
             this.plugin = plugin;
         }
+
         this.floorsMap = new HashMap<>();
         this.simpleMath = new SimpleMath(this.plugin);
 
@@ -73,22 +83,28 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.floorBuffer = new LinkedList<>();
 
         this.floorsMap.putIfAbsent(0, mainFloor);
+        caculateAABBforPlus(); //ONLY CACULATE FOR THE FIRST TIME.
     }
 
-    private ElevatorObject(Main plugin, String world, String nameOfElevator, Integer floor, Location atDoor, Location locationDOWN, Location locationUP) {
+    private ElevatorObject(Main plugin, String world, String nameOfElevator, FloorObject currentFloor, BoundingBox boundingBox) {
         if (plugin != null) {
             this.plugin = plugin;
         }
+
+        this.world = world; //NEEDS TO BE SECOND.
+
         this.floorsMap = new HashMap<>();
         this.simpleMath = new SimpleMath(this.plugin);
 
         this.elevatorName = nameOfElevator;
-        this.world = world;
 
-        this.elevatorFloor = floor;
-        this.atDoor = atDoor;
-        this.locationDOWN = locationDOWN;
-        this.locationUP = locationUP;
+        this.elevatorFloor = currentFloor.getFloor();
+        this.atDoor = currentFloor.getAtDoor();
+        this.locationDOWN = currentFloor.getBoundingBox().getVectorDOWN().toLocation(getBukkitWorld());
+        this.locationUP = currentFloor.getBoundingBox().getVectorUP().toLocation(getBukkitWorld());
+
+        this.locationDownPLUS = boundingBox.getVectorDOWN().toLocation(getBukkitWorld());
+        this.locationUpPLUS = boundingBox.getVectorUP().toLocation(getBukkitWorld());
 
         this.isGoing = false;
         this.floorQueueBuffer = new LinkedList<>();
@@ -98,18 +114,45 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.floorBuffer = new LinkedList<>();
     }
 
+    private void caculateAABBforPlus() {
+        org.bukkit.util.Vector tempDOWN = locationDOWN.toVector();
+        org.bukkit.util.Vector tempUP = locationUP.toVector();
+
+        tempDOWN.add(new org.bukkit.util.Vector(1, 0, 1));
+        if (tempDOWN.toLocation(getBukkitWorld()).getBlock().getType() == Material.GLOWSTONE) {
+            locationDownPLUS = tempDOWN.toLocation(getBukkitWorld());
+            locationDownPLUS.getBlock().setType(Material.REDSTONE_BLOCK);
+        } else {
+            tempDOWN.subtract(new org.bukkit.util.Vector(2, 0, 2));
+            if (tempDOWN.toLocation(getBukkitWorld()).getBlock().getType() == Material.GLOWSTONE) {
+                locationDownPLUS = tempDOWN.toLocation(getBukkitWorld());
+                locationDownPLUS.getBlock().setType(Material.REDSTONE_BLOCK);
+            } else {
+                plugin.getServer().broadcastMessage("coudn't caculate sides.");
+            }
+        }
+
+        tempUP.add(new org.bukkit.util.Vector(1, 0, 1));
+        if (tempUP.toLocation(getBukkitWorld()).getBlock().getType() == Material.GLOWSTONE) {
+            locationUpPLUS = tempUP.toLocation(getBukkitWorld());
+            locationUpPLUS.getBlock().setType(Material.REDSTONE_BLOCK);
+        } else {
+            tempUP.subtract(new org.bukkit.util.Vector(2, 0, 2));
+            if (tempUP.toLocation(getBukkitWorld()).getBlock().getType() == Material.GLOWSTONE) {
+                locationUpPLUS = tempUP.toLocation(getBukkitWorld());
+                locationUpPLUS.getBlock().setType(Material.REDSTONE_BLOCK);
+            } else {
+                plugin.getServer().broadcastMessage("coudn't caculate sides.");
+            }
+        }
+    }
+
     public Collection<Entity> getEntities() {
-        return simpleMath.getEntitiesInAABB(locationDOWN.toVector(), locationUP.toVector());
+        return simpleMath.getEntitiesInAABB(locationDownPLUS.toVector(), locationUpPLUS.toVector());
     }
 
     public Collection<Player> getPlayers() {
-        List<Player> playerList = new ArrayList<>();
-        for (Entity entity : simpleMath.getEntitiesInAABB(locationDOWN.toVector(), locationUP.toVector())) {
-            if (entity instanceof Player) {
-                playerList.add((Player) entity);
-            }
-        }
-        return playerList;
+        return simpleMath.getEntitiesInAABB(locationDownPLUS.toVector(), locationUpPLUS.toVector()).stream().filter(entity -> entity instanceof Player).map(entity -> (Player) entity).collect(Collectors.toList());
     }
 
     public void goToFloor(int floorNum) {
@@ -226,6 +269,8 @@ public class ElevatorObject implements ConfigurationSerializable {
         locationUP.add(0, 1, 0);
         locationDOWN.add(0, 1, 0);
         atDoor.add(0, 1, 0);
+        locationUpPLUS.add(0, 1, 0);
+        locationDownPLUS.add(0, 1, 0);
         if (debug) {
             this.plugin.getServer().broadcastMessage("GOING UP");
             this.plugin.getServer().broadcastMessage("L: X: " + locationDOWN.getBlockX() + " Y:" + locationDOWN.getBlockY() + " Z: " + locationDOWN.getBlockZ());
@@ -252,6 +297,8 @@ public class ElevatorObject implements ConfigurationSerializable {
         locationUP.subtract(0, 1, 0);
         locationDOWN.subtract(0, 1, 0);
         atDoor.subtract(0, 1, 0);
+        locationUpPLUS.subtract(0, 1, 0);
+        locationDownPLUS.subtract(0, 1, 0);
         if (debug) {
             this.plugin.getServer().broadcastMessage("GOING DOWN:");
             this.plugin.getServer().broadcastMessage("L: X: " + locationDOWN.getBlockX() + " Y:" + locationDOWN.getBlockY() + " Z: " + locationDOWN.getBlockZ());
@@ -356,7 +403,7 @@ public class ElevatorObject implements ConfigurationSerializable {
     }
 
     public org.bukkit.World getBukkitWorld() {
-        return this.plugin.getServer().getWorld(this.world);
+        return Bukkit.getServer().getWorld(this.world);
     }
 
     //GETTERS
@@ -436,15 +483,13 @@ public class ElevatorObject implements ConfigurationSerializable {
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<>();
         map.put("name", elevatorName);
-        map.put("floor", elevatorFloor);
-        map.put("locationDOWN", locationDOWN);
-        map.put("locationUP", locationUP);
         map.put("world", world);
-        map.put("atDoor", atDoor);
+        map.put("shaft", new FloorObject(elevatorFloor, atDoor, new BoundingBox(this.locationDOWN.toVector(), this.locationUP.toVector())));
+        map.put("shaftPlus", new BoundingBox(this.locationDownPLUS.toVector(), locationUpPLUS.toVector()));
         return map;
     }
 
     public static ElevatorObject deserialize(Map<String, Object> map) {
-        return new ElevatorObject(null, (String) map.get("world"), (String) map.get("name"), (int) map.get("floor"), (Location) map.get("atDoor"), (Location) map.get("locationDOWN"), (Location) map.get("locationUP"));
+        return new ElevatorObject(null, (String) map.get("world"), (String) map.get("name"), (FloorObject) map.get("shaft"), (BoundingBox) map.get("shaftPlus"));
     }
 }
