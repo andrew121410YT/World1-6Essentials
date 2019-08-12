@@ -37,6 +37,24 @@ public class BoundingBox implements ConfigurationSerializable {
         return vector;
     }
 
+    public BoundingBox add(Vector add) {
+        vectorUP.add(add);
+        vectorDOWN.add(add);
+
+        vectorDOWNMIN = Vector.getMinimum(vectorDOWN, vectorUP);
+        vectorUPMAX = Vector.getMaximum(vectorDOWN, vectorUP);
+        return this;
+    }
+
+    public BoundingBox subtract(Vector subtract) {
+        vectorUP.subtract(subtract);
+        vectorDOWN.subtract(subtract);
+
+        vectorDOWNMIN = Vector.getMinimum(vectorDOWN, vectorUP);
+        vectorUPMAX = Vector.getMaximum(vectorDOWN, vectorUP);
+        return this;
+    }
+
     //GETTERS
     public Vector getVectorDOWN() {
         return vectorDOWN;
