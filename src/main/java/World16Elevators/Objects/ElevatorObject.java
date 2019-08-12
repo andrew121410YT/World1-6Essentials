@@ -165,7 +165,7 @@ public class ElevatorObject implements ConfigurationSerializable {
 
                     //TP THEM DOWN 1
                     for (Entity entity : getEntities()) {
-                        entity.teleport(entity.getLocation().add(0, -1, 0));
+                        entity.teleport(entity.getLocation().subtract(0, 1, 0));
                     }
 
                 }
@@ -223,9 +223,9 @@ public class ElevatorObject implements ConfigurationSerializable {
         } catch (MaxChangedBlocksException e) {
             e.printStackTrace();
         }
-        locationUP.setY(locationUP.getY() + 1);
-        locationDOWN.setY(locationDOWN.getY() + 1);
-        atDoor.setY(atDoor.getY() + 1);
+        locationUP.add(0, 1, 0);
+        locationDOWN.add(0, 1, 0);
+        atDoor.add(0, 1, 0);
         if (debug) {
             this.plugin.getServer().broadcastMessage("GOING UP");
             this.plugin.getServer().broadcastMessage("L: X: " + locationDOWN.getBlockX() + " Y:" + locationDOWN.getBlockY() + " Z: " + locationDOWN.getBlockZ());
@@ -249,9 +249,9 @@ public class ElevatorObject implements ConfigurationSerializable {
         } catch (MaxChangedBlocksException e) {
             e.printStackTrace();
         }
-        locationUP.setY(locationUP.getY() - 1);
-        locationDOWN.setY(locationDOWN.getY() - 1);
-        atDoor.setY(atDoor.getY() - 1);
+        locationUP.subtract(0, 1, 0);
+        locationDOWN.subtract(0, 1, 0);
+        atDoor.subtract(0, 1, 0);
         if (debug) {
             this.plugin.getServer().broadcastMessage("GOING DOWN:");
             this.plugin.getServer().broadcastMessage("L: X: " + locationDOWN.getBlockX() + " Y:" + locationDOWN.getBlockY() + " Z: " + locationDOWN.getBlockZ());
