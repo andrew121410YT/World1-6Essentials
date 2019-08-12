@@ -14,7 +14,6 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -24,13 +23,12 @@ import java.util.*;
 @SerializableAs("ElevatorObject")
 public class ElevatorObject implements ConfigurationSerializable {
 
-    private String name;
-    private int floor;
+    private String elevatorName;
+    private Location atDoor;
+    private int elevatorFloor;
     private Location locationDOWN;
     private Location locationUP;
     private String world;
-
-    private Location atDoor;
 
     private Map<Integer, FloorObject> floorsMap;
 
@@ -43,13 +41,13 @@ public class ElevatorObject implements ConfigurationSerializable {
     //TEMP DON'T SAVE
     private Main plugin;
     private SimpleMath simpleMath;
-    private ArmorStand armorStand;
 
     private Boolean isGoing;
     private Boolean isFloorQueueGoing;
-    private Queue<Integer> floorQueue;
     private Boolean isWaiting;
     private Boolean isEmergencyStop;
+
+    private Queue<Integer> floorQueueBuffer;
     private Queue<Integer> floorBuffer;
 
     public ElevatorObject(Main plugin, String world, String nameOfElevator, FloorObject mainFloor) {
@@ -59,16 +57,16 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.floorsMap = new HashMap<>();
         this.simpleMath = new SimpleMath(this.plugin);
 
-        this.name = nameOfElevator;
+        this.elevatorName = nameOfElevator;
         this.world = world;
 
-        this.floor = mainFloor.getFloor();
+        this.elevatorFloor = mainFloor.getFloor();
         this.atDoor = mainFloor.getAtDoor();
         this.locationDOWN = mainFloor.getBoundingBox().getVectorDOWN().toLocation(getBukkitWorld());
         this.locationUP = mainFloor.getBoundingBox().getVectorUP().toLocation(getBukkitWorld());
 
         this.isGoing = false;
-        this.floorQueue = new LinkedList<>();
+        this.floorQueueBuffer = new LinkedList<>();
         this.isFloorQueueGoing = false;
         this.isWaiting = false;
         this.isEmergencyStop = false;
@@ -84,16 +82,16 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.floorsMap = new HashMap<>();
         this.simpleMath = new SimpleMath(this.plugin);
 
-        this.name = nameOfElevator;
+        this.elevatorName = nameOfElevator;
         this.world = world;
 
-        this.floor = floor;
+        this.elevatorFloor = floor;
         this.atDoor = atDoor;
         this.locationDOWN = locationDOWN;
         this.locationUP = locationUP;
 
         this.isGoing = false;
-        this.floorQueue = new LinkedList<>();
+        this.floorQueueBuffer = new LinkedList<>();
         this.isFloorQueueGoing = false;
         this.isWaiting = false;
         this.isEmergencyStop = false;
@@ -119,7 +117,7 @@ public class ElevatorObject implements ConfigurationSerializable {
 
         //Add to the queue if elevator is running or waiting.
         if (isGoing || isWaiting) {
-            floorQueue.add(floorNum);
+            floorQueueBuffer.add(floorNum);
             if (!isFloorQueueGoing) {
                 setupFloorQueue();
             }
@@ -132,7 +130,7 @@ public class ElevatorObject implements ConfigurationSerializable {
         //Checks if the elevator should go up or down.
         goUp = !(getFloor(floorNum).getBoundingBox().getVectorDOWN().getY() < locationDOWN.getY());
 
-        setupFloorBuffer(floorNum, goUp);
+        calculateFloorBuffer(floorNum, goUp);
         Integer[] integers = floorBuffer.toArray(new Integer[0]);
         plugin.getServer().broadcastMessage(Arrays.toString(integers));
 
@@ -146,7 +144,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                     //Check's if at floor if so then stop the elvator.
                     if (floorObject.getBoundingBox().getMidPointOnFloor().getY() == locationDOWN.getY()) {
                         this.cancel();
-                        floor = floorNum;
+                        elevatorFloor = floorNum;
 //                        arrivalChime(floorObject.getAtDoor());
                         openDoor(floorNum);
                         floorDone();
@@ -184,7 +182,7 @@ public class ElevatorObject implements ConfigurationSerializable {
 //                Check's if at floor if so then stop the elvator.
                 if (floorObject.getBoundingBox().isInAABB(locationDOWN.toVector())) {
                     this.cancel();
-                    floor = floorNum;
+                    elevatorFloor = floorNum;
 //                    arrivalChime(floorObject.getAtDoor());
                     openDoor(floorNum);
                     floorDone();
@@ -285,21 +283,25 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> isWaiting = false, elevatorWaiterTicksPerSecond);
     }
 
-    private boolean setupFloorBuffer(int floor, boolean isUp) {
+    private void calculateFloorBuffer(int floor, boolean isUp) {
+        //Don't calculate if the floor is non existent
+        if (getFloor(floor) == null) {
+            return;
+        }
+
         if (isUp) {
-            for (int num = this.floor; num < floor; num++) {
-                if (num != this.floor) {
+            for (int num = this.elevatorFloor; num < floor; num++) {
+                if (num != this.elevatorFloor) {
                     floorBuffer.add(num);
                 }
             }
-            return true;
+            return;
         }
-        for (int num = this.floor; num > floor; num--) {
-            if (num != this.floor) {
+        for (int num = this.elevatorFloor; num > floor; num--) {
+            if (num != this.elevatorFloor) {
                 floorBuffer.add(num);
             }
         }
-        return true;
     }
 
     private void setupFloorQueue() {
@@ -312,10 +314,10 @@ public class ElevatorObject implements ConfigurationSerializable {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (!isGoing && !isWaiting && floorQueue.peek() != null) {
-                    goToFloor(floorQueue.peek());
-                    floorQueue.remove();
-                } else if (floorQueue.isEmpty()) {
+                if (!isGoing && !isWaiting && floorQueueBuffer.peek() != null) {
+                    goToFloor(floorQueueBuffer.peek());
+                    floorQueueBuffer.remove();
+                } else if (floorQueueBuffer.isEmpty()) {
                     isFloorQueueGoing = false;
                     this.cancel();
                 }
@@ -360,12 +362,16 @@ public class ElevatorObject implements ConfigurationSerializable {
     }
 
     //GETTERS
-    public String getName() {
-        return name;
+    public String getElevatorName() {
+        return elevatorName;
     }
 
-    public int getFloor() {
-        return floor;
+    public Location getAtDoor() {
+        return atDoor;
+    }
+
+    public int getElevatorFloor() {
+        return elevatorFloor;
     }
 
     public Location getLocationDOWN() {
@@ -378,10 +384,6 @@ public class ElevatorObject implements ConfigurationSerializable {
 
     public String getWorld() {
         return world;
-    }
-
-    public Location getAtDoor() {
-        return atDoor;
     }
 
     public Map<Integer, FloorObject> getFloorsMap() {
@@ -404,12 +406,8 @@ public class ElevatorObject implements ConfigurationSerializable {
         return isGoing;
     }
 
-    public Boolean isFloorQueueGoing() {
+    public Boolean getFloorQueueGoing() {
         return isFloorQueueGoing;
-    }
-
-    public Queue<Integer> getFloorQueue() {
-        return floorQueue;
     }
 
     public Boolean isWaiting() {
@@ -418,6 +416,14 @@ public class ElevatorObject implements ConfigurationSerializable {
 
     public Boolean isEmergencyStop() {
         return isEmergencyStop;
+    }
+
+    public Queue<Integer> getFloorQueueBuffer() {
+        return floorQueueBuffer;
+    }
+
+    public Queue<Integer> getFloorBuffer() {
+        return floorBuffer;
     }
 
     public Main getPlugin() {
@@ -431,8 +437,8 @@ public class ElevatorObject implements ConfigurationSerializable {
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<>();
-        map.put("name", name);
-        map.put("floor", floor);
+        map.put("name", elevatorName);
+        map.put("floor", elevatorFloor);
         map.put("locationDOWN", locationDOWN);
         map.put("locationUP", locationUP);
         map.put("world", world);
