@@ -130,6 +130,8 @@ public class ElevatorObject implements ConfigurationSerializable {
         //Checks if the elevator should go up or down.
         goUp = !(getFloor(floorNum).getBoundingBox().getVectorDOWN().getY() < locationDOWN.getY());
 
+        FloorObject floorObject = getFloor(floorNum);
+
         calculateFloorBuffer(floorNum, goUp);
         Integer[] integers = floorBuffer.toArray(new Integer[0]);
         plugin.getServer().broadcastMessage(Arrays.toString(integers));
@@ -139,8 +141,6 @@ public class ElevatorObject implements ConfigurationSerializable {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    FloorObject floorObject = getFloor(floorNum);
-
                     //Check's if at floor if so then stop the elvator.
                     if (floorObject.getBoundingBox().getMidPointOnFloor().getY() == locationDOWN.getY()) {
                         this.cancel();
@@ -177,8 +177,6 @@ public class ElevatorObject implements ConfigurationSerializable {
         new BukkitRunnable() {
             @Override
             public void run() {
-                FloorObject floorObject = getFloor(floorNum);
-
 //                Check's if at floor if so then stop the elvator.
                 if (floorObject.getBoundingBox().isInAABB(locationDOWN.toVector())) {
                     this.cancel();
