@@ -14,8 +14,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.Entity;
@@ -62,34 +60,7 @@ public class ElevatorObject implements ConfigurationSerializable {
     private Queue<Integer> floorQueueBuffer;
     private Queue<Integer> floorBuffer;
 
-    public ElevatorObject(Main plugin, String world, String nameOfElevator, FloorObject mainFloor) {
-        if (plugin != null) {
-            this.plugin = plugin;
-        }
-
-        this.floorsMap = new HashMap<>();
-        this.simpleMath = new SimpleMath(this.plugin);
-
-        this.elevatorName = nameOfElevator;
-        this.world = world;
-
-        this.elevatorFloor = mainFloor.getFloor();
-        this.atDoor = mainFloor.getAtDoor();
-        this.locationDOWN = mainFloor.getBoundingBox().getVectorDOWN().toLocation(getBukkitWorld());
-        this.locationUP = mainFloor.getBoundingBox().getVectorUP().toLocation(getBukkitWorld());
-
-        this.isGoing = false;
-        this.floorQueueBuffer = new LinkedList<>();
-        this.isFloorQueueGoing = false;
-        this.isWaiting = false;
-        this.isEmergencyStop = false;
-        this.floorBuffer = new LinkedList<>();
-
-        this.floorsMap.putIfAbsent(0, mainFloor);
-        caculateAABBforPlus(); //ONLY CACULATE FOR THE FIRST TIME.
-    }
-
-    private ElevatorObject(Main plugin, String world, String nameOfElevator, FloorObject currentFloor, BoundingBox boundingBox) {
+    public ElevatorObject(Main plugin, String world, String nameOfElevator, FloorObject currentFloor, BoundingBox boundingBox) {
         if (plugin != null) {
             this.plugin = plugin;
         }
@@ -97,6 +68,9 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.world = world; //NEEDS TO BE SECOND.
 
         this.floorsMap = new HashMap<>();
+        this.floorQueueBuffer = new LinkedList<>();
+        this.floorBuffer = new LinkedList<>();
+
         this.simpleMath = new SimpleMath(this.plugin);
 
         this.elevatorName = nameOfElevator;
@@ -110,40 +84,11 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.locationUpPLUS = boundingBox.getVectorUP().toLocation(getBukkitWorld());
 
         this.isGoing = false;
-        this.floorQueueBuffer = new LinkedList<>();
         this.isFloorQueueGoing = false;
         this.isWaiting = false;
         this.isEmergencyStop = false;
-        this.floorBuffer = new LinkedList<>();
-    }
 
-    private void caculateAABBforPlus() {
-        org.bukkit.util.Vector tempDOWN = locationDOWN.toVector();
-        org.bukkit.util.Vector tempUP = locationUP.toVector();
-        Location tempDOWNL = tempDOWN.toLocation(getBukkitWorld());
-        Location tempUPL = tempUP.toLocation(getBukkitWorld());
-
-        Set<BlockFace> blockFaces = new HashSet<>();
-        blockFaces.add(BlockFace.NORTH_EAST);
-        blockFaces.add(BlockFace.NORTH_WEST);
-        blockFaces.add(BlockFace.SOUTH_EAST);
-        blockFaces.add(BlockFace.SOUTH_WEST);
-
-        blockFaces.forEach(blockFace -> {
-            Block block = tempDOWNL.getBlock().getRelative(blockFace);
-            if (block.getType() == Material.GLOWSTONE) {
-                locationDownPLUS = block.getLocation();
-                block.setType(Material.REDSTONE_BLOCK);
-            }
-        });
-
-        blockFaces.forEach(blockFace -> {
-            Block block = tempUPL.getBlock().getRelative(blockFace);
-            if (block.getType() == Material.GLOWSTONE) {
-                locationUpPLUS = block.getLocation();
-                block.setType(Material.REDSTONE_BLOCK);
-            }
-        });
+        this.floorsMap.putIfAbsent(0, currentFloor);
     }
 
     public Collection<Entity> getEntities() {
