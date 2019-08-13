@@ -71,8 +71,22 @@ public class elevator implements CommandExecutor {
 
                 elevatorObjectMap.get(elevatorName).goToFloor(floorNum);
                 return true;
-            }
+            } else if (args.length == 4 && args[0].equalsIgnoreCase("call")) {
+                String elevatorName = args[1].toLowerCase();
+                int floorNum = api.asIntOrDefault(args[2], 0);
+                int toFloorNum = api.asIntOrDefault(args[3], 0);
 
+                if (elevatorObjectMap.get(elevatorName) == null) {
+                    return true;
+                }
+
+                if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null) {
+                    return true;
+                }
+
+                elevatorObjectMap.get(elevatorName).callElevator(floorNum, toFloorNum);
+                return true;
+            }
             return true;
         }
 
@@ -213,6 +227,26 @@ public class elevator implements CommandExecutor {
 
                 elevatorObjectMap.get(elevatorName).goToFloor(floorNum);
                 p.sendMessage(Translate.chat("Going to floor: " + floorNum + " for the elevator: " + elevatorName));
+                return true;
+            }
+
+            if (args.length == 4 && args[0].equalsIgnoreCase("call")) {
+                String elevatorName = args[1].toLowerCase();
+                int floorNum = api.asIntOrDefault(args[2], 0);
+                int toFloorNum = api.asIntOrDefault(args[3], 0);
+
+                if (elevatorObjectMap.get(elevatorName) == null) {
+                    p.sendMessage(Translate.chat("That elevator doesn't exist."));
+                    return true;
+                }
+
+                if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null) {
+                    p.sendMessage(Translate.chat("Floor doesn't exist on this elevator"));
+                    return true;
+                }
+
+                elevatorObjectMap.get(elevatorName).callElevator(floorNum, toFloorNum);
+                p.sendMessage(Translate.chat("The elevator: " + elevatorName + " has been called to " + floorNum + " to go to " + toFloorNum));
                 return true;
             }
 

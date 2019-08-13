@@ -99,6 +99,11 @@ public class ElevatorObject implements ConfigurationSerializable {
         return simpleMath.getEntitiesInAABB(locationDownPLUS.toVector(), locationUpPLUS.toVector()).stream().filter(entity -> entity instanceof Player).map(entity -> (Player) entity).collect(Collectors.toList());
     }
 
+    public void callElevator(int whatFloor, int toWhatFloor) {
+        goToFloor(whatFloor);
+        goToFloor(toWhatFloor);
+    }
+
     public void goToFloor(int floorNum) {
         boolean goUp;
 
