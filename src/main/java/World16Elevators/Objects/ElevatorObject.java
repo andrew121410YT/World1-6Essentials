@@ -54,7 +54,7 @@ public class ElevatorObject implements ConfigurationSerializable {
 
     private Boolean isGoing;
     private Boolean isFloorQueueGoing;
-    private Boolean isWaiting;
+    private Boolean isIdling;
     private Boolean isEmergencyStop;
 
     private Queue<Integer> floorQueueBuffer;
@@ -85,7 +85,7 @@ public class ElevatorObject implements ConfigurationSerializable {
 
         this.isGoing = false;
         this.isFloorQueueGoing = false;
-        this.isWaiting = false;
+        this.isIdling = false;
         this.isEmergencyStop = false;
 
         this.floorsMap.putIfAbsent(0, currentFloor);
@@ -103,7 +103,7 @@ public class ElevatorObject implements ConfigurationSerializable {
         boolean goUp;
 
         //Add to the queue if elevator is running or waiting.
-        if (isGoing || isWaiting) {
+        if (isGoing || isIdling) {
             floorQueueBuffer.add(floorNum);
             if (!isFloorQueueGoing) {
                 setupFloorQueue();
@@ -141,7 +141,7 @@ public class ElevatorObject implements ConfigurationSerializable {
 
 //                    Stop's the elevator if emergencyStop is on.
                     if (isEmergencyStop) {
-                        isWaiting = false;
+                        isIdling = false;
                         isGoing = false;
                         isEmergencyStop = false;
                         this.cancel();
@@ -177,7 +177,7 @@ public class ElevatorObject implements ConfigurationSerializable {
 
 //                Stop's the elevator if emergencyStop is on.
                 if (isEmergencyStop) {
-                    isWaiting = false;
+                    isIdling = false;
                     isGoing = false;
                     isEmergencyStop = false;
                     this.cancel();
@@ -268,8 +268,8 @@ public class ElevatorObject implements ConfigurationSerializable {
     }
 
     private void floorDone() {
-        isWaiting = true;
-        this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> isWaiting = false, elevatorWaiterTicksPerSecond);
+        isIdling = true;
+        this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> isIdling = false, elevatorWaiterTicksPerSecond);
     }
 
     private void calculateFloorBuffer(int floor, boolean isUp) {
@@ -300,10 +300,11 @@ public class ElevatorObject implements ConfigurationSerializable {
         }
         isFloorQueueGoing = true;
 
+        //Checks every 2 seconds to see if the elevator isn't running or idling if not then go to floor.
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (!isGoing && !isWaiting && floorQueueBuffer.peek() != null) {
+                if (!isGoing && !isIdling && !floorQueueBuffer.isEmpty()) {
                     goToFloor(floorQueueBuffer.peek());
                     floorQueueBuffer.remove();
                 } else if (floorQueueBuffer.isEmpty()) {
@@ -400,7 +401,7 @@ public class ElevatorObject implements ConfigurationSerializable {
     }
 
     public Boolean isWaiting() {
-        return isWaiting;
+        return isIdling;
     }
 
     public Boolean isEmergencyStop() {
