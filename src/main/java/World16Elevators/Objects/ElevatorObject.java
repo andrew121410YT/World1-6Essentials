@@ -14,6 +14,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.Entity;
@@ -118,34 +120,30 @@ public class ElevatorObject implements ConfigurationSerializable {
     private void caculateAABBforPlus() {
         org.bukkit.util.Vector tempDOWN = locationDOWN.toVector();
         org.bukkit.util.Vector tempUP = locationUP.toVector();
+        Location tempDOWNL = tempDOWN.toLocation(getBukkitWorld());
+        Location tempUPL = tempUP.toLocation(getBukkitWorld());
 
-        tempDOWN.add(new org.bukkit.util.Vector(1, 0, 1));
-        if (tempDOWN.toLocation(getBukkitWorld()).getBlock().getType() == Material.GLOWSTONE) {
-            locationDownPLUS = tempDOWN.toLocation(getBukkitWorld());
-            locationDownPLUS.getBlock().setType(Material.REDSTONE_BLOCK);
-        } else {
-            tempDOWN.subtract(new org.bukkit.util.Vector(2, 0, 2));
-            if (tempDOWN.toLocation(getBukkitWorld()).getBlock().getType() == Material.GLOWSTONE) {
-                locationDownPLUS = tempDOWN.toLocation(getBukkitWorld());
-                locationDownPLUS.getBlock().setType(Material.REDSTONE_BLOCK);
-            } else {
-                plugin.getServer().broadcastMessage("coudn't caculate sides.");
-            }
-        }
+        Set<BlockFace> blockFaces = new HashSet<>();
+        blockFaces.add(BlockFace.NORTH_EAST);
+        blockFaces.add(BlockFace.NORTH_WEST);
+        blockFaces.add(BlockFace.SOUTH_EAST);
+        blockFaces.add(BlockFace.SOUTH_WEST);
 
-        tempUP.add(new org.bukkit.util.Vector(1, 0, 1));
-        if (tempUP.toLocation(getBukkitWorld()).getBlock().getType() == Material.GLOWSTONE) {
-            locationUpPLUS = tempUP.toLocation(getBukkitWorld());
-            locationUpPLUS.getBlock().setType(Material.REDSTONE_BLOCK);
-        } else {
-            tempUP.subtract(new org.bukkit.util.Vector(2, 0, 2));
-            if (tempUP.toLocation(getBukkitWorld()).getBlock().getType() == Material.GLOWSTONE) {
-                locationUpPLUS = tempUP.toLocation(getBukkitWorld());
-                locationUpPLUS.getBlock().setType(Material.REDSTONE_BLOCK);
-            } else {
-                plugin.getServer().broadcastMessage("coudn't caculate sides.");
+        blockFaces.forEach(blockFace -> {
+            Block block = tempDOWNL.getBlock().getRelative(blockFace);
+            if (block.getType() == Material.GLOWSTONE) {
+                locationDownPLUS = block.getLocation();
+                block.setType(Material.REDSTONE_BLOCK);
             }
-        }
+        });
+
+        blockFaces.forEach(blockFace -> {
+            Block block = tempUPL.getBlock().getRelative(blockFace);
+            if (block.getType() == Material.GLOWSTONE) {
+                locationUpPLUS = block.getLocation();
+                block.setType(Material.REDSTONE_BLOCK);
+            }
+        });
     }
 
     public Collection<Entity> getEntities() {
