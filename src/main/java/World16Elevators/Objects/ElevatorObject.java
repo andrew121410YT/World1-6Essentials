@@ -120,8 +120,6 @@ public class ElevatorObject implements ConfigurationSerializable {
         FloorObject floorObject = getFloor(floorNum);
 
         calculateFloorBuffer(floorNum, goUp);
-        Integer[] integers = floorBuffer.toArray(new Integer[0]);
-        plugin.getServer().broadcastMessage(Arrays.toString(integers));
 
         //Tell the elevator to go down instead of up.
         if (!goUp) {
