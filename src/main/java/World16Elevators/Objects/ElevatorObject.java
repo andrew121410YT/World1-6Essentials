@@ -133,7 +133,10 @@ public class ElevatorObject implements ConfigurationSerializable {
 
         FloorObject floorObject = getFloor(floorNum);
 
+        //This caculates what floors it's going to pass going up or down this has to be run before it sets this.elevatorFloor to not a floor.
         calculateFloorBuffer(floorNum, goUp);
+
+        this.elevatorFloor = Integer.MIN_VALUE; //Not on a floor.
 
         //Tell the elevator to go down instead of up.
         if (!goUp) {
