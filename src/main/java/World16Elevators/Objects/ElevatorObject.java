@@ -369,7 +369,7 @@ public class ElevatorObject implements ConfigurationSerializable {
         return integers;
     }
 
-    public void clickMessage(Player player) {
+    public void clickMessageGoto(Player player) {
         String messageD = "- Click a Floor to take the elevator to. -";
 
         List<BaseComponent[]> componentBuilders = new ArrayList<>();

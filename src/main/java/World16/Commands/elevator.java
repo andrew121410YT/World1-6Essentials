@@ -97,7 +97,7 @@ public class elevator implements CommandExecutor {
                 ElevatorObject elevatorObject = elevatorObjectMap.get(elevatorName);
 
                 if (key.equalsIgnoreCase("@dxdydz")) {
-                    elevatorObject.getPlayers().forEach(elevatorObject::clickMessage);
+                    elevatorObject.getPlayers().forEach(elevatorObject::clickMessageGoto);
                 }
                 return true;
             }
@@ -318,7 +318,7 @@ public class elevator implements CommandExecutor {
                     return true;
                 }
 
-                elevatorObjectMap.get(elevatorName).clickMessage(p);
+                elevatorObjectMap.get(elevatorName).clickMessageGoto(p);
                 return true;
             }
             return true;
