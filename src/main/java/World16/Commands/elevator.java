@@ -179,7 +179,7 @@ public class elevator implements CommandExecutor {
                     elevatorObjectMap.get(elevatorName).addFloor(new FloorObject(floorNum, api.getBlockPlayerIsLookingAt(p).getLocation(), boundingBox));
                     p.sendMessage(Translate.chat("Floor: " + floorNum + " has been added to the elevator: " + elevatorName));
                     return true;
-                } else if (args.length == 4 && args[2].equalsIgnoreCase("delete")) {
+                } else if (args.length == 4 && args[1].equalsIgnoreCase("delete")) {
                     String elevatorName = args[2].toLowerCase();
                     int floorNum = api.asIntOrDefault(args[3], 0);
 
