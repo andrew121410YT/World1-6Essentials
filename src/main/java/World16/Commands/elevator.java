@@ -5,6 +5,7 @@ import World16.Managers.CustomConfigManager;
 import World16.TabComplete.ElevatorTab;
 import World16.Utils.API;
 import World16.Utils.Translate;
+import World16Elevators.ElevatorMain;
 import World16Elevators.Objects.BoundingBox;
 import World16Elevators.Objects.ElevatorObject;
 import World16Elevators.Objects.FloorObject;
@@ -30,6 +31,7 @@ public class elevator implements CommandExecutor {
 
     private CustomConfigManager customConfigManager;
     private WorldEditPlugin worldEditPlugin;
+    private ElevatorMain elevatorMain;
 
     private Map<String, ElevatorObject> elevatorObjectMap;
 
@@ -41,6 +43,7 @@ public class elevator implements CommandExecutor {
 
         this.worldEditPlugin = this.plugin.getOtherPlugins().getWorldEditPlugin();
         this.elevatorObjectMap = this.plugin.getSetListMap().getElevatorObjectMap();
+        this.elevatorMain = this.plugin.getElevatorMain();
 
         this.plugin.getCommand("elevator").setExecutor(this);
         this.plugin.getCommand("elevator").setTabCompleter(new ElevatorTab(this.plugin));
@@ -188,7 +191,12 @@ public class elevator implements CommandExecutor {
                         return true;
                     }
 
-                    elevatorObjectMap.get(elevatorName).removeFloor(floorNum);
+                    if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null) {
+                        p.sendMessage(Translate.chat("This floor doesn't exist."));
+                        return true;
+                    }
+
+                    this.elevatorMain.deleteFloorOfElevator(elevatorName, floorNum);
                     p.sendMessage(Translate.chat("The floor: " + floorNum + " has been removed from the elevator: " + elevatorName));
                     return true;
                 }

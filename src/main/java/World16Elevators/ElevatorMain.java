@@ -91,4 +91,15 @@ public class ElevatorMain {
             this.eleYml.saveConfigSilent();
         }
     }
+
+    public void deleteFloorOfElevator(String elevatorName, int floorNum) {
+        if (elevatorObjectMap.get(elevatorName.toLowerCase()) != null) {
+            elevatorObjectMap.get(elevatorName.toLowerCase()).getFloorsMap().remove(floorNum);
+            ConfigurationSection elevatorFloors = this.eleYml.getConfig().getConfigurationSection("Elevators." + elevatorName.toLowerCase() + ".Floors");
+            if (elevatorFloors != null) {
+                elevatorFloors.set(String.valueOf(floorNum), null);
+                this.eleYml.saveConfigSilent();
+            }
+        }
+    }
 }
