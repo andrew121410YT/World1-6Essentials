@@ -86,6 +86,20 @@ public class elevator implements CommandExecutor {
 
                 elevatorObjectMap.get(elevatorName).callElevator(floorNum, toFloorNum);
                 return true;
+            } else if (args.length == 3 && args[0].equalsIgnoreCase("click")) {
+                String elevatorName = args[1].toLowerCase();
+                String key = args[2].toLowerCase();
+
+                if (elevatorObjectMap.get(elevatorName) == null) {
+                    return true;
+                }
+
+                ElevatorObject elevatorObject = elevatorObjectMap.get(elevatorName);
+
+                if (key.equalsIgnoreCase("@dxdydz")) {
+                    elevatorObject.getPlayers().forEach(elevatorObject::clickMessage);
+                }
+                return true;
             }
             return true;
         }
@@ -290,10 +304,21 @@ public class elevator implements CommandExecutor {
                         p.sendMessage(Translate.chat("That elevator doesn't exist."));
                         return true;
                     }
+
                     elevatorObjectMap.get(elevatorName).getFloorQueueBuffer().clear();
                     p.sendMessage(Translate.chat("The floor queue for the elevator: " + elevatorName + " has been cleared."));
                     return true;
                 }
+            }
+            if (args.length == 2 && args[0].equalsIgnoreCase("click")) {
+                String elevatorName = args[1].toLowerCase();
+
+                if (elevatorObjectMap.get(elevatorName) == null) {
+                    p.sendMessage(Translate.chat("That elevator doesn't exist."));
+                    return true;
+                }
+
+                elevatorObjectMap.get(elevatorName).clickMessage(p);
                 return true;
             }
             return true;

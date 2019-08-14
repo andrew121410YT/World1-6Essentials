@@ -10,6 +10,10 @@ import com.sk89q.worldedit.bukkit.BukkitUtil;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.world.World;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -353,6 +357,30 @@ public class ElevatorObject implements ConfigurationSerializable {
         Integer[] integers = homeSet.toArray(new Integer[0]);
         Arrays.sort(integers);
         return Arrays.toString(integers);
+    }
+
+    public Integer[] listAllFloorsInt() {
+        Set<Integer> homeSet = this.floorsMap.keySet();
+        Integer[] integers = homeSet.toArray(new Integer[0]);
+        Arrays.sort(integers);
+        return integers;
+    }
+
+    public void clickMessage(Player player) {
+        String messageD = "- Click a Floor to take the elevator to. -";
+
+        List<BaseComponent[]> componentBuilders = new ArrayList<>();
+        for (Integer integer : listAllFloorsInt()) {
+            componentBuilders.add(new ComponentBuilder(String.valueOf(integer)).color(ChatColor.YELLOW).bold(true).event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/elevator goto " + elevatorName.toLowerCase() + " " + integer)).create());
+        }
+
+        ComponentBuilder componentBuilder = new ComponentBuilder(messageD).color(ChatColor.YELLOW).bold(true).append("\n");
+        for (BaseComponent[] builder : componentBuilders) {
+            componentBuilder.append(" ");
+            componentBuilder.append(builder);
+        }
+
+        player.spigot().sendMessage(componentBuilder.create());
     }
 
     public org.bukkit.World getBukkitWorld() {
