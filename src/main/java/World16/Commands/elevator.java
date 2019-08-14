@@ -80,7 +80,7 @@ public class elevator implements CommandExecutor {
                     return true;
                 }
 
-                if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null) {
+                if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null && elevatorObjectMap.get(elevatorName).getFloorsMap().get(toFloorNum) == null) {
                     return true;
                 }
 
@@ -240,7 +240,7 @@ public class elevator implements CommandExecutor {
                     return true;
                 }
 
-                if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null) {
+                if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null && elevatorObjectMap.get(elevatorName).getFloorsMap().get(toFloorNum) == null) {
                     p.sendMessage(Translate.chat("Floor doesn't exist on this elevator"));
                     return true;
                 }

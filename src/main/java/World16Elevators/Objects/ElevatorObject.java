@@ -107,6 +107,11 @@ public class ElevatorObject implements ConfigurationSerializable {
     public void goToFloor(int floorNum) {
         boolean goUp;
 
+        //Check if the floor is a thing or not.
+        if (getFloor(floorNum) == null) {
+            return;
+        }
+
         //Add to the queue if elevator is running or waiting.
         if (isGoing || isIdling) {
             floorQueueBuffer.add(floorNum);
