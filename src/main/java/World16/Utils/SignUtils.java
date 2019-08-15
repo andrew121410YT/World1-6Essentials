@@ -29,4 +29,19 @@ public class SignUtils {
         tileEntitySign.a(nmsPlayer);
         conn.sendPacket(new PacketPlayOutOpenSignEditor(pos));
     }
+
+    public static String centerText(String text, int max){
+        if (text.length() > max)
+            return text.substring(0, max);
+        else{
+            int pad = max - text.length();
+            StringBuilder sb = new StringBuilder(text);
+            for (int i = 0; i < pad; i++)
+                if (i % 2 == 0)
+                    sb.insert(0, " ");
+                else
+                    sb.append(" ");
+            return sb.toString();
+        }
+    }
 }

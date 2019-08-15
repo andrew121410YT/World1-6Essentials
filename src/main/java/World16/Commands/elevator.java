@@ -9,6 +9,7 @@ import World16Elevators.ElevatorMain;
 import World16Elevators.Objects.BoundingBox;
 import World16Elevators.Objects.ElevatorObject;
 import World16Elevators.Objects.FloorObject;
+import World16Elevators.Objects.SignObject;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 import org.bukkit.Location;
@@ -162,6 +163,7 @@ public class elevator implements CommandExecutor {
                     p.sendMessage(Translate.chat("[Elevator Floor Setup]"));
                     p.sendMessage(Translate.chat("/elevator floor create <ElevatorName> <FloorNumber>"));
                     p.sendMessage(Translate.chat("/elevator floor delete <ElevatorName> <FloorNumber>"));
+                    p.sendMessage(Translate.chat("/elevator floor sign <ElevatorName> <FloorNumber>"));
                 }
                 if (args.length == 4 && args[1].equalsIgnoreCase("create")) {
                     String elevatorName = args[2].toLowerCase();
@@ -199,9 +201,27 @@ public class elevator implements CommandExecutor {
                     this.elevatorMain.deleteFloorOfElevator(elevatorName, floorNum);
                     p.sendMessage(Translate.chat("The floor: " + floorNum + " has been removed from the elevator: " + elevatorName));
                     return true;
+                } else if (args.length == 4 && args[1].equalsIgnoreCase("sign")) {
+                    String elevatorName = args[2].toLowerCase();
+                    int floorNum = api.asIntOrDefault(args[3], 0);
+
+                    if (elevatorObjectMap.get(elevatorName) == null) {
+                        p.sendMessage(Translate.chat("That elevator doesn't exist."));
+                        return true;
+                    }
+
+                    if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null) {
+                        p.sendMessage(Translate.chat("This floor doesn't exist."));
+                        return true;
+                    }
+
+                    elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum).setSignObject(new SignObject(this.api.getBlockPlayerIsLookingAt(p).getLocation()));
+                    p.sendMessage(Translate.chat("Sign has been set"));
+                    return true;
                 }
                 return true;
             }
+            //END OF FLOOR
 
             if (args.length == 2 && args[0].equalsIgnoreCase("delete")) {
                 String elevatorName = args[1].toLowerCase();

@@ -61,6 +61,8 @@ public class ElevatorObject implements ConfigurationSerializable {
     private Boolean isIdling;
     private Boolean isEmergencyStop;
 
+    private int topFloor = 0;
+
     private Queue<Integer> floorQueueBuffer;
     private Queue<Integer> floorBuffer;
 
@@ -116,7 +118,7 @@ public class ElevatorObject implements ConfigurationSerializable {
             return;
         }
 
-        //Add to the queue if elevator is running or waiting.
+        //Add to the queue if elevator is running or idling.
         if (isGoing || isIdling) {
             floorQueueBuffer.add(floorNum);
             if (!isFloorQueueGoing) {
@@ -131,6 +133,7 @@ public class ElevatorObject implements ConfigurationSerializable {
         //Checks if the elevator should go up or down.
         goUp = !(getFloor(floorNum).getBoundingBox().getVectorDOWN().getY() < locationDOWN.getY());
 
+        //Gets the floor before the elevator starts ticking.
         FloorObject floorObject = getFloor(floorNum);
 
         //This caculates what floors it's going to pass going up or down this has to be run before it sets this.elevatorFloor to not a floor.
@@ -147,9 +150,8 @@ public class ElevatorObject implements ConfigurationSerializable {
                     if (floorObject.getBoundingBox().getMidPointOnFloor().getY() == locationDOWN.getY()) {
                         this.cancel();
                         elevatorFloor = floorNum;
-//                        arrivalChime(floorObject.getAtDoor());
                         openDoor(floorNum);
-                        floorDone();
+                        doFloorIdle();
                         isGoing = false;
                         return;
                     }
@@ -183,9 +185,8 @@ public class ElevatorObject implements ConfigurationSerializable {
                 if (floorObject.getBoundingBox().isInAABB(locationDOWN.toVector())) {
                     this.cancel();
                     elevatorFloor = floorNum;
-//                    arrivalChime(floorObject.getAtDoor());
                     openDoor(floorNum);
-                    floorDone();
+                    doFloorIdle();
                     isGoing = false;
                     return;
                 }
@@ -274,15 +275,29 @@ public class ElevatorObject implements ConfigurationSerializable {
         Material oldBlock = getFloor(floor).getAtDoor().getBlock().getType();
         FloorObject floorObject = getFloor(floor);
         floorObject.getAtDoor().getBlock().setType(Material.REDSTONE_BLOCK);
+
+        if (isNextFloorGoingUp() == ElevatorStatus.UP) {
+            if (floorObject.getSignObject() != null) {
+                floorObject.getSignObject().doUpArrow();
+            }
+        } else if (isNextFloorGoingUp() == ElevatorStatus.DOWN) {
+            if (floorObject.getSignObject() != null) {
+                floorObject.getSignObject().doDownArrow();
+            }
+        }
+
         new BukkitRunnable() {
             @Override
             public void run() {
+                if (floorObject.getSignObject() != null) {
+                    floorObject.getSignObject().clearSign();
+                }
                 floorObject.getAtDoor().getBlock().setType(oldBlock);
             }
         }.runTaskLater(plugin, doorHolderTicksPerSecond);
     }
 
-    private void floorDone() {
+    private void doFloorIdle() {
         isIdling = true;
         this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> isIdling = false, elevatorWaiterTicksPerSecond);
     }
@@ -330,6 +345,33 @@ public class ElevatorObject implements ConfigurationSerializable {
         }.runTaskTimer(plugin, 40L, 40L);
     }
 
+    public ElevatorStatus isNextFloorGoingUp() {
+        if (!floorQueueBuffer.isEmpty()) {
+            FloorObject floorObject = getFloor(floorQueueBuffer.peek());
+            ElevatorStatus elevatorStatus = ElevatorStatus.NOT_GOING_ANYWHERE;
+            return elevatorStatus.upOrDown(!(floorObject.getBoundingBox().getVectorDOWN().getY() < locationDOWN.getY()));
+        } else if (this.elevatorFloor == 0) {
+            return ElevatorStatus.UP;
+        } else if (this.elevatorFloor == this.topFloor) {
+            return ElevatorStatus.DOWN;
+        }
+        return ElevatorStatus.NOT_GOING_ANYWHERE;
+    }
+
+    public Integer getNextFloor() {
+        if (!floorQueueBuffer.isEmpty()) {
+            return floorQueueBuffer.peek();
+        }
+        return null;
+    }
+
+    public FloorObject getNextFloorObect() {
+        if (!floorQueueBuffer.isEmpty()) {
+            return getFloor(floorQueueBuffer.peek());
+        }
+        return null;
+    }
+
     private void arrivalChime(Location location) {
         getBukkitWorld().playSound(location, Sound.BLOCK_NOTE_PLING, 10F, 1.8F);
     }
@@ -339,6 +381,7 @@ public class ElevatorObject implements ConfigurationSerializable {
     }
 
     public void addFloor(FloorObject floorObject) {
+        this.topFloor++;
         this.floorsMap.putIfAbsent(floorObject.getFloor(), floorObject);
     }
 

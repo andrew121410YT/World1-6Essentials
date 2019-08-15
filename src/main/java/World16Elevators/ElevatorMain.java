@@ -42,7 +42,7 @@ public class ElevatorMain {
             ConfigurationSection elevatorFloors = elevatorConfig.getConfigurationSection("Floors");
             if (elevatorFloors != null) {
                 for (String floorNumber : elevatorFloors.getKeys(false)) {
-                    elevatorObject.getFloorsMap().putIfAbsent(Integer.valueOf(floorNumber), (FloorObject) elevatorFloors.get(floorNumber));
+                    elevatorObject.addFloor((FloorObject) elevatorFloors.get(floorNumber));
                 }
 
                 //Just a hack since i don't want nothing static.

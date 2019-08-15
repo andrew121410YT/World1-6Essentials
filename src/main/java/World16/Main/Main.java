@@ -17,6 +17,7 @@ import World16Elevators.ElevatorMain;
 import World16Elevators.Objects.BoundingBox;
 import World16Elevators.Objects.ElevatorObject;
 import World16Elevators.Objects.FloorObject;
+import World16Elevators.Objects.SignObject;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -29,6 +30,7 @@ public class Main extends JavaPlugin {
 
     static {
         ConfigurationSerialization.registerClass(BoundingBox.class, "BoundingBox");
+        ConfigurationSerialization.registerClass(SignObject.class, "SignObject");
         ConfigurationSerialization.registerClass(FloorObject.class, "FloorObject");
         ConfigurationSerialization.registerClass(ElevatorObject.class, "ElevatorObject");
     }
