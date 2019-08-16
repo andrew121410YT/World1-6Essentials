@@ -6,10 +6,7 @@ import World16.TabComplete.ElevatorTab;
 import World16.Utils.API;
 import World16.Utils.Translate;
 import World16Elevators.ElevatorMain;
-import World16Elevators.Objects.BoundingBox;
-import World16Elevators.Objects.ElevatorObject;
-import World16Elevators.Objects.FloorObject;
-import World16Elevators.Objects.SignObject;
+import World16Elevators.Objects.*;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 import org.bukkit.Location;
@@ -61,47 +58,67 @@ public class elevator implements CommandExecutor {
             BlockCommandSender cmdblock = (BlockCommandSender) sender;
             Block commandblock = cmdblock.getBlock();
 
-            if (args.length == 3 && args[0].equalsIgnoreCase("goto")) {
-                String elevatorName = args[1].toLowerCase();
-                int floorNum = api.asIntOrDefault(args[2], 0);
-
-                if (elevatorObjectMap.get(elevatorName) == null) {
-                    return true;
-                }
-
-                if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null) {
-                    return true;
-                }
-
-                elevatorObjectMap.get(elevatorName).goToFloor(floorNum);
-                return true;
-            } else if (args.length == 4 && args[0].equalsIgnoreCase("call")) {
-                String elevatorName = args[1].toLowerCase();
-                int floorNum = api.asIntOrDefault(args[2], 0);
-                int toFloorNum = api.asIntOrDefault(args[3], 0);
-
-                if (elevatorObjectMap.get(elevatorName) == null) {
-                    return true;
-                }
-
-                if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null || elevatorObjectMap.get(elevatorName).getFloorsMap().get(toFloorNum) == null) {
-                    return true;
-                }
-
-                elevatorObjectMap.get(elevatorName).callElevator(floorNum, toFloorNum);
-                return true;
-            } else if (args.length == 3 && args[0].equalsIgnoreCase("click")) {
+            if (args.length == 3 && args[0].equalsIgnoreCase("click")) {
                 String elevatorName = args[1].toLowerCase();
                 String key = args[2].toLowerCase();
 
                 if (elevatorObjectMap.get(elevatorName) == null) {
                     return true;
                 }
-
                 ElevatorObject elevatorObject = elevatorObjectMap.get(elevatorName);
 
                 if (key.equalsIgnoreCase("@dxdydz")) {
                     elevatorObject.getPlayers().forEach(elevatorObject::clickMessageGoto);
+                }
+                return true;
+            } else if (args[0].equalsIgnoreCase("call")) {
+                if (args.length == 1) {
+                    return true;
+                } else if (args.length == 3) {
+                    String elevatorName = args[1].toLowerCase();
+                    int floorNum = api.asIntOrDefault(args[2], 0);
+
+                    if (elevatorObjectMap.get(elevatorName) == null) {
+                        return true;
+                    }
+
+                    if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null) {
+                        return true;
+                    }
+
+                    elevatorObjectMap.get(elevatorName).goToFloor(floorNum, ElevatorStatus.DONT_KNOW);
+                    return true;
+                } else if (args.length == 4 && api.isBoolean(args[3])) {
+                    String elevatorName = args[1].toLowerCase();
+                    int floorNum = api.asIntOrDefault(args[2], 0);
+                    boolean goUp = api.asBooleanOrDefault(args[3], false);
+
+                    if (elevatorObjectMap.get(elevatorName) == null) {
+                        return true;
+                    }
+
+                    if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null) {
+                        return true;
+                    }
+
+                    ElevatorStatus elevatorStatus = ElevatorStatus.DONT_KNOW;
+                    elevatorObjectMap.get(elevatorName).goToFloor(floorNum, elevatorStatus.upOrDown(goUp));
+                    return true;
+                } else if (args.length == 4 && !api.isBoolean(args[3])) {
+                    String elevatorName = args[1].toLowerCase();
+                    int floorNum = api.asIntOrDefault(args[2], 0);
+                    int toFloorNum = api.asIntOrDefault(args[3], 0);
+
+                    if (elevatorObjectMap.get(elevatorName) == null) {
+                        return true;
+                    }
+
+                    if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null || elevatorObjectMap.get(elevatorName).getFloorsMap().get(toFloorNum) == null) {
+                        return true;
+                    }
+
+                    elevatorObjectMap.get(elevatorName).callElevator(floorNum, toFloorNum);
+                    return true;
                 }
                 return true;
             }
@@ -116,9 +133,9 @@ public class elevator implements CommandExecutor {
 
         if (args.length == 0) {
             p.sendMessage(Translate.chat("Elevator Help"));
-            p.sendMessage(Translate.chat("/elevator create <Shows help for creation of a elevator>"));
-            p.sendMessage(Translate.chat("/elevator floor <Shows hel for the floor"));
-            p.sendMessage(Translate.chat("/elevator goto <ELEName> <FloorNumber>"));
+            p.sendMessage(Translate.chat("/elevator create <Shows help for creation of a elevator.>"));
+            p.sendMessage(Translate.chat("/elevator floor <Shows help for the floor."));
+            p.sendMessage(Translate.chat("/elevator call <Shows help to call the elevator."));
             return true;
         } else {
 
@@ -253,45 +270,6 @@ public class elevator implements CommandExecutor {
                 return true;
             }
 
-            if (args.length == 3 && args[0].equalsIgnoreCase("goto")) {
-                String elevatorName = args[1].toLowerCase();
-                int floorNum = api.asIntOrDefault(args[2], 0);
-
-                if (elevatorObjectMap.get(elevatorName) == null) {
-                    p.sendMessage(Translate.chat("That elevator doesn't exist."));
-                    return true;
-                }
-
-                if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null) {
-                    p.sendMessage(Translate.chat("Floor doesn't exist on this elevator"));
-                    return true;
-                }
-
-                elevatorObjectMap.get(elevatorName).goToFloor(floorNum);
-                p.sendMessage(Translate.chat("Going to floor: " + floorNum + " for the elevator: " + elevatorName));
-                return true;
-            }
-
-            if (args.length == 4 && args[0].equalsIgnoreCase("call")) {
-                String elevatorName = args[1].toLowerCase();
-                int floorNum = api.asIntOrDefault(args[2], 0);
-                int toFloorNum = api.asIntOrDefault(args[3], 0);
-
-                if (elevatorObjectMap.get(elevatorName) == null) {
-                    p.sendMessage(Translate.chat("That elevator doesn't exist."));
-                    return true;
-                }
-
-                if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null || elevatorObjectMap.get(elevatorName).getFloorsMap().get(toFloorNum) == null) {
-                    p.sendMessage(Translate.chat("Floor doesn't exist on this elevator"));
-                    return true;
-                }
-
-                elevatorObjectMap.get(elevatorName).callElevator(floorNum, toFloorNum);
-                p.sendMessage(Translate.chat("The elevator: " + elevatorName + " has been called to " + floorNum + " to go to " + toFloorNum));
-                return true;
-            }
-
             if (args.length == 2 && args[0].equalsIgnoreCase("stop")) {
                 String elevatorName = args[1].toLowerCase();
 
@@ -347,6 +325,68 @@ public class elevator implements CommandExecutor {
                 }
 
                 elevatorObjectMap.get(elevatorName).clickMessageGoto(p);
+                return true;
+            }
+            if (args[0].equalsIgnoreCase("call")) {
+                if (args.length == 1) {
+                    p.sendMessage(Translate.chat("/elevator call <ElevatorName> <FloorNumber>"));
+                    p.sendMessage(Translate.chat("/elevator call <ElevatorName <FloorNumber> <GoUp?>"));
+                    p.sendMessage(Translate.chat("/elevator call <ElevatorName> <FloorNumber> <FloorNumberToGoTo>"));
+                } else if (args.length == 3) {
+                    String elevatorName = args[1].toLowerCase();
+                    int floorNum = api.asIntOrDefault(args[2], 0);
+
+                    if (elevatorObjectMap.get(elevatorName) == null) {
+                        p.sendMessage(Translate.chat("That isn't a floor."));
+                        return true;
+                    }
+
+                    if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null) {
+                        p.sendMessage(Translate.chat("That floor does not exist."));
+                        return true;
+                    }
+
+                    elevatorObjectMap.get(elevatorName).goToFloor(floorNum, ElevatorStatus.DONT_KNOW);
+                    p.sendMessage(Translate.chat("Going to floor: " + floorNum + " for the Elevator: " + elevatorName));
+                    return true;
+                } else if (args.length == 4 && api.isBoolean(args[3])) {
+                    String elevatorName = args[1].toLowerCase();
+                    int floorNum = api.asIntOrDefault(args[2], 0);
+                    boolean goUp = api.asBooleanOrDefault(args[3], false);
+
+                    if (elevatorObjectMap.get(elevatorName) == null) {
+                        p.sendMessage(Translate.chat("That isn't a floor."));
+                        return true;
+                    }
+
+                    if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null) {
+                        p.sendMessage(Translate.chat("That floor does not exist."));
+                        return true;
+                    }
+
+                    ElevatorStatus elevatorStatus = ElevatorStatus.DONT_KNOW;
+                    elevatorObjectMap.get(elevatorName).goToFloor(floorNum, elevatorStatus.upOrDown(goUp));
+                    p.sendMessage(Translate.chat("Going to floor: " + floorNum + " for the Elevator: " + elevatorName + " ElevatorStatus: " + elevatorStatus.upOrDown(goUp)));
+                    return true;
+                } else if (args.length == 4 && !api.isBoolean(args[3])) {
+                    String elevatorName = args[1].toLowerCase();
+                    int floorNum = api.asIntOrDefault(args[2], 0);
+                    int toFloorNum = api.asIntOrDefault(args[3], 0);
+
+                    if (elevatorObjectMap.get(elevatorName) == null) {
+                        p.sendMessage(Translate.chat("That elevator doesn't exist."));
+                        return true;
+                    }
+
+                    if (elevatorObjectMap.get(elevatorName).getFloorsMap().get(floorNum) == null || elevatorObjectMap.get(elevatorName).getFloorsMap().get(toFloorNum) == null) {
+                        p.sendMessage(Translate.chat("Floor doesn't exist on this elevator"));
+                        return true;
+                    }
+
+                    elevatorObjectMap.get(elevatorName).callElevator(floorNum, toFloorNum);
+                    p.sendMessage(Translate.chat("The elevator: " + elevatorName + " has been called to " + floorNum + " to go to " + toFloorNum));
+                    return true;
+                }
                 return true;
             }
             return true;

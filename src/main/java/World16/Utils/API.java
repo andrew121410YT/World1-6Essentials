@@ -45,7 +45,7 @@ public class API {
     //Finals
     public static final String CUSTOM_COMMAND_FORMAT = "`";
     public static final Integer VERSION = 314;
-    public static final String DATE_OF_VERSION = "8/14/2019";
+    public static final String DATE_OF_VERSION = "8/16/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = PREFIX + "->[&bUSELESS&r]";
     public static final String DEBUG_TAG = PREFIX + "->[&eDEBUG&r]";
@@ -227,6 +227,10 @@ public class API {
         }
     }
 
+    public boolean isBoolean(String boolean1) {
+        return boolean1.equalsIgnoreCase("true") || boolean1.equalsIgnoreCase("false");
+    }
+
     public Integer asIntOrDefault(String input, int default1) {
         try {
             Integer.parseInt(input);
@@ -254,21 +258,21 @@ public class API {
         }
     }
 
-    public boolean isClass(String className) {
-        try {
-            Class.forName(className);
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
-    }
-
     public boolean asBooleanOrDefault(String boolean1, boolean default1) {
         try {
             Boolean.parseBoolean(boolean1);
             return Boolean.valueOf(boolean1);
         } catch (Exception e) {
             return default1;
+        }
+    }
+
+    public boolean isClass(String className) {
+        try {
+            Class.forName(className);
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
         }
     }
 

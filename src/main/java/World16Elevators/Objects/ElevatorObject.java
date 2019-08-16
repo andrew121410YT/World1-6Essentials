@@ -107,11 +107,11 @@ public class ElevatorObject implements ConfigurationSerializable {
     }
 
     public void callElevator(int whatFloor, int toWhatFloor) {
-        goToFloor(whatFloor);
-        goToFloor(toWhatFloor);
+        goToFloor(whatFloor, ElevatorStatus.DONT_KNOW);
+        goToFloor(toWhatFloor, ElevatorStatus.DONT_KNOW);
     }
 
-    public void goToFloor(int floorNum) {
+    public void goToFloor(int floorNum, ElevatorStatus elevatorStatus) {
         boolean goUp;
 
         //Check if the floor is a thing or not.
@@ -151,7 +151,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                     if (floorObject.getBoundingBox().getMidPointOnFloor().getY() == locationDOWN.getY()) {
                         this.cancel();
                         elevatorFloor = floorNum;
-                        openDoor(floorNum);
+                        floorDone(floorNum, elevatorStatus);
                         doFloorIdle();
                         isGoing = false;
                         return;
@@ -186,7 +186,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                 if (floorObject.getBoundingBox().isInAABB(locationDOWN.toVector())) {
                     this.cancel();
                     elevatorFloor = floorNum;
-                    openDoor(floorNum);
+                    floorDone(floorNum, elevatorStatus);
                     doFloorIdle();
                     isGoing = false;
                     return;
@@ -272,11 +272,13 @@ public class ElevatorObject implements ConfigurationSerializable {
         this.isEmergencyStop = true;
     }
 
-    private void openDoor(int floor) {
+    private void floorDone(int floor, ElevatorStatus elevatorStatus) {
         Material oldBlock = getFloor(floor).getAtDoor().getBlock().getType();
+
         FloorObject floorObject = getFloor(floor);
         floorObject.getAtDoor().getBlock().setType(Material.REDSTONE_BLOCK);
 
+        //SIGNS
         if (isNextFloorGoingUp() == ElevatorStatus.UP) {
             if (floorObject.getSignObject() != null) {
                 floorObject.getSignObject().doUpArrow();
@@ -284,6 +286,19 @@ public class ElevatorObject implements ConfigurationSerializable {
         } else if (isNextFloorGoingUp() == ElevatorStatus.DOWN) {
             if (floorObject.getSignObject() != null) {
                 floorObject.getSignObject().doDownArrow();
+            }
+        } else if (isNextFloorGoingUp() == ElevatorStatus.NOT_GOING_ANYWHERE && elevatorStatus != ElevatorStatus.DONT_KNOW) {
+            if (floorObject.getSignObject() != null) {
+                switch (elevatorStatus) {
+                    case UP:
+                        floorObject.getSignObject().doUpArrow();
+                        break;
+                    case DOWN:
+                        floorObject.getSignObject().doDownArrow();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -336,7 +351,7 @@ public class ElevatorObject implements ConfigurationSerializable {
             @Override
             public void run() {
                 if (!isGoing && !isIdling && !floorQueueBuffer.isEmpty()) {
-                    goToFloor(floorQueueBuffer.peek());
+                    goToFloor(floorQueueBuffer.peek(), ElevatorStatus.DONT_KNOW);
                     floorQueueBuffer.remove();
                 } else if (floorQueueBuffer.isEmpty()) {
                     isFloorQueueGoing = false;
@@ -425,7 +440,7 @@ public class ElevatorObject implements ConfigurationSerializable {
 
         List<BaseComponent[]> componentBuilders = new ArrayList<>();
         for (Integer integer : listAllFloorsInt()) {
-            componentBuilders.add(new ComponentBuilder(String.valueOf(integer)).color(ChatColor.YELLOW).bold(true).event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/elevator goto " + elevatorName.toLowerCase() + " " + integer)).create());
+            componentBuilders.add(new ComponentBuilder(String.valueOf(integer)).color(ChatColor.YELLOW).bold(true).event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/elevator call " + elevatorName.toLowerCase() + " " + integer)).create());
         }
 
         ComponentBuilder componentBuilder = new ComponentBuilder(messageD).color(ChatColor.YELLOW).bold(true).append("\n");
