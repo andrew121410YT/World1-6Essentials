@@ -276,16 +276,18 @@ public class ElevatorObject implements ConfigurationSerializable {
         FloorObject floorObject = getFloor(floor);
         floorObject.getAtDoor().getBlock().setType(Material.REDSTONE_BLOCK);
 
+        ElevatorStatus elevatorStatus1 = isNextFloorGoingUp();
+
         //SIGNS
-        if (isNextFloorGoingUp() == ElevatorStatus.UP) {
+        if (elevatorStatus1 == ElevatorStatus.UP) {
             if (floorObject.getSignObject() != null) {
                 floorObject.getSignObject().doUpArrow();
             }
-        } else if (isNextFloorGoingUp() == ElevatorStatus.DOWN) {
+        } else if (elevatorStatus1 == ElevatorStatus.DOWN) {
             if (floorObject.getSignObject() != null) {
                 floorObject.getSignObject().doDownArrow();
             }
-        } else if (isNextFloorGoingUp() == ElevatorStatus.NOT_GOING_ANYWHERE && elevatorStatus != ElevatorStatus.DONT_KNOW) {
+        } else if (elevatorStatus1 == ElevatorStatus.NOT_GOING_ANYWHERE && elevatorStatus != ElevatorStatus.DONT_KNOW) {
             if (floorObject.getSignObject() != null) {
                 switch (elevatorStatus) {
                     case UP:
@@ -372,15 +374,11 @@ public class ElevatorObject implements ConfigurationSerializable {
             return ElevatorStatus.UP;
         } else if (this.elevatorFloor == this.topFloor) {
             return ElevatorStatus.DOWN;
+        } else if (this.elevatorFloor == this.topBottomFloor) {
+            return ElevatorStatus.UP;
         }
-        return ElevatorStatus.NOT_GOING_ANYWHERE;
-    }
 
-    public FloorObject getNextFloorObect() {
-        if (!floorQueueBuffer.isEmpty()) {
-            return getFloor(floorQueueBuffer.peek());
-        }
-        return null;
+        return ElevatorStatus.NOT_GOING_ANYWHERE;
     }
 
     private void arrivalChime(Location location) {
@@ -442,7 +440,7 @@ public class ElevatorObject implements ConfigurationSerializable {
 
         List<BaseComponent[]> componentBuilders = new ArrayList<>();
         for (Integer integer : listAllFloorsInt()) {
-            componentBuilders.add(new ComponentBuilder(String.valueOf(integer)).color(ChatColor.YELLOW).bold(true).event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/elevator call " + elevatorName.toLowerCase() + " " + integer)).create());
+            componentBuilders.add(new ComponentBuilder(String.valueOf(integer)).color(ChatColor.GOLD).bold(true).event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/elevator call " + elevatorName.toLowerCase() + " " + integer)).create());
         }
 
         ComponentBuilder componentBuilder = new ComponentBuilder(messageD).color(ChatColor.YELLOW).bold(true).append("\n");
