@@ -62,6 +62,7 @@ public class ElevatorObject implements ConfigurationSerializable {
     private Boolean isEmergencyStop;
 
     private int topFloor = 0;
+    private int topBottomFloor = 0;
 
     private Queue<Integer> floorQueueBuffer;
     private Queue<Integer> floorBuffer;
@@ -381,9 +382,11 @@ public class ElevatorObject implements ConfigurationSerializable {
     }
 
     public void addFloor(FloorObject floorObject) {
-        if (floorObject.getFloor() != 0) {
+        if (!(floorObject.getFloor() <= 0)) {
             this.topFloor++;
-        } else {
+        } else if (floorObject.getFloor() < 0) {
+            this.topBottomFloor--;
+        } else if (floorObject.getFloor() == 0) {
             this.floorsMap.remove(floorObject.getFloor());
         }
 
