@@ -41,7 +41,7 @@ public class SignObject implements ConfigurationSerializable {
         }
 
         Sign sign = getSign();
-        String text = SignUtils.centerText("//\\\\", 16);
+        String text = SignUtils.centerText("/\\", 16);
         String text1 = SignUtils.centerText("//\\\\", 16);
         sign.setLine(0, Translate.chat("&a&l" + text));
         sign.setLine(1, Translate.chat("&a&l" + text1));
