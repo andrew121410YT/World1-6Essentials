@@ -64,7 +64,7 @@ public class ElevatorObject implements ConfigurationSerializable {
     private int topFloor = 0;
     private int topBottomFloor = 0;
 
-    private Queue<Integer> floorQueueBuffer;
+    private Queue<FloorQueue> floorQueueBuffer;
     private Queue<Integer> floorBuffer;
 
     public ElevatorObject(Main plugin, String world, String nameOfElevator, FloorObject currentFloor, BoundingBox boundingBox) {
@@ -121,10 +121,8 @@ public class ElevatorObject implements ConfigurationSerializable {
 
         //Add to the queue if elevator is running or idling.
         if (isGoing || isIdling) {
-            floorQueueBuffer.add(floorNum);
-            if (!isFloorQueueGoing) {
-                setupFloorQueue();
-            }
+            floorQueueBuffer.add(new FloorQueue(floorNum, elevatorStatus));
+            setupFloorQueue();
             return;
         }
 
@@ -351,7 +349,8 @@ public class ElevatorObject implements ConfigurationSerializable {
             @Override
             public void run() {
                 if (!isGoing && !isIdling && !floorQueueBuffer.isEmpty()) {
-                    goToFloor(floorQueueBuffer.peek(), ElevatorStatus.DONT_KNOW);
+                    FloorQueue floorQueue = floorQueueBuffer.peek();
+                    goToFloor(floorQueue.getFloorNumber(), floorQueue.getElevatorStatus());
                     floorQueueBuffer.remove();
                 } else if (floorQueueBuffer.isEmpty()) {
                     isFloorQueueGoing = false;
@@ -364,6 +363,9 @@ public class ElevatorObject implements ConfigurationSerializable {
     public ElevatorStatus isNextFloorGoingUp() {
         if (!floorQueueBuffer.isEmpty()) {
             FloorObject floorObject = getFloor(floorQueueBuffer.peek());
+            if (floorObject == null) {
+                return ElevatorStatus.NOT_GOING_ANYWHERE;
+            }
             ElevatorStatus elevatorStatus = ElevatorStatus.NOT_GOING_ANYWHERE;
             return elevatorStatus.upOrDown(!(floorObject.getBoundingBox().getVectorDOWN().getY() < locationDOWN.getY()));
         } else if (this.elevatorFloor == 0) {
@@ -372,13 +374,6 @@ public class ElevatorObject implements ConfigurationSerializable {
             return ElevatorStatus.DOWN;
         }
         return ElevatorStatus.NOT_GOING_ANYWHERE;
-    }
-
-    public Integer getNextFloor() {
-        if (!floorQueueBuffer.isEmpty()) {
-            return floorQueueBuffer.peek();
-        }
-        return null;
     }
 
     public FloorObject getNextFloorObect() {
@@ -411,6 +406,13 @@ public class ElevatorObject implements ConfigurationSerializable {
     public FloorObject getFloor(int floor) {
         if (this.floorsMap.get(floor) != null) {
             return this.floorsMap.get(floor);
+        }
+        return null;
+    }
+
+    private FloorObject getFloor(FloorQueue floorQueue) {
+        if (this.floorsMap.get(floorQueue.getFloorNumber()) != null) {
+            return this.floorsMap.get(floorQueue.getFloorNumber());
         }
         return null;
     }
@@ -513,7 +515,7 @@ public class ElevatorObject implements ConfigurationSerializable {
         return isEmergencyStop;
     }
 
-    public Queue<Integer> getFloorQueueBuffer() {
+    public Queue<FloorQueue> getFloorQueueBuffer() {
         return floorQueueBuffer;
     }
 

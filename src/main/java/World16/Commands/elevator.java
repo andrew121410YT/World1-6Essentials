@@ -18,9 +18,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 public class elevator implements CommandExecutor {
 
@@ -298,8 +296,12 @@ public class elevator implements CommandExecutor {
                         p.sendMessage(Translate.chat("That elevator doesn't exist."));
                         return true;
                     }
-                    Queue<Integer> floorQ = elevatorObjectMap.get(elevatorName).getFloorQueueBuffer();
-                    Integer[] integers = floorQ.toArray(new Integer[0]);
+                    Queue<FloorQueue> floorQ = elevatorObjectMap.get(elevatorName).getFloorQueueBuffer();
+                    List<Integer> integerList = new ArrayList<>();
+                    for (FloorQueue floorQueue : floorQ) {
+                        integerList.add(floorQueue.getFloorNumber());
+                    }
+                    Integer[] integers = integerList.toArray(new Integer[0]);
                     p.sendMessage(Arrays.toString(integers));
                     return true;
                 }
