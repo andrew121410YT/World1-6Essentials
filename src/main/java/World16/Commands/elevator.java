@@ -177,6 +177,7 @@ public class elevator implements CommandExecutor {
                 if (args.length == 1) {
                     p.sendMessage(Translate.chat("[Elevator Floor Setup]"));
                     p.sendMessage(Translate.chat("/elevator floor create <ElevatorName> <FloorNumber>"));
+                    p.sendMessage(Translate.chat("/elevator floor easycreate <ElevatorName> <FloorNumber>"));
                     p.sendMessage(Translate.chat("/elevator floor delete <ElevatorName> <FloorNumber>"));
                     p.sendMessage(Translate.chat("/elevator floor sign <ElevatorName> <FloorNumber>"));
                 }
@@ -198,6 +199,18 @@ public class elevator implements CommandExecutor {
                     BoundingBox boundingBox = new BoundingBox(selection.getMinimumPoint().toVector(), selection.getMaximumPoint().toVector());
                     elevatorObjectMap.get(elevatorName).addFloor(new FloorObject(floorNum, api.getBlockPlayerIsLookingAt(p).getLocation(), boundingBox));
                     p.sendMessage(Translate.chat("Floor: " + floorNum + " has been added to the elevator: " + elevatorName));
+                    return true;
+                } else if (args.length == 4 && args[1].equalsIgnoreCase("easycreate")) {
+                    String elevatorName = args[2].toLowerCase();
+                    int floorNum = api.asIntOrDefault(args[3], 0);
+
+                    if (elevatorObjectMap.get(elevatorName) == null) {
+                        p.sendMessage(Translate.chat("That elevator doesn't exist."));
+                        return true;
+                    }
+
+                    elevatorObjectMap.get(elevatorName).addFloor(new FloorObject(floorNum, api.getBlockPlayerIsLookingAt(p).getLocation()));
+                    p.sendMessage(Translate.chat("[EasyCreate] Floor: " + floorNum + " has been added to the elevator: " + elevatorName));
                     return true;
                 } else if (args.length == 4 && args[1].equalsIgnoreCase("delete")) {
                     String elevatorName = args[2].toLowerCase();

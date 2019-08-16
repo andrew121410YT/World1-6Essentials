@@ -23,6 +23,13 @@ public class FloorObject implements ConfigurationSerializable {
         this.signObject = null;
     }
 
+    public FloorObject(int floor, Location atDoor) {
+        this.floor = floor;
+        this.atDoor = atDoor;
+        this.boundingBox = null;
+        this.signObject = null;
+    }
+
     public FloorObject(int floor, Location atDoor, BoundingBox boundingBox, SignObject signObject) {
         this.floor = floor;
         this.atDoor = atDoor;

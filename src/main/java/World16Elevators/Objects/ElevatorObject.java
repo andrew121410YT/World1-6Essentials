@@ -129,11 +129,11 @@ public class ElevatorObject implements ConfigurationSerializable {
         isGoing = true;
         floorBuffer.clear(); //Clears the floorBuffer
 
-        //Checks if the elevator should go up or down.
-        goUp = !(getFloor(floorNum).getBoundingBox().getVectorDOWN().getY() < locationDOWN.getY());
-
         //Gets the floor before the elevator starts ticking.
         FloorObject floorObject = getFloor(floorNum);
+
+        //Checks if the elevator should go up or down.
+        goUp = floorObject.getAtDoor().getY() > this.atDoor.getY();
 
         //This caculates what floors it's going to pass going up or down this has to be run before it sets this.elevatorFloor to not a floor.
         calculateFloorBuffer(floorNum, goUp);
@@ -146,7 +146,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                 @Override
                 public void run() {
                     //Check's if at floor if so then stop the elvator.
-                    if (floorObject.getBoundingBox().getMidPointOnFloor().getY() == locationDOWN.getY()) {
+                    if (atDoor.getY() == floorObject.getAtDoor().getY()) {
                         this.cancel();
                         elevatorFloor = floorNum;
                         floorDone(floorNum, elevatorStatus);
@@ -164,7 +164,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                         return;
                     }
 
-                    worldEditMoveDOWN(floorNum, false);
+                    worldEditMoveDOWN(floorNum);
 
                     //TP THEM DOWN 1
                     for (Player player : getPlayers()) {
@@ -181,7 +181,7 @@ public class ElevatorObject implements ConfigurationSerializable {
             @Override
             public void run() {
 //                Check's if at floor if so then stop the elvator.
-                if (floorObject.getBoundingBox().isInAABB(locationDOWN.toVector())) {
+                if (atDoor.getY() == floorObject.getAtDoor().getY()) {
                     this.cancel();
                     elevatorFloor = floorNum;
                     floorDone(floorNum, elevatorStatus);
@@ -199,7 +199,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                     return;
                 }
 
-                worldEditMoveUP(floorNum, false);
+                worldEditMoveUP(floorNum);
 
                 //TP THEM UP 1
                 for (Player player : getPlayers()) {
@@ -210,7 +210,7 @@ public class ElevatorObject implements ConfigurationSerializable {
         }.runTaskTimer(plugin, ticksPerSecond, ticksPerSecond);
     }
 
-    private void worldEditMoveUP(int floor, boolean debug) {
+    private void worldEditMoveUP(int floor) {
         WorldEditPlugin worldEditPlugin = plugin.getOtherPlugins().getWorldEditPlugin();
 
         World world = BukkitUtil.getLocalWorld(plugin.getServer().getWorld("world"));
@@ -230,15 +230,9 @@ public class ElevatorObject implements ConfigurationSerializable {
         atDoor.add(0, 1, 0);
         locationUpPLUS.add(0, 1, 0);
         locationDownPLUS.add(0, 1, 0);
-        if (debug) {
-            this.plugin.getServer().broadcastMessage("GOING UP");
-            this.plugin.getServer().broadcastMessage("L: X: " + locationDOWN.getBlockX() + " Y:" + locationDOWN.getBlockY() + " Z: " + locationDOWN.getBlockZ());
-            this.plugin.getServer().broadcastMessage("L: X: " + locationUP.getBlockX() + " Y:" + locationUP.getBlockY() + " Z: " + locationUP.getBlockZ());
-            this.plugin.getServer().broadcastMessage("Vector: X: " + vectorD.getBlockX() + " Y: " + vectorD.getBlockY() + " Z: " + vectorD.getBlockZ());
-        }
     }
 
-    private void worldEditMoveDOWN(int floor, boolean debug) {
+    private void worldEditMoveDOWN(int floor) {
         WorldEditPlugin worldEditPlugin = plugin.getOtherPlugins().getWorldEditPlugin();
 
         World world = BukkitUtil.getLocalWorld(plugin.getServer().getWorld("world"));
@@ -258,12 +252,6 @@ public class ElevatorObject implements ConfigurationSerializable {
         atDoor.subtract(0, 1, 0);
         locationUpPLUS.subtract(0, 1, 0);
         locationDownPLUS.subtract(0, 1, 0);
-        if (debug) {
-            this.plugin.getServer().broadcastMessage("GOING DOWN:");
-            this.plugin.getServer().broadcastMessage("L: X: " + locationDOWN.getBlockX() + " Y:" + locationDOWN.getBlockY() + " Z: " + locationDOWN.getBlockZ());
-            this.plugin.getServer().broadcastMessage("L: X: " + locationUP.getBlockX() + " Y:" + locationUP.getBlockY() + " Z: " + locationUP.getBlockZ());
-            this.plugin.getServer().broadcastMessage("Vector: X: " + vectorD.getBlockX() + " Y: " + vectorD.getBlockY() + " Z: " + vectorD.getBlockZ());
-        }
     }
 
     public void emergencyStop() {
@@ -369,7 +357,7 @@ public class ElevatorObject implements ConfigurationSerializable {
                 return ElevatorStatus.NOT_GOING_ANYWHERE;
             }
             ElevatorStatus elevatorStatus = ElevatorStatus.NOT_GOING_ANYWHERE;
-            return elevatorStatus.upOrDown(!(floorObject.getBoundingBox().getVectorDOWN().getY() < locationDOWN.getY()));
+            return elevatorStatus.upOrDown(floorObject.getAtDoor().getY() > this.atDoor.getY());
         } else if (this.elevatorFloor == 0) {
             return ElevatorStatus.UP;
         } else if (this.elevatorFloor == this.topFloor) {
