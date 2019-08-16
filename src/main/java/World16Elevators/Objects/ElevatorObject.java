@@ -307,11 +307,6 @@ public class ElevatorObject implements ConfigurationSerializable {
     }
 
     private void calculateFloorBuffer(int floor, boolean isUp) {
-        //Don't calculate if the floor is non existent
-        if (getFloor(floor) == null) {
-            return;
-        }
-
         if (isUp) {
             for (int num = this.elevatorFloor; num < floor; num++) {
                 if (num != this.elevatorFloor) {
