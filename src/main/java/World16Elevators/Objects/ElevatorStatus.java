@@ -4,6 +4,7 @@ public enum ElevatorStatus {
 
     UP,
     DOWN,
+    IDLE,
     NOT_GOING_ANYWHERE,
     DONT_KNOW;
 
