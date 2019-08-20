@@ -23,6 +23,7 @@ import java.util.Map;
  * @version 2
  * @since 2/4/2019
  */
+
 public class KeyManager {
 
     private Main plugin;
@@ -84,7 +85,7 @@ public class KeyManager {
     public void giveKey(Player p, int keyDataID) { //GETS THE 1 KEY FROM THE MEMORY.
         Material material = Material.TRIPWIRE_HOOK;
         int amount = 1;
-        String name = "key";
+        String name = "Key";
 
         ItemStack item = new ItemStack(material, amount);
         ItemMeta itemMeta = item.getItemMeta();
