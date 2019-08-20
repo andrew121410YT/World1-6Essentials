@@ -30,10 +30,10 @@ public class SignUtils {
         conn.sendPacket(new PacketPlayOutOpenSignEditor(pos));
     }
 
-    public static String centerText(String text, int max){
+    public static String centerText(String text, int max) {
         if (text.length() > max)
             return text.substring(0, max);
-        else{
+        else {
             int pad = max - text.length();
             StringBuilder sb = new StringBuilder(text);
             for (int i = 0; i < pad; i++)
