@@ -51,7 +51,7 @@
             <url>https://jitpack.io</url>
         </repository>
 
-        <!--        Offcial WorldWdit API-->
+        <!-- Offcial WorldWdit API-->
         <repository>
             <id>enginehub-maven</id>
             <url>http://maven.enginehub.org/repo/</url>
@@ -69,14 +69,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--        Bukkit API-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.bukkit</groupId>-->
-        <!--            <artifactId>bukkit</artifactId>-->
-        <!--            <version>1.12-R0.1-SNAPSHOT</version>-->
-        <!--            <scope>provided</scope>-->
-        <!--        </dependency>-->
-
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>craftbukkit</artifactId>
@@ -84,6 +76,7 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- WorldEdit legacy API -->
         <dependency>
             <groupId>com.sk89q.worldedit</groupId>
             <artifactId>worldedit-bukkit</artifactId>

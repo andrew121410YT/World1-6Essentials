@@ -309,7 +309,7 @@ public class elevator implements CommandExecutor {
                         p.sendMessage(Translate.chat("That elevator doesn't exist."));
                         return true;
                     }
-                    Queue<FloorQueueObject> floorQ = elevatorObjectMap.get(elevatorName).getFloorQueueObjectBuffer();
+                    Queue<FloorQueueObject> floorQ = elevatorObjectMap.get(elevatorName).getFloorQueueBuffer();
                     List<Integer> integerList = new ArrayList<>();
                     for (FloorQueueObject floorQueueObject : floorQ) {
                         integerList.add(floorQueueObject.getFloorNumber());
@@ -326,7 +326,7 @@ public class elevator implements CommandExecutor {
                         return true;
                     }
 
-                    elevatorObjectMap.get(elevatorName).getFloorQueueObjectBuffer().clear();
+                    elevatorObjectMap.get(elevatorName).getFloorQueueBuffer().clear();
                     p.sendMessage(Translate.chat("The floor queue for the elevator: " + elevatorName + " has been cleared."));
                     return true;
                 }
