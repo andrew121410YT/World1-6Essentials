@@ -134,6 +134,7 @@ public class elevator implements CommandExecutor {
             p.sendMessage(Translate.chat("/elevator create <Shows help for creation of a elevator.>"));
             p.sendMessage(Translate.chat("/elevator floor <Shows help for the floor."));
             p.sendMessage(Translate.chat("/elevator call <Shows help to call the elevator."));
+            p.sendMessage(Translate.chat("/elevator rename <ElevatorName> <TOElevatorName>"));
             return true;
         } else {
 
@@ -180,7 +181,7 @@ public class elevator implements CommandExecutor {
                     p.sendMessage(Translate.chat("/elevator floor easycreate <ElevatorName> <FloorNumber>"));
                     p.sendMessage(Translate.chat("/elevator floor delete <ElevatorName> <FloorNumber>"));
                     p.sendMessage(Translate.chat("/elevator floor sign <ElevatorName> <FloorNumber>"));
-                    p.sendMessage(Translate.chat("/elevator rename <ElevatorName> <TOElevatorName>"));
+                    return true;
                 }
                 if (args.length == 4 && args[1].equalsIgnoreCase("create")) {
                     String elevatorName = args[2].toLowerCase();
@@ -414,7 +415,7 @@ public class elevator implements CommandExecutor {
                 }
 
                 ElevatorObject elevatorObject = elevatorObjectMap.get(elevatorName);
-                elevatorObjectMap.remove(elevatorName);
+                elevatorMain.deleteElevator(elevatorName);
                 elevatorObject.setElevatorName(toElevatorName);
                 elevatorObjectMap.putIfAbsent(toElevatorName, elevatorObject);
                 p.sendMessage(Translate.chat("Old Name: " + elevatorName + " new Name: " + toElevatorName));
