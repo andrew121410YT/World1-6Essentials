@@ -60,10 +60,14 @@ public class ElevatorTab implements TabCompleter {
             return null;
         }
 
+        List<String> elevatorList = new ArrayList<>(this.elevatorObjectMap.keySet());
+
         if (args.length == 1) {
             return getContains(args[0], tabCompleteMap.get("elevator"));
+        } else if (args.length == 2 && args[0].equalsIgnoreCase("delete")) {
+            return getContains(args[1], elevatorList);
         } else if (args.length == 2 && args[0].equalsIgnoreCase("rename")) {
-            return getContains(args[1], new ArrayList<>(this.elevatorObjectMap.keySet()));
+            return getContains(args[1], elevatorList);
         }
 
         return null;

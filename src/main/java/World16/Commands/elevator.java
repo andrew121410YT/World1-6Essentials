@@ -132,6 +132,7 @@ public class elevator implements CommandExecutor {
         if (args.length == 0) {
             p.sendMessage(Translate.chat("Elevator Help"));
             p.sendMessage(Translate.chat("/elevator create <Shows help for creation of a elevator.>"));
+            p.sendMessage(Translate.chat("/elevator delete <ElevatorName>"));
             p.sendMessage(Translate.chat("/elevator floor <Shows help for the floor."));
             p.sendMessage(Translate.chat("/elevator call <Shows help to call the elevator."));
             p.sendMessage(Translate.chat("/elevator rename <ElevatorName> <TOElevatorName>"));
