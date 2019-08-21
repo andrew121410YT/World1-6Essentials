@@ -1,6 +1,7 @@
 package World16.TabComplete;
 
 import World16.Main.Main;
+import World16Elevators.Objects.ElevatorObject;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -16,6 +17,8 @@ public class ElevatorTab implements TabCompleter {
 
     //Maps
     private Map<String, List<String>> tabCompleteMap;
+
+    private Map<String, ElevatorObject> elevatorObjectMap;
     //...
 
     //Lists
@@ -35,8 +38,11 @@ public class ElevatorTab implements TabCompleter {
             tabCompleteMap.get("elevator").add("stop");
             tabCompleteMap.get("elevator").add("queue");
             tabCompleteMap.get("elevator").add("click");
+            tabCompleteMap.get("elevator").add("rename");
 //            tabCompleteMap.get("back").add("");
         }
+
+        this.elevatorObjectMap = this.plugin.getSetListMap().getElevatorObjectMap();
     }
 
     @Override
@@ -56,6 +62,8 @@ public class ElevatorTab implements TabCompleter {
 
         if (args.length == 1) {
             return getContains(args[0], tabCompleteMap.get("elevator"));
+        } else if (args.length == 2 && args[0].equalsIgnoreCase("rename")) {
+            return getContains(args[1], new ArrayList<>(this.elevatorObjectMap.keySet()));
         }
 
         return null;

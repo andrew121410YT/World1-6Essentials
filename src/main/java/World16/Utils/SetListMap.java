@@ -98,6 +98,7 @@ public class SetListMap {
         jails.clear();
         tabCompleteMap.clear();
         homesMap.clear();
+        elevatorObjectMap.clear();
     }
 
     public void clearAllLists(Player p) {
@@ -181,9 +182,5 @@ public class SetListMap {
 
     public Map<String, ElevatorObject> getElevatorObjectMap() {
         return elevatorObjectMap;
-    }
-
-    public void setElevatorObjectMap(Map<String, ElevatorObject> elevatorObjectMap) {
-        this.elevatorObjectMap = elevatorObjectMap;
     }
 }

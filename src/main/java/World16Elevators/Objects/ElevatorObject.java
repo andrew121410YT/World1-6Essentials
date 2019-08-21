@@ -56,10 +56,10 @@ public class ElevatorObject implements ConfigurationSerializable {
     private Main plugin;
     private SimpleMath simpleMath;
 
-    private Boolean isGoing;
-    private Boolean isFloorQueueGoing;
-    private Boolean isIdling;
-    private Boolean isEmergencyStop;
+    private boolean isGoing;
+    private boolean isFloorQueueGoing;
+    private boolean isIdling;
+    private boolean isEmergencyStop;
 
     private int topFloor = 0;
     private int topBottomFloor = 0;
@@ -439,33 +439,77 @@ public class ElevatorObject implements ConfigurationSerializable {
         return Bukkit.getServer().getWorld(this.world);
     }
 
-    //GETTERS
+    //GETTERS AND SETTERS
     public String getElevatorName() {
         return elevatorName;
     }
 
-    public Location getAtDoor() {
-        return atDoor;
-    }
-
-    public int getElevatorFloor() {
-        return elevatorFloor;
-    }
-
-    public Location getLocationDOWN() {
-        return locationDOWN;
-    }
-
-    public Location getLocationUP() {
-        return locationUP;
+    public void setElevatorName(String elevatorName) {
+        this.elevatorName = elevatorName;
     }
 
     public String getWorld() {
         return world;
     }
 
+    public void setWorld(String world) {
+        this.world = world;
+    }
+
+    public Location getAtDoor() {
+        return atDoor;
+    }
+
+    public void setAtDoor(Location atDoor) {
+        this.atDoor = atDoor;
+    }
+
+    public int getElevatorFloor() {
+        return elevatorFloor;
+    }
+
+    public void setElevatorFloor(int elevatorFloor) {
+        this.elevatorFloor = elevatorFloor;
+    }
+
+    public Location getLocationDOWN() {
+        return locationDOWN;
+    }
+
+    public void setLocationDOWN(Location locationDOWN) {
+        this.locationDOWN = locationDOWN;
+    }
+
+    public Location getLocationUP() {
+        return locationUP;
+    }
+
+    public void setLocationUP(Location locationUP) {
+        this.locationUP = locationUP;
+    }
+
+    public Location getLocationDownPLUS() {
+        return locationDownPLUS;
+    }
+
+    public void setLocationDownPLUS(Location locationDownPLUS) {
+        this.locationDownPLUS = locationDownPLUS;
+    }
+
+    public Location getLocationUpPLUS() {
+        return locationUpPLUS;
+    }
+
+    public void setLocationUpPLUS(Location locationUpPLUS) {
+        this.locationUpPLUS = locationUpPLUS;
+    }
+
     public Map<Integer, FloorObject> getFloorsMap() {
         return floorsMap;
+    }
+
+    public void setFloorsMap(Map<Integer, FloorObject> floorsMap) {
+        this.floorsMap = floorsMap;
     }
 
     public long getTicksPerSecond() {
@@ -480,36 +524,84 @@ public class ElevatorObject implements ConfigurationSerializable {
         return elevatorWaiterTicksPerSecond;
     }
 
-    public Boolean isGoing() {
-        return isGoing;
-    }
-
-    public Boolean getFloorQueueGoing() {
-        return isFloorQueueGoing;
-    }
-
-    public Boolean isWaiting() {
-        return isIdling;
-    }
-
-    public Boolean isEmergencyStop() {
-        return isEmergencyStop;
-    }
-
-    public Queue<FloorQueueObject> getFloorQueueBuffer() {
-        return floorQueueBuffer;
-    }
-
-    public Queue<Integer> getFloorBuffer() {
-        return floorBuffer;
-    }
-
     public Main getPlugin() {
         return plugin;
     }
 
     public void setPlugin(Main plugin) {
         this.plugin = plugin;
+    }
+
+    public SimpleMath getSimpleMath() {
+        return simpleMath;
+    }
+
+    public void setSimpleMath(SimpleMath simpleMath) {
+        this.simpleMath = simpleMath;
+    }
+
+    public boolean isGoing() {
+        return isGoing;
+    }
+
+    public void setGoing(boolean going) {
+        isGoing = going;
+    }
+
+    public boolean isFloorQueueGoing() {
+        return isFloorQueueGoing;
+    }
+
+    public void setFloorQueueGoing(boolean floorQueueGoing) {
+        isFloorQueueGoing = floorQueueGoing;
+    }
+
+    public boolean isIdling() {
+        return isIdling;
+    }
+
+    public void setIdling(boolean idling) {
+        isIdling = idling;
+    }
+
+    public boolean isEmergencyStop() {
+        return isEmergencyStop;
+    }
+
+    public void setEmergencyStop(boolean emergencyStop) {
+        isEmergencyStop = emergencyStop;
+    }
+
+    public int getTopFloor() {
+        return topFloor;
+    }
+
+    public void setTopFloor(int topFloor) {
+        this.topFloor = topFloor;
+    }
+
+    public int getTopBottomFloor() {
+        return topBottomFloor;
+    }
+
+    public void setTopBottomFloor(int topBottomFloor) {
+        this.topBottomFloor = topBottomFloor;
+    }
+
+    public Queue<FloorQueueObject> getFloorQueueBuffer() {
+        return floorQueueBuffer;
+    }
+
+    public void setFloorQueueBuffer(Queue<FloorQueueObject> floorQueueBuffer) {
+        this.floorQueueBuffer = floorQueueBuffer;
+    }
+
+    public Queue<Integer> getFloorBuffer() {
+        return floorBuffer;
+    }
+
+    public void setFloorBuffer(Queue<Integer> floorBuffer) {
+        this.floorBuffer = floorBuffer;
     }
 
     @Override

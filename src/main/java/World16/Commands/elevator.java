@@ -180,6 +180,7 @@ public class elevator implements CommandExecutor {
                     p.sendMessage(Translate.chat("/elevator floor easycreate <ElevatorName> <FloorNumber>"));
                     p.sendMessage(Translate.chat("/elevator floor delete <ElevatorName> <FloorNumber>"));
                     p.sendMessage(Translate.chat("/elevator floor sign <ElevatorName> <FloorNumber>"));
+                    p.sendMessage(Translate.chat("/elevator rename <ElevatorName> <TOElevatorName>"));
                 }
                 if (args.length == 4 && args[1].equalsIgnoreCase("create")) {
                     String elevatorName = args[2].toLowerCase();
@@ -402,6 +403,21 @@ public class elevator implements CommandExecutor {
                     p.sendMessage(Translate.chat("The elevator: " + elevatorName + " has been called to " + floorNum + " to go to " + toFloorNum));
                     return true;
                 }
+                return true;
+            } else if (args.length == 3 && args[0].equalsIgnoreCase("rename")) {
+                String elevatorName = args[1].toLowerCase();
+                String toElevatorName = args[2].toLowerCase();
+
+                if (elevatorObjectMap.get(elevatorName) == null) {
+                    p.sendMessage(Translate.chat("That elevator doesn't exist."));
+                    return true;
+                }
+
+                ElevatorObject elevatorObject = elevatorObjectMap.get(elevatorName);
+                elevatorObjectMap.remove(elevatorName);
+                elevatorObject.setElevatorName(toElevatorName);
+                elevatorObjectMap.putIfAbsent(toElevatorName, elevatorObject);
+                p.sendMessage(Translate.chat("Old Name: " + elevatorName + " new Name: " + toElevatorName));
                 return true;
             }
             return true;
