@@ -29,6 +29,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin {
 
     static {
+        //Elevators
         ConfigurationSerialization.registerClass(BoundingBox.class, "BoundingBox");
         ConfigurationSerialization.registerClass(SignObject.class, "SignObject");
         ConfigurationSerialization.registerClass(FloorObject.class, "FloorObject");
@@ -59,7 +60,7 @@ public class Main extends JavaPlugin {
         regFileConfigGEN();
         regEvents();
         regCommands();
-        regbstats();
+        regBStats();
 
         getLogger().info("[World1-6Essentials] is now loaded!");
     }
@@ -155,8 +156,8 @@ public class Main extends JavaPlugin {
         this.elevatorMain.loadAllElevators();
     }
 
-    private void regbstats() {
-        Metrics metrics = new Metrics(this);
+    private void regBStats() {
+        new Metrics(this);
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

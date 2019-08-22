@@ -26,9 +26,6 @@ public class debug implements CommandExecutor {
     private Map<String, UUID> uuidCache;
     //...
 
-    //Lists
-    //...
-
     private API api;
     private SetListMap setListMap;
 

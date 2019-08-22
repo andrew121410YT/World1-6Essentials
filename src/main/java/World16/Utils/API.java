@@ -27,6 +27,7 @@ import java.util.UUID;
  *
  * @author Andrew121410
  */
+
 public class API {
 
     // Maps
@@ -40,12 +41,11 @@ public class API {
     //...
 
     private Main plugin;
-    private CustomYmlManager configinstance = null;
 
     //Finals
     public static final String CUSTOM_COMMAND_FORMAT = "`";
-    public static final Integer VERSION = 314;
-    public static final String DATE_OF_VERSION = "8/20/2019";
+    public static final Integer VERSION = 412;
+    public static final String DATE_OF_VERSION = "8/21/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = PREFIX + "->[&bUSELESS&r]";
     public static final String DEBUG_TAG = PREFIX + "->[&eDEBUG&r]";
@@ -72,7 +72,6 @@ public class API {
     @Deprecated
     public API(Main plugin, CustomYmlManager configInstance) {
         this.plugin = plugin;
-        this.configinstance = configInstance;
         doSetListMap();
         setMySQL();
     }
@@ -94,7 +93,7 @@ public class API {
 
     // START OF MYSQL
 
-    public void setMySQL() {
+    private void setMySQL() {
         mysql_HOST = plugin.getConfig().getString("MysqlHOST");
         mysql_DATABASE = plugin.getConfig().getString("MysqlDATABASE");
         mysql_USER = plugin.getConfig().getString("MysqlUSER");
