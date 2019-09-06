@@ -106,14 +106,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Discord JDA-->
-        <dependency>
-            <groupId>net.dv8tion</groupId>
-            <artifactId>JDA</artifactId>
-            <version>4.0.0_46</version>
-            <scope>compile</scope>
-        </dependency>
-
     </dependencies>
 
 </project>
