@@ -34,5 +34,7 @@ public class OnPlayerQuitEvent implements Listener {
 
         event.setQuitMessage("");
         Bukkit.broadcastMessage(Translate.chat(API.PREFIX + " &5Bye Bye, " + p.getDisplayName()));
+
+        this.plugin.getDiscordBot().sendLeaveMessage(p);
     }
 }

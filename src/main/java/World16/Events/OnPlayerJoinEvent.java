@@ -104,6 +104,8 @@ public class OnPlayerJoinEvent implements Listener {
             p.hidePlayer(k);
             k.sendMessage(Translate.chat("[&9World1-6&r] &9Player: " + p.getDisplayName() + " &cnow cannot see you,"));
         });
+
+        this.plugin.getDiscordBot().sendJoinMessage(p);
     }
 
     public void version(Player p) {

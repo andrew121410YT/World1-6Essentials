@@ -51,6 +51,13 @@
             <url>https://jitpack.io</url>
         </repository>
 
+        <!-- Discord JDA -->
+        <repository>
+            <id>jcenter</id>
+            <name>jcenter-bintray</name>
+            <url>http://jcenter.bintray.com</url>
+        </repository>
+
         <!-- Offcial WorldWdit API-->
         <repository>
             <id>enginehub-maven</id>
@@ -96,6 +103,14 @@
             <groupId>com.github.andrew121410</groupId>
             <artifactId>CCUtilsJava</artifactId>
             <version>f7a018ede3</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Discord JDA-->
+        <dependency>
+            <groupId>net.dv8tion</groupId>
+            <artifactId>JDA</artifactId>
+            <version>4.0.0_46</version>
             <scope>compile</scope>
         </dependency>
 

@@ -13,6 +13,7 @@ import World16.Managers.CustomConfigManager;
 import World16.Managers.JailManager;
 import World16.Utils.*;
 import World16.test.test1;
+import World16DiscordBot.DiscordBot;
 import World16Elevators.ElevatorMain;
 import World16Elevators.Objects.BoundingBox;
 import World16Elevators.Objects.ElevatorObject;
@@ -40,6 +41,8 @@ public class Main extends JavaPlugin {
 
     private SetListMap setListMap;
 
+    private DiscordBot discordBot;
+
     //Managers
     private CustomConfigManager customConfigManager;
     private JailManager jailManager;
@@ -58,6 +61,7 @@ public class Main extends JavaPlugin {
 
         regCustomManagers();
         regFileConfigGEN();
+        discordBot = new DiscordBot(this, customConfigManager);
         regEvents();
         regCommands();
         regBStats();
@@ -200,5 +204,9 @@ public class Main extends JavaPlugin {
 
     public ElevatorMain getElevatorMain() {
         return elevatorMain;
+    }
+
+    public DiscordBot getDiscordBot() {
+        return discordBot;
     }
 }
