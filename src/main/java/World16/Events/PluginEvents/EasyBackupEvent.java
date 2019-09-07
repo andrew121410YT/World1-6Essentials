@@ -17,8 +17,6 @@ public class EasyBackupEvent implements Listener {
 
     @EventHandler
     public void onEasyBackup(me.forseth11.easybackup.api.EasyBackupEvent event) {
-        me.forseth11.easybackup.api.Event.Type type = event.getEvent().getType();
-
         this.plugin.getDiscordBot().sendEasyBackupEvent(event.getEvent());
     }
 }

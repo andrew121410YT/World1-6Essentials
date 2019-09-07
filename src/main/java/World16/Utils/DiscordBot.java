@@ -1,4 +1,4 @@
-package World16DiscordBot;
+package World16.Utils;
 
 import World16.Main.Main;
 import World16.Managers.CustomConfigManager;
