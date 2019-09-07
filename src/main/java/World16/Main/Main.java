@@ -9,6 +9,7 @@ import World16.Commands.tp.tpa;
 import World16.Commands.tp.tpaccept;
 import World16.Commands.tp.tpdeny;
 import World16.Events.*;
+import World16.Events.PluginEvents.EasyBackupEvent;
 import World16.Managers.CustomConfigManager;
 import World16.Managers.JailManager;
 import World16.Utils.*;
@@ -141,6 +142,9 @@ public class Main extends JavaPlugin {
         new OnAsyncPlayerChatEvent(this);
         new OnPlayerInteractEvent(this);
         new OnPlayerMoveEvent(this);
+
+        //PluginEvents
+        new EasyBackupEvent(this);
     }
 
     private void regFileConfigGEN() {

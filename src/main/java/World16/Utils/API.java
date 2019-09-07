@@ -45,7 +45,7 @@ public class API {
     //Finals
     public static final String CUSTOM_COMMAND_FORMAT = "`";
     public static final Integer VERSION = 412;
-    public static final String DATE_OF_VERSION = "9/5/2019";
+    public static final String DATE_OF_VERSION = "9/7/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
     public static final String USELESS_TAG = PREFIX + "->[&bUSELESS&r]";
     public static final String DEBUG_TAG = PREFIX + "->[&eDEBUG&r]";

@@ -106,6 +106,13 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>me.forseth11.easybackup</groupId>
+            <artifactId>me.forseth11.easybackup</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
 </project>
