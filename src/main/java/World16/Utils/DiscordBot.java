@@ -37,6 +37,8 @@ public class DiscordBot implements Runnable {
             inSc = new Scanner(socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            this.sendServerStartMessage();
         }
     }
 
@@ -71,6 +73,18 @@ public class DiscordBot implements Runnable {
         jsonObject.put("EasyBackupTYPE", event.getType().name());
         jsonObject.put("Message", event.getMessage());
         jsonObject.put("Time", event.getTime());
+        jsonPrintOut(jsonObject);
+    }
+
+    public void sendServerStartMessage() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("TYPE", "ServerStart");
+        jsonPrintOut(jsonObject);
+    }
+
+    public void sendServerQuitMessage() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("TYPE", "ServerQuit");
         jsonPrintOut(jsonObject);
     }
 

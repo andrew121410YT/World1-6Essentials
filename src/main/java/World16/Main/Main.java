@@ -71,6 +71,7 @@ public class Main extends JavaPlugin {
     }
 
     public void onDisable() {
+        this.discordBot.sendServerQuitMessage();
         this.getElevatorMain().saveAllElevators();
         this.setListMap.clearSetListMap();
         getLogger().info("[World1-6Essentials] is now disabled.");
