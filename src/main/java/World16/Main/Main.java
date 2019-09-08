@@ -62,6 +62,7 @@ public class Main extends JavaPlugin {
         regCustomManagers();
         regFileConfigGEN();
         discordBot = new DiscordBot(this, customConfigManager);
+        this.plugin.getServer().getScheduler().runTaskAsynchronously(this, this.discordBot);
         regEvents();
         regCommands();
         regBStats();

@@ -10,14 +10,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
-public class DiscordBot {
+public class DiscordBot implements Runnable {
 
     private Main plugin;
     private CustomConfigManager customConfigManager;
 
     private PrintWriter out;
     private BufferedReader in;
+    private Scanner inSc;
+
     private Socket socket;
 
     public DiscordBot(Main plugin, CustomConfigManager customConfigManager) {
@@ -31,8 +34,20 @@ public class DiscordBot {
             socket = new Socket("192.168.1.26", 2020);
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            inSc = new Scanner(socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void run() {
+        while (inSc.hasNextLine()) {
+            String line = inSc.nextLine();
+            switch (line) {
+                case "0":
+                    out.println("1");
+                    break;
+            }
         }
     }
 
@@ -40,14 +55,14 @@ public class DiscordBot {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("TYPE", "PlayerJoin");
         jsonObject.put("Player", player.getDisplayName());
-        out.println(jsonObject.toJSONString());
+        jsonPrintOut(jsonObject);
     }
 
     public void sendLeaveMessage(Player player) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("TYPE", "PlayerQuit");
         jsonObject.put("Player", player.getDisplayName());
-        out.println(jsonObject.toJSONString());
+        jsonPrintOut(jsonObject);
     }
 
     public void sendEasyBackupEvent(me.forseth11.easybackup.api.Event event) {
@@ -56,6 +71,11 @@ public class DiscordBot {
         jsonObject.put("EasyBackupTYPE", event.getType().name());
         jsonObject.put("Message", event.getMessage());
         jsonObject.put("Time", event.getTime());
+        jsonPrintOut(jsonObject);
+    }
+
+    private void jsonPrintOut(JSONObject jsonObject) {
+        jsonObject.put("WHO", "World1-6");
         out.println(jsonObject.toJSONString());
     }
 }
