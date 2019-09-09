@@ -170,7 +170,7 @@ public class Main extends JavaPlugin {
         if (discordbot) {
             this.plugin.getServer().getScheduler().runTaskAsynchronously(this, this.discordBot);
         } else {
-            this.plugin.getServer().broadcastMessage(API.EMERGENCY_TAG + " Discord Bot has not been enabled because of exception");
+            this.plugin.getServer().getConsoleSender().sendMessage(API.EMERGENCY_TAG + " Discord Bot has not been enabled because of exception");
         }
     }
 
