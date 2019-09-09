@@ -23,23 +23,26 @@ public class DiscordBot implements Runnable {
 
     private Socket socket;
 
+    private boolean notOn;
+
     public DiscordBot(Main plugin, CustomConfigManager customConfigManager) {
         this.plugin = plugin;
         this.customConfigManager = customConfigManager;
-        setup();
     }
 
-    public void setup() {
+    public boolean setup() {
         try {
             socket = new Socket("192.168.1.26", 2020);
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             inSc = new Scanner(socket.getInputStream());
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            this.sendServerStartMessage();
+            this.notOn = true;
+            return false;
         }
+        this.notOn = false;
+        this.sendServerStartMessage();
+        return true;
     }
 
     public void run() {
@@ -89,6 +92,7 @@ public class DiscordBot implements Runnable {
     }
 
     private void jsonPrintOut(JSONObject jsonObject) {
+        if (notOn) return;
         jsonObject.put("WHO", "World1-6");
         out.println(jsonObject.toJSONString());
     }

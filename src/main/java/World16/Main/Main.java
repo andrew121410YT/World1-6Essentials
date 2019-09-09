@@ -19,12 +19,10 @@ import World16Elevators.Objects.BoundingBox;
 import World16Elevators.Objects.ElevatorObject;
 import World16Elevators.Objects.FloorObject;
 import World16Elevators.Objects.SignObject;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -51,8 +49,6 @@ public class Main extends JavaPlugin {
     private API api;
     private OtherPlugins otherPlugins;
 
-    private PluginManager pm = Bukkit.getPluginManager();
-
     public void onEnable() {
         this.plugin = this;
         this.otherPlugins = new OtherPlugins(this);
@@ -61,8 +57,7 @@ public class Main extends JavaPlugin {
 
         regCustomManagers();
         regFileConfigGEN();
-        discordBot = new DiscordBot(this, customConfigManager);
-        this.plugin.getServer().getScheduler().runTaskAsynchronously(this, this.discordBot);
+        regDiscordBot();
         regEvents();
         regCommands();
         regBStats();
@@ -167,6 +162,16 @@ public class Main extends JavaPlugin {
 
     private void regBStats() {
         new Metrics(this);
+    }
+
+    private void regDiscordBot() {
+        this.discordBot = new DiscordBot(this, this.customConfigManager);
+        boolean discordbot = this.discordBot.setup();
+        if (discordbot) {
+            this.plugin.getServer().getScheduler().runTaskAsynchronously(this, this.discordBot);
+        } else {
+            this.plugin.getServer().broadcastMessage(API.EMERGENCY_TAG + " Discord Bot has not been enabled because of exception");
+        }
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
