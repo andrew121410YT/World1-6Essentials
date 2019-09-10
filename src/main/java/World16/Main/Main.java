@@ -58,6 +58,7 @@ public class Main extends JavaPlugin {
         regCustomManagers();
         regFileConfigGEN();
         regDiscordBot();
+        regElevators();
         regEvents();
         regCommands();
         regBStats();
@@ -155,9 +156,6 @@ public class Main extends JavaPlugin {
 
         this.jailManager = new JailManager(this.customConfigManager, this);
         this.jailManager.getAllJailsFromConfig();
-
-        this.elevatorMain = new ElevatorMain(this, this.customConfigManager);
-        this.elevatorMain.loadAllElevators();
     }
 
     private void regBStats() {
@@ -171,6 +169,15 @@ public class Main extends JavaPlugin {
             this.plugin.getServer().getScheduler().runTaskAsynchronously(this, this.discordBot);
         } else {
             this.plugin.getServer().getConsoleSender().sendMessage(API.EMERGENCY_TAG + " Discord Bot has not been enabled because of exception");
+        }
+    }
+
+    private void regElevators() {
+        this.elevatorMain = new ElevatorMain(this, this.customConfigManager);
+        if (this.otherPlugins.hasWorldEdit()) {
+            this.elevatorMain.loadAllElevators();
+        } else {
+            this.plugin.getServer().getConsoleSender().sendMessage(API.EMERGENCY_TAG + " Elevator's won't be working since there's no WorldEdit.");
         }
     }
 

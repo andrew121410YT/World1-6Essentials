@@ -26,6 +26,11 @@ public class ElevatorMain {
     }
 
     public void loadAllElevators() {
+        //Don't run if there's no WorldEdit.
+        if (!this.plugin.getOtherPlugins().hasWorldEdit()) {
+            return;
+        }
+
         ConfigurationSection cs = this.eleYml.getConfig().getConfigurationSection("Elevators");
         if (cs == null) {
             this.eleYml.getConfig().createSection("Elevators");
@@ -53,6 +58,11 @@ public class ElevatorMain {
     }
 
     public void saveAllElevators() {
+        //Don't run if there's no WorldEdit.
+        if (!this.plugin.getOtherPlugins().hasWorldEdit()) {
+            return;
+        }
+
         for (Map.Entry<String, ElevatorObject> entry : elevatorObjectMap.entrySet()) {
             String k = entry.getKey();
             ElevatorObject v = entry.getValue();
@@ -84,6 +94,11 @@ public class ElevatorMain {
     }
 
     public void deleteElevator(String name) {
+        //Don't run if there's no WorldEdit.
+        if (!this.plugin.getOtherPlugins().hasWorldEdit()) {
+            return;
+        }
+
         if (elevatorObjectMap.get(name.toLowerCase()) != null) {
             elevatorObjectMap.remove(name.toLowerCase());
             ConfigurationSection elevator = this.eleYml.getConfig().getConfigurationSection("Elevators");
@@ -93,6 +108,11 @@ public class ElevatorMain {
     }
 
     public void deleteFloorOfElevator(String elevatorName, int floorNum) {
+        //Don't run if there's no WorldEdit.
+        if (!this.plugin.getOtherPlugins().hasWorldEdit()) {
+            return;
+        }
+
         if (elevatorObjectMap.get(elevatorName.toLowerCase()) != null) {
             elevatorObjectMap.get(elevatorName.toLowerCase()).getFloorsMap().remove(floorNum);
             ConfigurationSection elevatorFloors = this.eleYml.getConfig().getConfigurationSection("Elevators." + elevatorName.toLowerCase() + ".Floors");

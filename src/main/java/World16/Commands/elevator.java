@@ -47,6 +47,10 @@ public class elevator implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (!this.plugin.getOtherPlugins().hasWorldEdit()) {
+            return true;
+        }
+
         if (!(sender instanceof Player)) {
 
             if (!(sender instanceof BlockCommandSender)) {

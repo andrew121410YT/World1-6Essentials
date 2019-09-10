@@ -8,6 +8,8 @@ public class OtherPlugins {
 
     private Main plugin;
 
+    private boolean hasWorldEdit;
+
     //Plugins
     private WorldEditPlugin worldEditPlugin;
 
@@ -19,15 +21,24 @@ public class OtherPlugins {
 
     private void setUpWorldEditPlugin() {
         Plugin plugin = this.plugin.getServer().getPluginManager().getPlugin("WorldEdit");
+
+        if (plugin == null) {
+            hasWorldEdit = false;
+            return;
+        }
         if (plugin instanceof WorldEditPlugin) {
             this.worldEditPlugin = (WorldEditPlugin) plugin;
-        } else {
-            this.plugin.getServer().broadcastMessage(Translate.chat(API.EMERGENCY_TAG + " No WorldEdit = no work :sad"));
-            this.plugin.getServer().shutdown();
-        }
+        } else hasWorldEdit = false;
     }
 
+    //Getters
     public WorldEditPlugin getWorldEditPlugin() {
         return worldEditPlugin;
+    }
+
+    //Bool Getter
+
+    public boolean hasWorldEdit() {
+        return hasWorldEdit;
     }
 }
