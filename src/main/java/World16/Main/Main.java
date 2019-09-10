@@ -168,7 +168,7 @@ public class Main extends JavaPlugin {
         if (discordbot) {
             this.plugin.getServer().getScheduler().runTaskAsynchronously(this, this.discordBot);
         } else {
-            this.plugin.getServer().getConsoleSender().sendMessage(API.EMERGENCY_TAG + " Discord Bot has not been enabled because of exception");
+            this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(API.EMERGENCY_TAG + " &cDiscord Bot has not been enabled because of exception"));
         }
     }
 
@@ -177,7 +177,7 @@ public class Main extends JavaPlugin {
         if (this.otherPlugins.hasWorldEdit()) {
             this.elevatorMain.loadAllElevators();
         } else {
-            this.plugin.getServer().getConsoleSender().sendMessage(API.EMERGENCY_TAG + " Elevator's won't be working since there's no WorldEdit.");
+            this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(API.EMERGENCY_TAG + " &cElevator's won't be working since there's no WorldEdit."));
         }
     }
 

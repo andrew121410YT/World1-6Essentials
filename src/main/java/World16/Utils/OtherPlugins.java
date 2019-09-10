@@ -26,8 +26,10 @@ public class OtherPlugins {
             hasWorldEdit = false;
             return;
         }
+
         if (plugin instanceof WorldEditPlugin) {
             this.worldEditPlugin = (WorldEditPlugin) plugin;
+            hasWorldEdit = true;
         } else hasWorldEdit = false;
     }
 
