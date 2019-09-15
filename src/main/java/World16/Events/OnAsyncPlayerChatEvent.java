@@ -2,7 +2,6 @@ package World16.Events;
 
 import World16.Main.Main;
 import World16.Utils.API;
-import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -20,12 +19,15 @@ public class OnAsyncPlayerChatEvent implements Listener {
     private API api;
 
     //Lists
-    List<String> adminList = SetListMap.adminList;
-    List<Player> adminListPlayer = SetListMap.adminListPlayer;
+    private List<String> adminList;
+    private List<Player> adminListPlayer;
     //...
 
     public OnAsyncPlayerChatEvent(Main getPlugin) {
         this.plugin = getPlugin;
+
+        this.adminList = this.plugin.getSetListMap().getAdminList();
+        this.adminListPlayer = this.plugin.getSetListMap().getAdminListPlayer();
 
         this.api = new API(this.plugin);
 
@@ -35,6 +37,7 @@ public class OnAsyncPlayerChatEvent implements Listener {
         adminList.add("andrew121410");
         adminList.add("Robobros3");
         adminList.add("RoboBros1");
+        adminList.add("Andrzej_Przybyla");
     }
 
     @EventHandler
@@ -66,9 +69,6 @@ public class OnAsyncPlayerChatEvent implements Listener {
         }
 
         String[] args = cmd.split(" ");
-        if (args == null) {
-            return;
-        }
 
         if (!adminList.contains(p.getDisplayName())) {
             return;

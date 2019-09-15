@@ -2,11 +2,10 @@ package World16.Commands;
 
 import CCUtils.Storage.SQLite;
 import World16.Main.Main;
+import World16.Managers.KeyManager;
 import World16.Objects.KeyObject;
 import World16.TabComplete.KeyTab;
 import World16.Utils.API;
-import World16.Utils.KeyAPI;
-import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,45 +17,44 @@ import java.util.Map;
 public class key implements CommandExecutor {
 
     //Maps
-    Map<String, KeyObject> keyDataM = SetListMap.keyDataM;
-    //...
-
-    //Lists
+    private Map<String, KeyObject> keyDataM;
     //...
 
     private Main plugin;
 
     private API api;
-    private KeyAPI keyapi;
+    private KeyManager keyapi;
     private SQLite isql;
 
     public key(Main getPlugin) {
         this.plugin = getPlugin;
 
-        this.api = new API(this.plugin);
-        this.isql = new SQLite(this.plugin.getDataFolder(), "keys");
+        this.keyDataM = this.plugin.getSetListMap().getKeyDataM();
 
-        this.keyapi = new KeyAPI(this.plugin, this.isql);
+        this.api = new API(this.plugin);
+
+        this.isql = new SQLite(this.plugin.getDataFolder(), "keys");
+        this.keyapi = new KeyManager(this.plugin, this.isql);
 
         this.plugin.getCommand("key").setExecutor(this);
         this.plugin.getCommand("key").setTabCompleter(new KeyTab(this.plugin));
     }
 
-    @SuppressWarnings("unused")
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        // IF THE PLAYER IS THE CONSOLE OR COMMAND BLOCk
         if (!(sender instanceof Player)) {
             sender.sendMessage("Only Players Can Use This Command.");
             return true;
         }
+
         Player p = (Player) sender;
-        // 1
+
+        if (!p.hasPermission("world16.key")) { // Permission
+            api.PermissionErrorMessage(p);
+            return true;
+        }
+
         if (args.length == 0) {
-            if (!p.hasPermission("world16.key")) { // Permission
-                api.PermissionErrorMessage(p);
-                return true;
-            }
             p.sendMessage(Translate.chat("---------------"));
             p.sendMessage(Translate.chat("&bAll of key commands."));
             p.sendMessage(Translate.chat("&6/key list < Show's all of your keys."));
@@ -65,10 +63,9 @@ public class key implements CommandExecutor {
             p.sendMessage(Translate.chat("&6/key reset < Resets/Clears all data from DATABASE."));
             p.sendMessage(Translate.chat("---------------"));
             return true;
-        } else if (args.length >= 1) {
-
+        } else {
             //SET
-            if (args.length >= 1 && args[0].equalsIgnoreCase("set")) {
+            if (args[0].equalsIgnoreCase("set")) {
                 if (!p.hasPermission("world16.key.set")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
@@ -92,34 +89,32 @@ public class key implements CommandExecutor {
                         keyapi.SetKeyAndDeleteOldKey(isql, keyID, p, setDataDone); //<-- MySql
                         p.sendMessage(Translate.chat("&6Your key has been set and stored in the isql database."));
                         return true;
-                    } else {
-                        p.kickPlayer("Please rejoin the server something went wrong.");
-                        return true;
                     }
+                    return true;
                 } else {
                     p.sendMessage(Translate.chat("&cUsage: /key set <KeyID> <Lore>"));
                     return true;
                 }
 
                 //GIVE
-            } else if (args.length >= 1 && (args[0].equalsIgnoreCase("give"))) {
+            } else if (args[0].equalsIgnoreCase("give")) {
                 if (!p.hasPermission("world16.key.give")) {
                     api.PermissionErrorMessage(p);
                     return true;
                 }
                 if (args.length == 1) {
                     p.sendMessage(Translate.chat("&cUsage: /key give <KeyID>"));
-                } else if (args.length >= 2) {
-                    Integer keyID = Integer.valueOf(args[1]);
+                } else {
+                    int keyID = Integer.valueOf(args[1]);
                     if (keyID <= 5) {
-                        keyapi.giveKeyToPlayerFromRam(p, keyID);
+                        keyapi.giveKey(p, keyID);
                         return true;
                     } else {
                         p.sendMessage(Translate.chat("&cRight now keys can only go up too 5."));
                     }
                 }
                 //RESET
-            } else if (args.length >= 1 && (args[0].equalsIgnoreCase("reset"))) {
+            } else if (args[0].equalsIgnoreCase("reset")) {
                 if (!p.hasPermission("world16.key.reset")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
@@ -128,7 +123,7 @@ public class key implements CommandExecutor {
                     p.sendMessage(Translate.chat("&cUsage: /key reset <KeyID>"));
                     return true;
                 } else if (args.length == 2 && !args[1].equalsIgnoreCase("@everything")) {
-                    Integer keyID = Integer.valueOf(args[1]);
+                    int keyID = Integer.valueOf(args[1]);
                     keyapi.ReplaceKey(isql, keyID, p, "null");
                     keyDataM.remove(p.getDisplayName());
                     p.sendMessage(Translate.chat("&4The lore has been reseted."));
@@ -141,7 +136,7 @@ public class key implements CommandExecutor {
                 } else {
                     p.sendMessage(Translate.chat("&4Something went wrong."));
                 }
-            } else if (args.length >= 1 && args[0].equalsIgnoreCase("list")) {
+            } else if (args[0].equalsIgnoreCase("list")) {
                 if (args.length == 1) {
                     if (keyDataM.get(p.getDisplayName()) != null) {
                         KeyObject keyObject = keyDataM.get(p.getDisplayName());

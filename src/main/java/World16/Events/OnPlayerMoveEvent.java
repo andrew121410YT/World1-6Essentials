@@ -2,7 +2,6 @@ package World16.Events;
 
 import World16.Main.Main;
 import World16.Utils.API;
-import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -17,7 +16,7 @@ import java.util.UUID;
 public class OnPlayerMoveEvent implements Listener {
 
     //Lists
-    Map<UUID, Location> afkMap = SetListMap.afkMap;
+    private Map<UUID, Location> afkMap;
     //...
 
     private Main plugin;
@@ -26,6 +25,8 @@ public class OnPlayerMoveEvent implements Listener {
     public OnPlayerMoveEvent(Main plugin) {
         this.plugin = plugin;
         this.api = new API(this.plugin);
+
+        this.afkMap = this.plugin.getSetListMap().getAfkMap();
 
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
 

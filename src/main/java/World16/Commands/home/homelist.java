@@ -23,7 +23,7 @@ public class homelist implements CommandExecutor {
         this.api = new API(this.plugin);
 
         isql = new SQLite(this.plugin.getDataFolder(), "Homes");
-        homeManager = new HomeManager(isql);
+        homeManager = new HomeManager(this.plugin, isql);
         plugin.getCommand("homelist").setExecutor(this);
     }
 

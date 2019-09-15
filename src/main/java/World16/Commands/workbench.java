@@ -15,9 +15,9 @@ public class workbench implements CommandExecutor {
 
     private CustomConfigManager customConfigManager;
 
-    public workbench(CustomConfigManager getCustomYml, Main getPlugin) {
-        this.plugin = getPlugin;
-        this.customConfigManager = getCustomYml;
+    public workbench(Main plugin, CustomConfigManager customConfigManager) {
+        this.plugin = plugin;
+        this.customConfigManager = customConfigManager;
         this.api = new API(this.plugin);
 
         this.plugin.getCommand("workbench").setExecutor(this);

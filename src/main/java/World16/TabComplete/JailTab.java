@@ -1,7 +1,6 @@
 package World16.TabComplete;
 
 import World16.Main.Main;
-import World16.Utils.SetListMap;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -16,7 +15,7 @@ public class JailTab implements TabCompleter {
     private Main plugin;
 
     //Maps
-    Map<String, List<String>> tabCompleteMap = SetListMap.tabCompleteMap;
+    private Map<String, List<String>> tabCompleteMap;
     //...
 
     //Lists
@@ -24,6 +23,7 @@ public class JailTab implements TabCompleter {
 
     public JailTab(Main plugin) {
         this.plugin = plugin;
+        this.tabCompleteMap = this.plugin.getSetListMap().getTabCompleteMap();
 
         tabCompleteMap.computeIfAbsent("jail", k -> new ArrayList<>());
 
@@ -40,22 +40,32 @@ public class JailTab implements TabCompleter {
         if (!(sender instanceof Player)) {
             return null;
         }
-        Player player = (Player) sender;
+        Player p = (Player) sender;
 
-        if (cmd.getName().equalsIgnoreCase("jail")) {
-            List<String> list = getContains(args[0], tabCompleteMap.get("jail"));
-            return list;
+        if (!cmd.getName().equalsIgnoreCase("jail")) {
+            return null;
         }
+
+        if (!p.hasPermission("world16.jail")) {
+            return null;
+        }
+
+        if (args.length == 1) {
+            return getContains(args[0], tabCompleteMap.get("jail"));
+        }
+
         return null;
     }
 
-    private List<String> getContains(String args, List<String> a) {
+    private List<String> getContains(String args, List<String> oldArrayList) {
         List<String> list = new ArrayList<>();
-        for (String mat : a) {
+
+        for (String mat : oldArrayList) {
             if (mat.contains(args.toLowerCase())) {
                 list.add(mat);
             }
         }
+
         return list;
     }
 }

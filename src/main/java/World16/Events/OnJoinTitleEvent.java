@@ -1,8 +1,8 @@
 package World16.Events;
 
 import World16.Main.Main;
+import World16.Managers.TitleManager;
 import World16.Utils.Translate;
-import World16.titleapi.TitleAPI;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,9 +23,9 @@ public class OnJoinTitleEvent implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
-        TitleAPI.sendTitle(e.getPlayer(), 10, 5 * 20, 10, Translate.chat(file.getString("TittleTOP")),
+        TitleManager.sendTitle(e.getPlayer(), 10, 5 * 20, 10, Translate.chat(file.getString("TittleTOP")),
                 Translate.chat(file.getString("TittleBOTTOM")));
-        TitleAPI.sendTabTitle(e.getPlayer(), Translate.chat(file.getString("TablistTOP")),
+        TitleManager.sendTabTitle(e.getPlayer(), Translate.chat(file.getString("TablistTOP")),
                 Translate.chat(file.getString("TablistBOTTOM")));
     }
 }

@@ -15,25 +15,28 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 public class debug implements CommandExecutor {
 
     //Maps
-    Map<String, UUID> uuidCache = SetListMap.uuidCache;
-    //...
-
-    //Lists
+    private Map<String, UUID> uuidCache;
     //...
 
     private API api;
+    private SetListMap setListMap;
 
     private Main plugin;
 
     public debug(Main getPlugin) {
         this.plugin = getPlugin;
         this.api = new API(this.plugin);
+
+        this.setListMap = this.plugin.getSetListMap();
+        this.uuidCache = this.plugin.getSetListMap().getUuidCache();
 
         this.plugin.getCommand("debug1-6").setExecutor(this);
         this.plugin.getCommand("debug1-6").setTabCompleter(new DebugTab(this.plugin));
@@ -53,18 +56,7 @@ public class debug implements CommandExecutor {
                 api.PermissionErrorMessage(p);
                 return true;
             }
-            p.sendMessage(Translate.chat("/debug1-6 op"));
-            p.sendMessage(Translate.chat("/debug1-6 defaultstuff"));
-            p.sendMessage(Translate.chat("/debug1-6 clearalllists")); //1
-            p.sendMessage(Translate.chat("/debug1-6 clearallmaps")); //2
-            p.sendMessage(Translate.chat("/debug1-6 clearalllistswithname"));
-            p.sendMessage(Translate.chat("/debug1-6 clearallmapswithname")); //2
-            p.sendMessage(Translate.chat("/debug1-6 date"));
-            p.sendMessage(Translate.chat("/debug1-6 checkuuid"));
-            p.sendMessage(Translate.chat("/debug1-6 debugmessages"));
-            p.sendMessage(Translate.chat("/debug1-6 finddefaultspawn"));
-            p.sendMessage(Translate.chat("/debug1-6 uuidcache"));
-            //p.sendMessage(World16.Translate.chat("/debug1-6 "));
+            p.sendMessage(Translate.chat("&6Please use tab complete."));
             return true;
         } else {
             //OP
@@ -74,19 +66,14 @@ public class debug implements CommandExecutor {
                     return true;
                 }
                 p.sendMessage(Translate.chat("&4Debug working oping andrew and tyler and richard"));
-                // Ops Andrew
                 ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
-                String command = "op andrew121410";
-                Bukkit.dispatchCommand(console, command);
-                String command1 = "op AlphaGibbon43";
-                Bukkit.dispatchCommand(console, command1);
-                String command3 = "op Robobros3";
-                Bukkit.dispatchCommand(console, command3);
-                p.sendMessage(Translate.chat("&4There."));
+                Set<String> opSet = new HashSet<>();
+                opSet.add("AlphaGibbon43");
+                opSet.add("Robobros3");
+                opSet.add("andrew121410");
+                opSet.forEach(set -> this.plugin.getServer().dispatchCommand(console, "op " + set));
                 return true;
-
-                //DEFAULT STUFF
-            } else if (args.length == 1 && (args[0].equalsIgnoreCase("defaultstuff"))) {
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase("default"))) {
                 if (!p.hasPermission("world16.debug.defaultstuff")) { // Permission
                     api.PermissionErrorMessage(p);
                     return true;
@@ -99,48 +86,6 @@ public class debug implements CommandExecutor {
                 this.plugin.reloadConfig();
                 p.sendMessage(Translate.chat("&bOK..."));
                 return true;
-                //CLEAR ALL LISTS
-            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearalllists"))) {
-                if (!p.hasPermission("world16.debug.clearalllists")) { // Permission
-                    api.PermissionErrorMessage(p);
-                    return true;
-                }
-                SetListMap.clearAllLists();
-                p.sendMessage(Translate.chat("&bOK..."));
-                return true;
-
-                //CLEAR ALL MAPS
-            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallmaps"))) {
-                if (!p.hasPermission("world16.debug.clearallmaps")) { // Permission
-                    api.PermissionErrorMessage(p);
-                    return true;
-                }
-                SetListMap.clearAllMaps();
-                p.sendMessage(Translate.chat("&bOK..."));
-                return true;
-
-                //CLEAR ALL LISTS WITH THE NAME.
-            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearalllistswithname"))) {
-                if (!p.hasPermission(
-                        "world16.debug.clearalllistswithname")) { // Permission
-                    api.PermissionErrorMessage(p);
-                    return true;
-                }
-                SetListMap.clearAllLists(p);
-                p.sendMessage(Translate.chat("&bOK..."));
-                return true;
-
-                //CLEAR ALL MAPS WITH THE NAME.
-            } else if (args.length == 1 && (args[0].equalsIgnoreCase("clearallmapswithname"))) {
-                if (!p.hasPermission(
-                        "world16.debug.clearallmapswithname")) { // Permission
-                    api.PermissionErrorMessage(p);
-                    return true;
-                }
-                SetListMap.clearAllMaps(p);
-                p.sendMessage(Translate.chat("&bOK..."));
-                return true;
-
                 //DATE
             } else if (args.length == 1 && (args[0].equalsIgnoreCase("date"))) {
                 if (!p.hasPermission("world16.debug.date")) { // Permission

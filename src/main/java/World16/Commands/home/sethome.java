@@ -24,7 +24,7 @@ public class sethome implements CommandExecutor {
         this.api = new API(this.plugin);
 
         isql = new SQLite(this.plugin.getDataFolder(), "Homes");
-        homeManager = new HomeManager(this.isql);
+        homeManager = new HomeManager(this.plugin, this.isql);
         plugin.getCommand("sethome").setExecutor(this);
     }
 

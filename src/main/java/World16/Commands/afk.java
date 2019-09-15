@@ -4,7 +4,6 @@ import World16.CustomEvents.handlers.AfkEventHandler;
 import World16.CustomEvents.handlers.UnAfkEventHandler;
 import World16.Main.Main;
 import World16.Utils.API;
-import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -19,7 +18,7 @@ import java.util.UUID;
 public class afk implements CommandExecutor {
 
     //Lists
-    Map<UUID, Location> afkMap = SetListMap.afkMap;
+    private Map<UUID, Location> afkMap;
     //....
 
     private Main plugin;
@@ -28,6 +27,8 @@ public class afk implements CommandExecutor {
     public afk(Main getPlugin) {
         this.plugin = getPlugin;
         this.api = new API(this.plugin);
+
+        this.afkMap = this.plugin.getSetListMap().getAfkMap();
 
         this.plugin.getCommand("afk").setExecutor(this);
     }

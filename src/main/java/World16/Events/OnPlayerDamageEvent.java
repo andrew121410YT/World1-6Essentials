@@ -1,7 +1,6 @@
 package World16.Events;
 
 import World16.Main.Main;
-import World16.Utils.SetListMap;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,10 +13,12 @@ public class OnPlayerDamageEvent implements Listener {
 
     private Main plugin;
 
-    List<String> godm = SetListMap.godmList;
+    private List<String> godm;
 
     public OnPlayerDamageEvent(Main getPlugin) {
         this.plugin = getPlugin;
+
+        this.godm = this.plugin.getSetListMap().getGodmList();
 
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
     }

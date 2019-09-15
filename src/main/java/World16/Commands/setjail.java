@@ -16,8 +16,8 @@ public class setjail implements CommandExecutor {
     private Main plugin;
     private JailManager jailManager;
 
-    public setjail(CustomConfigManager getCustomYml, Main getPlugin, JailManager jailManager) {
-        this.plugin = getPlugin;
+    public setjail(Main plugin, CustomConfigManager customConfigManager, JailManager jailManager) {
+        this.plugin = plugin;
         this.jailManager = jailManager;
         this.api = new API(this.plugin);
         this.plugin.getCommand("setjail").setExecutor(this);

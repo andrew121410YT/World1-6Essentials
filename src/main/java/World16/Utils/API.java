@@ -3,7 +3,10 @@ package World16.Utils;
 import World16.Main.Main;
 import World16.Managers.CustomConfigManager;
 import World16.Managers.CustomYmlManager;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -16,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -23,29 +27,29 @@ import java.util.UUID;
  *
  * @author Andrew121410
  */
+
 public class API {
 
     // Maps
-    Map<String, UUID> uuidCache = SetListMap.uuidCache;
-    Map<UUID, Location> afkMap = SetListMap.afkMap;
+    private Map<String, UUID> uuidCache;
+    private Map<UUID, Location> afkMap;
     //...
 
     // Lists
-    List<String> Fly1 = SetListMap.flyList;
-    List<String> GodM = SetListMap.godmList;
+    private List<String> Fly1;
+    private List<String> GodM;
     //...
 
     private Main plugin;
-    private CustomYmlManager configinstance = null;
 
     //Finals
     public static final String CUSTOM_COMMAND_FORMAT = "`";
-    public static final Integer VERSION = 314;
-    public static final String DATE_OF_VERSION = "7/13/2019";
+    public static final String DATE_OF_VERSION = "9/10/2019";
     public static final String PREFIX = "[&9World1-6Ess&r]";
-    public static final String USELESS_TAG = "" + PREFIX + "->[&bUSELESS&r]";
-    public static final String EMERGENCY_TAG = "" + PREFIX + "->&c[EMERGENCY]&r";
-    public static final String TOO_DAMN_OLD = "Your mc version is too damn old 1.11 up too 1.14.3 please.";
+    public static final String USELESS_TAG = PREFIX + "->[&bUSELESS&r]";
+    public static final String DEBUG_TAG = PREFIX + "->[&eDEBUG&r]";
+    public static final String EMERGENCY_TAG = PREFIX + "->&c[EMERGENCY]&r";
+    public static final String TOO_DAMN_OLD = "Your mc version is too damn old 1.11 up too 1.14.4 please.";
     public static final String SOMETHING_WENT_WRONG = "Something went wrong.";
     //...
 
@@ -60,26 +64,35 @@ public class API {
     // MAIN
     public API(Main plugin) {
         this.plugin = plugin;
+        doSetListMap();
         setMySQL();
     }
 
     @Deprecated
     public API(Main plugin, CustomYmlManager configInstance) {
         this.plugin = plugin;
-        this.configinstance = configInstance;
+        doSetListMap();
         setMySQL();
     }
 
     public API(Main plugin, CustomConfigManager configManager) {
         this.plugin = plugin;
+        doSetListMap();
         setMySQL();
     }
 
     // END MAIN
 
+    private void doSetListMap() {
+        this.uuidCache = this.plugin.getSetListMap().getUuidCache();
+        this.afkMap = this.plugin.getSetListMap().getAfkMap();
+        this.Fly1 = this.plugin.getSetListMap().getFlyList();
+        this.GodM = this.plugin.getSetListMap().getAdminList();
+    }
+
     // START OF MYSQL
 
-    public void setMySQL() {
+    private void setMySQL() {
         mysql_HOST = plugin.getConfig().getString("MysqlHOST");
         mysql_DATABASE = plugin.getConfig().getString("MysqlDATABASE");
         mysql_USER = plugin.getConfig().getString("MysqlUSER");
@@ -212,6 +225,10 @@ public class API {
         }
     }
 
+    public boolean isBoolean(String boolean1) {
+        return boolean1.equalsIgnoreCase("true") || boolean1.equalsIgnoreCase("false");
+    }
+
     public Integer asIntOrDefault(String input, int default1) {
         try {
             Integer.parseInt(input);
@@ -230,12 +247,12 @@ public class API {
         }
     }
 
-    public boolean isClass(String className) {
+    public Double asDoubleOrDefault(String input, double default1) {
         try {
-            Class.forName(className);
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
+            Double.parseDouble(input);
+            return Double.valueOf(input);
+        } catch (Exception e) {
+            return default1;
         }
     }
 
@@ -246,6 +263,29 @@ public class API {
         } catch (Exception e) {
             return default1;
         }
+    }
+
+    public boolean isClass(String className) {
+        try {
+            Class.forName(className);
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
+    public Class<?> getNMSClass(String name) {
+        String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+        try {
+            return Class.forName("net.minecraft.server." + version + "." + name);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Block getBlockPlayerIsLookingAt(Player player) {
+        return player.getTargetBlock((Set<Material>) null, 5);
     }
 
     public void PermissionErrorMessage(Player p) {

@@ -1,6 +1,6 @@
 package World16.Managers;
 
-import World16.Utils.SetListMap;
+import World16.Main.Main;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -10,11 +10,16 @@ import java.util.*;
 
 public class ERamManager {
 
-    Map<String, Map<String, List<Location>>> stringRawLocationObjectHashMap = SetListMap.eRamRaw;
+    private Map<String, Map<String, List<Location>>> stringRawLocationObjectHashMap;
 
+    private Main plugin;
     private CustomYmlManager customYmlManager;
 
-    public ERamManager(CustomConfigManager customConfigManager) {
+    public ERamManager(Main plugin, CustomConfigManager customConfigManager) {
+        this.plugin = plugin;
+
+        this.stringRawLocationObjectHashMap = this.plugin.getSetListMap().geteRamRaw();
+
         customYmlManager = customConfigManager.getERamYML();
     }
 

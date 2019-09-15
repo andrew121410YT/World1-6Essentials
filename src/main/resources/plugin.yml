@@ -2,6 +2,9 @@ name: World1-6Essentials
 version: 0.1
 author: Andrew121410
 main: World16.Main.Main
+
+softdepend: [WorldEdit]
+
 commands:
   World1-6Essentials:
   bed:
@@ -45,6 +48,7 @@ commands:
     aliases:
       - homes
   sethome:
+  elevator:
 
   gmc:
     aliases:
@@ -112,17 +116,10 @@ permissions:
     children:
       world16.debug: true
       world16.debug.op: true
-      world16.debug.defaultstuff: true
-      world16.debug.clearalllists: true
-      world16.debug.clearallmaps: true
-      world16.debug.clearalllistswithname: true
-      world16.debug.clearallmapswithname: true
+      world16.debug.default: true
       world16.debug.date: true
       world16.debug.checkuuid: true
       world16.debig.checkuuid.other: true
-      world16.debug.debugmessages: true
-      world16.debug.finddefaultspawn: true
-      world16.debug.uuidcache: true
 
 
   world16.echest:
@@ -210,4 +207,7 @@ permissions:
     default: true
   world16.home.op:
     description: Allows to do op home commands
+    default: true
+  world16.elevator:
+    description: Allows to do elevator
     default: true

@@ -1,7 +1,6 @@
 package World16.Events;
 
 import World16.Main.Main;
-import World16.Utils.SetListMap;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,13 +12,15 @@ import java.util.Map;
 public class OnPlayerInteractEvent implements Listener {
 
     //Maps
-    Map<String, Location> latestClickedBlocked = SetListMap.latestClickedBlocked;
+    private Map<String, Location> latestClickedBlocked;
     //...
 
     private Main plugin;
 
     public OnPlayerInteractEvent(Main getPlugin) {
         plugin = getPlugin;
+
+        this.latestClickedBlocked = this.plugin.getSetListMap().getLatestClickedBlocked();
 
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }

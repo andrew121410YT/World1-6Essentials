@@ -1,7 +1,6 @@
 package World16.Managers;
 
 import World16.Main.Main;
-import World16.Utils.SetListMap;
 import World16.Utils.Translate;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
@@ -11,7 +10,7 @@ import java.util.Map;
 public class JailManager {
 
     //Maps
-    Map<String, Location> jailsMap = SetListMap.jails;
+    private Map<String, Location> jailsMap;
     //...
 
     private Main plugin;
@@ -21,12 +20,15 @@ public class JailManager {
     public JailManager(CustomConfigManager customConfigManager, Main plugin) {
         this.plugin = plugin;
         this.jailsYml = customConfigManager.getJailsYml();
+
+        this.jailsMap = this.plugin.getSetListMap().getJails();
     }
 
     public void getAllJailsFromConfig() {
         ConfigurationSection cs = this.jailsYml.getConfig().getConfigurationSection("Jails");
         if (cs == null) {
             this.jailsYml.getConfig().createSection("Jails");
+            this.jailsYml.saveConfigSilent();
             this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat("&c[JailManager]&r&6 Jails section has been created."));
             return;
         }

@@ -1,6 +1,6 @@
 package World16.TabComplete;
 
-import World16.Utils.SetListMap;
+import World16.Main.Main;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -11,12 +11,18 @@ import java.util.*;
 
 public class HomeListTab implements TabCompleter {
 
+    //This is just a reminder for myself to not copy this because it won't work with other stuff since it's custom coded.
+
     //Lists
-    Map<UUID, Map<String, Location>> rawHomesMap = SetListMap.homesMap;
+    private Map<UUID, Map<String, Location>> rawHomesMap;
     //...
 
-    public HomeListTab() {
+    private Main plugin;
 
+    public HomeListTab(Main plugin) {
+        this.plugin = plugin;
+
+        this.rawHomesMap = this.plugin.getSetListMap().getHomesMap();
     }
 
     @Override
@@ -24,23 +30,35 @@ public class HomeListTab implements TabCompleter {
         if (!(sender instanceof Player)) {
             return null;
         }
-        Player player = (Player) sender;
+        Player p = (Player) sender;
 
-        if (cmd.getName().equalsIgnoreCase("home") || cmd.getName().equalsIgnoreCase("delhome")) {
-            Set<String> homeSet = rawHomesMap.get(player.getUniqueId()).keySet();
+        if (!p.hasPermission("world16.home")) {
+            return null;
+        }
+
+        if (args.length == 1) {
+            if (rawHomesMap.get(p.getUniqueId()) == null) {
+                p.kickPlayer("[HomeTabComplete] You where not in the memory so NPE was caused.");
+                return null;
+            }
+            Set<String> homeSet = rawHomesMap.get(p.getUniqueId()).keySet();
             String[] homeString = homeSet.toArray(new String[0]);
             return getContains(args[0], Arrays.asList(homeString));
         }
+
         return null;
     }
 
-    private List<String> getContains(String args, List<String> a) {
+
+    private List<String> getContains(String args, List<String> oldArrayList) {
         List<String> list = new ArrayList<>();
-        for (String mat : a) {
+
+        for (String mat : oldArrayList) {
             if (mat.contains(args.toLowerCase())) {
                 list.add(mat);
             }
         }
+
         return list;
     }
 }

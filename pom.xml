@@ -47,37 +47,47 @@
         </repository>
 
         <repository>
-            <id>viaversion-repo</id>
-            <url>https://repo.viaversion.com</url>
-        </repository>
-
-        <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
+        </repository>
+
+        <!-- Discord JDA -->
+        <repository>
+            <id>jcenter</id>
+            <name>jcenter-bintray</name>
+            <url>http://jcenter.bintray.com</url>
+        </repository>
+
+        <!-- Offcial WorldWdit API-->
+        <repository>
+            <id>enginehub-maven</id>
+            <url>http://maven.enginehub.org/repo/</url>
         </repository>
 
     </repositories>
 
     <dependencies>
-        <!--Spigot API -->
+
+        <!--        Spigot API -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.12-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-        <!--Bukkit API -->
+
         <dependency>
             <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>1.12-R0.1-SNAPSHOT</version>
+            <artifactId>craftbukkit</artifactId>
+            <version>1.12.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-        <!-- ViaVersion API -->
+
+        <!-- WorldEdit legacy API -->
         <dependency>
-            <groupId>us.myles</groupId>
-            <artifactId>viaversion</artifactId>
-            <version>1.6.0</version>
+            <groupId>com.sk89q.worldedit</groupId>
+            <artifactId>worldedit-bukkit</artifactId>
+            <version>6.1.4-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -92,8 +102,15 @@
         <dependency>
             <groupId>com.github.andrew121410</groupId>
             <artifactId>CCUtilsJava</artifactId>
-            <version>f4687d37ab</version>
+            <version>f7a018ede3</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>me.forseth11.easybackup</groupId>
+            <artifactId>me.forseth11.easybackup</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>

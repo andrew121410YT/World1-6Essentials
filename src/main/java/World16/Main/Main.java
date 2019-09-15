@@ -8,50 +8,68 @@ import World16.Commands.home.sethome;
 import World16.Commands.tp.tpa;
 import World16.Commands.tp.tpaccept;
 import World16.Commands.tp.tpdeny;
-import World16.CustomInventorys.CustomInventoryManager;
 import World16.Events.*;
+import World16.Events.PluginEvents.EasyBackupEvent;
 import World16.Managers.CustomConfigManager;
 import World16.Managers.JailManager;
-import World16.Utils.API;
-import World16.Utils.Metrics;
-import World16.Utils.SetListMap;
-import World16.Utils.Translate;
+import World16.Utils.*;
 import World16.test.test1;
-import org.bukkit.Bukkit;
+import World16Elevators.ElevatorMain;
+import World16Elevators.Objects.BoundingBox;
+import World16Elevators.Objects.ElevatorObject;
+import World16Elevators.Objects.FloorObject;
+import World16Elevators.Objects.SignObject;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
+    static {
+        //Elevators
+        ConfigurationSerialization.registerClass(BoundingBox.class, "BoundingBox");
+        ConfigurationSerialization.registerClass(SignObject.class, "SignObject");
+        ConfigurationSerialization.registerClass(FloorObject.class, "FloorObject");
+        ConfigurationSerialization.registerClass(ElevatorObject.class, "ElevatorObject");
+    }
+
     private Main plugin;
 
+    private SetListMap setListMap;
+
+    private DiscordBot discordBot;
+
     //Managers
-    private CustomConfigManager customconfig;
-    private CustomInventoryManager customInventoryManager;
+    private CustomConfigManager customConfigManager;
     private JailManager jailManager;
+    private ElevatorMain elevatorMain;
 
     private API api;
-
-    private PluginManager pm = Bukkit.getPluginManager();
+    private OtherPlugins otherPlugins;
 
     public void onEnable() {
-        plugin = this;
-        api = new API(plugin);
+        this.plugin = this;
+        this.otherPlugins = new OtherPlugins(this);
+        this.setListMap = new SetListMap();
+        this.api = new API(plugin);
 
         regCustomManagers();
         regFileConfigGEN();
+        regDiscordBot();
+        regElevators();
         regEvents();
         regCommands();
-        regbstats();
+        regBStats();
 
         getLogger().info("[World1-6Essentials] is now loaded!");
     }
 
     public void onDisable() {
-        SetListMap.clearSetListMap();
+        this.discordBot.sendServerQuitMessage();
+        this.getElevatorMain().saveAllElevators();
+        this.setListMap.clearSetListMap();
         getLogger().info("[World1-6Essentials] is now disabled.");
     }
 
@@ -70,33 +88,34 @@ public class Main extends JavaPlugin {
         new commandblock(this);
         new bed(this);
         new ram(this);
-        new spawn(this.customconfig, this);
+        new spawn(this, this.customConfigManager);
         new echest(this);
         new sign(this);
         new key(this); //KEY COMMAND
         new colors(this);
-        new setjail(this.customconfig, this, this.jailManager);
-        new setspawn(this.customconfig, this);
-        new jail(this.customconfig, this, this.jailManager);
+        new setjail(this, this.customConfigManager, this.jailManager);
+        new setspawn(this, this.customConfigManager);
+        new jail(this, this.customConfigManager, this.jailManager);
         new afk(this);
-        new flyspeed(this.customconfig, this);
-        new isafk(this.customconfig, this);
+        new flyspeed(this, this.customConfigManager);
+        new isafk(this, this.customConfigManager);
         new back(this);
-        new broadcast(this.customconfig, this);
+        new broadcast(this, this.customConfigManager);
         new god(this);
-        new msg(customconfig, this);
+        new msg(this, this.customConfigManager);
 
-        new tpa(this.customconfig, this);
-        new tpaccept(this.customconfig, this);
-        new tpdeny(this.customconfig, this);
+        new tpa(this, this.customConfigManager);
+        new tpaccept(this, this.customConfigManager);
+        new tpdeny(this, this.customConfigManager);
 
-        new test1(customconfig, this);
-        new eram(this.customconfig, this, this.customInventoryManager);
-        new waitdo(this.customconfig, this);
-        new runCommands(this.customconfig, this);
-        new wformat(this.customconfig, this);
-        new xyzdxdydz(this.customconfig, this);
-        new workbench(this.customconfig, this);
+        new test1(this, this.customConfigManager);
+        new eram(this, this.customConfigManager);
+        new waitdo(this, this.customConfigManager);
+        new runCommands(this, this.customConfigManager);
+        new wformat(this, this.customConfigManager);
+        new xyzdxdydz(this);
+        new workbench(this, this.customConfigManager);
+        new elevator(this, this.customConfigManager);
 
         //Homes
         new delhome(this.plugin);
@@ -117,10 +136,12 @@ public class Main extends JavaPlugin {
         new OnPlayerBedEnterEvent(this);
         new OnJoinTitleEvent(this);
         //...
-        new OnInventoryClickEvent(this, this.customInventoryManager);
         new OnAsyncPlayerChatEvent(this);
         new OnPlayerInteractEvent(this);
         new OnPlayerMoveEvent(this);
+
+        //PluginEvents
+        new EasyBackupEvent(this);
     }
 
     private void regFileConfigGEN() {
@@ -130,22 +151,34 @@ public class Main extends JavaPlugin {
     }
 
     private void regCustomManagers() {
-        this.customconfig = new CustomConfigManager(this);
-        customconfig.registerAllCustomConfigs();
+        this.customConfigManager = new CustomConfigManager(this);
+        customConfigManager.registerAllCustomConfigs();
 
-        this.customInventoryManager = new CustomInventoryManager(this);
-        this.customInventoryManager.registerAllCustomInventorys();
-
-        this.jailManager = new JailManager(this.customconfig, this);
+        this.jailManager = new JailManager(this.customConfigManager, this);
         this.jailManager.getAllJailsFromConfig();
     }
 
-    public void checkForPlugins() {
-
+    private void regBStats() {
+        new Metrics(this);
     }
 
-    private void regbstats() {
-        Metrics metrics = new Metrics(this);
+    private void regDiscordBot() {
+        this.discordBot = new DiscordBot(this, this.customConfigManager);
+        boolean discordbot = this.discordBot.setup();
+        if (discordbot) {
+            this.plugin.getServer().getScheduler().runTaskAsynchronously(this, this.discordBot);
+        } else {
+            this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(API.EMERGENCY_TAG + " &cDiscord Bot has not been enabled because of exception"));
+        }
+    }
+
+    private void regElevators() {
+        this.elevatorMain = new ElevatorMain(this, this.customConfigManager);
+        if (this.otherPlugins.hasWorldEdit()) {
+            this.elevatorMain.loadAllElevators();
+        } else {
+            this.plugin.getServer().getConsoleSender().sendMessage(Translate.chat(API.EMERGENCY_TAG + " &cElevator's won't be working since there's no WorldEdit."));
+        }
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -160,19 +193,37 @@ public class Main extends JavaPlugin {
         return true;
     }
 
+    //Getters
+
     public Main getPlugin() {
         return plugin;
     }
 
-    public API getApi() {
-        return this.api;
-    }
-
-    public CustomInventoryManager getCustomInventoryManager() {
-        return customInventoryManager;
+    public SetListMap getSetListMap() {
+        return setListMap;
     }
 
     public CustomConfigManager getCustomConfigManager() {
-        return customconfig;
+        return customConfigManager;
+    }
+
+    public JailManager getJailManager() {
+        return jailManager;
+    }
+
+    public API getApi() {
+        return api;
+    }
+
+    public OtherPlugins getOtherPlugins() {
+        return otherPlugins;
+    }
+
+    public ElevatorMain getElevatorMain() {
+        return elevatorMain;
+    }
+
+    public DiscordBot getDiscordBot() {
+        return discordBot;
     }
 }

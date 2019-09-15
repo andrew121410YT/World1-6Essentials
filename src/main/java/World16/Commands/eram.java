@@ -1,12 +1,10 @@
 package World16.Commands;
 
-import World16.CustomInventorys.CustomInventoryManager;
 import World16.Main.Main;
 import World16.Managers.CustomConfigManager;
 import World16.Managers.ERamManager;
 import World16.TabComplete.ERamTab;
 import World16.Utils.API;
-import World16.Utils.SetListMap;
 import World16.Utils.Tag;
 import World16.Utils.Translate;
 import org.bukkit.Bukkit;
@@ -30,21 +28,25 @@ public class eram implements CommandExecutor {
     private ERamManager eRamManager;
 
     private CustomConfigManager customConfigManager;
-    private CustomInventoryManager customInventoryManager;
+
+    private Tag tagClass;
 
     //Maps
-    Map<String, Map<String, List<Location>>> aaa = SetListMap.eRamRaw;
-    Map<String, Location> latestClickedBlocked = SetListMap.latestClickedBlocked;
+    private Map<String, Map<String, List<Location>>> eramM;
+    private Map<String, Location> latestClickedBlocked;
 
     //...
 
-    public eram(CustomConfigManager getCustomYml, Main getPlugin, CustomInventoryManager customInventoryManager) {
-        this.customConfigManager = getCustomYml;
-        this.plugin = getPlugin;
+    public eram(Main plugin, CustomConfigManager customConfigManager) {
+        this.plugin = plugin;
+        this.customConfigManager = customConfigManager;
         this.api = new API(this.plugin);
-        this.customInventoryManager = customInventoryManager;
 
-        eRamManager = new ERamManager(this.customConfigManager);
+        eRamManager = new ERamManager(this.plugin, this.customConfigManager);
+        this.tagClass = new Tag(this.plugin.getSetListMap());
+
+        this.eramM = this.plugin.getSetListMap().geteRamRaw();
+        this.latestClickedBlocked = this.plugin.getSetListMap().getLatestClickedBlocked();
 
         this.plugin.getCommand("eram").setExecutor(this);
         this.plugin.getCommand("eram").setTabCompleter(new ERamTab(this.plugin));
@@ -67,7 +69,7 @@ public class eram implements CommandExecutor {
 
                 if (tag.startsWith("@")) {
                     String tagWithoutA = tag.replace("@", "");
-                    tag = Tag.getTag(playerName, tagWithoutA);
+                    tag = tagClass.getTag(playerName, tagWithoutA);
                 }
                 eRamManager.doIt(playerName, tag);
                 return true;
@@ -77,7 +79,7 @@ public class eram implements CommandExecutor {
 
                 if (tag.startsWith("@")) {
                     String tagWithoutA = tag.replace("@", "");
-                    tag = Tag.getTag(playerName, tagWithoutA);
+                    tag = tagClass.getTag(playerName, tagWithoutA);
                 }
                 eRamManager.undoIt(playerName, tag);
                 return true;
@@ -87,16 +89,16 @@ public class eram implements CommandExecutor {
 
                 if (tagName.startsWith("@")) {
                     String tagWithoutA = tagName.replace("@", "");
-                    tagName = Tag.getTag(playerName, tagWithoutA);
+                    tagName = tagClass.getTag(playerName, tagWithoutA);
                 }
 
-                Tag.removeTag(playerName, tagName);
+                tagClass.removeTag(playerName, tagName);
                 return true;
             } else if (args.length == 4 && args[0].equalsIgnoreCase("addtag")) {
                 String playerName = args[1];
                 String tagName = args[2].toLowerCase();
                 String string = args[3].toLowerCase();
-                Tag.addTag(playerName, tagName, string);
+                tagClass.addTag(playerName, tagName, string);
                 return true;
             } else if (args.length == 4 && args[0].equalsIgnoreCase("delete")) {
                 String playerName = args[1];
@@ -116,7 +118,7 @@ public class eram implements CommandExecutor {
 
                 if (saveName.startsWith("@")) {
                     String tagWithoutA = saveName.replace("@", "");
-                    saveName = Tag.getTag(playerName, tagWithoutA);
+                    saveName = tagClass.getTag(playerName, tagWithoutA);
                 }
 
                 //Relative cords
@@ -156,10 +158,10 @@ public class eram implements CommandExecutor {
                     return true;
                 }
 
-                aaa.computeIfAbsent(playerName, k -> new HashMap<>());
-                aaa.get(playerName).computeIfAbsent(saveName, k -> new ArrayList<>());
+                eramM.computeIfAbsent(playerName, k -> new HashMap<>());
+                eramM.get(playerName).computeIfAbsent(saveName, k -> new ArrayList<>());
 
-                aaa.get(playerName).get(saveName).add(new Location(Bukkit.getWorld("world"), Double.valueOf(x), Double.valueOf(y), Double.valueOf(z)));
+                eramM.get(playerName).get(saveName).add(new Location(Bukkit.getWorld("world"), Double.valueOf(x), Double.valueOf(y), Double.valueOf(z)));
                 eRamManager.saveThingy(playerName, uuid, saveName);
             }
             sender.sendMessage("Only Players Can Use This Command.");
@@ -181,10 +183,10 @@ public class eram implements CommandExecutor {
         } else if (args.length == 3 && args[0] != null && args[1] != null && args[0].equalsIgnoreCase("save")) {
             String saveName = args[1].toLowerCase();
 
-            aaa.computeIfAbsent(p.getDisplayName(), k -> new HashMap<>());
-            aaa.get(p.getDisplayName()).computeIfAbsent(saveName, k -> new ArrayList<>());
+            eramM.computeIfAbsent(p.getDisplayName(), k -> new HashMap<>());
+            eramM.get(p.getDisplayName()).computeIfAbsent(saveName, k -> new ArrayList<>());
 
-            aaa.get(p.getDisplayName()).get(saveName).add(latestClickedBlocked.get(p.getDisplayName()));
+            eramM.get(p.getDisplayName()).get(saveName).add(latestClickedBlocked.get(p.getDisplayName()));
             eRamManager.saveThingy(p.getDisplayName(), p.getUniqueId(), saveName);
             return true;
         } else if (args.length == 1 && args[0].equalsIgnoreCase("load")) {
@@ -197,17 +199,17 @@ public class eram implements CommandExecutor {
             eRamManager.undoIt(p.getDisplayName(), args[1]);
             return true;
         } else if (args.length == 1 && args[0].equalsIgnoreCase("list")) {
-            if (aaa.get(p.getDisplayName()) == null) {
-                aaa.computeIfAbsent(p.getDisplayName(), k -> new HashMap<>());
+            if (eramM.get(p.getDisplayName()) == null) {
+                eramM.computeIfAbsent(p.getDisplayName(), k -> new HashMap<>());
                 p.sendMessage("You almost broke the plugin but this if statement saved it!");
                 return true;
             }
 
-            if (aaa.get(p.getDisplayName()).isEmpty()) {
+            if (eramM.get(p.getDisplayName()).isEmpty()) {
                 p.sendMessage(Translate.chat("There is nothing?"));
                 return true;
             }
-            Set<String> homeSet = aaa.get(p.getDisplayName()).keySet();
+            Set<String> homeSet = eramM.get(p.getDisplayName()).keySet();
             String[] homeString = homeSet.toArray(new String[0]);
             Arrays.sort(homeString);
             String str = String.join(", ", homeString);
@@ -220,12 +222,12 @@ public class eram implements CommandExecutor {
         } else if (args.length == 3 && args[0].equalsIgnoreCase("addtag")) {
             String tagName = args[1].toLowerCase();
             String string = args[2].toLowerCase();
-            Tag.addTag(p.getDisplayName(), tagName, string);
+            tagClass.addTag(p.getDisplayName(), tagName, string);
             p.sendMessage(Translate.chat("&6Added tag -> " + tagName + " " + string));
             return true;
         } else if (args.length == 2 && args[0].equalsIgnoreCase("deletetag")) {
             String tagName = args[1].toLowerCase();
-            Tag.removeTag(p.getDisplayName(), tagName);
+            tagClass.removeTag(p.getDisplayName(), tagName);
             p.sendMessage(Translate.chat("&cRemoved tag -> " + tagName));
             return true;
         } else {
